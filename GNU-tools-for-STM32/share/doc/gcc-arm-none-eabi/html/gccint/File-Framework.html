@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- Copyright (C) 1988-2021 Free Software Foundation, Inc.
+<!-- Copyright (C) 1988-2023 Free Software Foundation, Inc.
 
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
@@ -189,14 +189,19 @@ for the file format in use is appropriate.
 
 <dl>
 <dt><a name="index-TARGET_005fASM_005fOUTPUT_005fSOURCE_005fFILENAME"></a>Target Hook: <em>void</em> <strong>TARGET_ASM_OUTPUT_SOURCE_FILENAME</strong> <em>(FILE *<var>file</var>, const char *<var>name</var>)</em></dt>
-<dd><p>Output DWARF debugging information which indicates that filename <var>name</var> is the current source file to the stdio stream <var>file</var>.
-</p> 
-<p>This target hook need not be defined if the standard form of output for the file format in use is appropriate.
+<dd><p>Output DWARF debugging information which indicates that filename
+<var>name</var> is the current source file to the stdio stream <var>file</var>.
+</p>
+<p>This target hook need not be defined if the standard form of output
+for the file format in use is appropriate.
 </p></dd></dl>
 
 <dl>
 <dt><a name="index-TARGET_005fASM_005fOUTPUT_005fIDENT"></a>Target Hook: <em>void</em> <strong>TARGET_ASM_OUTPUT_IDENT</strong> <em>(const char *<var>name</var>)</em></dt>
-<dd><p>Output a string based on <var>name</var>, suitable for the &lsquo;<samp>#ident</samp>&rsquo;  directive, or the equivalent directive or pragma in non-C-family languages.  If this hook is not defined, nothing is output for the &lsquo;<samp>#ident</samp>&rsquo;  directive.
+<dd><p>Output a string based on <var>name</var>, suitable for the &lsquo;<samp>#ident</samp>&rsquo;
+directive, or the equivalent directive or pragma in non-C-family languages.
+If this hook is not defined, nothing is output for the &lsquo;<samp>#ident</samp>&rsquo;
+directive.
 </p></dd></dl>
 
 <dl>
@@ -243,7 +248,11 @@ Return NULL if function should go to default text section.
 
 <dl>
 <dt><a name="index-TARGET_005fASM_005fFUNCTION_005fSWITCHED_005fTEXT_005fSECTIONS"></a>Target Hook: <em>void</em> <strong>TARGET_ASM_FUNCTION_SWITCHED_TEXT_SECTIONS</strong> <em>(FILE *<var>file</var>, tree <var>decl</var>, bool <var>new_is_cold</var>)</em></dt>
-<dd><p>Used by the target to emit any assembler directives or additional  labels needed when a function is partitioned between different  sections.  Output should be written to <var>file</var>.  The function  decl is available as <var>decl</var> and the new section is &lsquo;cold&rsquo; if  <var>new_is_cold</var> is <code>true</code>.
+<dd><p>Used by the target to emit any assembler directives or additional
+labels needed when a function is partitioned between different
+sections.  Output should be written to <var>file</var>.  The function
+decl is available as <var>decl</var> and the new section is &lsquo;cold&rsquo; if
+<var>new_is_cold</var> is <code>true</code>.
 </p></dd></dl>
 
 <dl>

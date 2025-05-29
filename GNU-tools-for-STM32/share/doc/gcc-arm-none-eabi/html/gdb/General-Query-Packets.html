@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- Copyright (C) 1988-2022 Free Software Foundation, Inc.
+<!-- Copyright (C) 1988-2023 Free Software Foundation, Inc.
 
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
@@ -450,7 +450,7 @@ thread information block.
 </p>
 </dd>
 <dt>&lsquo;<samp>E <var>nn</var></samp>&rsquo;</dt>
-<dd><p>An error occured.  This means that either the thread was not found, or the
+<dd><p>An error occurred.  This means that either the thread was not found, or the
 address could not be retrieved.
 </p>
 </dd>
@@ -506,7 +506,7 @@ tags found in the requested memory range.
 </p>
 </dd>
 <dt>&lsquo;<samp>E <var>nn</var></samp>&rsquo;</dt>
-<dd><p>An error occured.  This means that fetching of memory tags failed for some
+<dd><p>An error occurred.  This means that fetching of memory tags failed for some
 reason.
 </p>
 </dd>
@@ -558,7 +558,7 @@ accordingly.
 </p>
 </dd>
 <dt>&lsquo;<samp>E <var>nn</var></samp>&rsquo;</dt>
-<dd><p>An error occured.  This means that modifying the memory tag granules failed
+<dd><p>An error occurred.  This means that modifying the memory tag granules failed
 for some reason.
 </p>
 </dd>
@@ -825,7 +825,8 @@ stubs&rsquo;s interpreter may have security implications</em>.
 <dd><p>A command response with the hex encoded output string <var>OUTPUT</var>.
 </p></dd>
 <dt>&lsquo;<samp>E <var>NN</var></samp>&rsquo;</dt>
-<dd><p>Indicate a badly formed request.
+<dd><p>Indicate a badly formed request.  The error number <var>NN</var> is given as
+hex digits.
 </p></dd>
 <dt>&lsquo;<samp><!-- /@w --></samp>&rsquo;</dt>
 <dd><p>An empty reply indicates that &lsquo;<samp>qRcmd</samp>&rsquo; is not recognized.
@@ -1634,6 +1635,13 @@ the remote stub will expect that no &lsquo;<samp>struct link_map</samp>&rsquo;
 exists prior to the starting point.
 </p>
 </dd>
+<dt><code>lmid=<var>lmid</var></code></dt>
+<dd><p>A hexadecimal number specifying a namespace identifier.  This is
+currently only used together with &lsquo;<samp>start</samp>&rsquo; to provide the
+namespace identifier back to <small>GDB</small> in the response.
+<small>GDB</small> will only provide values that were previously reported to
+it.  If unset, the response will include &lsquo;<samp>lmid=&quot;0x0&quot;</samp>&rsquo;.
+</p></dd>
 </dl>
 
 <p>Arguments that are not understood by the remote stub will be silently

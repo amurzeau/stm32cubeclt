@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- Copyright (C) 1988-2022 Free Software Foundation, Inc.
+<!-- Copyright (C) 1988-2023 Free Software Foundation, Inc.
 
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
@@ -26,7 +26,7 @@ developing GNU and promoting software freedom." -->
 <link href="Concept-Index.html#Concept-Index" rel="index" title="Concept Index">
 <link href="index.html#SEC_Contents" rel="contents" title="Table of Contents">
 <link href="Running.html#Running" rel="up" title="Running">
-<link href="Threads.html#Threads" rel="next" title="Threads">
+<link href="Inferior_002dSpecific-Breakpoints.html#Inferior_002dSpecific-Breakpoints" rel="next" title="Inferior-Specific Breakpoints">
 <link href="Kill-Process.html#Kill-Process" rel="prev" title="Kill Process">
 <style type="text/css">
 <!--
@@ -90,6 +90,15 @@ embedded targets may have several inferiors running in different parts
 of a single address space.  Each inferior may in turn have multiple
 threads running in it.
 </p>
+<a name="index-ID-list"></a>
+<p>The commands <code>info inferiors</code> and <code>info connections</code>, which will be
+introduced below, accept a space-separated <em>ID list</em> as their argument
+specifying one or more elements on which to operate.  A list element can be
+either a single non-negative number, like &lsquo;<samp>5</samp>&rsquo;, or an ascending range of
+such numbers, like &lsquo;<samp>5-7</samp>&rsquo;.  A list can consist of any combination of such
+elements, even duplicates or overlapping ranges are valid.  E.g.
+&lsquo;<samp>1 4-6 5 4-4</samp>&rsquo; or &lsquo;<samp>1 2 4-7</samp>&rsquo;.
+</p>
 <p>To find out what inferiors exist at any moment, use <code>info&nbsp;inferiors</code><!-- /@w -->:
 </p>
 <dl compact="compact">
@@ -97,9 +106,8 @@ threads running in it.
 </dd>
 <dt><code>info inferiors</code></dt>
 <dd><p>Print a list of all inferiors currently being managed by <small>GDB</small>.
-By default all inferiors are printed, but the argument <var>id</var>&hellip;
-&ndash; a space separated list of inferior numbers &ndash; can be used to limit
-the display to just the requested inferiors.
+By default all inferiors are printed, but the ID list <var>id</var>&hellip; can be
+used to limit the display to just the requested inferiors.
 </p>
 <p><small>GDB</small> displays for each inferior (in this order):
 </p>
@@ -130,7 +138,7 @@ indicates the current inferior.
   2    process 2307      2 (extended-remote host:10000)  hello
 </pre></div>
 
-<p>To get informations about the current inferior, use <code>inferior</code>:
+<p>To get information about the current inferior, use <code>inferior</code>:
 </p>
 <dl compact="compact">
 <dd><a name="index-inferior-1"></a>
@@ -155,9 +163,8 @@ indicates the current inferior.
 </dd>
 <dt><code>info connections</code></dt>
 <dd><p>Print a list of all open target connections currently being managed by
-<small>GDB</small>.  By default all connections are printed, but the
-argument <var>id</var>&hellip; &ndash; a space separated list of connections
-numbers &ndash; can be used to limit the display to just the requested
+<small>GDB</small>.  By default all connections are printed, but the ID list
+<var>id</var>&hellip; can be used to limit the display to just the requested
 connections.
 </p>
 <p><small>GDB</small> displays for each connection (in this order):
@@ -258,7 +265,7 @@ Added inferior 2.
 
 <p>You can now simply switch focus to inferior 2 and run it.
 </p>
-<a name="index-remove_002dinferiors"></a>
+<a name="remove_005finferiors_005fcli"></a><a name="index-remove_002dinferiors"></a>
 </dd>
 <dt><code>remove-inferiors <var>infno</var>&hellip;</code></dt>
 <dd><p>Removes the inferior or inferiors <var>infno</var>&hellip;.  It is not
@@ -344,6 +351,9 @@ spaces in a debug session.  You can do that with the <code>maint&nbsp;info&nbsp;
 </li><li> the name of the executable loaded into the program space, with e.g.,
 the <code>file</code> command.
 
+</li><li> the name of the core file loaded into the program space, with e.g.,
+the <code>core-file</code> command.
+
 </li></ol>
 
 <p>An asterisk &lsquo;<samp>*</samp>&rsquo; preceding the <small>GDB</small> program space number
@@ -355,7 +365,7 @@ example, the list of inferiors bound to the program space.
 </p>
 <div class="smallexample">
 <pre class="smallexample">(gdb) maint info program-spaces
-  Id   Executable
+  Id   Executable        Core File
 * 1    hello
   2    goodbye
         Bound inferiors: ID 1 (process 21561)
@@ -369,7 +379,7 @@ the parent and child processes of a <code>vfork</code> call.  For example,
 </p>
 <div class="smallexample">
 <pre class="smallexample">(gdb) maint info program-spaces
-  Id   Executable
+  Id   Executable        Core File
 * 1    vfork-test
         Bound inferiors: ID 2 (process 18050), ID 1 (process 18045)
 </pre></div>
@@ -378,6 +388,11 @@ the parent and child processes of a <code>vfork</code> call.  For example,
 space as a result of inferior 1 having executed a <code>vfork</code> call.
 </p></dd>
 </dl>
+
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top">&bull; <a href="Inferior_002dSpecific-Breakpoints.html#Inferior_002dSpecific-Breakpoints" accesskey="1">Inferior-Specific Breakpoints</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Controlling breakpoints
+</td></tr>
+</table>
 
 <hr>
 <div class="header">

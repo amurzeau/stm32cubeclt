@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- Copyright (C) 1988-2021 Free Software Foundation, Inc.
+<!-- Copyright (C) 1988-2023 Free Software Foundation, Inc.
 
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
@@ -166,8 +166,28 @@ pointer to an array, like this:
 <p>Note that the <code>length</code> option is only meant for use with arrays of
 non-atomic objects, that is, objects that contain pointers pointing to
 other GTY-managed objects.  For other GC-allocated arrays and strings
-you should use <code>atomic</code>.
+you should use <code>atomic</code> or <code>string_length</code>.
 </p>
+<a name="index-string_005flength"></a>
+</dd>
+<dt><code>string_length (&quot;<var>expression</var>&quot;)</code></dt>
+<dd>
+<p>In order to simplify production of PCH, a structure member that is a plain
+array of bytes (an optionally <code>const</code> and/or <code>unsigned</code> <code>char
+*</code>) is treated specially by the infrastructure. Even if such an array has not
+been allocated in GC-controlled memory, it will still be written properly into
+a PCH.  The machinery responsible for this needs to know the length of the
+data; by default, the length is determined by calling <code>strlen</code> on the
+pointer.  The <code>string_length</code> option specifies an alternate way to
+determine the length, such as by inspecting another struct member:
+</p>
+<div class="smallexample">
+<pre class="smallexample">struct GTY(()) non_terminated_string {
+  size_t sz;
+  const char * GTY((string_length (&quot;%h.sz&quot;))) data;
+};
+</pre></div>
+
 <a name="index-skip"></a>
 </dd>
 <dt><code>skip</code></dt>
@@ -175,6 +195,16 @@ you should use <code>atomic</code>.
 <p>If <code>skip</code> is applied to a field, the type machinery will ignore it.
 This is somewhat dangerous; the only safe use is in a union when one
 field really isn&rsquo;t ever used.
+</p>
+<a name="index-callback"></a>
+</dd>
+<dt><code>callback</code></dt>
+<dd>
+<p><code>callback</code> should be applied to fields with pointer to function type
+and causes the field to be ignored similarly to <code>skip</code>, except when
+writing PCH and the field is non-NULL it will remember the field&rsquo;s address
+for relocation purposes if the process writing PCH has different load base
+from a process reading PCH.
 </p>
 <a name="index-for_005fuser"></a>
 </dd>
@@ -362,7 +392,7 @@ they are saved and restored correctly to PCH files.
 <dd>
 <p>The <code>special</code> option is used to mark types that have to be dealt
 with by special case machinery.  The parameter is the name of the
-special case.  See <samp>gengtype.c</samp> for further details.  Avoid
+special case.  See <samp>gengtype.cc</samp> for further details.  Avoid
 adding new special cases unless there is no other alternative.
 </p>
 <a name="index-user"></a>

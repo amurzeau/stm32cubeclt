@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- Copyright (C) 1988-2022 Free Software Foundation, Inc.
+<!-- Copyright (C) 1988-2023 Free Software Foundation, Inc.
 
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
@@ -297,8 +297,14 @@ in <small>GDB</small>.  You may want to report the problem to the
 <small>GDB</small> developers.
 </p>
 <p>For each packet <var>name</var>, the command to enable or disable the
-packet is <code>set remote <var>name</var>-packet</code>.  The available settings
-are:
+packet is <code>set remote <var>name</var>-packet</code>.  If you configure a packet, the
+configuration will apply for all future remote targets if no target is selected.
+In case there is a target selected, only the configuration of the current target
+is changed.  All other existing remote targets&rsquo; features are not affected.
+The command to print the current configuration of a packet is
+<code>show remote <var>name</var>-packet</code>.  It displays the current remote target&rsquo;s
+configuration.  If no remote target is selected, the default configuration for
+future connections is shown.  The available settings are:
 </p>
 <table>
 <tr><td width="28%">Command Name</td><td width="32%">Remote Packet</td><td width="25%">Related Features</td></tr>
@@ -362,6 +368,21 @@ are:
 <tr><td width="28%"><code>no-resumed-stop-reply</code></td><td width="32%"><code>no resumed thread left stop reply</code></td><td width="25%">Tracking thread lifetime.</td></tr>
 </table>
 
+<a name="index-packet-size_002c-remote_002c-configuring"></a>
+<p>The number of bytes per memory-read or memory-write packet for a remote target
+can be configured using the commands
+<code>set&nbsp;remote&nbsp;<span class="nolinebreak">memory-read-packet-size</span></code><!-- /@w --> and
+<code>set&nbsp;remote&nbsp;<span class="nolinebreak">memory-write-packet-size</span></code><!-- /@w -->.  If set to &lsquo;<samp>0</samp>&rsquo; (zero) the
+default packet size will be used.  The actual limit is further reduced depending
+on the target.  Specify &lsquo;<samp>fixed</samp>&rsquo; to disable the target-dependent restriction
+and &lsquo;<samp>limit</samp>&rsquo; to enable it.  Similar to the enabling and disabling of remote
+packets, the command applies to the currently selected target (if available).
+If no remote target is selected, it applies to all future remote connections.
+The configuration of the selected target can be displayed using the commands
+<code>show&nbsp;remote&nbsp;<span class="nolinebreak">memory-read-packet-size</span></code><!-- /@w --> and
+<code>show&nbsp;remote&nbsp;<span class="nolinebreak">memory-write-packet-size</span></code><!-- /@w -->.  If no remote target is
+selected, the default configuration for future connections is shown.
+</p>
 <hr>
 <div class="header">
 <p>

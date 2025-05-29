@@ -1,6 +1,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- Copyright (C) 1988-2021 Free Software Foundation, Inc.
+<!-- This file documents the use of the GNU compilers.
+
+Copyright (C) 1988-2023 Free Software Foundation, Inc.
 
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
@@ -30,7 +32,7 @@ You have freedom to copy and modify this GNU Manual, like GNU
 <meta name="distribution" content="global">
 <meta name="Generator" content="makeinfo">
 <link href="index.html#Top" rel="start" title="Top">
-<link href="Option-Index.html#Option-Index" rel="index" title="Option Index">
+<link href="Indices.html#Indices" rel="index" title="Indices">
 <link href="index.html#SEC_Contents" rel="contents" title="Table of Contents">
 <link href="Variable-Attributes.html#Variable-Attributes" rel="up" title="Variable Attributes">
 <link href="ARC-Variable-Attributes.html#ARC-Variable-Attributes" rel="next" title="ARC Variable Attributes">
@@ -66,11 +68,11 @@ ul.no-bullet {list-style: none}
 
 </head>
 
-<body lang="en">
+<body lang="en_US">
 <a name="Common-Variable-Attributes"></a>
 <div class="header">
 <p>
-Next: <a href="ARC-Variable-Attributes.html#ARC-Variable-Attributes" accesskey="n" rel="next">ARC Variable Attributes</a>, Up: <a href="Variable-Attributes.html#Variable-Attributes" accesskey="u" rel="up">Variable Attributes</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Option-Index.html#Option-Index" title="Index" rel="index">Index</a>]</p>
+Next: <a href="ARC-Variable-Attributes.html#ARC-Variable-Attributes" accesskey="n" rel="next">ARC Variable Attributes</a>, Up: <a href="Variable-Attributes.html#Variable-Attributes" accesskey="u" rel="up">Variable Attributes</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Indices.html#Indices" title="Index" rel="index">Index</a>]</p>
 </div>
 <hr>
 <a name="Common-Variable-Attributes-1"></a>
@@ -79,9 +81,11 @@ Next: <a href="ARC-Variable-Attributes.html#ARC-Variable-Attributes" accesskey="
 <p>The following attributes are supported on most targets.
 </p>
 <dl compact="compact">
+<dd>
+<a name="index-alias-variable-attribute"></a>
+</dd>
 <dt><code>alias (&quot;<var>target</var>&quot;)</code></dt>
-<dd><a name="index-alias-variable-attribute"></a>
-<p>The <code>alias</code> variable attribute causes the declaration to be emitted
+<dd><p>The <code>alias</code> variable attribute causes the declaration to be emitted
 as an alias for another symbol known as an <em>alias target</em>.  Except
 for top-level qualifiers the alias target must have the same type as
 the alias.  For instance, the following
@@ -217,17 +221,44 @@ the misaligned offset:
 The <code>warn_if_not_aligned</code> attribute can also be used for types
 (see <a href="Common-Type-Attributes.html#Common-Type-Attributes">Common Type Attributes</a>.)
 </p>
+<a name="index-strict_005fflex_005farray-variable-attribute"></a>
+</dd>
+<dt><code>strict_flex_array (<var>level</var>)</code></dt>
+<dd><p>The <code>strict_flex_array</code> attribute should be attached to the trailing
+array field of a structure.  It controls when to treat the trailing array
+field of a structure as a flexible array member for the purposes of accessing
+the elements of such an array.
+<var>level</var> must be an integer betwen 0 to 3.
+</p>
+<p><var>level</var>=0 is the least strict level, all trailing arrays of structures
+are treated as flexible array members. <var>level</var>=3 is the strictest level,
+only when the trailing array is declared as a flexible array member per C99
+standard onwards (&lsquo;<samp>[]</samp>&rsquo;), it is treated as a flexible array member.
+</p>
+<p>There are two more levels in between 0 and 3, which are provided to support
+older codes that use GCC zero-length array extension (&lsquo;<samp>[0]</samp>&rsquo;) or one-element
+array as flexible array members (&lsquo;<samp>[1]</samp>&rsquo;):
+When <var>level</var> is 1, the trailing array is treated as a flexible array member
+when it is declared as either &lsquo;<samp>[]</samp>&rsquo;, &lsquo;<samp>[0]</samp>&rsquo;, or &lsquo;<samp>[1]</samp>&rsquo;;
+When <var>level</var> is 2, the trailing array is treated as a flexible array member
+when it is declared as either &lsquo;<samp>[]</samp>&rsquo;, or &lsquo;<samp>[0]</samp>&rsquo;.
+</p>
+<p>This attribute can be used with or without the <samp>-fstrict-flex-arrays</samp>.
+When both the attribute and the option present at the same time, the level of
+the strictness for the specific trailing array field is determined by the
+attribute.
+</p>
+<a name="index-alloc_005fsize-variable-attribute"></a>
 </dd>
 <dt><code>alloc_size (<var>position</var>)</code></dt>
 <dt><code>alloc_size (<var>position-1</var>, <var>position-2</var>)</code></dt>
-<dd><a name="index-alloc_005fsize-variable-attribute"></a>
-<p>The <code>alloc_size</code> variable attribute may be applied to the declaration
+<dd><p>The <code>alloc_size</code> variable attribute may be applied to the declaration
 of a pointer to a function that returns a pointer and takes at least one
 argument of an integer type.  It indicates that the returned pointer points
-to an object whose size is given by the function argument at <var>position-1</var>,
+to an object whose size is given by the function argument at <var>position</var>,
 or by the product of the arguments at <var>position-1</var> and <var>position-2</var>.
 Meaningful sizes are positive values less than <code>PTRDIFF_MAX</code>.  Other
-sizes are disagnosed when detected.  GCC uses this information to improve
+sizes are diagnosed when detected.  GCC uses this information to improve
 the results of <code>__builtin_object_size</code>.
 </p>
 <p>For instance, the following declarations
@@ -245,10 +276,10 @@ is given by the product of arguments 1 and 2, and similarly, that
 <code>malloc_ptr</code>, like the standard C function <code>malloc</code>,
 returns an object whose size is given by argument 1 to the function.
 </p>
+<a name="index-cleanup-variable-attribute"></a>
 </dd>
 <dt><code>cleanup (<var>cleanup_function</var>)</code></dt>
-<dd><a name="index-cleanup-variable-attribute"></a>
-<p>The <code>cleanup</code> attribute runs a function when the variable goes
+<dd><p>The <code>cleanup</code> attribute runs a function when the variable goes
 out of scope.  This attribute can only be applied to auto function
 scope variables; it may not be applied to parameters or variables
 with static storage duration.  The function must take one parameter,
@@ -262,25 +293,25 @@ does not allow the exception to be caught, only to perform an action.
 It is undefined what happens if <var>cleanup_function</var> does not
 return normally.
 </p>
-</dd>
-<dt><code>common</code></dt>
-<dt><code>nocommon</code></dt>
-<dd><a name="index-common-variable-attribute"></a>
+<a name="index-common-variable-attribute"></a>
 <a name="index-nocommon-variable-attribute"></a>
 <a name="index-fcommon-1"></a>
 <a name="index-fno_002dcommon-1"></a>
-<p>The <code>common</code> attribute requests GCC to place a variable in
+</dd>
+<dt><code>common</code></dt>
+<dt><code>nocommon</code></dt>
+<dd><p>The <code>common</code> attribute requests GCC to place a variable in
 &ldquo;common&rdquo; storage.  The <code>nocommon</code> attribute requests the
 opposite&mdash;to allocate space for it directly.
 </p>
 <p>These attributes override the default chosen by the
 <samp>-fno-common</samp> and <samp>-fcommon</samp> flags respectively.
 </p>
+<a name="index-copy-variable-attribute"></a>
 </dd>
 <dt><code>copy</code></dt>
 <dt><code>copy (<var>variable</var>)</code></dt>
-<dd><a name="index-copy-variable-attribute"></a>
-<p>The <code>copy</code> attribute applies the set of attributes with which
+<dd><p>The <code>copy</code> attribute applies the set of attributes with which
 <var>variable</var> has been declared to the declaration of the variable
 to which the attribute is applied.  The attribute is designed for
 libraries that define aliases that are expected to specify the same
@@ -294,11 +325,11 @@ but not attributes that affect a symbol&rsquo;s linkage or visibility such as
 attribute is also not copied.  See <a href="Common-Function-Attributes.html#Common-Function-Attributes">Common Function Attributes</a>.
 See <a href="Common-Type-Attributes.html#Common-Type-Attributes">Common Type Attributes</a>.
 </p>
+<a name="index-deprecated-variable-attribute"></a>
 </dd>
 <dt><code>deprecated</code></dt>
 <dt><code>deprecated (<var>msg</var>)</code></dt>
-<dd><a name="index-deprecated-variable-attribute"></a>
-<p>The <code>deprecated</code> attribute results in a warning if the variable
+<dd><p>The <code>deprecated</code> attribute results in a warning if the variable
 is used anywhere in the source file.  This is useful when identifying
 variables that are expected to be removed in a future version of a
 program.  The warning also includes the location of the declaration
@@ -323,10 +354,27 @@ see <a href="Common-Type-Attributes.html#Common-Type-Attributes">Common Type Att
 <p>The message attached to the attribute is affected by the setting of
 the <samp>-fmessage-length</samp> option.
 </p>
+<a name="index-unavailable-variable-attribute"></a>
+</dd>
+<dt><code>unavailable</code></dt>
+<dt><code>unavailable (<var>msg</var>)</code></dt>
+<dd><p>The <code>unavailable</code> attribute indicates that the variable so marked
+is not available, if it is used anywhere in the source file.  It behaves
+in the same manner as the <code>deprecated</code> attribute except that the
+compiler will emit an error rather than a warning.
+</p>
+<p>It is expected that items marked as <code>deprecated</code> will eventually be
+withdrawn from interfaces, and then become unavailable.  This attribute
+allows for marking them appropriately.
+</p>
+<p>The <code>unavailable</code> attribute can also be used for functions and
+types (see <a href="Common-Function-Attributes.html#Common-Function-Attributes">Common Function Attributes</a>,
+see <a href="Common-Type-Attributes.html#Common-Type-Attributes">Common Type Attributes</a>).
+</p>
+<a name="index-mode-variable-attribute"></a>
 </dd>
 <dt><code>mode (<var>mode</var>)</code></dt>
-<dd><a name="index-mode-variable-attribute"></a>
-<p>This attribute specifies the data type for the declaration&mdash;whichever
+<dd><p>This attribute specifies the data type for the declaration&mdash;whichever
 type corresponds to the mode <var>mode</var>.  This in effect lets you
 request an integer or floating-point type according to its width.
 </p>
@@ -337,10 +385,10 @@ indicate the mode corresponding to a one-byte integer, <code>word</code> or
 <code>__word__</code> for the mode of a one-word integer, and <code>pointer</code>
 or <code>__pointer__</code> for the mode used to represent pointers.
 </p>
+<a name="index-nonstring-variable-attribute"></a>
 </dd>
 <dt><code>nonstring</code></dt>
-<dd><a name="index-nonstring-variable-attribute"></a>
-<p>The <code>nonstring</code> variable attribute specifies that an object or member
+<dd><p>The <code>nonstring</code> variable attribute specifies that an object or member
 declaration with type array of <code>char</code>, <code>signed char</code>, or
 <code>unsigned char</code>, or pointer to such a type is intended to store
 character arrays that do not necessarily contain a terminating <code>NUL</code>.
@@ -373,10 +421,10 @@ int f (struct Data *pd, const char *s)
 }
 </pre></div>
 
+<a name="index-packed-variable-attribute"></a>
 </dd>
 <dt><code>packed</code></dt>
-<dd><a name="index-packed-variable-attribute"></a>
-<p>The <code>packed</code> attribute specifies that a structure member should have
+<dd><p>The <code>packed</code> attribute specifies that a structure member should have
 the smallest possible alignment&mdash;one bit for a bit-field and one byte
 otherwise, unless a larger value is specified with the <code>aligned</code>
 attribute.  The attribute does not apply to non-member objects.
@@ -398,10 +446,10 @@ been fixed in GCC 4.4 but the change can lead to differences in the
 structure layout.  See the documentation of
 <samp>-Wpacked-bitfield-compat</samp> for more information.
 </p>
+<a name="index-section-variable-attribute"></a>
 </dd>
 <dt><code>section (&quot;<var>section-name</var>&quot;)</code></dt>
-<dd><a name="index-section-variable-attribute"></a>
-<p>Normally, the compiler places the objects it generates in sections like
+<dd><p>Normally, the compiler places the objects it generates in sections like
 <code>data</code> and <code>bss</code>.  Sometimes, however, you need additional sections,
 or you need certain particular variables to appear in special sections,
 for example to map to special hardware.  The <code>section</code>
@@ -447,10 +495,10 @@ attribute is not available on all platforms.
 If you need to map the entire contents of a module to a particular
 section, consider using the facilities of the linker instead.
 </p>
+<a name="index-tls_005fmodel-variable-attribute"></a>
 </dd>
 <dt><code>tls_model (&quot;<var>tls_model</var>&quot;)</code></dt>
-<dd><a name="index-tls_005fmodel-variable-attribute"></a>
-<p>The <code>tls_model</code> attribute sets thread-local storage model
+<dd><p>The <code>tls_model</code> attribute sets thread-local storage model
 (see <a href="Thread_002dLocal.html#Thread_002dLocal">Thread-Local</a>) of a particular <code>__thread</code> variable,
 overriding <samp>-ftls-model=</samp> command-line switch on a per-variable
 basis.
@@ -459,17 +507,17 @@ The <var>tls_model</var> argument should be one of <code>global-dynamic</code>,
 </p>
 <p>Not all targets support this attribute.
 </p>
+<a name="index-unused-variable-attribute"></a>
 </dd>
 <dt><code>unused</code></dt>
-<dd><a name="index-unused-variable-attribute"></a>
-<p>This attribute, attached to a variable, means that the variable is meant
-to be possibly unused.  GCC does not produce a warning for this
-variable.
+<dd><p>This attribute, attached to a variable or structure field, means that
+the variable or field is meant to be possibly unused.  GCC does not
+produce a warning for this variable or field.
 </p>
+<a name="index-used-variable-attribute"></a>
 </dd>
 <dt><code>used</code></dt>
-<dd><a name="index-used-variable-attribute"></a>
-<p>This attribute, attached to a variable with static storage, means that
+<dd><p>This attribute, attached to a variable with static storage, means that
 the variable must be emitted even if it appears that the variable is not
 referenced.
 </p>
@@ -477,10 +525,10 @@ referenced.
 attribute also means that the member is instantiated if the
 class itself is instantiated.
 </p>
+<a name="index-retain-variable-attribute"></a>
 </dd>
 <dt><code>retain</code></dt>
-<dd><a name="index-retain-variable-attribute"></a>
-<p>For ELF targets that support the GNU or FreeBSD OSABIs, this attribute
+<dd><p>For ELF targets that support the GNU or FreeBSD OSABIs, this attribute
 will save the variable from linker garbage collection.  To support
 this behavior, variables that have not been placed in specific sections
 (e.g. by the <code>section</code> attribute, or the <code>-fdata-sections</code> option),
@@ -488,10 +536,27 @@ will be placed in new, unique sections.
 </p>
 <p>This additional functionality requires Binutils version 2.36 or later.
 </p>
+<a name="index-uninitialized-variable-attribute"></a>
+</dd>
+<dt><code>uninitialized</code></dt>
+<dd><p>This attribute, attached to a variable with automatic storage, means that
+the variable should not be automatically initialized by the compiler when
+the option <code>-ftrivial-auto-var-init</code> presents.
+</p>
+<p>With the option <code>-ftrivial-auto-var-init</code>, all the automatic variables
+that do not have explicit initializers will be initialized by the compiler.
+These additional compiler initializations might incur run-time overhead,
+sometimes dramatically.  This attribute can be used to mark some variables
+to be excluded from such automatical initialization in order to reduce runtime
+overhead.
+</p>
+<p>This attribute has no effect when the option <code>-ftrivial-auto-var-init</code>
+does not present.
+</p>
+<a name="index-vector_005fsize-variable-attribute"></a>
 </dd>
 <dt><code>vector_size (<var>bytes</var>)</code></dt>
-<dd><a name="index-vector_005fsize-variable-attribute"></a>
-<p>This attribute specifies the vector size for the type of the declared
+<dd><p>This attribute specifies the vector size for the type of the declared
 variable, measured in bytes.  The type to which it applies is known as
 the <em>base type</em>.  The <var>bytes</var> argument must be a positive
 power-of-two multiple of the base type size.  For example, the declaration:
@@ -521,23 +586,23 @@ struct S  __attribute__ ((vector_size (16))) foo;
 <p>is invalid even if the size of the structure is the same as the size of
 the <code>int</code>.
 </p>
+<a name="index-visibility-variable-attribute"></a>
 </dd>
 <dt><code>visibility (&quot;<var>visibility_type</var>&quot;)</code></dt>
-<dd><a name="index-visibility-variable-attribute"></a>
-<p>This attribute affects the linkage of the declaration to which it is attached.
+<dd><p>This attribute affects the linkage of the declaration to which it is attached.
 The <code>visibility</code> attribute is described in
 <a href="Common-Function-Attributes.html#Common-Function-Attributes">Common Function Attributes</a>.
 </p>
+<a name="index-weak-variable-attribute"></a>
 </dd>
 <dt><code>weak</code></dt>
-<dd><a name="index-weak-variable-attribute"></a>
-<p>The <code>weak</code> attribute is described in
+<dd><p>The <code>weak</code> attribute is described in
 <a href="Common-Function-Attributes.html#Common-Function-Attributes">Common Function Attributes</a>.
 </p>
+<a name="index-noinit-variable-attribute"></a>
 </dd>
 <dt><code>noinit</code></dt>
-<dd><a name="index-noinit-variable-attribute"></a>
-<p>Any data with the <code>noinit</code> attribute will not be initialized by
+<dd><p>Any data with the <code>noinit</code> attribute will not be initialized by
 the C runtime startup code, or the program loader.  Not initializing
 data in this way can reduce program startup times.
 </p>
@@ -545,10 +610,10 @@ data in this way can reduce program startup times.
 script to place sections with the <code>.noinit</code> prefix in the right
 location.
 </p>
+<a name="index-persistent-variable-attribute"></a>
 </dd>
 <dt><code>persistent</code></dt>
-<dd><a name="index-persistent-variable-attribute"></a>
-<p>Any data with the <code>persistent</code> attribute will not be initialized by
+<dd><p>Any data with the <code>persistent</code> attribute will not be initialized by
 the C runtime startup code, but will be initialized by the program
 loader.  This enables the value of the variable to &lsquo;<samp>persist</samp>&rsquo;
 between processor resets.
@@ -558,10 +623,10 @@ script to place the sections with the <code>.persistent</code> prefix in the
 right location.  Specifically, some type of non-volatile, writeable
 memory is required.
 </p>
+<a name="index-objc_005fnullability-variable-attribute"></a>
 </dd>
 <dt><code>objc_nullability (<var>nullability kind</var>) <span class="roman">(Objective-C and Objective-C++ only)</span></code></dt>
-<dd><a name="index-objc_005fnullability-variable-attribute"></a>
-<p>This attribute applies to pointer variables only.  It allows marking the
+<dd><p>This attribute applies to pointer variables only.  It allows marking the
 pointer with one of four possible values describing the conditions under
 which the pointer might have a <code>nil</code> value. In most cases, the
 attribute is intended to be an internal representation for property and
@@ -591,7 +656,7 @@ getter will never validly return <code>nil</code>.
 <hr>
 <div class="header">
 <p>
-Next: <a href="ARC-Variable-Attributes.html#ARC-Variable-Attributes" accesskey="n" rel="next">ARC Variable Attributes</a>, Up: <a href="Variable-Attributes.html#Variable-Attributes" accesskey="u" rel="up">Variable Attributes</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Option-Index.html#Option-Index" title="Index" rel="index">Index</a>]</p>
+Next: <a href="ARC-Variable-Attributes.html#ARC-Variable-Attributes" accesskey="n" rel="next">ARC Variable Attributes</a>, Up: <a href="Variable-Attributes.html#Variable-Attributes" accesskey="u" rel="up">Variable Attributes</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Indices.html#Indices" title="Index" rel="index">Index</a>]</p>
 </div>
 
 

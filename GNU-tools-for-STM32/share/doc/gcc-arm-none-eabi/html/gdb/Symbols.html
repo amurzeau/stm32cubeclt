@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- Copyright (C) 1988-2022 Free Software Foundation, Inc.
+<!-- Copyright (C) 1988-2023 Free Software Foundation, Inc.
 
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
@@ -586,12 +586,10 @@ type printers.
 <a name="index-info-scope"></a>
 <a name="index-local-variables"></a>
 </dd>
-<dt><code>info scope <var>location</var></code></dt>
-<dd><p>List all the variables local to a particular scope.  This command
-accepts a <var>location</var> argument&mdash;a function name, a source line, or
-an address preceded by a &lsquo;<samp>*</samp>&rsquo;, and prints all the variables local
-to the scope defined by that location.  (See <a href="Specify-Location.html#Specify-Location">Specify Location</a>, for
-details about supported forms of <var>location</var>.)  For example:
+<dt><code>info scope <var>locspec</var></code></dt>
+<dd><p>List all the variables local to the lexical scope of the code location
+that results from resolving <var>locspec</var>.  See <a href="Location-Specifications.html#Location-Specifications">Location Specifications</a>, for details about supported forms of <var>locspec</var>.
+For example:
 </p>
 <div class="smallexample">
 <pre class="smallexample">(gdb) <b>info scope command_line_handler</b>
@@ -785,6 +783,13 @@ expression <var>regexp</var> will be listed.
 printing header information and messages explaining why no functions
 or variables have been printed.
 </p>
+<a name="index-info-main"></a>
+</dd>
+<dt><code>info main</code></dt>
+<dd><p>Print the name of the starting function of the program.  This serves
+primarily Fortran programs, which have a user-supplied name for the
+main subroutine.
+</p>
 <a name="index-info-classes"></a>
 <a name="index-Objective_002dC_002c-classes-and-selectors"></a>
 </dd>
@@ -956,6 +961,44 @@ line 1574.
 <p>List the <code>struct linetable</code> from all <code>struct symtab</code>
 instances whose name matches <var>regexp</var>.  If <var>regexp</var> is not
 given, list the <code>struct linetable</code> from all <code>struct symtab</code>.
+For example:
+</p>
+<div class="smallexample">
+<pre class="smallexample">(gdb) maint info line-table
+objfile: /home/gnu/build/a.out ((struct objfile *) 0x6120000e0d40)
+compunit_symtab: simple.cpp ((struct compunit_symtab *) 0x6210000ff450)
+symtab: /home/gnu/src/simple.cpp ((struct symtab *) 0x6210000ff4d0)
+linetable: ((struct linetable *) 0x62100012b760):
+INDEX  LINE   ADDRESS            IS-STMT PROLOGUE-END
+0      3      0x0000000000401110 Y
+1      4      0x0000000000401114 Y       Y
+2      9      0x0000000000401120 Y
+3      10     0x0000000000401124 Y       Y
+4      10     0x0000000000401129
+5      15     0x0000000000401130 Y
+6      16     0x0000000000401134 Y       Y
+7      16     0x0000000000401139
+8      21     0x0000000000401140 Y
+9      22     0x000000000040114f Y       Y
+10     22     0x0000000000401154
+11     END    0x000000000040115a Y
+</pre></div>
+<p>The &lsquo;<samp>IS-STMT</samp>&rsquo; column indicates if the address is a recommended breakpoint
+location to represent a line or a statement.  The &lsquo;<samp>PROLOGUE-END</samp>&rsquo; column
+indicates that a given address is an adequate place to set a breakpoint at the
+first instruction following a function prologue.
+</p>
+<a name="index-set-always_002dread_002dctf-_005bon_007coff_005d"></a>
+<a name="index-show-always_002dread_002dctf"></a>
+<a name="index-always_002dread_002dctf"></a>
+<a name="index-CTF-info_002c-when-to-read"></a>
+</dd>
+<dt><code>set always-read-ctf [on|off]</code></dt>
+<dt><code>show always-read-ctf</code></dt>
+<dd>
+<p>When off, CTF debug info is only read if DWARF debug info is not
+present.  When on, CTF debug info is read regardless of whether DWARF
+debug info is present.  The default value is off.
 </p>
 <a name="index-maint-set-symbol_002dcache_002dsize"></a>
 <a name="index-symbol-cache-size"></a>
@@ -996,6 +1039,21 @@ command is useful when debugging the symbol cache.  It is also useful
 when collecting performance data.  The command <code>maint
 flush-symbol-cache</code> is deprecated in favor of <code>maint flush
 symbol-cache</code>..
+</p>
+<a name="index-maint-set-ignore_002dprologue_002dend_002dflag"></a>
+<a name="index-prologue_002dend"></a>
+</dd>
+<dt><code>maint set ignore-prologue-end-flag [on|off]</code></dt>
+<dd><p>Enable or disable the use of the &lsquo;<samp>PROLOGUE-END</samp>&rsquo; flag from the line-table.
+When &lsquo;<samp>off</samp>&rsquo; (the default), <small>GDB</small> uses the &lsquo;<samp>PROLOGUE-END</samp>&rsquo; flag
+to place breakpoints past the end of a function prologue.  When &lsquo;<samp>on</samp>&rsquo;,
+<small>GDB</small> ignores the flag and relies on prologue analyzers to skip function
+prologues.
+</p>
+<a name="index-maint-show-ignore_002dprologue_002dend_002dflag"></a>
+</dd>
+<dt><code>maint show ignore-prologue-end-flag</code></dt>
+<dd><p>Show whether <small>GDB</small> will ignore the &lsquo;<samp>PROLOGUE-END</samp>&rsquo; flag.
 </p>
 </dd>
 </dl>

@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- Copyright (C) 1988-2021 Free Software Foundation, Inc.
+<!-- Copyright (C) 1988-2023 Free Software Foundation, Inc.
 
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
@@ -110,21 +110,25 @@ the target operating system.
 <dl>
 <dt><a name="index-TARGET_005fD_005fMINFO_005fSECTION"></a>D Target Hook: <em>const char *</em> <strong>TARGET_D_MINFO_SECTION</strong></dt>
 <dd><p>Contains the name of the section in which module info references should be
-placed.  This section is expected to be bracketed by two symbols to indicate
-the start and end address of the section, so that the runtime library can
-collect all modules for each loaded shared library and executable.  The
-default value of <code>NULL</code> disables the use of sections altogether.
+placed.  By default, the compiler puts all module info symbols in the
+<code>&quot;minfo&quot;</code> section.  Define this macro to override the string if a
+different section name should be used.  This section is expected to be
+bracketed by two symbols <code>TARGET_D_MINFO_SECTION_START</code> and 
+<code>TARGET_D_MINFO_SECTION_END</code> to indicate the start and end address of
+the section, so that the runtime library can collect all modules for each
+loaded shared library and executable.  Setting the value to <code>NULL</code>
+disables the use of sections for storing module info altogether.
 </p></dd></dl>
 
 <dl>
-<dt><a name="index-TARGET_005fD_005fMINFO_005fSTART_005fNAME"></a>D Target Hook: <em>const char *</em> <strong>TARGET_D_MINFO_START_NAME</strong></dt>
+<dt><a name="index-TARGET_005fD_005fMINFO_005fSECTION_005fSTART"></a>D Target Hook: <em>const char *</em> <strong>TARGET_D_MINFO_SECTION_START</strong></dt>
 <dd><p>If <code>TARGET_D_MINFO_SECTION</code> is defined, then this must also be defined
 as the name of the symbol indicating the start address of the module info
 section
 </p></dd></dl>
 
 <dl>
-<dt><a name="index-TARGET_005fD_005fMINFO_005fEND_005fNAME"></a>D Target Hook: <em>const char *</em> <strong>TARGET_D_MINFO_END_NAME</strong></dt>
+<dt><a name="index-TARGET_005fD_005fMINFO_005fSECTION_005fEND"></a>D Target Hook: <em>const char *</em> <strong>TARGET_D_MINFO_SECTION_END</strong></dt>
 <dd><p>If <code>TARGET_D_MINFO_SECTION</code> is defined, then this must also be defined
 as the name of the symbol indicating the end address of the module info
 section

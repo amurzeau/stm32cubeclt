@@ -1,6 +1,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- Copyright (C) 1988-2021 Free Software Foundation, Inc.
+<!-- This file documents the use of the GNU compilers.
+
+Copyright (C) 1988-2023 Free Software Foundation, Inc.
 
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
@@ -30,7 +32,7 @@ You have freedom to copy and modify this GNU Manual, like GNU
 <meta name="distribution" content="global">
 <meta name="Generator" content="makeinfo">
 <link href="index.html#Top" rel="start" title="Top">
-<link href="Option-Index.html#Option-Index" rel="index" title="Option Index">
+<link href="Indices.html#Indices" rel="index" title="Indices">
 <link href="index.html#SEC_Contents" rel="contents" title="Table of Contents">
 <link href="Basic-PowerPC-Built_002din-Functions.html#Basic-PowerPC-Built_002din-Functions" rel="up" title="Basic PowerPC Built-in Functions">
 <link href="PowerPC-AltiVec_002fVSX-Built_002din-Functions.html#PowerPC-AltiVec_002fVSX-Built_002din-Functions" rel="next" title="PowerPC AltiVec/VSX Built-in Functions">
@@ -66,11 +68,11 @@ ul.no-bullet {list-style: none}
 
 </head>
 
-<body lang="en">
+<body lang="en_US">
 <a name="Basic-PowerPC-Built_002din-Functions-Available-on-ISA-3_002e1"></a>
 <div class="header">
 <p>
-Previous: <a href="Basic-PowerPC-Built_002din-Functions-Available-on-ISA-3_002e0.html#Basic-PowerPC-Built_002din-Functions-Available-on-ISA-3_002e0" accesskey="p" rel="prev">Basic PowerPC Built-in Functions Available on ISA 3.0</a>, Up: <a href="Basic-PowerPC-Built_002din-Functions.html#Basic-PowerPC-Built_002din-Functions" accesskey="u" rel="up">Basic PowerPC Built-in Functions</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Option-Index.html#Option-Index" title="Index" rel="index">Index</a>]</p>
+Previous: <a href="Basic-PowerPC-Built_002din-Functions-Available-on-ISA-3_002e0.html#Basic-PowerPC-Built_002din-Functions-Available-on-ISA-3_002e0" accesskey="p" rel="prev">Basic PowerPC Built-in Functions Available on ISA 3.0</a>, Up: <a href="Basic-PowerPC-Built_002din-Functions.html#Basic-PowerPC-Built_002din-Functions" accesskey="u" rel="up">Basic PowerPC Built-in Functions</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Indices.html#Indices" title="Index" rel="index">Index</a>]</p>
 </div>
 <hr>
 <a name="Basic-PowerPC-Built_002din-Functions-Available-on-ISA-3_002e1-1"></a>
@@ -85,81 +87,70 @@ enabling all the same options as for <samp>-mcpu=power9</samp>.
 <p>The following built-in functions are available on Linux 64-bit systems
 that use a future architecture instruction set (<samp>-mcpu=power10</samp>):
 </p>
-<div class="smallexample">
-<pre class="smallexample">unsigned long long int
-</pre><pre class="smallexample">__builtin_cfuged (unsigned long long int, unsigned long long int)
-</pre></div>
-<p>Perform a 64-bit centrifuge operation, as if implemented by the
+<dl>
+<dt><a name="index-_005f_005fbuiltin_005fcfuged"></a>Built-in Function: <em>unsigned long long</em> <strong>__builtin_cfuged</strong> <em>(unsigned long long, unsigned long long)</em></dt>
+<dd><p>Perform a 64-bit centrifuge operation, as if implemented by the
 <code>cfuged</code> instruction.
-<a name="index-_005f_005fbuiltin_005fcfuged"></a>
-</p>
-<div class="smallexample">
-<pre class="smallexample">unsigned long long int
-</pre><pre class="smallexample">__builtin_cntlzdm (unsigned long long int, unsigned long long int)
-</pre></div>
-<p>Perform a 64-bit count leading zeros operation under mask, as if
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-_005f_005fbuiltin_005fcntlzdm"></a>Built-in Function: <em>unsigned long long</em> <strong>__builtin_cntlzdm</strong> <em>(unsigned long long, unsigned long long)</em></dt>
+<dd><p>Perform a 64-bit count leading zeros operation under mask, as if
 implemented by the <code>cntlzdm</code> instruction.
-<a name="index-_005f_005fbuiltin_005fcntlzdm"></a>
-</p>
-<div class="smallexample">
-<pre class="smallexample">unsigned long long int
-</pre><pre class="smallexample">__builtin_cnttzdm (unsigned long long int, unsigned long long int)
-</pre></div>
-<p>Perform a 64-bit count trailing zeros operation under mask, as if
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-_005f_005fbuiltin_005fcnttzdm"></a>Built-in Function: <em>unsigned long long</em> <strong>__builtin_cnttzdm</strong> <em>(unsigned long long, unsigned long long)</em></dt>
+<dd><p>Perform a 64-bit count trailing zeros operation under mask, as if
 implemented by the <code>cnttzdm</code> instruction.
-<a name="index-_005f_005fbuiltin_005fcnttzdm"></a>
-</p>
-<div class="smallexample">
-<pre class="smallexample">unsigned long long int
-</pre><pre class="smallexample">__builtin_pdepd (unsigned long long int, unsigned long long int)
-</pre></div>
-<p>Perform a 64-bit parallel bits deposit operation, as if implemented by the
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-_005f_005fbuiltin_005fpdepd"></a>Built-in Function: <em>unsigned long long</em> <strong>__builtin_pdepd</strong> <em>(unsigned long long, unsigned long long)</em></dt>
+<dd><p>Perform a 64-bit parallel bits deposit operation, as if implemented by the
 <code>pdepd</code> instruction.
-<a name="index-_005f_005fbuiltin_005fpdepd"></a>
-</p>
-<div class="smallexample">
-<pre class="smallexample">unsigned long long int
-</pre><pre class="smallexample">__builtin_pextd (unsigned long long int, unsigned long long int)
-</pre></div>
-<p>Perform a 64-bit parallel bits extract operation, as if implemented by the
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-_005f_005fbuiltin_005fpextd"></a>Built-in Function: <em>unsigned long long</em> <strong>__builtin_pextd</strong> <em>(unsigned long long, unsigned long long)</em></dt>
+<dd><p>Perform a 64-bit parallel bits extract operation, as if implemented by the
 <code>pextd</code> instruction.
-<a name="index-_005f_005fbuiltin_005fpextd"></a>
-</p>
-<div class="smallexample">
-<pre class="smallexample">vector signed __int128 vsx_xl_sext (signed long long, signed char *);
-</pre><pre class="smallexample">vector signed __int128 vsx_xl_sext (signed long long, signed short *);
-</pre><pre class="smallexample">vector signed __int128 vsx_xl_sext (signed long long, signed int *);
-</pre><pre class="smallexample">vector signed __int128 vsx_xl_sext (signed long long, signed long long *);
-</pre><pre class="smallexample">vector unsigned __int128 vsx_xl_zext (signed long long, unsigned char *);
-</pre><pre class="smallexample">vector unsigned __int128 vsx_xl_zext (signed long long, unsigned short *);
-</pre><pre class="smallexample">vector unsigned __int128 vsx_xl_zext (signed long long, unsigned int *);
-</pre><pre class="smallexample">vector unsigned __int128 vsx_xl_zext (signed long long, unsigned long long *);
-</pre></div>
+</p></dd></dl>
 
+<dl>
+<dt><a name="index-vsx_005fxl_005fsext"></a>Built-in Function: <em>vector signed __int128</em> <strong>vsx_xl_sext</strong> <em>(signed long long, signed char *)</em></dt>
+<dt><a name="index-vsx_005fxl_005fsext-1"></a>Built-in Function: <em>vector signed __int128</em> <strong>vsx_xl_sext</strong> <em>(signed long long, signed short *)</em></dt>
+<dt><a name="index-vsx_005fxl_005fsext-2"></a>Built-in Function: <em>vector signed __int128</em> <strong>vsx_xl_sext</strong> <em>(signed long long, signed int *)</em></dt>
+<dt><a name="index-vsx_005fxl_005fsext-3"></a>Built-in Function: <em>vector signed __int128</em> <strong>vsx_xl_sext</strong> <em>(signed long long, signed long long *)</em></dt>
+<dt><a name="index-vsx_005fxl_005fzext"></a>Built-in Function: <em>vector unsigned __int128</em> <strong>vsx_xl_zext</strong> <em>(signed long long, unsigned char *)</em></dt>
+<dt><a name="index-vsx_005fxl_005fzext-1"></a>Built-in Function: <em>vector unsigned __int128</em> <strong>vsx_xl_zext</strong> <em>(signed long long, unsigned short *)</em></dt>
+<dt><a name="index-vsx_005fxl_005fzext-2"></a>Built-in Function: <em>vector unsigned __int128</em> <strong>vsx_xl_zext</strong> <em>(signed long long, unsigned int *)</em></dt>
+<dt><a name="index-vsx_005fxl_005fzext-3"></a>Built-in Function: <em>vector unsigned __int128</em> <strong>vsx_xl_zext</strong> <em>(signed long long, unsigned long long *)</em></dt>
+<dd>
 <p>Load (and sign extend) to an __int128 vector, as if implemented by the ISA 3.1
-<code>lxvrbx</code> <code>lxvrhx</code> <code>lxvrwx</code> <code>lxvrdx</code> instructions.
-<a name="index-vsx_005fxl_005fsext"></a>
-<a name="index-vsx_005fxl_005fzext"></a>
-</p>
-<div class="smallexample">
-<pre class="smallexample">void vec_xst_trunc (vector signed __int128, signed long long, signed char *);
-</pre><pre class="smallexample">void vec_xst_trunc (vector signed __int128, signed long long, signed short *);
-</pre><pre class="smallexample">void vec_xst_trunc (vector signed __int128, signed long long, signed int *);
-</pre><pre class="smallexample">void vec_xst_trunc (vector signed __int128, signed long long, signed long long *);
-</pre><pre class="smallexample">void vec_xst_trunc (vector unsigned __int128, signed long long, unsigned char *);
-</pre><pre class="smallexample">void vec_xst_trunc (vector unsigned __int128, signed long long, unsigned short *);
-</pre><pre class="smallexample">void vec_xst_trunc (vector unsigned __int128, signed long long, unsigned int *);
-</pre><pre class="smallexample">void vec_xst_trunc (vector unsigned __int128, signed long long, unsigned long long *);
-</pre></div>
+<code>lxvrbx</code>, <code>lxvrhx</code>, <code>lxvrwx</code>, and  <code>lxvrdx</code>
+instructions.
+</p></dd></dl>
 
+<dl>
+<dt><a name="index-vec_005fxst_005ftrunc"></a>Built-in Function: <em>void</em> <strong>vec_xst_trunc</strong> <em>(vector signed __int128, signed long long, signed char *)</em></dt>
+<dt><a name="index-vec_005fxst_005ftrunc-1"></a>Built-in Function: <em>void</em> <strong>vec_xst_trunc</strong> <em>(vector signed __int128, signed long long, signed short *)</em></dt>
+<dt><a name="index-vec_005fxst_005ftrunc-2"></a>Built-in Function: <em>void</em> <strong>vec_xst_trunc</strong> <em>(vector signed __int128, signed long long, signed int *)</em></dt>
+<dt><a name="index-vec_005fxst_005ftrunc-3"></a>Built-in Function: <em>void</em> <strong>vec_xst_trunc</strong> <em>(vector signed __int128, signed long long, signed long long *)</em></dt>
+<dt><a name="index-vec_005fxst_005ftrunc-4"></a>Built-in Function: <em>void</em> <strong>vec_xst_trunc</strong> <em>(vector unsigned __int128, signed long long, unsigned char *)</em></dt>
+<dt><a name="index-vec_005fxst_005ftrunc-5"></a>Built-in Function: <em>void</em> <strong>vec_xst_trunc</strong> <em>(vector unsigned __int128, signed long long, unsigned short *)</em></dt>
+<dt><a name="index-vec_005fxst_005ftrunc-6"></a>Built-in Function: <em>void</em> <strong>vec_xst_trunc</strong> <em>(vector unsigned __int128, signed long long, unsigned int *)</em></dt>
+<dt><a name="index-vec_005fxst_005ftrunc-7"></a>Built-in Function: <em>void</em> <strong>vec_xst_trunc</strong> <em>(vector unsigned __int128, signed long long, unsigned long long *)</em></dt>
+<dd>
 <p>Truncate and store the rightmost element of a vector, as if implemented by the
-ISA 3.1 <code>stxvrbx</code> <code>stxvrhx</code> <code>stxvrwx</code> <code>stxvrdx</code> instructions.
-<a name="index-vec_005fxst_005ftrunc"></a>
-</p>
+ISA 3.1 <code>stxvrbx</code>, <code>stxvrhx</code>, <code>stxvrwx</code>, and <code>stxvrdx</code>
+instructions.
+</p></dd></dl>
+
 <hr>
 <div class="header">
 <p>
-Previous: <a href="Basic-PowerPC-Built_002din-Functions-Available-on-ISA-3_002e0.html#Basic-PowerPC-Built_002din-Functions-Available-on-ISA-3_002e0" accesskey="p" rel="prev">Basic PowerPC Built-in Functions Available on ISA 3.0</a>, Up: <a href="Basic-PowerPC-Built_002din-Functions.html#Basic-PowerPC-Built_002din-Functions" accesskey="u" rel="up">Basic PowerPC Built-in Functions</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Option-Index.html#Option-Index" title="Index" rel="index">Index</a>]</p>
+Previous: <a href="Basic-PowerPC-Built_002din-Functions-Available-on-ISA-3_002e0.html#Basic-PowerPC-Built_002din-Functions-Available-on-ISA-3_002e0" accesskey="p" rel="prev">Basic PowerPC Built-in Functions Available on ISA 3.0</a>, Up: <a href="Basic-PowerPC-Built_002din-Functions.html#Basic-PowerPC-Built_002din-Functions" accesskey="u" rel="up">Basic PowerPC Built-in Functions</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Indices.html#Indices" title="Index" rel="index">Index</a>]</p>
 </div>
 
 

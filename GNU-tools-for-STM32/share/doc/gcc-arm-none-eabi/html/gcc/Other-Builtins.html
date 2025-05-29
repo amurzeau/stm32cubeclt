@@ -1,6 +1,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- Copyright (C) 1988-2021 Free Software Foundation, Inc.
+<!-- This file documents the use of the GNU compilers.
+
+Copyright (C) 1988-2023 Free Software Foundation, Inc.
 
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
@@ -30,7 +32,7 @@ You have freedom to copy and modify this GNU Manual, like GNU
 <meta name="distribution" content="global">
 <meta name="Generator" content="makeinfo">
 <link href="index.html#Top" rel="start" title="Top">
-<link href="Option-Index.html#Option-Index" rel="index" title="Option Index">
+<link href="Indices.html#Indices" rel="index" title="Indices">
 <link href="index.html#SEC_Contents" rel="contents" title="Table of Contents">
 <link href="C-Extensions.html#C-Extensions" rel="up" title="C Extensions">
 <link href="Target-Builtins.html#Target-Builtins" rel="next" title="Target Builtins">
@@ -66,36 +68,21 @@ ul.no-bullet {list-style: none}
 
 </head>
 
-<body lang="en">
+<body lang="en_US">
 <a name="Other-Builtins"></a>
 <div class="header">
 <p>
-Next: <a href="Target-Builtins.html#Target-Builtins" accesskey="n" rel="next">Target Builtins</a>, Previous: <a href="Object-Size-Checking.html#Object-Size-Checking" accesskey="p" rel="prev">Object Size Checking</a>, Up: <a href="C-Extensions.html#C-Extensions" accesskey="u" rel="up">C Extensions</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Option-Index.html#Option-Index" title="Index" rel="index">Index</a>]</p>
+Next: <a href="Target-Builtins.html#Target-Builtins" accesskey="n" rel="next">Target Builtins</a>, Previous: <a href="Object-Size-Checking.html#Object-Size-Checking" accesskey="p" rel="prev">Object Size Checking</a>, Up: <a href="C-Extensions.html#C-Extensions" accesskey="u" rel="up">C Extensions</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Indices.html#Indices" title="Index" rel="index">Index</a>]</p>
 </div>
 <hr>
 <a name="Other-Built_002din-Functions-Provided-by-GCC"></a>
 <h3 class="section">6.59 Other Built-in Functions Provided by GCC</h3>
 <a name="index-built_002din-functions-1"></a>
-<a name="index-_005f_005fbuiltin_005falloca"></a>
-<a name="index-_005f_005fbuiltin_005falloca_005fwith_005falign"></a>
-<a name="index-_005f_005fbuiltin_005falloca_005fwith_005falign_005fand_005fmax"></a>
-<a name="index-_005f_005fbuiltin_005fcall_005fwith_005fstatic_005fchain"></a>
-<a name="index-_005f_005fbuiltin_005fextend_005fpointer"></a>
-<a name="index-_005f_005fbuiltin_005ffpclassify"></a>
-<a name="index-_005f_005fbuiltin_005fhas_005fattribute"></a>
 <a name="index-_005f_005fbuiltin_005fisfinite"></a>
 <a name="index-_005f_005fbuiltin_005fisnormal"></a>
 <a name="index-_005f_005fbuiltin_005fisgreater"></a>
 <a name="index-_005f_005fbuiltin_005fisgreaterequal"></a>
-<a name="index-_005f_005fbuiltin_005fisinf_005fsign"></a>
-<a name="index-_005f_005fbuiltin_005fisless"></a>
-<a name="index-_005f_005fbuiltin_005fislessequal"></a>
-<a name="index-_005f_005fbuiltin_005fislessgreater"></a>
 <a name="index-_005f_005fbuiltin_005fisunordered"></a>
-<a name="index-_005f_005fbuiltin_005fobject_005fsize-2"></a>
-<a name="index-_005f_005fbuiltin_005fpowi"></a>
-<a name="index-_005f_005fbuiltin_005fpowif"></a>
-<a name="index-_005f_005fbuiltin_005fpowil"></a>
 <a name="index-_005f_005fbuiltin_005fspeculation_005fsafe_005fvalue"></a>
 <a name="index-_005fExit"></a>
 <a name="index-_005fexit"></a>
@@ -587,7 +574,7 @@ except in strict ISO C90 mode (<samp>-ansi</samp> or <samp>-std=c90</samp>).
 <code>expl</code>, <code>fabsf</code>, <code>fabsl</code>, <code>floorf</code>, <code>floorl</code>,
 <code>fmodf</code>, <code>fmodl</code>, <code>frexpf</code>, <code>frexpl</code>, <code>ldexpf</code>,
 <code>ldexpl</code>, <code>log10f</code>, <code>log10l</code>, <code>logf</code>, <code>logl</code>,
-<code>modfl</code>, <code>modf</code>, <code>powf</code>, <code>powl</code>, <code>sinf</code>,
+<code>modfl</code>, <code>modff</code>, <code>powf</code>, <code>powl</code>, <code>sinf</code>,
 <code>sinhf</code>, <code>sinhl</code>, <code>sinl</code>, <code>sqrtf</code>, <code>sqrtl</code>,
 <code>tanf</code>, <code>tanhf</code>, <code>tanhl</code> and <code>tanl</code>
 that are recognized in any mode since ISO C90 reserves these names for
@@ -646,9 +633,19 @@ In the same fashion, GCC provides <code>fpclassify</code>, <code>isfinite</code>
 <code>isinf_sign</code>, <code>isnormal</code> and <code>signbit</code> built-ins used with
 <code>__builtin_</code> prefixed.  The <code>isinf</code> and <code>isnan</code>
 built-in functions appear both with and without the <code>__builtin_</code> prefix.
+With <code>-ffinite-math-only</code> option the <code>isinf</code> and <code>isnan</code>
+built-in functions will always return 0.
+</p>
+<p>GCC provides built-in versions of the ISO C99 floating-point rounding and
+exceptions handling functions <code>fegetround</code>, <code>feclearexcept</code> and
+<code>feraiseexcept</code>.  They may not be available for all targets, and because
+they need close interaction with libc internal values, they may not be available
+for all target libcs, but in all cases they will gracefully fallback to libc
+calls.  These built-in functions appear both with and without the
+<code>__builtin_</code> prefix.
 </p>
 <dl>
-<dt><a name="index-_002a_005f_005fbuiltin_005falloca"></a>Built-in Function: <em>void</em> <strong>*__builtin_alloca</strong> <em>(size_t size)</em></dt>
+<dt><a name="index-_005f_005fbuiltin_005falloca"></a>Built-in Function: <em>void *</em> <strong>__builtin_alloca</strong> <em>(size_t <var>size</var>)</em></dt>
 <dd><p>The <code>__builtin_alloca</code> function must be called at block scope.
 The function allocates an object <var>size</var> bytes large on the stack
 of the calling function.  The object is aligned on the default stack
@@ -689,7 +686,7 @@ See <a href="Variable-Length.html#Variable-Length">Variable Length</a>, for deta
 </dd></dl>
 
 <dl>
-<dt><a name="index-_002a_005f_005fbuiltin_005falloca_005fwith_005falign"></a>Built-in Function: <em>void</em> <strong>*__builtin_alloca_with_align</strong> <em>(size_t size, size_t alignment)</em></dt>
+<dt><a name="index-_005f_005fbuiltin_005falloca_005fwith_005falign"></a>Built-in Function: <em>void *</em> <strong>__builtin_alloca_with_align</strong> <em>(size_t <var>size</var>, size_t <var>alignment</var>)</em></dt>
 <dd><p>The <code>__builtin_alloca_with_align</code> function must be called at block
 scope.  The function allocates an object <var>size</var> bytes large on
 the stack of the calling function.  The allocated object is aligned on
@@ -737,7 +734,7 @@ an extension.  See <a href="Variable-Length.html#Variable-Length">Variable Lengt
 </dd></dl>
 
 <dl>
-<dt><a name="index-_002a_005f_005fbuiltin_005falloca_005fwith_005falign_005fand_005fmax"></a>Built-in Function: <em>void</em> <strong>*__builtin_alloca_with_align_and_max</strong> <em>(size_t size, size_t alignment, size_t max_size)</em></dt>
+<dt><a name="index-_005f_005fbuiltin_005falloca_005fwith_005falign_005fand_005fmax"></a>Built-in Function: <em>void *</em> <strong>__builtin_alloca_with_align_and_max</strong> <em>(size_t <var>size</var>, size_t <var>alignment</var>, size_t <var>max_size</var>)</em></dt>
 <dd><p>Similar to <code>__builtin_alloca_with_align</code> but takes an extra argument
 specifying an upper bound for <var>size</var> in case its value cannot be computed
 at compile time, for use by <samp>-fstack-usage</samp>, <samp>-Wstack-usage</samp>
@@ -748,7 +745,7 @@ check its compatibility with <var>size</var>.
 </dd></dl>
 
 <dl>
-<dt><a name="index-_005f_005fbuiltin_005fhas_005fattribute-1"></a>Built-in Function: <em>bool</em> <strong>__builtin_has_attribute</strong> <em>(<var>type-or-expression</var>, <var>attribute</var>)</em></dt>
+<dt><a name="index-_005f_005fbuiltin_005fhas_005fattribute"></a>Built-in Function: <em>bool</em> <strong>__builtin_has_attribute</strong> <em>(<var>type-or-expression</var>, <var>attribute</var>)</em></dt>
 <dd><p>The <code>__builtin_has_attribute</code> function evaluates to an integer constant
 expression equal to <code>true</code> if the symbol or type referenced by
 the <var>type-or-expression</var> argument has been declared with
@@ -792,7 +789,7 @@ recognized in such contexts.
 </dd></dl>
 
 <dl>
-<dt><a name="index-_005f_005fbuiltin_005fspeculation_005fsafe_005fvalue-1"></a>Built-in Function: <em><var>type</var></em> <strong>__builtin_speculation_safe_value</strong> <em>(<var>type</var> val, <var>type</var> failval)</em></dt>
+<dt><a name="index-_005f_005fbuiltin_005fspeculation_005fsafe_005fvalue-1"></a>Built-in Function: <em><var>type</var></em> <strong>__builtin_speculation_safe_value</strong> <em>(<var>type</var> <var>val</var>, <var>type</var> <var>failval</var>)</em></dt>
 <dd>
 <p>This built-in function can be used to help mitigate against unsafe
 speculative execution.  <var>type</var> may be any integral type or any
@@ -931,7 +928,7 @@ depending on the arguments&rsquo; types.  For example:
 </dd></dl>
 
 <dl>
-<dt><a name="index-_005f_005fbuiltin_005fcall_005fwith_005fstatic_005fchain-1"></a>Built-in Function: <em><var>type</var></em> <strong>__builtin_call_with_static_chain</strong> <em>(<var>call_exp</var>, <var>pointer_exp</var>)</em></dt>
+<dt><a name="index-_005f_005fbuiltin_005fcall_005fwith_005fstatic_005fchain"></a>Built-in Function: <em><var>type</var></em> <strong>__builtin_call_with_static_chain</strong> <em>(<var>call_exp</var>, <var>pointer_exp</var>)</em></dt>
 <dd>
 <p>The <var>call_exp</var> expression must be a function call, and the
 <var>pointer_exp</var> expression must be a pointer.  The <var>pointer_exp</var>
@@ -1031,9 +1028,8 @@ corresponding to <var>t</var> for each function.
 <p>The standard rules for <code>&lt;tgmath.h&gt;</code> macros are used to find a
 common type <var>u</var> from the types of the arguments for parameters
 whose types vary between the functions; complex integer types (a GNU
-extension) are treated like <code>_Complex double</code> for this purpose
-(or <code>_Complex _Float64</code> if all the function return types are the
-same <code>_Float<var>n</var></code> or <code>_Float<var>n</var>x</code> type).
+extension) are treated like the complex type corresponding to the real
+floating type that would be chosen for the corresponding real integer type.
 If the function return types vary, or are all the same integer type,
 the function called is the one for which <var>t</var> is <var>u</var>, and it is
 an error if there is no such function.  If the function return types
@@ -1043,19 +1039,6 @@ type; if there is a function for which <var>t</var> is <var>u</var>, it is
 called, and otherwise the first function, if any, for which <var>t</var>
 has at least the range and precision of <var>u</var> is called, and it is
 an error if there is no such function.
-</p>
-</dd></dl>
-
-<dl>
-<dt><a name="index-_005f_005fbuiltin_005fcomplex"></a>Built-in Function: <em><var>type</var></em> <strong>__builtin_complex</strong> <em>(<var>real</var>, <var>imag</var>)</em></dt>
-<dd>
-<p>The built-in function <code>__builtin_complex</code> is provided for use in
-implementing the ISO C11 macros <code>CMPLXF</code>, <code>CMPLX</code> and
-<code>CMPLXL</code>.  <var>real</var> and <var>imag</var> must have the same type, a
-real binary floating-point type, and the result has the corresponding
-complex type with real and imaginary parts <var>real</var> and <var>imag</var>.
-Unlike &lsquo;<samp><var>real</var> + I * <var>imag</var></samp>&rsquo;, this works even when
-infinities, NaNs and negative zeros are involved.
 </p>
 </dd></dl>
 
@@ -1140,6 +1123,11 @@ bits that are padding bits for all the union members.
 <p>This built-in-function is useful if the padding bits of an object might
 have intederminate values and the object representation needs to be
 bitwise compared to some other object, for example for atomic operations.
+</p>
+<p>For C++, <var>ptr</var> argument type should be pointer to trivially-copyable
+type, unless the argument is address of a variable or parameter, because
+otherwise it isn&rsquo;t known if the type isn&rsquo;t just a base class whose padding
+bits are reused or laid out differently in a derived class.
 </p></dd></dl>
 
 <dl>
@@ -1275,6 +1263,24 @@ int g (int c)
 </dd></dl>
 
 <dl>
+<dt><a name="index-_005f_005fbuiltin_005fassoc_005fbarrier"></a>Built-in Function: <em><var>type</var></em> <strong>__builtin_assoc_barrier</strong> <em>(<var>type</var> <var>expr</var>)</em></dt>
+<dd><p>This built-in inhibits re-association of the floating-point expression
+<var>expr</var> with expressions consuming the return value of the built-in. The
+expression <var>expr</var> itself can be reordered, and the whole expression
+<var>expr</var> can be reordered with operands after the barrier. The barrier is
+only relevant when <code>-fassociative-math</code> is active, since otherwise
+floating-point is not treated as associative.
+</p>
+<div class="smallexample">
+<pre class="smallexample">float x0 = a + b - b;
+float x1 = __builtin_assoc_barrier(a + b) - b;
+</pre></div>
+
+<p>means that, with <code>-fassociative-math</code>, <code>x0</code> can be optimized to
+<code>x0 = a</code> but <code>x1</code> cannot.
+</p></dd></dl>
+
+<dl>
 <dt><a name="index-_005f_005fbuiltin_005fassume_005faligned"></a>Built-in Function: <em>void *</em> <strong>__builtin_assume_aligned</strong> <em>(const void *<var>exp</var>, size_t <var>align</var>, ...)</em></dt>
 <dd><p>This function returns its first argument, and allows the compiler
 to assume that the returned pointer is at least <var>align</var> bytes
@@ -1405,8 +1411,16 @@ and GCC does not issue a warning.
 </p></dd></dl>
 
 <dl>
-<dt><a name="index-_005f_005fbuiltin_005fobject_005fsize-3"></a>Built-in Function: <em>size_t</em> <strong>__builtin_object_size</strong> <em>(const void * <var>ptr</var>, int <var>type</var>)</em></dt>
-<dd><p>Returns the size of an object pointed to by <var>ptr</var>.  See <a href="Object-Size-Checking.html#Object-Size-Checking">Object Size Checking</a>, for a detailed description of the function.
+<dt><a name="index-_005f_005fbuiltin_005fobject_005fsize-1"></a>Built-in Function: <em>size_t</em> <strong>__builtin_object_size</strong> <em>(const void * <var>ptr</var>, int <var>type</var>)</em></dt>
+<dd><p>Returns a constant size estimate of an object pointed to by <var>ptr</var>.
+See <a href="Object-Size-Checking.html#Object-Size-Checking">Object Size Checking</a>, for a detailed description of the function.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-_005f_005fbuiltin_005fdynamic_005fobject_005fsize-1"></a>Built-in Function: <em>size_t</em> <strong>__builtin_dynamic_object_size</strong> <em>(const void * <var>ptr</var>, int <var>type</var>)</em></dt>
+<dd><p>Similar to <code>__builtin_object_size</code> except that the return value
+need not be a constant.  See <a href="Object-Size-Checking.html#Object-Size-Checking">Object Size Checking</a>, for a detailed
+description of the function.
 </p></dd></dl>
 
 <dl>
@@ -1440,7 +1454,7 @@ type is <code>long double</code>.
 </p></dd></dl>
 
 <dl>
-<dt><a name="index-_005f_005fbuiltin_005ffpclassify-1"></a>Built-in Function: <em>int</em> <strong>__builtin_fpclassify</strong> <em>(int, int, int, int, int, ...)</em></dt>
+<dt><a name="index-_005f_005fbuiltin_005ffpclassify"></a>Built-in Function: <em>int</em> <strong>__builtin_fpclassify</strong> <em>(int, int, int, int, int, ...)</em></dt>
 <dd><p>This built-in implements the C99 fpclassify functionality.  The first
 five int arguments should be the target library&rsquo;s notion of the
 possible FP classes and are used for return values.  They must be
@@ -1497,7 +1511,7 @@ type is <code>_Float<var>n</var>x</code>.
 </p></dd></dl>
 
 <dl>
-<dt><a name="index-_005f_005fbuiltin_005fisinf_005fsign-1"></a>Built-in Function: <em>int</em> <strong>__builtin_isinf_sign</strong> <em>(...)</em></dt>
+<dt><a name="index-_005f_005fbuiltin_005fisinf_005fsign"></a>Built-in Function: <em>int</em> <strong>__builtin_isinf_sign</strong> <em>(...)</em></dt>
 <dd><p>Similar to <code>isinf</code>, except the return value is -1 for
 an argument of <code>-Inf</code> and 1 for an argument of <code>+Inf</code>.
 Note while the parameter list is an
@@ -1507,7 +1521,7 @@ does not do default promotion from float to double.
 </p></dd></dl>
 
 <dl>
-<dt><a name="index-_005f_005fbuiltin_005fnan"></a>Built-in Function: <em>double</em> <strong>__builtin_nan</strong> <em>(const char *str)</em></dt>
+<dt><a name="index-_005f_005fbuiltin_005fnan"></a>Built-in Function: <em>double</em> <strong>__builtin_nan</strong> <em>(const char *<var>str</var>)</em></dt>
 <dd><p>This is an implementation of the ISO C99 function <code>nan</code>.
 </p>
 <p>Since ISO C99 defines this function in terms of <code>strtod</code>, which we
@@ -1525,118 +1539,133 @@ compile-time constant.
 </p></dd></dl>
 
 <dl>
-<dt><a name="index-_005f_005fbuiltin_005fnand32"></a>Built-in Function: <em>_Decimal32</em> <strong>__builtin_nand32</strong> <em>(const char *str)</em></dt>
+<dt><a name="index-_005f_005fbuiltin_005fnand32"></a>Built-in Function: <em>_Decimal32</em> <strong>__builtin_nand32</strong> <em>(const char *<var>str</var>)</em></dt>
 <dd><p>Similar to <code>__builtin_nan</code>, except the return type is <code>_Decimal32</code>.
 </p></dd></dl>
 
 <dl>
-<dt><a name="index-_005f_005fbuiltin_005fnand64"></a>Built-in Function: <em>_Decimal64</em> <strong>__builtin_nand64</strong> <em>(const char *str)</em></dt>
+<dt><a name="index-_005f_005fbuiltin_005fnand64"></a>Built-in Function: <em>_Decimal64</em> <strong>__builtin_nand64</strong> <em>(const char *<var>str</var>)</em></dt>
 <dd><p>Similar to <code>__builtin_nan</code>, except the return type is <code>_Decimal64</code>.
 </p></dd></dl>
 
 <dl>
-<dt><a name="index-_005f_005fbuiltin_005fnand128"></a>Built-in Function: <em>_Decimal128</em> <strong>__builtin_nand128</strong> <em>(const char *str)</em></dt>
+<dt><a name="index-_005f_005fbuiltin_005fnand128"></a>Built-in Function: <em>_Decimal128</em> <strong>__builtin_nand128</strong> <em>(const char *<var>str</var>)</em></dt>
 <dd><p>Similar to <code>__builtin_nan</code>, except the return type is <code>_Decimal128</code>.
 </p></dd></dl>
 
 <dl>
-<dt><a name="index-_005f_005fbuiltin_005fnanf"></a>Built-in Function: <em>float</em> <strong>__builtin_nanf</strong> <em>(const char *str)</em></dt>
+<dt><a name="index-_005f_005fbuiltin_005fnanf"></a>Built-in Function: <em>float</em> <strong>__builtin_nanf</strong> <em>(const char *<var>str</var>)</em></dt>
 <dd><p>Similar to <code>__builtin_nan</code>, except the return type is <code>float</code>.
 </p></dd></dl>
 
 <dl>
-<dt><a name="index-_005f_005fbuiltin_005fnanl"></a>Built-in Function: <em>long double</em> <strong>__builtin_nanl</strong> <em>(const char *str)</em></dt>
+<dt><a name="index-_005f_005fbuiltin_005fnanl"></a>Built-in Function: <em>long double</em> <strong>__builtin_nanl</strong> <em>(const char *<var>str</var>)</em></dt>
 <dd><p>Similar to <code>__builtin_nan</code>, except the return type is <code>long double</code>.
 </p></dd></dl>
 
 <dl>
-<dt><a name="index-_005f_005fbuiltin_005fnanfn"></a>Built-in Function: <em>_Float<var>n</var></em> <strong>__builtin_nanf<var>n</var></strong> <em>(const char *str)</em></dt>
+<dt><a name="index-_005f_005fbuiltin_005fnanfn"></a>Built-in Function: <em>_Float<var>n</var></em> <strong>__builtin_nanf<var>n</var></strong> <em>(const char *<var>str</var>)</em></dt>
 <dd><p>Similar to <code>__builtin_nan</code>, except the return type is
 <code>_Float<var>n</var></code>.
 </p></dd></dl>
 
 <dl>
-<dt><a name="index-_005f_005fbuiltin_005fnanfnx"></a>Built-in Function: <em>_Float<var>n</var>x</em> <strong>__builtin_nanf<var>n</var>x</strong> <em>(const char *str)</em></dt>
+<dt><a name="index-_005f_005fbuiltin_005fnanfnx"></a>Built-in Function: <em>_Float<var>n</var>x</em> <strong>__builtin_nanf<var>n</var>x</strong> <em>(const char *<var>str</var>)</em></dt>
 <dd><p>Similar to <code>__builtin_nan</code>, except the return type is
 <code>_Float<var>n</var>x</code>.
 </p></dd></dl>
 
 <dl>
-<dt><a name="index-_005f_005fbuiltin_005fnans"></a>Built-in Function: <em>double</em> <strong>__builtin_nans</strong> <em>(const char *str)</em></dt>
+<dt><a name="index-_005f_005fbuiltin_005fnans"></a>Built-in Function: <em>double</em> <strong>__builtin_nans</strong> <em>(const char *<var>str</var>)</em></dt>
 <dd><p>Similar to <code>__builtin_nan</code>, except the significand is forced
 to be a signaling NaN.  The <code>nans</code> function is proposed by
-<a href="http://www.open-std.org/jtc1/sc22/wg14/www/docs/n965.htm">WG14 N965</a>.
+<a href="https://www.open-std.org/jtc1/sc22/wg14/www/docs/n965.htm">WG14 N965</a>.
 </p></dd></dl>
 
 <dl>
-<dt><a name="index-_005f_005fbuiltin_005fnansd32"></a>Built-in Function: <em>_Decimal32</em> <strong>__builtin_nansd32</strong> <em>(const char *str)</em></dt>
+<dt><a name="index-_005f_005fbuiltin_005fnansd32"></a>Built-in Function: <em>_Decimal32</em> <strong>__builtin_nansd32</strong> <em>(const char *<var>str</var>)</em></dt>
 <dd><p>Similar to <code>__builtin_nans</code>, except the return type is <code>_Decimal32</code>.
 </p></dd></dl>
 
 <dl>
-<dt><a name="index-_005f_005fbuiltin_005fnansd64"></a>Built-in Function: <em>_Decimal64</em> <strong>__builtin_nansd64</strong> <em>(const char *str)</em></dt>
+<dt><a name="index-_005f_005fbuiltin_005fnansd64"></a>Built-in Function: <em>_Decimal64</em> <strong>__builtin_nansd64</strong> <em>(const char *<var>str</var>)</em></dt>
 <dd><p>Similar to <code>__builtin_nans</code>, except the return type is <code>_Decimal64</code>.
 </p></dd></dl>
 
 <dl>
-<dt><a name="index-_005f_005fbuiltin_005fnansd128"></a>Built-in Function: <em>_Decimal128</em> <strong>__builtin_nansd128</strong> <em>(const char *str)</em></dt>
+<dt><a name="index-_005f_005fbuiltin_005fnansd128"></a>Built-in Function: <em>_Decimal128</em> <strong>__builtin_nansd128</strong> <em>(const char *<var>str</var>)</em></dt>
 <dd><p>Similar to <code>__builtin_nans</code>, except the return type is <code>_Decimal128</code>.
 </p></dd></dl>
 
 <dl>
-<dt><a name="index-_005f_005fbuiltin_005fnansf"></a>Built-in Function: <em>float</em> <strong>__builtin_nansf</strong> <em>(const char *str)</em></dt>
+<dt><a name="index-_005f_005fbuiltin_005fnansf"></a>Built-in Function: <em>float</em> <strong>__builtin_nansf</strong> <em>(const char *<var>str</var>)</em></dt>
 <dd><p>Similar to <code>__builtin_nans</code>, except the return type is <code>float</code>.
 </p></dd></dl>
 
 <dl>
-<dt><a name="index-_005f_005fbuiltin_005fnansl"></a>Built-in Function: <em>long double</em> <strong>__builtin_nansl</strong> <em>(const char *str)</em></dt>
+<dt><a name="index-_005f_005fbuiltin_005fnansl"></a>Built-in Function: <em>long double</em> <strong>__builtin_nansl</strong> <em>(const char *<var>str</var>)</em></dt>
 <dd><p>Similar to <code>__builtin_nans</code>, except the return type is <code>long double</code>.
 </p></dd></dl>
 
 <dl>
-<dt><a name="index-_005f_005fbuiltin_005fnansfn"></a>Built-in Function: <em>_Float<var>n</var></em> <strong>__builtin_nansf<var>n</var></strong> <em>(const char *str)</em></dt>
+<dt><a name="index-_005f_005fbuiltin_005fnansfn"></a>Built-in Function: <em>_Float<var>n</var></em> <strong>__builtin_nansf<var>n</var></strong> <em>(const char *<var>str</var>)</em></dt>
 <dd><p>Similar to <code>__builtin_nans</code>, except the return type is
 <code>_Float<var>n</var></code>.
 </p></dd></dl>
 
 <dl>
-<dt><a name="index-_005f_005fbuiltin_005fnansfnx"></a>Built-in Function: <em>_Float<var>n</var>x</em> <strong>__builtin_nansf<var>n</var>x</strong> <em>(const char *str)</em></dt>
+<dt><a name="index-_005f_005fbuiltin_005fnansfnx"></a>Built-in Function: <em>_Float<var>n</var>x</em> <strong>__builtin_nansf<var>n</var>x</strong> <em>(const char *<var>str</var>)</em></dt>
 <dd><p>Similar to <code>__builtin_nans</code>, except the return type is
 <code>_Float<var>n</var>x</code>.
 </p></dd></dl>
 
 <dl>
-<dt><a name="index-_005f_005fbuiltin_005fffs"></a>Built-in Function: <em>int</em> <strong>__builtin_ffs</strong> <em>(int x)</em></dt>
+<dt><a name="index-_005f_005fbuiltin_005fissignaling"></a>Built-in Function: <em>int</em> <strong>__builtin_issignaling</strong> <em>(...)</em></dt>
+<dd><p>Return non-zero if the argument is a signaling NaN and zero otherwise.
+Note while the parameter list is an
+ellipsis, this function only accepts exactly one floating-point
+argument.  GCC treats this parameter as type-generic, which means it
+does not do default promotion from float to double.
+This built-in function can work even without the non-default
+<code>-fsignaling-nans</code> option, although if a signaling NaN is computed,
+stored or passed as argument to some function other than this built-in
+in the current translation unit, it is safer to use <code>-fsignaling-nans</code>.
+With <code>-ffinite-math-only</code> option this built-in function will always
+return 0.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-_005f_005fbuiltin_005fffs"></a>Built-in Function: <em>int</em> <strong>__builtin_ffs</strong> <em>(int <var>x</var>)</em></dt>
 <dd><p>Returns one plus the index of the least significant 1-bit of <var>x</var>, or
 if <var>x</var> is zero, returns zero.
 </p></dd></dl>
 
 <dl>
-<dt><a name="index-_005f_005fbuiltin_005fclz"></a>Built-in Function: <em>int</em> <strong>__builtin_clz</strong> <em>(unsigned int x)</em></dt>
+<dt><a name="index-_005f_005fbuiltin_005fclz"></a>Built-in Function: <em>int</em> <strong>__builtin_clz</strong> <em>(unsigned int <var>x</var>)</em></dt>
 <dd><p>Returns the number of leading 0-bits in <var>x</var>, starting at the most
 significant bit position.  If <var>x</var> is 0, the result is undefined.
 </p></dd></dl>
 
 <dl>
-<dt><a name="index-_005f_005fbuiltin_005fctz"></a>Built-in Function: <em>int</em> <strong>__builtin_ctz</strong> <em>(unsigned int x)</em></dt>
+<dt><a name="index-_005f_005fbuiltin_005fctz"></a>Built-in Function: <em>int</em> <strong>__builtin_ctz</strong> <em>(unsigned int <var>x</var>)</em></dt>
 <dd><p>Returns the number of trailing 0-bits in <var>x</var>, starting at the least
 significant bit position.  If <var>x</var> is 0, the result is undefined.
 </p></dd></dl>
 
 <dl>
-<dt><a name="index-_005f_005fbuiltin_005fclrsb"></a>Built-in Function: <em>int</em> <strong>__builtin_clrsb</strong> <em>(int x)</em></dt>
+<dt><a name="index-_005f_005fbuiltin_005fclrsb"></a>Built-in Function: <em>int</em> <strong>__builtin_clrsb</strong> <em>(int <var>x</var>)</em></dt>
 <dd><p>Returns the number of leading redundant sign bits in <var>x</var>, i.e. the
 number of bits following the most significant bit that are identical
 to it.  There are no special cases for 0 or other values. 
 </p></dd></dl>
 
 <dl>
-<dt><a name="index-_005f_005fbuiltin_005fpopcount"></a>Built-in Function: <em>int</em> <strong>__builtin_popcount</strong> <em>(unsigned int x)</em></dt>
+<dt><a name="index-_005f_005fbuiltin_005fpopcount"></a>Built-in Function: <em>int</em> <strong>__builtin_popcount</strong> <em>(unsigned int <var>x</var>)</em></dt>
 <dd><p>Returns the number of 1-bits in <var>x</var>.
 </p></dd></dl>
 
 <dl>
-<dt><a name="index-_005f_005fbuiltin_005fparity"></a>Built-in Function: <em>int</em> <strong>__builtin_parity</strong> <em>(unsigned int x)</em></dt>
+<dt><a name="index-_005f_005fbuiltin_005fparity"></a>Built-in Function: <em>int</em> <strong>__builtin_parity</strong> <em>(unsigned int <var>x</var>)</em></dt>
 <dd><p>Returns the parity of <var>x</var>, i.e. the number of 1-bits in <var>x</var>
 modulo 2.
 </p></dd></dl>
@@ -1714,51 +1743,41 @@ modulo 2.
 </p></dd></dl>
 
 <dl>
-<dt><a name="index-_005f_005fbuiltin_005fpowi-1"></a>Built-in Function: <em>double</em> <strong>__builtin_powi</strong> <em>(double, int)</em></dt>
+<dt><a name="index-_005f_005fbuiltin_005fpowi"></a>Built-in Function: <em>double</em> <strong>__builtin_powi</strong> <em>(double, int)</em></dt>
+<dt><a name="index-_005f_005fbuiltin_005fpowif"></a>Built-in Function: <em>float</em> <strong>__builtin_powif</strong> <em>(float, int)</em></dt>
+<dt><a name="index-_005f_005fbuiltin_005fpowil"></a>Built-in Function: <em>long double</em> <strong>__builtin_powil</strong> <em>(long double, int)</em></dt>
 <dd><p>Returns the first argument raised to the power of the second.  Unlike the
 <code>pow</code> function no guarantees about precision and rounding are made.
 </p></dd></dl>
 
 <dl>
-<dt><a name="index-_005f_005fbuiltin_005fpowif-1"></a>Built-in Function: <em>float</em> <strong>__builtin_powif</strong> <em>(float, int)</em></dt>
-<dd><p>Similar to <code>__builtin_powi</code>, except the argument and return types
-are <code>float</code>.
-</p></dd></dl>
-
-<dl>
-<dt><a name="index-_005f_005fbuiltin_005fpowil-1"></a>Built-in Function: <em>long double</em> <strong>__builtin_powil</strong> <em>(long double, int)</em></dt>
-<dd><p>Similar to <code>__builtin_powi</code>, except the argument and return types
-are <code>long double</code>.
-</p></dd></dl>
-
-<dl>
-<dt><a name="index-_005f_005fbuiltin_005fbswap16"></a>Built-in Function: <em>uint16_t</em> <strong>__builtin_bswap16</strong> <em>(uint16_t x)</em></dt>
+<dt><a name="index-_005f_005fbuiltin_005fbswap16"></a>Built-in Function: <em>uint16_t</em> <strong>__builtin_bswap16</strong> <em>(uint16_t <var>x</var>)</em></dt>
 <dd><p>Returns <var>x</var> with the order of the bytes reversed; for example,
 <code>0xaabb</code> becomes <code>0xbbaa</code>.  Byte here always means
 exactly 8 bits.
 </p></dd></dl>
 
 <dl>
-<dt><a name="index-_005f_005fbuiltin_005fbswap32"></a>Built-in Function: <em>uint32_t</em> <strong>__builtin_bswap32</strong> <em>(uint32_t x)</em></dt>
+<dt><a name="index-_005f_005fbuiltin_005fbswap32"></a>Built-in Function: <em>uint32_t</em> <strong>__builtin_bswap32</strong> <em>(uint32_t <var>x</var>)</em></dt>
 <dd><p>Similar to <code>__builtin_bswap16</code>, except the argument and return types
 are 32-bit.
 </p></dd></dl>
 
 <dl>
-<dt><a name="index-_005f_005fbuiltin_005fbswap64"></a>Built-in Function: <em>uint64_t</em> <strong>__builtin_bswap64</strong> <em>(uint64_t x)</em></dt>
+<dt><a name="index-_005f_005fbuiltin_005fbswap64"></a>Built-in Function: <em>uint64_t</em> <strong>__builtin_bswap64</strong> <em>(uint64_t <var>x</var>)</em></dt>
 <dd><p>Similar to <code>__builtin_bswap32</code>, except the argument and return types
 are 64-bit.
 </p></dd></dl>
 
 <dl>
-<dt><a name="index-_005f_005fbuiltin_005fbswap128"></a>Built-in Function: <em>uint128_t</em> <strong>__builtin_bswap128</strong> <em>(uint128_t x)</em></dt>
+<dt><a name="index-_005f_005fbuiltin_005fbswap128"></a>Built-in Function: <em>uint128_t</em> <strong>__builtin_bswap128</strong> <em>(uint128_t <var>x</var>)</em></dt>
 <dd><p>Similar to <code>__builtin_bswap64</code>, except the argument and return types
 are 128-bit.  Only supported on targets when 128-bit types are supported.
 </p></dd></dl>
 
 
 <dl>
-<dt><a name="index-_005f_005fbuiltin_005fextend_005fpointer-1"></a>Built-in Function: <em>Pmode</em> <strong>__builtin_extend_pointer</strong> <em>(void * x)</em></dt>
+<dt><a name="index-_005f_005fbuiltin_005fextend_005fpointer"></a>Built-in Function: <em>Pmode</em> <strong>__builtin_extend_pointer</strong> <em>(void * <var>x</var>)</em></dt>
 <dd><p>On targets where the user visible pointer size is smaller than the size
 of an actual hardware address this function returns the extended user
 pointer.  Targets where this is true included ILP32 mode on x86_64 or
@@ -1767,13 +1786,13 @@ code.
 </p></dd></dl>
 
 <dl>
-<dt><a name="index-_005f_005fbuiltin_005fgoacc_005fparlevel_005fid"></a>Built-in Function: <em>int</em> <strong>__builtin_goacc_parlevel_id</strong> <em>(int x)</em></dt>
+<dt><a name="index-_005f_005fbuiltin_005fgoacc_005fparlevel_005fid"></a>Built-in Function: <em>int</em> <strong>__builtin_goacc_parlevel_id</strong> <em>(int <var>x</var>)</em></dt>
 <dd><p>Returns the openacc gang, worker or vector id depending on whether <var>x</var> is
 0, 1 or 2.
 </p></dd></dl>
 
 <dl>
-<dt><a name="index-_005f_005fbuiltin_005fgoacc_005fparlevel_005fsize"></a>Built-in Function: <em>int</em> <strong>__builtin_goacc_parlevel_size</strong> <em>(int x)</em></dt>
+<dt><a name="index-_005f_005fbuiltin_005fgoacc_005fparlevel_005fsize"></a>Built-in Function: <em>int</em> <strong>__builtin_goacc_parlevel_size</strong> <em>(int <var>x</var>)</em></dt>
 <dd><p>Returns the openacc gang, worker or vector size depending on whether <var>x</var> is
 0, 1 or 2.
 </p></dd></dl>
@@ -1781,7 +1800,7 @@ code.
 <hr>
 <div class="header">
 <p>
-Next: <a href="Target-Builtins.html#Target-Builtins" accesskey="n" rel="next">Target Builtins</a>, Previous: <a href="Object-Size-Checking.html#Object-Size-Checking" accesskey="p" rel="prev">Object Size Checking</a>, Up: <a href="C-Extensions.html#C-Extensions" accesskey="u" rel="up">C Extensions</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Option-Index.html#Option-Index" title="Index" rel="index">Index</a>]</p>
+Next: <a href="Target-Builtins.html#Target-Builtins" accesskey="n" rel="next">Target Builtins</a>, Previous: <a href="Object-Size-Checking.html#Object-Size-Checking" accesskey="p" rel="prev">Object Size Checking</a>, Up: <a href="C-Extensions.html#C-Extensions" accesskey="u" rel="up">C Extensions</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Indices.html#Indices" title="Index" rel="index">Index</a>]</p>
 </div>
 
 

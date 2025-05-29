@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- Copyright (C) 1988-2022 Free Software Foundation, Inc.
+<!-- Copyright (C) 1988-2023 Free Software Foundation, Inc.
 
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
@@ -26,7 +26,7 @@ developing GNU and promoting software freedom." -->
 <link href="Concept-Index.html#Concept-Index" rel="index" title="Concept Index">
 <link href="index.html#SEC_Contents" rel="contents" title="Table of Contents">
 <link href="Python-API.html#Python-API" rel="up" title="Python API">
-<link href="Python-Auto_002dloading.html#Python-Auto_002dloading" rel="next" title="Python Auto-loading">
+<link href="Disassembly-In-Python.html#Disassembly-In-Python" rel="next" title="Disassembly In Python">
 <link href="Connections-In-Python.html#Connections-In-Python" rel="prev" title="Connections In Python">
 <style type="text/css">
 <!--
@@ -63,25 +63,26 @@ ul.no-bullet {list-style: none}
 <a name="TUI-Windows-In-Python"></a>
 <div class="header">
 <p>
-Previous: <a href="Connections-In-Python.html#Connections-In-Python" accesskey="p" rel="prev">Connections In Python</a>, Up: <a href="Python-API.html#Python-API" accesskey="u" rel="up">Python API</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+Next: <a href="Disassembly-In-Python.html#Disassembly-In-Python" accesskey="n" rel="next">Disassembly In Python</a>, Previous: <a href="Connections-In-Python.html#Connections-In-Python" accesskey="p" rel="prev">Connections In Python</a>, Up: <a href="Python-API.html#Python-API" accesskey="u" rel="up">Python API</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
 </div>
 <hr>
 <a name="Implementing-new-TUI-windows"></a>
-<h4 class="subsubsection">23.3.2.37 Implementing new TUI windows</h4>
+<h4 class="subsubsection">23.3.2.38 Implementing new TUI windows</h4>
 <a name="index-Python-TUI-Windows"></a>
 
 <p>New TUI (see <a href="TUI.html#TUI">TUI</a>) windows can be implemented in Python.
 </p>
-<a name="index-gdb_002eregister_005fwindow_005ftype"></a>
 <dl>
-<dt><a name="index-gdb_002eregister_005fwindow_005ftype-1"></a>Function: <strong>gdb.register_window_type</strong> <em>(<var>name</var>, <var>factory</var>)</em></dt>
+<dt><a name="index-gdb_002eregister_005fwindow_005ftype"></a>Function: <strong>gdb.register_window_type</strong> <em>(name, factory)</em></dt>
 <dd><p>Because TUI windows are created and destroyed depending on the layout
 the user chooses, new window types are implemented by registering a
 factory function with <small>GDB</small>.
 </p>
 <p><var>name</var> is the name of the new window.  It&rsquo;s an error to try to
 replace one of the built-in windows, but other window types can be
-replaced.
+replaced.  The <var>name</var> should match the regular expression
+<code>[a-zA-Z][-_.a-zA-Z0-9]*</code>, it is an error to try and create a
+window with an invalid name.
 </p>
 <p><var>function</var> is a factory function that is called to create the TUI
 window.  This is called with a single argument of type
@@ -128,7 +129,7 @@ displayed above the window.  This attribute can be modified.
 </p></dd></dl>
 
 <dl>
-<dt><a name="index-TuiWindow_002ewrite"></a>Function: <strong>TuiWindow.write</strong> <em>(<var>string</var> <span class="roman">[</span>, <var>full_window</var><span class="roman">]</span>)</em></dt>
+<dt><a name="index-TuiWindow_002ewrite"></a>Function: <strong>TuiWindow.write</strong> <em>(string <span class="roman">[</span>, full_window<span class="roman">]</span>)</em></dt>
 <dd><p>Write <var>string</var> to the window.  <var>string</var> can contain ANSI
 terminal escape styling sequences; <small>GDB</small> will translate these
 as appropriate for the terminal.
@@ -172,7 +173,7 @@ send output to the <code>gdb.TuiWindow</code>.
 </p></dd></dl>
 
 <dl>
-<dt><a name="index-Window_002ehscroll"></a>Function: <strong>Window.hscroll</strong> <em>(<var>num</var>)</em></dt>
+<dt><a name="index-Window_002ehscroll"></a>Function: <strong>Window.hscroll</strong> <em>(num)</em></dt>
 <dd><p>This is a request to scroll the window horizontally.  <var>num</var> is the
 amount by which to scroll, with negative numbers meaning to scroll
 right.  In the TUI model, it is the viewport that moves, not the
@@ -181,7 +182,7 @@ right, and so the content should appear to move to the left.
 </p></dd></dl>
 
 <dl>
-<dt><a name="index-Window_002evscroll"></a>Function: <strong>Window.vscroll</strong> <em>(<var>num</var>)</em></dt>
+<dt><a name="index-Window_002evscroll"></a>Function: <strong>Window.vscroll</strong> <em>(num)</em></dt>
 <dd><p>This is a request to scroll the window vertically.  <var>num</var> is the
 amount by which to scroll, with negative numbers meaning to scroll
 backward.  In the TUI model, it is the viewport that moves, not the
@@ -189,18 +190,22 @@ contents.  A positive argument should cause the viewport to move down,
 and so the content should appear to move up.
 </p></dd></dl>
 
-<dl>
-<dt><a name="index-Window_002eclick"></a>Function: <strong>Window.click</strong> <em>(<var>x</var>, <var>y</var>, <var>button</var>)</em></dt>
+<a name="python_002dwindow_002dclick"></a><dl>
+<dt><a name="index-Window_002eclick"></a>Function: <strong>Window.click</strong> <em>(x, y, button)</em></dt>
 <dd><p>This is called on a mouse click in this window.  <var>x</var> and <var>y</var> are
 the mouse coordinates inside the window (0-based, from the top left
 corner), and <var>button</var> specifies which mouse button was used, whose
 values can be 1 (left), 2 (middle), or 3 (right).
+</p>
+<p>When TUI mouse events are disabled by turning off the <code>tui mouse-events</code>
+setting (see <a href="TUI-Configuration.html#tui_002dmouse_002devents">set tui mouse-events</a>), then <code>click</code> will
+not be called.
 </p></dd></dl>
 
 <hr>
 <div class="header">
 <p>
-Previous: <a href="Connections-In-Python.html#Connections-In-Python" accesskey="p" rel="prev">Connections In Python</a>, Up: <a href="Python-API.html#Python-API" accesskey="u" rel="up">Python API</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+Next: <a href="Disassembly-In-Python.html#Disassembly-In-Python" accesskey="n" rel="next">Disassembly In Python</a>, Previous: <a href="Connections-In-Python.html#Connections-In-Python" accesskey="p" rel="prev">Connections In Python</a>, Up: <a href="Python-API.html#Python-API" accesskey="u" rel="up">Python API</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
 </div>
 
 

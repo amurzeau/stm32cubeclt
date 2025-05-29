@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- Copyright (C) 1988-2021 Free Software Foundation, Inc.
+<!-- Copyright (C) 1988-2023 Free Software Foundation, Inc.
 
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
@@ -79,6 +79,9 @@ ul.no-bullet {list-style: none}
 
 
 
+
+
+
 <a name="index-Prerequisites"></a>
 
 <p>GCC requires that various tools and packages be available for use in the
@@ -89,7 +92,9 @@ described below.
 <h3 class="heading">Tools/packages necessary for building GCC</h3>
 <dl compact="compact">
 <dt>ISO C++11 compiler</dt>
-<dd><p>Necessary to bootstrap GCC.
+<dd><p>Necessary to bootstrap GCC.  GCC 4.8.3 or newer has sufficient
+support for used C++11 features, with earlier GCC versions you
+might run into implementation bugs.
 </p>
 <p>Versions of GCC prior to 11 also allow bootstrapping with an ISO C++98
 compiler, versions of GCC prior to 4.8 also allow bootstrapping with a
@@ -98,13 +103,8 @@ bootstrapping with a traditional (K&amp;R) C compiler.
 </p>
 <p>To build all languages in a cross-compiler or other configuration where
 3-stage bootstrap is not performed, you need to start with an existing
-GCC binary (version 4.8 or later) because source code for language
+GCC binary (version 4.8.3 or later) because source code for language
 frontends other than C might use GCC extensions.
-</p>
-<p>Note that to bootstrap GCC with versions of GCC earlier than 4.8, you
-may need to use <samp>--disable-stage1-checking</samp>, though
-bootstrapping the compiler with such earlier compilers is strongly
-discouraged.
 </p>
 </dd>
 <dt>C standard library and headers</dt>
@@ -127,7 +127,7 @@ name of the package depends on your distro) or you must build GCC as a
 <dt><a name="GNAT-prerequisite"></a>GNAT</dt>
 <dd>
 <p>In order to build GNAT, the Ada compiler, you need a working GNAT
-compiler (GCC version 4.7 or later).
+compiler (GCC version 5.1 or later).
 </p>
 <p>This includes GNAT tools such as <code>gnatmake</code> and
 <code>gnatlink</code>, since the Ada front end is written in Ada and
@@ -152,6 +152,39 @@ must not be set when building the Ada compiler, the Ada tools, or the
 Ada runtime libraries. You can check that your build environment is clean
 by verifying that &lsquo;<samp>gnatls -v</samp>&rsquo; lists only one explicit path in each
 section.
+</p>
+</dd>
+<dt><a name="GDC-prerequisite"></a>GDC</dt>
+<dd>
+<p>In order to build GDC, the D compiler, you need a working GDC
+compiler (GCC version 9.4 or later) and D runtime library,
+&lsquo;<samp>libphobos</samp>&rsquo;, as the D front end is written in D.
+</p>
+<p>Versions of GDC prior to 12 can be built with an ISO C++11 compiler, which can
+then be installed and used to bootstrap newer versions of the D front end.
+</p>
+<p>It is strongly recommended to use an older version of GDC to build GDC. More
+recent versions of GDC than the version built are not guaranteed to work and
+will often fail during the build with compilation errors relating to
+deprecations or removed features.
+</p>
+<p>Note that <code>configure</code> does not test whether the GDC installation works
+and has a sufficiently recent version.  Though the implementation of the D
+front end does not make use of any GDC-specific extensions, or novel features
+of the D language, if too old a GDC version is installed and
+<samp>--enable-languages=d</samp> is used, the build will fail.
+</p>
+<p>On some targets, &lsquo;<samp>libphobos</samp>&rsquo; isn&rsquo;t enabled by default, but compiles
+and works if <samp>--enable-libphobos</samp> is used.  Specifics are
+documented for affected targets.
+</p>
+</dd>
+<dt><a name="GM2-prerequisite"></a>GM2</dt>
+<dd>
+<p>Python3 is required if you want to build the complete Modula-2
+documentation including the target <code>SYSTEM</code> definition module.
+If Python3 is unavailable Modula-2 documentation will include a target
+independent version of the SYSTEM modules.
 </p>
 </dd>
 <dt>A &ldquo;working&rdquo; POSIX compatible shell, or GNU bash</dt>
@@ -186,6 +219,9 @@ are broken.  GNU awk version 3.1.5 is known to work.
 host/target specific instructions for your platform for the exact
 requirements.
 </p>
+<p>Note binutils 2.35 or newer is required for LTO to work correctly
+with GNU libtool that includes doing a bootstrap with LTO enabled.
+</p>
 </dd>
 <dt>gzip version 1.2.4 (or later) or</dt>
 <dt>bzip2 version 1.0.2 (or later)</dt>
@@ -210,7 +246,7 @@ systems&rsquo; <code>tar</code> programs will also work, only try GNU
 <dd>
 <p>Necessary when targeting Darwin, building &lsquo;<samp>libstdc++</samp>&rsquo;,
 and not using <samp>--disable-symvers</samp>.
-Necessary when targeting Solaris 2 with Solaris <code>ld</code> and not using
+Necessary when targeting Solaris with Solaris <code>ld</code> and not using
 <samp>--disable-symvers</samp>.
 </p>
 <p>Necessary when regenerating <samp>Makefile</samp> dependencies in libiberty.
@@ -221,6 +257,9 @@ repository (mainly Unicode-related and rarely changing) from source
 tables.
 </p>
 <p>Used by <code>automake</code>.
+</p>
+<p>If available, enables parallel testing of &lsquo;<samp>libgomp</samp>&rsquo; in case that
+<code>flock</code> is not available.
 </p>
 </dd>
 </dl>
@@ -237,7 +276,8 @@ install the libraries.
 <dl compact="compact">
 <dt>GNU Multiple Precision Library (GMP) version 4.3.2 (or later)</dt>
 <dd>
-<p>Necessary to build GCC.  If a GMP source distribution is found in a
+<p>Necessary to build GCC.  It can be downloaded from
+<a href="https://gmplib.org/">https://gmplib.org/</a>.  If a GMP source distribution is found in a
 subdirectory of your GCC sources named <samp>gmp</samp>, it will be built
 together with GCC.  Alternatively, if GMP is already installed but it
 is not in your library search path, you will have to configure with the
@@ -263,7 +303,7 @@ download_prerequisites installs.
 <dt>MPC Library version 1.0.1 (or later)</dt>
 <dd>
 <p>Necessary to build GCC.  It can be downloaded from
-<a href="http://www.multiprecision.org/mpc/">http://www.multiprecision.org/mpc/</a>.  If an MPC source distribution
+<a href="https://www.multiprecision.org/mpc/">https://www.multiprecision.org/mpc/</a>.  If an MPC source distribution
 is found in a subdirectory of your GCC sources named <samp>mpc</samp>, it
 will be built together with GCC.  Alternatively, if MPC is already
 installed but it is not in your default library search path, the
@@ -290,6 +330,41 @@ search path.
 The library is searched in your default library patch search.
 Alternatively, the <samp>--with-zstd</samp> configure option should be used.
 </p>
+</dd>
+<dt>Python3 modules</dt>
+<dd>
+<p>The complete list of Python3 modules broken down by GCC subcomponent
+is shown below:
+</p>
+<dl compact="compact">
+<dt>internal debugging in gdbhooks</dt>
+<dd><p><code>gdb</code>, <code>gdb.printing</code>, <code>gdb.types</code>,
+<code>os.path</code>, <code>re</code>, <code>sys</code> and <code>tempfile</code>,
+</p>
+</dd>
+<dt>g++ testsuite</dt>
+<dd><p><code>gcov</code>, <code>gzip</code>, <code>json</code>, <code>os</code> and <code>pytest</code>.
+</p>
+</dd>
+<dt>c++ cxx api generation</dt>
+<dd><p><code>csv</code>, <code>os</code>, <code>sys</code> and <code>time</code>.
+</p>
+</dd>
+<dt>modula-2 documentation</dt>
+<dd><p><code>argparse</code>, <code>os</code>, <code>pathlib</code>, <code>shutil</code> and
+<code>sys</code>.
+</p>
+</dd>
+<dt>git developer tools</dt>
+<dd><p><code>os</code> and <code>sys</code>.
+</p>
+</dd>
+<dt>ada documentation</dt>
+<dd><p><code>latex_elements</code>, <code>os</code>, <code>pygments</code>, <code>re</code>,
+<code>sys</code> and <code>time</code>.
+</p></dd>
+</dl>
+
 </dd>
 </dl>
 
@@ -331,7 +406,7 @@ to the latest released version.
 <samp>gcc/cp/cfns.h</samp>.
 </p>
 </dd>
-<dt>DejaGnu 1.4.4</dt>
+<dt>DejaGnu version 1.5.3 (or later)</dt>
 <dt>Expect</dt>
 <dt>Tcl</dt>
 <dd>
@@ -365,13 +440,21 @@ They are included in releases.
 <p>Necessary for running <code>makeinfo</code> when modifying <samp>*.texi</samp>
 files to test your changes.
 </p>
-<p>Necessary for running <code>make dvi</code> or <code>make pdf</code> to
-create printable documentation in DVI or PDF format.  Texinfo version
+<p>Necessary for running <code>make dvi</code>, <code>make pdf</code>,
+or <code>make html</code> to create formatted documentation.  Texinfo version
 4.8 or later is required for <code>make pdf</code>.
 </p>
-<p>Necessary to build GCC documentation during development because the
-generated output files are not included in the repository.  They are
-included in releases.
+<p>Necessary to build GCC documentation in info format during development
+because the generated output files are not included in the repository.
+(They are included in release tarballs.)
+</p>
+<p>Note that the minimum requirement is for a very old version of
+Texinfo, but recent versions of Texinfo produce better-quality output,
+especially for HTML format.  The version of Texinfo packaged with any
+current operating system distribution is likely to be adequate for
+building the documentation without error, but you may still want to
+install a newer release to get the best appearance and usability of
+the generated manuals.
 </p>
 </dd>
 <dt>TeX (any working version)</dt>
@@ -411,7 +494,6 @@ own sources.
 <p>
 <p><a href="./index.html">Return to the GCC Installation page</a>
 </p>
-
 
 
 

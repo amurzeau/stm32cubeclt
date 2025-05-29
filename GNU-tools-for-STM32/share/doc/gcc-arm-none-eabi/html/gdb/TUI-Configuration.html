@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- Copyright (C) 1988-2022 Free Software Foundation, Inc.
+<!-- Copyright (C) 1988-2023 Free Software Foundation, Inc.
 
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
@@ -142,11 +142,30 @@ assembly windows.
 <dt><code>set tui compact-source <span class="roman">[</span>on<span class="roman">|</span>off<span class="roman">]</span></code></dt>
 <dd><a name="index-set-tui-compact_002dsource"></a>
 <p>Set whether the TUI source window is displayed in &ldquo;compact&rdquo; form.
-The default display uses more space for line numbers and starts the
-source text at the next tab stop; the compact display uses only as
-much space as is needed for the line numbers in the current file, and
-only a single space to separate the line numbers from the source.
-</p></dd>
+The default display uses more space for line numbers; the compact
+display uses only as much space as is needed for the line numbers in
+the current file.
+</p>
+<a name="tui_002dmouse_002devents"></a></dd>
+<dt><code>set tui mouse-events <span class="roman">[</span>on<span class="roman">|</span>off<span class="roman">]</span></code></dt>
+<dd><a name="index-set-tui-mouse_002devents"></a>
+<p>When on (default), mouse clicks control the TUI (see <a href="TUI-Mouse-Support.html#TUI-Mouse-Support">TUI Mouse Support</a>).
+When off, mouse clicks are handled by the terminal, enabling terminal-native
+text selection.
+</p>
+<a name="index-set-debug-tui"></a>
+</dd>
+<dt><code>set debug tui <span class="roman">[</span>on|off<span class="roman">]</span></code></dt>
+<dd><p>Turn on or off display of <small>GDB</small> internal debug messages relating
+to the TUI.
+</p>
+<a name="index-show-debug-tui"></a>
+</dd>
+<dt><code>show debug tui</code></dt>
+<dd><p>Show the current status of displaying <small>GDB</small> internal debug
+messages relating to the TUI.
+</p>
+</dd>
 </dl>
 
 <p>Note that the colors of the TUI borders can be controlled using the

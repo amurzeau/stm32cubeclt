@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- Copyright (C) 1988-2022 Free Software Foundation, Inc.
+<!-- Copyright (C) 1988-2023 Free Software Foundation, Inc.
 
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
@@ -70,9 +70,9 @@ Previous: <a href="GDB_002fMI-Support-Commands.html#GDB_002fMI-Support-Commands"
 <h3 class="section">27.24 Miscellaneous <small>GDB/MI</small> Commands</h3>
 
 
+<a name="index-_002dgdb_002dexit"></a>
 <a name="The-_002dgdb_002dexit-Command"></a>
 <h4 class="subheading">The <code>-gdb-exit</code> Command</h4>
-<a name="index-_002dgdb_002dexit"></a>
 
 <a name="Synopsis-104"></a>
 <h4 class="subsubheading">Synopsis</h4>
@@ -100,9 +100,9 @@ Previous: <a href="GDB_002fMI-Support-Commands.html#GDB_002fMI-Support-Commands"
 
 
 
+<a name="index-_002dgdb_002dset"></a>
 <a name="The-_002dgdb_002dset-Command"></a>
 <h4 class="subheading">The <code>-gdb-set</code> Command</h4>
-<a name="index-_002dgdb_002dset"></a>
 
 <a name="Synopsis-105"></a>
 <h4 class="subsubheading">Synopsis</h4>
@@ -129,9 +129,9 @@ Previous: <a href="GDB_002fMI-Support-Commands.html#GDB_002fMI-Support-Commands"
 </pre></div>
 
 
+<a name="index-_002dgdb_002dshow"></a>
 <a name="The-_002dgdb_002dshow-Command"></a>
 <h4 class="subheading">The <code>-gdb-show</code> Command</h4>
-<a name="index-_002dgdb_002dshow"></a>
 
 <a name="Synopsis-106"></a>
 <h4 class="subsubheading">Synopsis</h4>
@@ -159,9 +159,9 @@ Previous: <a href="GDB_002fMI-Support-Commands.html#GDB_002fMI-Support-Commands"
 
 
 
+<a name="index-_002dgdb_002dversion"></a>
 <a name="The-_002dgdb_002dversion-Command"></a>
 <h4 class="subheading">The <code>-gdb-version</code> Command</h4>
-<a name="index-_002dgdb_002dversion"></a>
 
 <a name="Synopsis-107"></a>
 <h4 class="subsubheading">Synopsis</h4>
@@ -198,12 +198,12 @@ default shows this information when you start an interactive session.
 (gdb)
 </pre></div>
 
+<a name="index-_002dlist_002dthread_002dgroups"></a>
 <a name="The-_002dlist_002dthread_002dgroups-Command"></a>
 <h4 class="subheading">The <code>-list-thread-groups</code> Command</h4>
-<a name="index-_002dlist_002dthread_002dgroups"></a>
 
 <a name="Synopsis-108"></a>
-<h4 class="subheading">Synopsis</h4>
+<h4 class="subsubheading">Synopsis</h4>
 
 <div class="smallexample">
 <pre class="smallexample">-list-thread-groups [ --available ] [ --recurse 1 ] [ <var>group</var> ... ]
@@ -303,7 +303,7 @@ and only if there is a corresponding executable file.
 </dl>
 
 <a name="Example-90"></a>
-<h4 class="subheading">Example</h4>
+<h4 class="subsubheading">Example</h4>
 
 <div class="smallexample">
 <pre class="smallexample">(gdb)
@@ -327,9 +327,9 @@ and only if there is a corresponding executable file.
                         {id=&quot;2&quot;,target-id=&quot;Thread 0xb7e14b90&quot;,cores=[2]}]},...]
 </pre></div>
 
+<a name="index-_002dinfo_002dos"></a>
 <a name="The-_002dinfo_002dos-Command"></a>
 <h4 class="subheading">The <code>-info-os</code> Command</h4>
-<a name="index-_002dinfo_002dos"></a>
 
 <a name="Synopsis-109"></a>
 <h4 class="subsubheading">Synopsis</h4>
@@ -406,12 +406,12 @@ for MI clients that want to enumerate the types of data, such as in a
 popup menu, but is needless clutter on the command line, and
 <code>info os</code> omits it.)
 </p>
+<a name="index-_002dadd_002dinferior"></a>
 <a name="The-_002dadd_002dinferior-Command"></a>
 <h4 class="subheading">The <code>-add-inferior</code> Command</h4>
-<a name="index-_002dadd_002dinferior"></a>
 
 <a name="Synopsis-110"></a>
-<h4 class="subheading">Synopsis</h4>
+<h4 class="subsubheading">Synopsis</h4>
 
 <div class="smallexample">
 <pre class="smallexample">-add-inferior [ --no-connection ]
@@ -452,13 +452,13 @@ following fields:
 </dl>
 
 <a name="GDB-Command-91"></a>
-<h4 class="subheading"><small>GDB</small> Command</h4>
+<h4 class="subsubheading"><small>GDB</small> Command</h4>
 
 <p>The corresponding <small>GDB</small> command is &lsquo;<samp>add-inferior</samp>&rsquo;
 (see <a href="Inferiors-Connections-and-Programs.html#add_005finferior_005fcli">&lsquo;<samp>add-inferior</samp>&rsquo;</a>).
 </p>
 <a name="Example-92"></a>
-<h4 class="subheading">Example</h4>
+<h4 class="subsubheading">Example</h4>
 
 <div class="smallexample">
 <pre class="smallexample">(gdb)
@@ -466,12 +466,48 @@ following fields:
 ^done,inferior=&quot;i3&quot;
 </pre></div>
 
-<a name="The-_002dinterpreter_002dexec-Command"></a>
-<h4 class="subheading">The <code>-interpreter-exec</code> Command</h4>
-<a name="index-_002dinterpreter_002dexec"></a>
+<a name="index-_002dremove_002dinferior"></a>
+<a name="The-_002dremove_002dinferior-Command"></a>
+<h4 class="subheading">The <code>-remove-inferior</code> Command</h4>
 
 <a name="Synopsis-111"></a>
-<h4 class="subheading">Synopsis</h4>
+<h4 class="subsubheading">Synopsis</h4>
+
+<div class="smallexample">
+<pre class="smallexample">-remove-inferior <var>inferior-id</var>
+</pre></div>
+
+<p>Removes an inferior (see <a href="Inferiors-Connections-and-Programs.html#Inferiors-Connections-and-Programs">Inferiors Connections and Programs</a>).
+Only inferiors that have exited can be removed.  The <var>inferior-id</var>
+is the inferior to be removed, and should be the same id string as
+returned by the &lsquo;<samp>-add-inferior</samp>&rsquo; command.
+</p>
+<p>When an inferior is successfully removed a
+<code>=thread-group-removed</code> notification (see <a href="GDB_002fMI-Async-Records.html#GDB_002fMI-Async-Records">GDB/MI Async Records</a>) is emitted, the <var>id</var> field of which contains the
+<var>inferior-id</var> for the removed inferior.
+</p>
+<a name="GDB-Command-92"></a>
+<h4 class="subsubheading"><small>GDB</small> Command</h4>
+
+<p>The corresponding <small>GDB</small> command is &lsquo;<samp>remove-inferiors</samp>&rsquo;
+(see <a href="Inferiors-Connections-and-Programs.html#remove_005finferiors_005fcli">&lsquo;<samp>remove-inferiors</samp>&rsquo;</a>).
+</p>
+<a name="Example-93"></a>
+<h4 class="subsubheading">Example</h4>
+
+<div class="smallexample">
+<pre class="smallexample">(gdb)
+-remove-inferior i3
+=thread-group-removed,id=&quot;i3&quot;
+^done
+</pre></div>
+
+<a name="index-_002dinterpreter_002dexec"></a>
+<a name="The-_002dinterpreter_002dexec-Command"></a>
+<h4 class="subheading">The <code>-interpreter-exec</code> Command</h4>
+
+<a name="Synopsis-112"></a>
+<h4 class="subsubheading">Synopsis</h4>
 
 <div class="smallexample">
 <pre class="smallexample">-interpreter-exec <var>interpreter</var> <var>command</var>
@@ -479,13 +515,13 @@ following fields:
 <a name="g_t_002dinterpreter_002dexec"></a>
 <p>Execute the specified <var>command</var> in the given <var>interpreter</var>.
 </p>
-<a name="GDB-Command-92"></a>
-<h4 class="subheading"><small>GDB</small> Command</h4>
+<a name="GDB-Command-93"></a>
+<h4 class="subsubheading"><small>GDB</small> Command</h4>
 
 <p>The corresponding <small>GDB</small> command is &lsquo;<samp>interpreter-exec</samp>&rsquo;.
 </p>
-<a name="Example-93"></a>
-<h4 class="subheading">Example</h4>
+<a name="Example-94"></a>
+<h4 class="subsubheading">Example</h4>
 
 <div class="smallexample">
 <pre class="smallexample">(gdb)
@@ -497,12 +533,12 @@ following fields:
 (gdb)
 </pre></div>
 
+<a name="index-_002dinferior_002dtty_002dset"></a>
 <a name="The-_002dinferior_002dtty_002dset-Command"></a>
 <h4 class="subheading">The <code>-inferior-tty-set</code> Command</h4>
-<a name="index-_002dinferior_002dtty_002dset"></a>
 
-<a name="Synopsis-112"></a>
-<h4 class="subheading">Synopsis</h4>
+<a name="Synopsis-113"></a>
+<h4 class="subsubheading">Synopsis</h4>
 
 <div class="smallexample">
 <pre class="smallexample">-inferior-tty-set /dev/pts/1
@@ -510,13 +546,13 @@ following fields:
 
 <p>Set terminal for future runs of the program being debugged.
 </p>
-<a name="GDB-Command-93"></a>
-<h4 class="subheading"><small>GDB</small> Command</h4>
+<a name="GDB-Command-94"></a>
+<h4 class="subsubheading"><small>GDB</small> Command</h4>
 
 <p>The corresponding <small>GDB</small> command is &lsquo;<samp>set inferior-tty</samp>&rsquo; /dev/pts/1.
 </p>
-<a name="Example-94"></a>
-<h4 class="subheading">Example</h4>
+<a name="Example-95"></a>
+<h4 class="subsubheading">Example</h4>
 
 <div class="smallexample">
 <pre class="smallexample">(gdb)
@@ -525,12 +561,12 @@ following fields:
 (gdb)
 </pre></div>
 
+<a name="index-_002dinferior_002dtty_002dshow"></a>
 <a name="The-_002dinferior_002dtty_002dshow-Command"></a>
 <h4 class="subheading">The <code>-inferior-tty-show</code> Command</h4>
-<a name="index-_002dinferior_002dtty_002dshow"></a>
 
-<a name="Synopsis-113"></a>
-<h4 class="subheading">Synopsis</h4>
+<a name="Synopsis-114"></a>
+<h4 class="subsubheading">Synopsis</h4>
 
 <div class="smallexample">
 <pre class="smallexample">-inferior-tty-show
@@ -538,13 +574,13 @@ following fields:
 
 <p>Show terminal for future runs of program being debugged.
 </p>
-<a name="GDB-Command-94"></a>
-<h4 class="subheading"><small>GDB</small> Command</h4>
+<a name="GDB-Command-95"></a>
+<h4 class="subsubheading"><small>GDB</small> Command</h4>
 
 <p>The corresponding <small>GDB</small> command is &lsquo;<samp>show inferior-tty</samp>&rsquo;.
 </p>
-<a name="Example-95"></a>
-<h4 class="subheading">Example</h4>
+<a name="Example-96"></a>
+<h4 class="subsubheading">Example</h4>
 
 <div class="smallexample">
 <pre class="smallexample">(gdb)
@@ -556,12 +592,12 @@ following fields:
 (gdb)
 </pre></div>
 
+<a name="index-_002denable_002dtimings"></a>
 <a name="The-_002denable_002dtimings-Command"></a>
 <h4 class="subheading">The <code>-enable-timings</code> Command</h4>
-<a name="index-_002denable_002dtimings"></a>
 
-<a name="Synopsis-114"></a>
-<h4 class="subheading">Synopsis</h4>
+<a name="Synopsis-115"></a>
+<h4 class="subsubheading">Synopsis</h4>
 
 <div class="smallexample">
 <pre class="smallexample">-enable-timings [yes | no]
@@ -572,13 +608,13 @@ command as a field in its output.  This command is to help frontend
 developers optimize the performance of their code.  No argument is
 equivalent to &lsquo;<samp>yes</samp>&rsquo;.
 </p>
-<a name="GDB-Command-95"></a>
-<h4 class="subheading"><small>GDB</small> Command</h4>
+<a name="GDB-Command-96"></a>
+<h4 class="subsubheading"><small>GDB</small> Command</h4>
 
 <p>No equivalent.
 </p>
-<a name="Example-96"></a>
-<h4 class="subheading">Example</h4>
+<a name="Example-97"></a>
+<h4 class="subsubheading">Example</h4>
 
 <div class="smallexample">
 <pre class="smallexample">(gdb)
@@ -605,12 +641,12 @@ fullname=&quot;/home/nickrob/myprog.c&quot;,line=&quot;73&quot;,arch=&quot;i386:
 (gdb)
 </pre></div>
 
+<a name="index-_002dcomplete"></a>
 <a name="The-_002dcomplete-Command"></a>
 <h4 class="subheading">The <code>-complete</code> Command</h4>
-<a name="index-_002dcomplete"></a>
 
-<a name="Synopsis-115"></a>
-<h4 class="subheading">Synopsis</h4>
+<a name="Synopsis-116"></a>
+<h4 class="subsubheading">Synopsis</h4>
 
 <div class="smallexample">
 <pre class="smallexample">-complete <var>command</var>
@@ -623,7 +659,7 @@ CLI and MI channels &mdash; for example: because of lack of PTYs like on Windows
 because <small>GDB</small> is used remotely via a SSH connection.
 </p>
 <a name="Result-9"></a>
-<h4 class="subheading">Result</h4>
+<h4 class="subsubheading">Result</h4>
 
 <p>The result consists of two or three fields:
 </p>
@@ -645,13 +681,13 @@ has no known completions, this field is omitted.
 </dd>
 </dl>
 
-<a name="GDB-Command-96"></a>
-<h4 class="subheading"><small>GDB</small> Command</h4>
+<a name="GDB-Command-97"></a>
+<h4 class="subsubheading"><small>GDB</small> Command</h4>
 
 <p>The corresponding <small>GDB</small> command is &lsquo;<samp>complete</samp>&rsquo;.
 </p>
-<a name="Example-97"></a>
-<h4 class="subheading">Example</h4>
+<a name="Example-98"></a>
+<h4 class="subsubheading">Example</h4>
 
 <div class="smallexample">
 <pre class="smallexample">(gdb)

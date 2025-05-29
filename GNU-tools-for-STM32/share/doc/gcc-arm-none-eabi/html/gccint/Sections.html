@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- Copyright (C) 1988-2021 Free Software Foundation, Inc.
+<!-- Copyright (C) 1988-2023 Free Software Foundation, Inc.
 
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
@@ -83,11 +83,11 @@ section</em>, which holds initialized writable data; and the <em>bss
 section</em>, which holds uninitialized data.  Some systems have other kinds
 of sections.
 </p>
-<p><samp>varasm.c</samp> provides several well-known sections, such as
+<p><samp>varasm.cc</samp> provides several well-known sections, such as
 <code>text_section</code>, <code>data_section</code> and <code>bss_section</code>.
 The normal way of controlling a <code><var>foo</var>_section</code> variable
 is to define the associated <code><var>FOO</var>_SECTION_ASM_OP</code> macro,
-as described below.  The macros are only read once, when <samp>varasm.c</samp>
+as described below.  The macros are only read once, when <samp>varasm.cc</samp>
 initializes itself, so their values must be run-time constants.
 They may however depend on command-line flags.
 </p>
@@ -107,7 +107,7 @@ in <code>TARGET_ASM_INIT_SECTIONS</code>.  The same is true of
 create a distinct <code>readonly_data_section</code>, the default is to
 reuse <code>text_section</code>.
 </p>
-<p>All the other <samp>varasm.c</samp> sections are optional, and are null
+<p>All the other <samp>varasm.cc</samp> sections are optional, and are null
 if the target does not provide them.
 </p>
 <dl>
@@ -274,7 +274,7 @@ readonly data section is used.
 <dl>
 <dt><a name="index-TARGET_005fASM_005fINIT_005fSECTIONS"></a>Target Hook: <em>void</em> <strong>TARGET_ASM_INIT_SECTIONS</strong> <em>(void)</em></dt>
 <dd><p>Define this hook if you need to do something special to set up the
-<samp>varasm.c</samp> sections, or if your target has some special sections
+<samp>varasm.cc</samp> sections, or if your target has some special sections
 of its own that you need to create.
 </p>
 <p>GCC calls this hook after processing the command line, but before writing
@@ -362,7 +362,8 @@ the string if a different section name should be used.
 
 <dl>
 <dt><a name="index-TARGET_005fASM_005fTM_005fCLONE_005fTABLE_005fSECTION"></a>Target Hook: <em>section *</em> <strong>TARGET_ASM_TM_CLONE_TABLE_SECTION</strong> <em>(void)</em></dt>
-<dd><p>Return the section that should be used for transactional memory clone  tables.
+<dd><p>Return the section that should be used for transactional memory clone
+tables.
 </p></dd></dl>
 
 <dl>
@@ -423,7 +424,7 @@ encode more than one bit of information, but this practice is now
 discouraged; use <code>SYMBOL_REF_FLAGS</code>.
 </p>
 <p>The default definition of this hook, <code>default_encode_section_info</code>
-in <samp>varasm.c</samp>, sets a number of commonly-useful bits in
+in <samp>varasm.cc</samp>, sets a number of commonly-useful bits in
 <code>SYMBOL_REF_FLAGS</code>.  Check whether the default does what you need
 before overriding it.
 </p></dd></dl>

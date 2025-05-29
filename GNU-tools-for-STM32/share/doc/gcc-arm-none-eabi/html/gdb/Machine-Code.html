@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- Copyright (C) 1988-2022 Free Software Foundation, Inc.
+<!-- Copyright (C) 1988-2023 Free Software Foundation, Inc.
 
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
@@ -83,11 +83,13 @@ well as hex.
 <dd><a name="index-info-line"></a>
 </dd>
 <dt><code>info line</code></dt>
-<dt><code>info line <var>location</var></code></dt>
-<dd><p>Print the starting and ending addresses of the compiled code for
-source line <var>location</var>.  You can specify source lines in any of
-the ways documented in <a href="Specify-Location.html#Specify-Location">Specify Location</a>.  With no <var>location</var>
-information about the current source line is printed.
+<dt><code>info line <var>locspec</var></code></dt>
+<dd><p>Print the starting and ending addresses of the compiled code for the
+source lines of the code locations that result from resolving
+<var>locspec</var>.  See <a href="Location-Specifications.html#Location-Specifications">Location Specifications</a>, for the various forms
+of <var>locspec</var>.
+With no <var>locspec</var>, information about the current source line is
+printed.
 </p></dd>
 </dl>
 
@@ -102,8 +104,9 @@ Line 895 of &quot;builtin.c&quot; starts at pc 0x634c &lt;m4_changequote&gt; and
 </pre></div>
 
 <p><a name="index-code-address-and-its-source-line"></a>
-We can also inquire (using <code>*<var>addr</var></code> as the form for
-<var>location</var>) what source line covers a particular address:
+We can also inquire, using <code>*<var>addr</var></code> as the form for
+<var>locspec</var>, what source line covers a particular address
+<var>addr</var>:
 </p><div class="smallexample">
 <pre class="smallexample">(gdb) info line *0x63ff
 Line 926 of &quot;builtin.c&quot; starts at pc 0x63e4 &lt;m4_changequote+152&gt; and \
@@ -124,7 +127,7 @@ Variables</a>).
 specifying a location will display information about the next source
 line.
 </p>
-<dl compact="compact">
+<a name="disassemble"></a><dl compact="compact">
 <dd><a name="index-disassemble"></a>
 <a name="index-assembly-instructions"></a>
 <a name="index-instructions_002c-assembly"></a>
@@ -135,16 +138,17 @@ line.
 <dt><code>disassemble /m</code></dt>
 <dt><code>disassemble /s</code></dt>
 <dt><code>disassemble /r</code></dt>
+<dt><code>disassemble /b</code></dt>
 <dd><p>This specialized command dumps a range of memory as machine
 instructions.  It can also print mixed source+disassembly by specifying
-the <code>/m</code> or <code>/s</code> modifier and print the raw instructions in hex
-as well as in symbolic form by specifying the <code>/r</code> modifier.
-The default memory range is the function surrounding the
+the <code>/m</code> or <code>/s</code> modifier and print the raw instructions in
+hex as well as in symbolic form by specifying the <code>/r</code> or <code>/b</code>
+modifier.  The default memory range is the function surrounding the
 program counter of the selected frame.  A single argument to this
 command is a program counter value; <small>GDB</small> dumps the function
-surrounding this value.  When two arguments are given, they should
-be separated by a comma, possibly surrounded by whitespace.  The
-arguments specify a range of addresses to dump, in one of two forms:
+surrounding this value.  When two arguments are given, they should be
+separated by a comma, possibly surrounded by whitespace.  The arguments
+specify a range of addresses to dump, in one of two forms:
 </p>
 <dl compact="compact">
 <dt><code><var>start</var>,<var>end</var></code></dt>
@@ -181,6 +185,35 @@ Dump of assembler code from 0x32c4 to 0x32e4:
    0x32d8 &lt;main+224&gt;:      addil -0x800,dp
    0x32dc &lt;main+228&gt;:      ldo 0x588(r1),r26
    0x32e0 &lt;main+232&gt;:      ldil 0x3000,r31
+End of assembler dump.
+</pre></div>
+
+<p>The following two examples are for RISC-V, and demonstrates the
+difference between the <code>/r</code> and <code>/b</code> modifiers.  First with
+<code>/b</code>, the bytes of the instruction are printed, in hex, in memory
+order:
+</p>
+<div class="smallexample">
+<pre class="smallexample">(gdb) disassemble /b 0x00010150,0x0001015c
+Dump of assembler code from 0x10150 to 0x1015c:
+   0x00010150 &lt;call_me+4&gt;:      22 dc                 	sw	s0,56(sp)
+   0x00010152 &lt;call_me+6&gt;:      80 00                 	addi	s0,sp,64
+   0x00010154 &lt;call_me+8&gt;:      23 26 a4 fe           	sw	a0,-20(s0)
+   0x00010158 &lt;call_me+12&gt;:     23 24 b4 fe           	sw	a1,-24(s0)
+End of assembler dump.
+</pre></div>
+
+<p>In contrast, with <code>/r</code> the bytes of the instruction are displayed
+in the instruction order, for RISC-V this means that the bytes have been
+swapped to little-endian order:
+</p>
+<div class="smallexample">
+<pre class="smallexample">(gdb) disassemble /r 0x00010150,0x0001015c
+Dump of assembler code from 0x10150 to 0x1015c:
+   0x00010150 &lt;call_me+4&gt;:      dc22              	sw	s0,56(sp)
+   0x00010152 &lt;call_me+6&gt;:      0080              	addi	s0,sp,64
+   0x00010154 &lt;call_me+8&gt;:      fea42623        	sw	a0,-20(s0)
+   0x00010158 &lt;call_me+12&gt;:     feb42423        	sw	a1,-24(s0)
 End of assembler dump.
 </pre></div>
 
@@ -313,10 +346,12 @@ Dump of assembler code from 0x400281 to 0x40028b:
 End of assembler dump.
 </pre></div>
 
-<p>Addresses cannot be specified as a location (see <a href="Specify-Location.html#Specify-Location">Specify Location</a>).
-So, for example, if you want to disassemble function <code>bar</code>
-in file <samp>foo.c</samp>, you must type &lsquo;<samp>disassemble 'foo.c'::bar</samp>&rsquo;
-and not &lsquo;<samp>disassemble foo.c:bar</samp>&rsquo;.
+<p>Note that the &lsquo;<samp>disassemble</samp>&rsquo; command&rsquo;s address arguments are
+specified using expressions in your programming language
+(see <a href="Expressions.html#Expressions">Expressions</a>), not location specs
+(see <a href="Location-Specifications.html#Location-Specifications">Location Specifications</a>).  So, for example, if you want to
+disassemble function <code>bar</code> in file <samp>foo.c</samp>, you must type
+&lsquo;<samp>disassemble 'foo.c'::bar</samp>&rsquo; and not &lsquo;<samp>disassemble foo.c:bar</samp>&rsquo;.
 </p>
 <p>Some architectures have more than one commonly-used set of instruction
 mnemonics or other syntax.

@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- Copyright (C) 1988-2021 Free Software Foundation, Inc.
+<!-- Copyright (C) 1988-2023 Free Software Foundation, Inc.
 
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
@@ -151,14 +151,13 @@ infinite precision.
 However, they can pretend to do so when only the sign of the result will
 be used, which is the case when the result is stored in the condition
 code.  And that is the <em>only</em> way this kind of expression may
-validly be used: as a value to be stored in the condition codes, either
-<code>(cc0)</code> or a register.  See <a href="Comparisons.html#Comparisons">Comparisons</a>.
+validly be used: as a value to be stored in the condition codes, in a
+register.  See <a href="Comparisons.html#Comparisons">Comparisons</a>.
 </p>
 <p>The mode <var>m</var> is not related to the modes of <var>x</var> and <var>y</var>, but
-instead is the mode of the condition code value.  If <code>(cc0)</code> is
-used, it is <code>VOIDmode</code>.  Otherwise it is some mode in class
+instead is the mode of the condition code value.  It is some mode in class
 <code>MODE_CC</code>, often <code>CCmode</code>.  See <a href="Condition-Code.html#Condition-Code">Condition Code</a>.  If <var>m</var>
-is <code>VOIDmode</code> or <code>CCmode</code>, the operation returns sufficient
+is <code>CCmode</code>, the operation returns sufficient
 information (in an unspecified format) so that any comparison operator
 can be applied to the result of the <code>COMPARE</code> operation.  For other
 modes in class <code>MODE_CC</code>, the operation only returns a subset of
@@ -227,7 +226,20 @@ not be the same.
 <p>For unsigned widening multiplication, use the same idiom, but with
 <code>zero_extend</code> instead of <code>sign_extend</code>.
 </p>
+<a name="index-smul_005fhighpart"></a>
+<a name="index-umul_005fhighpart"></a>
+<a name="index-high_002dpart-multiplication"></a>
+<a name="index-multiplication-high-part"></a>
+</dd>
+<dt><code>(smul_highpart:<var>m</var> <var>x</var> <var>y</var>)</code></dt>
+<dt><code>(umul_highpart:<var>m</var> <var>x</var> <var>y</var>)</code></dt>
+<dd><p>Represents the high-part multiplication of <var>x</var> and <var>y</var> carried
+out in machine mode <var>m</var>.  <code>smul_highpart</code> returns the high part
+of a signed multiplication, <code>umul_highpart</code> returns the high part
+of an unsigned multiplication.
+</p>
 <a name="index-fma"></a>
+<a name="index-fused-multiply_002dadd"></a>
 </dd>
 <dt><code>(fma:<var>m</var> <var>x</var> <var>y</var> <var>z</var>)</code></dt>
 <dd><p>Represents the <code>fma</code>, <code>fmaf</code>, and <code>fmal</code> builtin

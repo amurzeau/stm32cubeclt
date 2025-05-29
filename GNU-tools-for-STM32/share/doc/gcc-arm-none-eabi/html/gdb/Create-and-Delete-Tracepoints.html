@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- Copyright (C) 1988-2022 Free Software Foundation, Inc.
+<!-- Copyright (C) 1988-2023 Free Software Foundation, Inc.
 
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
@@ -73,10 +73,10 @@ Next: <a href="Enable-and-Disable-Tracepoints.html#Enable-and-Disable-Tracepoint
 <dd><a name="index-set-tracepoint"></a>
 <a name="index-trace"></a>
 </dd>
-<dt><code>trace <var>location</var></code></dt>
+<dt><code>trace <var>locspec</var></code></dt>
 <dd><p>The <code>trace</code> command is very similar to the <code>break</code> command.
-Its argument <var>location</var> can be any valid location.
-See <a href="Specify-Location.html#Specify-Location">Specify Location</a>.  The <code>trace</code> command defines a tracepoint,
+Its argument <var>locspec</var> can be any valid location specification.
+See <a href="Location-Specifications.html#Location-Specifications">Location Specifications</a>.  The <code>trace</code> command defines a tracepoint,
 which is a point in the target program where the debugger will briefly stop,
 collect some data, and then allow the program to continue.  Setting a tracepoint
 or changing its actions takes effect immediately if the remote stub
@@ -110,7 +110,7 @@ the remote stub) while <small>GDB</small> is disconnected.
 <p>You can abbreviate <code>trace</code> as <code>tr</code>.
 </p>
 </dd>
-<dt><code>trace <var>location</var> if <var>cond</var></code></dt>
+<dt><code>trace <var>locspec</var> if <var>cond</var></code></dt>
 <dd><p>Set a tracepoint with condition <var>cond</var>; evaluate the expression
 <var>cond</var> each time the tracepoint is reached, and collect data only
 if the value is nonzero&mdash;that is, if <var>cond</var> evaluates as true.
@@ -118,7 +118,7 @@ See <a href="Tracepoint-Conditions.html#Tracepoint-Conditions">Tracepoint Condit
 information on tracepoint conditions.
 </p>
 </dd>
-<dt><code>ftrace <var>location</var> [ if <var>cond</var> ]</code></dt>
+<dt><code>ftrace <var>locspec</var> [ if <var>cond</var> ]</code></dt>
 <dd><a name="index-set-fast-tracepoint"></a>
 <a name="index-fast-tracepoints_002c-setting"></a>
 <a name="index-ftrace"></a>
@@ -150,20 +150,21 @@ to set the <code>mmap_min_addr</code> kernel parameter, as in
 trampolines.  The minimum address should be set to a page boundary.
 </p>
 </dd>
-<dt><code>strace <var>location</var> [ if <var>cond</var> ]</code></dt>
+<dt><code>strace [<var>locspec</var> | -m <var>marker</var>] [ if <var>cond</var> ]</code></dt>
 <dd><a name="index-set-static-tracepoint"></a>
 <a name="index-static-tracepoints_002c-setting"></a>
 <a name="index-probe-static-tracepoint-marker"></a>
 <a name="index-strace"></a>
 <p>The <code>strace</code> command sets a static tracepoint.  For targets that
 support it, setting a static tracepoint probes a static
-instrumentation point, or marker, found at <var>location</var>.  It may not
-be possible to set a static tracepoint at the desired location, in
-which case the command will exit with an explanatory message.
+instrumentation point, or marker, found at the code locations that
+result from resolving <var>locspec</var>.  It may not be possible to set a
+static tracepoint at the desired code location, in which case the
+command will exit with an explanatory message.
 </p>
 <p><small>GDB</small> handles arguments to <code>strace</code> exactly as for
 <code>trace</code>, with the addition that the user can also specify
-<code>-m <var>marker</var></code> as <var>location</var>.  This probes the marker
+<code>-m <var>marker</var></code> instead of a location spec.  This probes the marker
 identified by the <var>marker</var> string identifier.  This identifier
 depends on the static tracepoint backend library your program is
 using.  You can find all the marker identifiers in the &lsquo;<samp>ID</samp>&rsquo; field

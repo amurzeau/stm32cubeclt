@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- Copyright (C) 1988-2022 Free Software Foundation, Inc.
+<!-- Copyright (C) 1988-2023 Free Software Foundation, Inc.
 
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
@@ -85,8 +85,8 @@ loaded at <small>GDB</small> startup.  See <a href="Startup.html#Startup">Startu
 session.  For example, to change the limit of array elements to print,
 you can do the following:
 </p><div class="smallexample">
-<pre class="smallexample">(GDB) set print elements 10
-(GDB) print some_array
+<pre class="smallexample">(gdb) set print elements 10
+(gdb) print some_array
 $1 = {0, 10, 20, 30, 40, 50, 60, 70, 80, 90...}
 </pre></div>
 
@@ -102,7 +102,7 @@ allow overriding relevant global print settings as set by <code>set
 print</code> subcommands.  See <a href="Data.html#print-options">print options</a>.  The example above could be
 rewritten as:
 </p><div class="smallexample">
-<pre class="smallexample">(GDB) print -elements 10 -- some_array
+<pre class="smallexample">(gdb) print -elements 10 -- some_array
 $1 = {0, 10, 20, 30, 40, 50, 60, 70, 80, 90...}
 </pre></div>
 
@@ -133,13 +133,13 @@ free-form arguments, such as expressions or filenames.
 </p>
 <p>For example, the command
 </p><div class="smallexample">
-<pre class="smallexample">(GDB) with print array on -- print some_array
+<pre class="smallexample">(gdb) with print array on -- print some_array
 </pre></div>
 <p>is equivalent to the following 3 commands:
 </p><div class="smallexample">
-<pre class="smallexample">(GDB) set print array on
-(GDB) print some_array
-(GDB) set print array off
+<pre class="smallexample">(gdb) set print array on
+(gdb) print some_array
+(gdb) set print array off
 </pre></div>
 
 <p>The <code>with</code> command is particularly useful when you want to
@@ -147,7 +147,7 @@ override a setting while running user-defined commands, or commands
 defined in Python or Guile.  See <a href="Extending-GDB.html#Extending-GDB">Extending GDB</a>.
 </p>
 <div class="smallexample">
-<pre class="smallexample">(GDB) with print pretty on -- my_complex_command
+<pre class="smallexample">(gdb) with print pretty on -- my_complex_command
 </pre></div>
 
 <p>To change several settings for the same command, you can nest

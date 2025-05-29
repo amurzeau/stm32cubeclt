@@ -1,6 +1,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- Copyright (C) 1988-2021 Free Software Foundation, Inc.
+<!-- This file documents the use of the GNU compilers.
+
+Copyright (C) 1988-2023 Free Software Foundation, Inc.
 
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
@@ -30,7 +32,7 @@ You have freedom to copy and modify this GNU Manual, like GNU
 <meta name="distribution" content="global">
 <meta name="Generator" content="makeinfo">
 <link href="index.html#Top" rel="start" title="Top">
-<link href="Option-Index.html#Option-Index" rel="index" title="Option Index">
+<link href="Indices.html#Indices" rel="index" title="Indices">
 <link href="index.html#SEC_Contents" rel="contents" title="Table of Contents">
 <link href="Invoking-GCC.html#Invoking-GCC" rel="up" title="Invoking GCC">
 <link href="Warning-Options.html#Warning-Options" rel="next" title="Warning Options">
@@ -66,11 +68,11 @@ ul.no-bullet {list-style: none}
 
 </head>
 
-<body lang="en">
+<body lang="en_US">
 <a name="Diagnostic-Message-Formatting-Options"></a>
 <div class="header">
 <p>
-Next: <a href="Warning-Options.html#Warning-Options" accesskey="n" rel="next">Warning Options</a>, Previous: <a href="Objective_002dC-and-Objective_002dC_002b_002b-Dialect-Options.html#Objective_002dC-and-Objective_002dC_002b_002b-Dialect-Options" accesskey="p" rel="prev">Objective-C and Objective-C++ Dialect Options</a>, Up: <a href="Invoking-GCC.html#Invoking-GCC" accesskey="u" rel="up">Invoking GCC</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Option-Index.html#Option-Index" title="Index" rel="index">Index</a>]</p>
+Next: <a href="Warning-Options.html#Warning-Options" accesskey="n" rel="next">Warning Options</a>, Previous: <a href="Objective_002dC-and-Objective_002dC_002b_002b-Dialect-Options.html#Objective_002dC-and-Objective_002dC_002b_002b-Dialect-Options" accesskey="p" rel="prev">Objective-C and Objective-C++ Dialect Options</a>, Up: <a href="Invoking-GCC.html#Invoking-GCC" accesskey="u" rel="up">Invoking GCC</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Indices.html#Indices" title="Index" rel="index">Index</a>]</p>
 </div>
 <hr>
 <a name="Options-to-Control-Diagnostic-Messages-Formatting"></a>
@@ -88,9 +90,10 @@ information should be reported.  Note that some language front ends may not
 honor these options.
 </p>
 <dl compact="compact">
-<dt><code>-fmessage-length=<var>n</var></code></dt>
 <dd><a name="index-fmessage_002dlength"></a>
-<p>Try to format error messages so that they fit on lines of about
+</dd>
+<dt><code>-fmessage-length=<var>n</var></code></dt>
+<dd><p>Try to format error messages so that they fit on lines of about
 <var>n</var> characters.  If <var>n</var> is zero, then no line-wrapping is
 done; each error message appears on a single line.  This is the
 default for all front ends.
@@ -108,19 +111,19 @@ parse diagnostics output and prefer that it remain more stable over time.
 <samp>-fdiagnostics-plain-output</samp> is currently equivalent to the following
 options:
 </p><div class="smallexample">
-<pre class="smallexample">-fno-diagnostics-show-caret 
--fno-diagnostics-show-line-numbers 
--fdiagnostics-color=never 
--fdiagnostics-urls=never 
+<pre class="smallexample">-fno-diagnostics-show-caret
+-fno-diagnostics-show-line-numbers
+-fdiagnostics-color=never
+-fdiagnostics-urls=never
 -fdiagnostics-path-format=separate-events
 </pre></div>
 <p>In the future, if GCC changes the default appearance of its diagnostics, the
 corresponding option to disable the new behavior will be added to this list.
 </p>
+<a name="index-fdiagnostics_002dshow_002dlocation"></a>
 </dd>
 <dt><code>-fdiagnostics-show-location=once</code></dt>
-<dd><a name="index-fdiagnostics_002dshow_002dlocation"></a>
-<p>Only meaningful in line-wrapping mode.  Instructs the diagnostic messages
+<dd><p>Only meaningful in line-wrapping mode.  Instructs the diagnostic messages
 reporter to emit source location information <em>once</em>; that is, in
 case the message is too long to fit on a single physical line and has to
 be wrapped, the source location won&rsquo;t be emitted (as prefix) again,
@@ -134,13 +137,13 @@ messages reporter to emit the same source location information (as
 prefix) for physical lines that result from the process of breaking
 a message which is too long to fit on a single line.
 </p>
+<a name="index-fdiagnostics_002dcolor"></a>
+<a name="index-highlight_002c-color"></a>
+<a name="index-GCC_005fCOLORS-environment-variable"></a>
 </dd>
 <dt><code>-fdiagnostics-color[=<var>WHEN</var>]</code></dt>
 <dt><code>-fno-diagnostics-color</code></dt>
-<dd><a name="index-fdiagnostics_002dcolor"></a>
-<a name="index-highlight_002c-color"></a>
-<a name="index-GCC_005fCOLORS-environment-variable"></a>
-<p>Use color in diagnostics.  <var>WHEN</var> is &lsquo;<samp>never</samp>&rsquo;, &lsquo;<samp>always</samp>&rsquo;,
+<dd><p>Use color in diagnostics.  <var>WHEN</var> is &lsquo;<samp>never</samp>&rsquo;, &lsquo;<samp>always</samp>&rsquo;,
 or &lsquo;<samp>auto</samp>&rsquo;.  The default depends on how the compiler has been configured,
 it can be any of the above <var>WHEN</var> options or also &lsquo;<samp>never</samp>&rsquo;
 if <code>GCC_COLORS</code> environment variable isn&rsquo;t present in the environment,
@@ -179,7 +182,7 @@ for 88-color and 256-color modes background colors.
 <pre class="smallexample">error=01;31:warning=01;35:note=01;36:range1=32:range2=34:locus=01:\
 quote=01:path=01;36:fixit-insert=32:fixit-delete=31:\
 diff-filename=01:diff-hunk=32:diff-delete=31:diff-insert=32:\
-type-diff=01;32
+type-diff=01;32:fnname=01;32:targs=35
 </pre></div>
 <p>where &lsquo;<samp>01;31</samp>&rsquo; is bold red, &lsquo;<samp>01;35</samp>&rsquo; is bold magenta,
 &lsquo;<samp>01;36</samp>&rsquo; is bold cyan, &lsquo;<samp>32</samp>&rsquo; is green, &lsquo;<samp>34</samp>&rsquo; is blue,
@@ -188,95 +191,106 @@ Setting <code>GCC_COLORS</code> to the empty string disables colors.
 Supported capabilities are as follows.
 </p>
 <dl compact="compact">
-<dt><code>error=</code></dt>
 <dd><a name="index-error-GCC_005fCOLORS-capability"></a>
-<p>SGR substring for error: markers.
+</dd>
+<dt><code>error=</code></dt>
+<dd><p>SGR substring for error: markers.
 </p>
+<a name="index-warning-GCC_005fCOLORS-capability"></a>
 </dd>
 <dt><code>warning=</code></dt>
-<dd><a name="index-warning-GCC_005fCOLORS-capability"></a>
-<p>SGR substring for warning: markers.
+<dd><p>SGR substring for warning: markers.
 </p>
+<a name="index-note-GCC_005fCOLORS-capability"></a>
 </dd>
 <dt><code>note=</code></dt>
-<dd><a name="index-note-GCC_005fCOLORS-capability"></a>
-<p>SGR substring for note: markers.
+<dd><p>SGR substring for note: markers.
 </p>
+<a name="index-path-GCC_005fCOLORS-capability"></a>
 </dd>
 <dt><code>path=</code></dt>
-<dd><a name="index-path-GCC_005fCOLORS-capability"></a>
-<p>SGR substring for colorizing paths of control-flow events as printed
+<dd><p>SGR substring for colorizing paths of control-flow events as printed
 via <samp>-fdiagnostics-path-format=</samp>, such as the identifiers of
 individual events and lines indicating interprocedural calls and returns.
 </p>
+<a name="index-range1-GCC_005fCOLORS-capability"></a>
 </dd>
 <dt><code>range1=</code></dt>
-<dd><a name="index-range1-GCC_005fCOLORS-capability"></a>
-<p>SGR substring for first additional range.
+<dd><p>SGR substring for first additional range.
 </p>
+<a name="index-range2-GCC_005fCOLORS-capability"></a>
 </dd>
 <dt><code>range2=</code></dt>
-<dd><a name="index-range2-GCC_005fCOLORS-capability"></a>
-<p>SGR substring for second additional range.
+<dd><p>SGR substring for second additional range.
 </p>
+<a name="index-locus-GCC_005fCOLORS-capability"></a>
 </dd>
 <dt><code>locus=</code></dt>
-<dd><a name="index-locus-GCC_005fCOLORS-capability"></a>
-<p>SGR substring for location information, &lsquo;<samp>file:line</samp>&rsquo; or
+<dd><p>SGR substring for location information, &lsquo;<samp>file:line</samp>&rsquo; or
 &lsquo;<samp>file:line:column</samp>&rsquo; etc.
 </p>
+<a name="index-quote-GCC_005fCOLORS-capability"></a>
 </dd>
 <dt><code>quote=</code></dt>
-<dd><a name="index-quote-GCC_005fCOLORS-capability"></a>
-<p>SGR substring for information printed within quotes.
+<dd><p>SGR substring for information printed within quotes.
 </p>
+<a name="index-fnname-GCC_005fCOLORS-capability"></a>
+</dd>
+<dt><code>fnname=</code></dt>
+<dd><p>SGR substring for names of C++ functions.
+</p>
+<a name="index-targs-GCC_005fCOLORS-capability"></a>
+</dd>
+<dt><code>targs=</code></dt>
+<dd><p>SGR substring for C++ function template parameter bindings.
+</p>
+<a name="index-fixit_002dinsert-GCC_005fCOLORS-capability"></a>
 </dd>
 <dt><code>fixit-insert=</code></dt>
-<dd><a name="index-fixit_002dinsert-GCC_005fCOLORS-capability"></a>
-<p>SGR substring for fix-it hints suggesting text to
+<dd><p>SGR substring for fix-it hints suggesting text to
 be inserted or replaced.
 </p>
+<a name="index-fixit_002ddelete-GCC_005fCOLORS-capability"></a>
 </dd>
 <dt><code>fixit-delete=</code></dt>
-<dd><a name="index-fixit_002ddelete-GCC_005fCOLORS-capability"></a>
-<p>SGR substring for fix-it hints suggesting text to
+<dd><p>SGR substring for fix-it hints suggesting text to
 be deleted.
 </p>
+<a name="index-diff_002dfilename-GCC_005fCOLORS-capability"></a>
 </dd>
 <dt><code>diff-filename=</code></dt>
-<dd><a name="index-diff_002dfilename-GCC_005fCOLORS-capability"></a>
-<p>SGR substring for filename headers within generated patches.
+<dd><p>SGR substring for filename headers within generated patches.
 </p>
+<a name="index-diff_002dhunk-GCC_005fCOLORS-capability"></a>
 </dd>
 <dt><code>diff-hunk=</code></dt>
-<dd><a name="index-diff_002dhunk-GCC_005fCOLORS-capability"></a>
-<p>SGR substring for the starts of hunks within generated patches.
+<dd><p>SGR substring for the starts of hunks within generated patches.
 </p>
+<a name="index-diff_002ddelete-GCC_005fCOLORS-capability"></a>
 </dd>
 <dt><code>diff-delete=</code></dt>
-<dd><a name="index-diff_002ddelete-GCC_005fCOLORS-capability"></a>
-<p>SGR substring for deleted lines within generated patches.
+<dd><p>SGR substring for deleted lines within generated patches.
 </p>
+<a name="index-diff_002dinsert-GCC_005fCOLORS-capability"></a>
 </dd>
 <dt><code>diff-insert=</code></dt>
-<dd><a name="index-diff_002dinsert-GCC_005fCOLORS-capability"></a>
-<p>SGR substring for inserted lines within generated patches.
+<dd><p>SGR substring for inserted lines within generated patches.
 </p>
+<a name="index-type_002ddiff-GCC_005fCOLORS-capability"></a>
 </dd>
 <dt><code>type-diff=</code></dt>
-<dd><a name="index-type_002ddiff-GCC_005fCOLORS-capability"></a>
-<p>SGR substring for highlighting mismatching types within template
+<dd><p>SGR substring for highlighting mismatching types within template
 arguments in the C++ frontend.
 </p></dd>
 </dl>
 
-</dd>
-<dt><code>-fdiagnostics-urls[=<var>WHEN</var>]</code></dt>
-<dd><a name="index-fdiagnostics_002durls"></a>
+<a name="index-fdiagnostics_002durls"></a>
 <a name="index-urls"></a>
 <a name="index-GCC_005fURLS-environment-variable"></a>
 <a name="index-TERM_005fURLS-environment-variable"></a>
-<p>Use escape sequences to embed URLs in diagnostics.  For example, when
+</dd>
+<dt><code>-fdiagnostics-urls[=<var>WHEN</var>]</code></dt>
+<dd><p>Use escape sequences to embed URLs in diagnostics.  For example, when
 <samp>-fdiagnostics-show-option</samp> emits text showing the command-line
 option controlling a diagnostic, embed a URL for documentation of that
 option.
@@ -315,31 +329,31 @@ That list is currently xfce4-terminal, certain known to be buggy
 gnome-terminal versions, the linux console, and mingw.
 This check can be skipped with the <samp>-fdiagnostics-urls=always</samp>.
 </p>
+<a name="index-fno_002ddiagnostics_002dshow_002doption"></a>
+<a name="index-fdiagnostics_002dshow_002doption"></a>
 </dd>
 <dt><code>-fno-diagnostics-show-option</code></dt>
-<dd><a name="index-fno_002ddiagnostics_002dshow_002doption"></a>
-<a name="index-fdiagnostics_002dshow_002doption"></a>
-<p>By default, each diagnostic emitted includes text indicating the
+<dd><p>By default, each diagnostic emitted includes text indicating the
 command-line option that directly controls the diagnostic (if such an
 option is known to the diagnostic machinery).  Specifying the
 <samp>-fno-diagnostics-show-option</samp> flag suppresses that behavior.
 </p>
+<a name="index-fno_002ddiagnostics_002dshow_002dcaret"></a>
+<a name="index-fdiagnostics_002dshow_002dcaret"></a>
 </dd>
 <dt><code>-fno-diagnostics-show-caret</code></dt>
-<dd><a name="index-fno_002ddiagnostics_002dshow_002dcaret"></a>
-<a name="index-fdiagnostics_002dshow_002dcaret"></a>
-<p>By default, each diagnostic emitted includes the original source line
+<dd><p>By default, each diagnostic emitted includes the original source line
 and a caret &lsquo;<samp>^</samp>&rsquo; indicating the column.  This option suppresses this
 information.  The source line is truncated to <var>n</var> characters, if
 the <samp>-fmessage-length=n</samp> option is given.  When the output is done
 to the terminal, the width is limited to the width given by the
 <code>COLUMNS</code> environment variable or, if not set, to the terminal width.
 </p>
+<a name="index-fno_002ddiagnostics_002dshow_002dlabels"></a>
+<a name="index-fdiagnostics_002dshow_002dlabels"></a>
 </dd>
 <dt><code>-fno-diagnostics-show-labels</code></dt>
-<dd><a name="index-fno_002ddiagnostics_002dshow_002dlabels"></a>
-<a name="index-fdiagnostics_002dshow_002dlabels"></a>
-<p>By default, when printing source code (via <samp>-fdiagnostics-show-caret</samp>),
+<dd><p>By default, when printing source code (via <samp>-fdiagnostics-show-caret</samp>),
 diagnostics can label ranges of source code with pertinent information, such
 as the types of expressions:
 </p>
@@ -353,35 +367,45 @@ as the types of expressions:
 <p>This option suppresses the printing of these labels (in the example above,
 the vertical bars and the &ldquo;char *&rdquo; and &ldquo;long int&rdquo; text).
 </p>
+<a name="index-fno_002ddiagnostics_002dshow_002dcwe"></a>
+<a name="index-fdiagnostics_002dshow_002dcwe"></a>
 </dd>
 <dt><code>-fno-diagnostics-show-cwe</code></dt>
-<dd><a name="index-fno_002ddiagnostics_002dshow_002dcwe"></a>
-<a name="index-fdiagnostics_002dshow_002dcwe"></a>
-<p>Diagnostic messages can optionally have an associated
+<dd><p>Diagnostic messages can optionally have an associated
 <a href="https://cwe.mitre.org/index.html">CWE</a> identifier.
 GCC itself only provides such metadata for some of the <samp>-fanalyzer</samp>
 diagnostics.  GCC plugins may also provide diagnostics with such metadata.
 By default, if this information is present, it will be printed with
 the diagnostic.  This option suppresses the printing of this metadata.
 </p>
+<a name="index-fno_002ddiagnostics_002dshow_002drules"></a>
+<a name="index-fdiagnostics_002dshow_002drules"></a>
+</dd>
+<dt><code>-fno-diagnostics-show-rules</code></dt>
+<dd><p>Diagnostic messages can optionally have rules associated with them, such
+as from a coding standard, or a specification.
+GCC itself does not do this for any of its diagnostics, but plugins may do so.
+By default, if this information is present, it will be printed with
+the diagnostic.  This option suppresses the printing of this metadata.
+</p>
+<a name="index-fno_002ddiagnostics_002dshow_002dline_002dnumbers"></a>
+<a name="index-fdiagnostics_002dshow_002dline_002dnumbers"></a>
 </dd>
 <dt><code>-fno-diagnostics-show-line-numbers</code></dt>
-<dd><a name="index-fno_002ddiagnostics_002dshow_002dline_002dnumbers"></a>
-<a name="index-fdiagnostics_002dshow_002dline_002dnumbers"></a>
-<p>By default, when printing source code (via <samp>-fdiagnostics-show-caret</samp>),
+<dd><p>By default, when printing source code (via <samp>-fdiagnostics-show-caret</samp>),
 a left margin is printed, showing line numbers.  This option suppresses this
 left margin.
 </p>
+<a name="index-fdiagnostics_002dminimum_002dmargin_002dwidth"></a>
 </dd>
 <dt><code>-fdiagnostics-minimum-margin-width=<var>width</var></code></dt>
-<dd><a name="index-fdiagnostics_002dminimum_002dmargin_002dwidth"></a>
-<p>This option controls the minimum width of the left margin printed by
+<dd><p>This option controls the minimum width of the left margin printed by
 <samp>-fdiagnostics-show-line-numbers</samp>.  It defaults to 6.
 </p>
+<a name="index-fdiagnostics_002dparseable_002dfixits"></a>
 </dd>
 <dt><code>-fdiagnostics-parseable-fixits</code></dt>
-<dd><a name="index-fdiagnostics_002dparseable_002dfixits"></a>
-<p>Emit fix-it hints in a machine-parseable format, suitable for consumption
+<dd><p>Emit fix-it hints in a machine-parseable format, suitable for consumption
 by IDEs.  For each fix-it, a line will be printed after the relevant
 diagnostic, starting with the string &ldquo;fix-it:&rdquo;.  For example:
 </p>
@@ -410,10 +434,10 @@ newline as &ldquo;\n&rdquo;, double quotes as &ldquo;\&quot;&rdquo;, non-printab
 An empty range (e.g. &ldquo;45:3-45:3&rdquo;) indicates that the string is to
 be inserted at the given position.
 </p>
+<a name="index-fdiagnostics_002dgenerate_002dpatch"></a>
 </dd>
 <dt><code>-fdiagnostics-generate-patch</code></dt>
-<dd><a name="index-fdiagnostics_002dgenerate_002dpatch"></a>
-<p>Print fix-it hints to stderr in unified diff format, after any diagnostics
+<dd><p>Print fix-it hints to stderr in unified diff format, after any diagnostics
 are printed.  For example:
 </p>
 <div class="smallexample">
@@ -432,10 +456,10 @@ are printed.  For example:
 <p>The diff may or may not be colorized, following the same rules
 as for diagnostics (see <samp>-fdiagnostics-color</samp>).
 </p>
+<a name="index-fdiagnostics_002dshow_002dtemplate_002dtree"></a>
 </dd>
 <dt><code>-fdiagnostics-show-template-tree</code></dt>
-<dd><a name="index-fdiagnostics_002dshow_002dtemplate_002dtree"></a>
-
+<dd>
 <p>In the C++ frontend, when printing diagnostics showing mismatching
 template types, such as:
 </p>
@@ -458,11 +482,11 @@ such as:
 <p>The parts that differ are highlighted with color (&ldquo;double&rdquo; and
 &ldquo;float&rdquo; in this case).
 </p>
+<a name="index-fno_002delide_002dtype"></a>
+<a name="index-felide_002dtype"></a>
 </dd>
 <dt><code>-fno-elide-type</code></dt>
-<dd><a name="index-fno_002delide_002dtype"></a>
-<a name="index-felide_002dtype"></a>
-<p>By default when the C++ frontend prints diagnostics showing mismatching
+<dd><p>By default when the C++ frontend prints diagnostics showing mismatching
 template types, common parts of the types are printed as &ldquo;[...]&rdquo; to
 simplify the error message.  For example:
 </p>
@@ -475,10 +499,10 @@ simplify the error message.  For example:
 This flag also affects the output of the
 <samp>-fdiagnostics-show-template-tree</samp> flag.
 </p>
+<a name="index-fdiagnostics_002dpath_002dformat"></a>
 </dd>
 <dt><code>-fdiagnostics-path-format=<var>KIND</var></code></dt>
-<dd><a name="index-fdiagnostics_002dpath_002dformat"></a>
-<p>Specify how to print paths of control-flow events for diagnostics that
+<dd><p>Specify how to print paths of control-flow events for diagnostics that
 have such a path associated with them.
 </p>
 <p><var>KIND</var> is &lsquo;<samp>none</samp>&rsquo;, &lsquo;<samp>separate-events</samp>&rsquo;, or &lsquo;<samp>inline-events</samp>&rsquo;,
@@ -573,30 +597,33 @@ and using indentation to show how stack frames are nested, pushed, and popped.
 (etc)
 </pre></div>
 
+<a name="index-fdiagnostics_002dshow_002dpath_002ddepths"></a>
 </dd>
 <dt><code>-fdiagnostics-show-path-depths</code></dt>
-<dd><a name="index-fdiagnostics_002dshow_002dpath_002ddepths"></a>
-<p>This option provides additional information when printing control-flow paths
+<dd><p>This option provides additional information when printing control-flow paths
 associated with a diagnostic.
 </p>
 <p>If this is option is provided then the stack depth will be printed for
-each run of events within <samp>-fdiagnostics-path-format=separate-events</samp>.
+each run of events within <samp>-fdiagnostics-path-format=inline-events</samp>.
+If provided with <samp>-fdiagnostics-path-format=separate-events</samp>, then
+the stack depth and function declaration will be appended when printing
+each event.
 </p>
 <p>This is intended for use by GCC developers and plugin developers when
 debugging diagnostics that report interprocedural control flow.
 </p>
+<a name="index-fno_002dshow_002dcolumn"></a>
+<a name="index-fshow_002dcolumn"></a>
 </dd>
 <dt><code>-fno-show-column</code></dt>
-<dd><a name="index-fno_002dshow_002dcolumn"></a>
-<a name="index-fshow_002dcolumn"></a>
-<p>Do not print column numbers in diagnostics.  This may be necessary if
+<dd><p>Do not print column numbers in diagnostics.  This may be necessary if
 diagnostics are being scanned by a program that does not understand the
 column numbers, such as <code>dejagnu</code>.
 </p>
+<a name="index-fdiagnostics_002dcolumn_002dunit"></a>
 </dd>
 <dt><code>-fdiagnostics-column-unit=<var>UNIT</var></code></dt>
-<dd><a name="index-fdiagnostics_002dcolumn_002dunit"></a>
-<p>Select the units for the column number.  This affects traditional diagnostics
+<dd><p>Select the units for the column number.  This affects traditional diagnostics
 (in the absence of <samp>-fno-show-column</samp>), as well as JSON format
 diagnostics if requested.
 </p>
@@ -612,26 +639,68 @@ its UTF-8 encoding requires four bytes.
 <p>Setting <var>UNIT</var> to &lsquo;<samp>byte</samp>&rsquo; changes the column number to the raw byte
 count in all cases, as was traditionally output by GCC prior to version 11.1.0.
 </p>
+<a name="index-fdiagnostics_002dcolumn_002dorigin"></a>
 </dd>
 <dt><code>-fdiagnostics-column-origin=<var>ORIGIN</var></code></dt>
-<dd><a name="index-fdiagnostics_002dcolumn_002dorigin"></a>
-<p>Select the origin for column numbers, i.e. the column number assigned to the
+<dd><p>Select the origin for column numbers, i.e. the column number assigned to the
 first column.  The default value of 1 corresponds to traditional GCC
 behavior and to the GNU style guide.  Some utilities may perform better with an
 origin of 0; any non-negative value may be specified.
 </p>
+<a name="index-fdiagnostics_002descape_002dformat"></a>
+</dd>
+<dt><code>-fdiagnostics-escape-format=<var>FORMAT</var></code></dt>
+<dd><p>When GCC prints pertinent source lines for a diagnostic it normally attempts
+to print the source bytes directly.  However, some diagnostics relate to encoding
+issues in the source file, such as malformed UTF-8, or issues with Unicode
+normalization.  These diagnostics are flagged so that GCC will escape bytes
+that are not printable ASCII when printing their pertinent source lines.
+</p>
+<p>This option controls how such bytes should be escaped.
+</p>
+<p>The default <var>FORMAT</var>, &lsquo;<samp>unicode</samp>&rsquo; displays Unicode characters that
+are not printable ASCII in the form &lsquo;<samp>&lt;U+XXXX&gt;</samp>&rsquo;, and bytes that do not
+correspond to a Unicode character validly-encoded in UTF-8-encoded will be
+displayed as hexadecimal in the form &lsquo;<samp>&lt;XX&gt;</samp>&rsquo;.
+</p>
+<p>For example, a source line containing the string &lsquo;<samp>before</samp>&rsquo; followed by the
+Unicode character U+03C0 (&ldquo;GREEK SMALL LETTER PI&rdquo;, with UTF-8 encoding
+0xCF 0x80) followed by the byte 0xBF (a stray UTF-8 trailing byte), followed by
+the string &lsquo;<samp>after</samp>&rsquo; will be printed for such a diagnostic as:
+</p>
+<div class="smallexample">
+<pre class="smallexample"> before&lt;U+03C0&gt;&lt;BF&gt;after
+</pre></div>
+
+<p>Setting <var>FORMAT</var> to &lsquo;<samp>bytes</samp>&rsquo; will display all non-printable-ASCII bytes
+in the form &lsquo;<samp>&lt;XX&gt;</samp>&rsquo;, thus showing the underlying encoding of non-ASCII
+Unicode characters.  For the example above, the following will be printed:
+</p>
+<div class="smallexample">
+<pre class="smallexample"> before&lt;CF&gt;&lt;80&gt;&lt;BF&gt;after
+</pre></div>
+
+<a name="index-fdiagnostics_002dformat"></a>
 </dd>
 <dt><code>-fdiagnostics-format=<var>FORMAT</var></code></dt>
-<dd><a name="index-fdiagnostics_002dformat"></a>
-<p>Select a different format for printing diagnostics.
-<var>FORMAT</var> is &lsquo;<samp>text</samp>&rsquo; or &lsquo;<samp>json</samp>&rsquo;.
-The default is &lsquo;<samp>text</samp>&rsquo;.
+<dd><p>Select a different format for printing diagnostics.
+<var>FORMAT</var> is &lsquo;<samp>text</samp>&rsquo;, &lsquo;<samp>sarif-stderr</samp>&rsquo;, &lsquo;<samp>sarif-file</samp>&rsquo;,
+&lsquo;<samp>json</samp>&rsquo;, &lsquo;<samp>json-stderr</samp>&rsquo;, or &lsquo;<samp>json-file</samp>&rsquo;.
 </p>
-<p>The &lsquo;<samp>json</samp>&rsquo; format consists of a top-level JSON array containing JSON
-objects representing the diagnostics.
+<p>The default is &lsquo;<samp>text</samp>&rsquo;.
 </p>
-<p>The JSON is emitted as one line, without formatting; the examples below
-have been formatted for clarity.
+<p>The &lsquo;<samp>sarif-stderr</samp>&rsquo; and &lsquo;<samp>sarif-file</samp>&rsquo; formats both emit
+diagnostics in SARIF Version 2.1.0 format, either to stderr, or to a file
+named <samp><var>source</var>.sarif</samp>, respectively.
+</p>
+<p>The &lsquo;<samp>json</samp>&rsquo; format is a synonym for &lsquo;<samp>json-stderr</samp>&rsquo;.
+The &lsquo;<samp>json-stderr</samp>&rsquo; and &lsquo;<samp>json-file</samp>&rsquo; formats are identical, apart from
+where the JSON is emitted to - with the former, the JSON is emitted to stderr,
+whereas with &lsquo;<samp>json-file</samp>&rsquo; it is written to <samp><var>source</var>.gcc.json</samp>.
+</p>
+<p>The emitted JSON consists of a top-level JSON array containing JSON objects
+representing the diagnostics.  The JSON is emitted as one line, without
+formatting; the examples below have been formatted for clarity.
 </p>
 <p>Diagnostics can have child diagnostics.  For example, this error and note:
 </p>
@@ -687,12 +756,13 @@ misleading-indentation.c:17:5: note: ...this statement, but the latter
                         }
                     }
                 ],
+                &quot;escape-source&quot;: false,
                 &quot;message&quot;: &quot;...this statement, but the latter is &hellip;&quot;
             }
         ]
+	&quot;escape-source&quot;: false,
 	&quot;column-origin&quot;: 1,
-    },
-    &hellip;
+    }
 ]
 </pre></div>
 
@@ -770,6 +840,7 @@ of the expression, which have labels.  It might be printed in JSON form as:
                 &quot;label&quot;: &quot;T {aka struct t}&quot;
             }
         ],
+        &quot;escape-source&quot;: false,
         &quot;message&quot;: &quot;invalid operands to binary + &hellip;&quot;
     }
 </pre></div>
@@ -822,6 +893,7 @@ with a replacement fix-it hint:
                 }
             }
         ],
+        &quot;escape-source&quot;: false,
         &quot;message&quot;: &quot;\u2018struct s\u2019 has no member named &hellip;&quot;
     }
 </pre></div>
@@ -878,13 +950,17 @@ within the stack.
     ]
 </pre></div>
 
+<p>Diagnostics have a boolean attribute <code>escape-source</code>, hinting whether
+non-ASCII bytes should be escaped when printing the pertinent lines of
+source code (<code>true</code> for diagnostics involving source encoding issues).
+</p>
 </dd>
 </dl>
 
 <hr>
 <div class="header">
 <p>
-Next: <a href="Warning-Options.html#Warning-Options" accesskey="n" rel="next">Warning Options</a>, Previous: <a href="Objective_002dC-and-Objective_002dC_002b_002b-Dialect-Options.html#Objective_002dC-and-Objective_002dC_002b_002b-Dialect-Options" accesskey="p" rel="prev">Objective-C and Objective-C++ Dialect Options</a>, Up: <a href="Invoking-GCC.html#Invoking-GCC" accesskey="u" rel="up">Invoking GCC</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Option-Index.html#Option-Index" title="Index" rel="index">Index</a>]</p>
+Next: <a href="Warning-Options.html#Warning-Options" accesskey="n" rel="next">Warning Options</a>, Previous: <a href="Objective_002dC-and-Objective_002dC_002b_002b-Dialect-Options.html#Objective_002dC-and-Objective_002dC_002b_002b-Dialect-Options" accesskey="p" rel="prev">Objective-C and Objective-C++ Dialect Options</a>, Up: <a href="Invoking-GCC.html#Invoking-GCC" accesskey="u" rel="up">Invoking GCC</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Indices.html#Indices" title="Index" rel="index">Index</a>]</p>
 </div>
 
 

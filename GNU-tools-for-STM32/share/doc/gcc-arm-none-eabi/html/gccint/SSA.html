@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- Copyright (C) 1988-2021 Free Software Foundation, Inc.
+<!-- Copyright (C) 1988-2023 Free Software Foundation, Inc.
 
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
@@ -98,7 +98,7 @@ expressions are renamed so that their version number matches that of
 the most recent assignment.
 </p>
 <p>We represent variable versions using <code>SSA_NAME</code> nodes.  The
-renaming process in <samp>tree-ssa.c</samp> wraps every real and
+renaming process in <samp>tree-ssa.cc</samp> wraps every real and
 virtual operand with an <code>SSA_NAME</code> node which contains
 the version number and the statement that created the
 <code>SSA_NAME</code>.  Only definitions and virtual definitions may

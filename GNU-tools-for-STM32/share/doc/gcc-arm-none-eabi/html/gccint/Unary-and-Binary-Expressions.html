@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- Copyright (C) 1988-2021 Free Software Foundation, Inc.
+<!-- Copyright (C) 1988-2023 Free Software Foundation, Inc.
 
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
@@ -110,6 +110,7 @@ Next: <a href="Vectors.html#Vectors" accesskey="n" rel="next">Vectors</a>, Previ
 <a name="index-PLUS_005fEXPR"></a>
 <a name="index-MINUS_005fEXPR"></a>
 <a name="index-MULT_005fEXPR"></a>
+<a name="index-WIDEN_005fMULT_005fEXPR"></a>
 <a name="index-MULT_005fHIGHPART_005fEXPR"></a>
 <a name="index-RDIV_005fEXPR"></a>
 <a name="index-TRUNC_005fDIV_005fEXPR"></a>
@@ -346,10 +347,19 @@ one operand is of floating type and the other is of integral type.
 controlled by the <code>flag_wrapv</code> and <code>flag_trapv</code> variables.
 </p>
 </dd>
+<dt><code>WIDEN_MULT_EXPR</code></dt>
+<dd><p>This node represents a widening multiplication.  The operands have
+integral types with same <var>b</var> bits of precision, producing an
+integral type result with at least <em>2<var>b</var></em> bits of precision.
+The behaviour is equivalent to extending both operands, possibly of
+different signedness, to the result type, then multiplying them.
+</p>
+</dd>
 <dt><code>MULT_HIGHPART_EXPR</code></dt>
 <dd><p>This node represents the &ldquo;high-part&rdquo; of a widening multiplication.
 For an integral type with <var>b</var> bits of precision, the result is
 the most significant <var>b</var> bits of the full <em>2<var>b</var></em> product.
+Both operands must have the same precision and same signedness.
 </p>
 </dd>
 <dt><code>RDIV_EXPR</code></dt>
@@ -562,11 +572,11 @@ represented.  Unrepresented fields will be cleared (zeroed), unless the
 CONSTRUCTOR_NO_CLEARING flag is set, in which case their value becomes
 undefined.
 </p>
+<a name="index-COMPOUND_005fLITERAL_005fEXPR_005fDECL_005fEXPR"></a>
+<a name="index-COMPOUND_005fLITERAL_005fEXPR_005fDECL"></a>
 </dd>
 <dt><code>COMPOUND_LITERAL_EXPR</code></dt>
-<dd><a name="index-COMPOUND_005fLITERAL_005fEXPR_005fDECL_005fEXPR"></a>
-<a name="index-COMPOUND_005fLITERAL_005fEXPR_005fDECL"></a>
-<p>These nodes represent ISO C99 compound literals.  The
+<dd><p>These nodes represent ISO C99 compound literals.  The
 <code>COMPOUND_LITERAL_EXPR_DECL_EXPR</code> is a <code>DECL_EXPR</code>
 containing an anonymous <code>VAR_DECL</code> for
 the unnamed object represented by the compound literal; the

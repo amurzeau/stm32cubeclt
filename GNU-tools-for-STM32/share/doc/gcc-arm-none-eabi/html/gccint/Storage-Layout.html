@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- Copyright (C) 1988-2021 Free Software Foundation, Inc.
+<!-- Copyright (C) 1988-2023 Free Software Foundation, Inc.
 
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
@@ -202,9 +202,30 @@ sign-extend the result to 64 bits.  On such machines, set
 
 <dl>
 <dt><a name="index-TARGET_005fC_005fEXCESS_005fPRECISION"></a>Target Hook: <em>enum flt_eval_method</em> <strong>TARGET_C_EXCESS_PRECISION</strong> <em>(enum excess_precision_type <var>type</var>)</em></dt>
-<dd><p>Return a value, with the same meaning as the C99 macro <code>FLT_EVAL_METHOD</code> that describes which excess precision should be applied.  <var>type</var> is either <code>EXCESS_PRECISION_TYPE_IMPLICIT</code>, <code>EXCESS_PRECISION_TYPE_FAST</code>, or <code>EXCESS_PRECISION_TYPE_STANDARD</code>.  For <code>EXCESS_PRECISION_TYPE_IMPLICIT</code>, the target should return which precision and range operations will be implictly evaluated in regardless of the excess precision explicitly added.  For <code>EXCESS_PRECISION_TYPE_STANDARD</code> and <code>EXCESS_PRECISION_TYPE_FAST</code>, the target should return the explicit excess precision that should be added depending on the value set for <samp>-fexcess-precision=<span class="roman">[</span>standard<span class="roman">|</span>fast<span class="roman">]</span></samp>. Note that unpredictable explicit excess precision does not make sense, so a target should never return <code>FLT_EVAL_METHOD_UNPREDICTABLE</code> when <var>type</var> is <code>EXCESS_PRECISION_TYPE_STANDARD</code> or <code>EXCESS_PRECISION_TYPE_FAST</code>.
+<dd><p>Return a value, with the same meaning as the C99 macro
+<code>FLT_EVAL_METHOD</code> that describes which excess precision should be
+applied.  <var>type</var> is either <code>EXCESS_PRECISION_TYPE_IMPLICIT</code>,
+<code>EXCESS_PRECISION_TYPE_FAST</code>,
+<code>EXCESS_PRECISION_TYPE_STANDARD</code>, or
+<code>EXCESS_PRECISION_TYPE_FLOAT16</code>.  For
+<code>EXCESS_PRECISION_TYPE_IMPLICIT</code>, the target should return which
+precision and range operations will be implictly evaluated in regardless
+of the excess precision explicitly added.  For
+<code>EXCESS_PRECISION_TYPE_STANDARD</code>, 
+<code>EXCESS_PRECISION_TYPE_FLOAT16</code>, and
+<code>EXCESS_PRECISION_TYPE_FAST</code>, the target should return the
+explicit excess precision that should be added depending on the
+value set for <samp>-fexcess-precision=<span class="roman">[</span>standard<span class="roman">|</span>fast<span class="roman">|</span>16<span class="roman">]</span></samp>.
+Note that unpredictable explicit excess precision does not make sense,
+so a target should never return <code>FLT_EVAL_METHOD_UNPREDICTABLE</code>
+when <var>type</var> is <code>EXCESS_PRECISION_TYPE_STANDARD</code>,
+<code>EXCESS_PRECISION_TYPE_FLOAT16</code> or
+<code>EXCESS_PRECISION_TYPE_FAST</code>.
 </p></dd></dl>
-
+<p>Return a value, with the same meaning as the C99 macro
+<code>FLT_EVAL_METHOD</code> that describes which excess precision should be
+applied.
+</p>
 <dl>
 <dt><a name="index-TARGET_005fPROMOTE_005fFUNCTION_005fMODE"></a>Target Hook: <em>machine_mode</em> <strong>TARGET_PROMOTE_FUNCTION_MODE</strong> <em>(const_tree <var>type</var>, machine_mode <var>mode</var>, int *<var>punsignedp</var>, const_tree <var>funtype</var>, int <var>for_return</var>)</em></dt>
 <dd><p>Like <code>PROMOTE_MODE</code>, but it is applied to outgoing function arguments or
@@ -737,7 +758,7 @@ ordinary types as &lsquo;<samp>U&nbsp;<var>n</var>&nbsp;<var>name</var>&nbsp;<va
 <var>name</var> is the name used for the type qualifier in source code,
 <var>n</var> is the length of <var>name</var> as above, and <var>code</var> is the
 code used to represent the unqualified version of this type.  (See
-<code>write_builtin_type</code> in <samp>cp/mangle.c</samp> for the list of
+<code>write_builtin_type</code> in <samp>cp/mangle.cc</samp> for the list of
 codes.)  In both cases the spaces are for clarity; do not include any
 spaces in your string.
 </p>
@@ -749,6 +770,16 @@ before mangling.
 <p>The default version of this hook always returns <code>NULL</code>, which is
 appropriate for a target that does not define any new fundamental
 types.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-TARGET_005fEMIT_005fSUPPORT_005fTINFOS"></a>Target Hook: <em>void</em> <strong>TARGET_EMIT_SUPPORT_TINFOS</strong> <em>(emit_support_tinfos_callback <var>callback</var>)</em></dt>
+<dd><p>If your target defines any fundamental types which depend on ISA flags,
+they might need C++ tinfo symbols in libsupc++/libstdc++ regardless of
+ISA flags the library is compiled with.
+This hook allows creating tinfo symbols even for those cases, by temporarily
+creating each corresponding fundamental type trees, calling the
+<var>callback</var> function on it and setting the type back to <code>nullptr</code>.
 </p></dd></dl>
 
 <hr>

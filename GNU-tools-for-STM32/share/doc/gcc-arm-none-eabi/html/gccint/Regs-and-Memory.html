@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- Copyright (C) 1988-2021 Free Software Foundation, Inc.
+<!-- Copyright (C) 1988-2023 Free Software Foundation, Inc.
 
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
@@ -353,7 +353,7 @@ significant byte within a word.
 <code>WORDS_BIG_ENDIAN</code>.  However, most parts of the compiler treat
 floating point values as if they had the same endianness as integer
 values.  This works because they handle them solely as a collection of
-integer values, with no particular numerical value.  Only real.c and
+integer values, with no particular numerical value.  Only real.cc and
 the runtime libraries care about <code>FLOAT_WORDS_BIG_ENDIAN</code>.
 </p>
 <p>Thus,
@@ -473,65 +473,23 @@ the reload pass.
 <p><code>scratch</code> is usually present inside a <code>clobber</code> operation
 (see <a href="Side-Effects.html#Side-Effects">Side Effects</a>).
 </p>
-<a name="index-cc0"></a>
-<a name="index-condition-code-register"></a>
-</dd>
-<dt><code>(cc0)</code></dt>
-<dd><p>This refers to the machine&rsquo;s condition code register.  It has no
-operands and may not have a machine mode.  There are two ways to use it:
-</p>
-<ul>
-<li> To stand for a complete set of condition code flags.  This is best on
-most machines, where each comparison sets the entire series of flags.
-
-<p>With this technique, <code>(cc0)</code> may be validly used in only two
-contexts: as the destination of an assignment (in test and compare
-instructions) and in comparison operators comparing against zero
-(<code>const_int</code> with value zero; that is to say, <code>const0_rtx</code>).
-</p>
-</li><li> To stand for a single flag that is the result of a single condition.
-This is useful on machines that have only a single flag bit, and in
-which comparison instructions must specify the condition to test.
-
-<p>With this technique, <code>(cc0)</code> may be validly used in only two
-contexts: as the destination of an assignment (in test and compare
-instructions) where the source is a comparison operator, and as the
-first operand of <code>if_then_else</code> (in a conditional branch).
-</p></li></ul>
-
-<a name="index-cc0_005frtx"></a>
-<p>There is only one expression object of code <code>cc0</code>; it is the
-value of the variable <code>cc0_rtx</code>.  Any attempt to create an
-expression of code <code>cc0</code> will return <code>cc0_rtx</code>.
-</p>
-<p>Instructions can set the condition code implicitly.  On many machines,
-nearly all instructions set the condition code based on the value that
-they compute or store.  It is not necessary to record these actions
-explicitly in the RTL because the machine description includes a
-prescription for recognizing the instructions that do so (by means of
-the macro <code>NOTICE_UPDATE_CC</code>).  See <a href="Condition-Code.html#Condition-Code">Condition Code</a>.  Only
-instructions whose sole purpose is to set the condition code, and
-instructions that use the condition code, need mention <code>(cc0)</code>.
-</p>
 <p>On some machines, the condition code register is given a register number
-and a <code>reg</code> is used instead of <code>(cc0)</code>.  This is usually the
-preferable approach if only a small subset of instructions modify the
-condition code.  Other machines store condition codes in general
+and a <code>reg</code> is used.
+Other machines store condition codes in general
 registers; in such cases a pseudo register should be used.
 </p>
 <p>Some machines, such as the SPARC and RS/6000, have two sets of
 arithmetic instructions, one that sets and one that does not set the
 condition code.  This is best handled by normally generating the
 instruction that does not set the condition code, and making a pattern
-that both performs the arithmetic and sets the condition code register
-(which would not be <code>(cc0)</code> in this case).  For examples, search
-for &lsquo;<samp>addcc</samp>&rsquo; and &lsquo;<samp>andcc</samp>&rsquo; in <samp>sparc.md</samp>.
+that both performs the arithmetic and sets the condition code register.
+For examples, search for &lsquo;<samp>addcc</samp>&rsquo; and &lsquo;<samp>andcc</samp>&rsquo; in <samp>sparc.md</samp>.
 </p>
 <a name="index-pc"></a>
+<a name="index-program-counter"></a>
 </dd>
 <dt><code>(pc)</code></dt>
-<dd><a name="index-program-counter"></a>
-<p>This represents the machine&rsquo;s program counter.  It has no operands and
+<dd><p>This represents the machine&rsquo;s program counter.  It has no operands and
 may not have a machine mode.  <code>(pc)</code> may be validly used only in
 certain specific contexts in jump instructions.
 </p>

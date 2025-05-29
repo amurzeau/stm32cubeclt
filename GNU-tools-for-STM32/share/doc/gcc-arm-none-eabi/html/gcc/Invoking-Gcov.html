@@ -1,6 +1,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- Copyright (C) 1988-2021 Free Software Foundation, Inc.
+<!-- This file documents the use of the GNU compilers.
+
+Copyright (C) 1988-2023 Free Software Foundation, Inc.
 
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
@@ -30,7 +32,7 @@ You have freedom to copy and modify this GNU Manual, like GNU
 <meta name="distribution" content="global">
 <meta name="Generator" content="makeinfo">
 <link href="index.html#Top" rel="start" title="Top">
-<link href="Option-Index.html#Option-Index" rel="index" title="Option Index">
+<link href="Indices.html#Indices" rel="index" title="Indices">
 <link href="index.html#SEC_Contents" rel="contents" title="Table of Contents">
 <link href="Gcov.html#Gcov" rel="up" title="Gcov">
 <link href="Gcov-and-Optimization.html#Gcov-and-Optimization" rel="next" title="Gcov and Optimization">
@@ -66,11 +68,11 @@ ul.no-bullet {list-style: none}
 
 </head>
 
-<body lang="en">
+<body lang="en_US">
 <a name="Invoking-Gcov"></a>
 <div class="header">
 <p>
-Next: <a href="Gcov-and-Optimization.html#Gcov-and-Optimization" accesskey="n" rel="next">Gcov and Optimization</a>, Previous: <a href="Gcov-Intro.html#Gcov-Intro" accesskey="p" rel="prev">Gcov Intro</a>, Up: <a href="Gcov.html#Gcov" accesskey="u" rel="up">Gcov</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Option-Index.html#Option-Index" title="Index" rel="index">Index</a>]</p>
+Next: <a href="Gcov-and-Optimization.html#Gcov-and-Optimization" accesskey="n" rel="next">Gcov and Optimization</a>, Previous: <a href="Gcov-Intro.html#Gcov-Intro" accesskey="p" rel="prev">Gcov Intro</a>, Up: <a href="Gcov.html#Gcov" accesskey="u" rel="up">Gcov</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Indices.html#Indices" title="Index" rel="index">Index</a>]</p>
 </div>
 <hr>
 <a name="Invoking-gcov"></a>
@@ -133,11 +135,11 @@ and the files have <samp>.gcov.json.gz</samp> extension.
 </p>
 <div class="smallexample">
 <pre class="smallexample">{
-  &quot;current_working_directory&quot;: <var>current_working_directory</var>,
-  &quot;data_file&quot;: <var>data_file</var>,
-  &quot;format_version&quot;: <var>format_version</var>,
-  &quot;gcc_version&quot;: <var>gcc_version</var>
-  &quot;files&quot;: [<var>file</var>]
+  &quot;current_working_directory&quot;: &quot;foo/bar&quot;,
+  &quot;data_file&quot;: &quot;a.out&quot;,
+  &quot;format_version&quot;: &quot;1&quot;,
+  &quot;gcc_version&quot;: &quot;11.1.1 20210510&quot;
+  &quot;files&quot;: [&quot;$file&quot;]
 }
 </pre></div>
 
@@ -158,9 +160,9 @@ a compilation unit was compiled
 </p>
 <div class="smallexample">
 <pre class="smallexample">{
-  &quot;file&quot;: <var>file_name</var>,
-  &quot;functions&quot;: [<var>function</var>],
-  &quot;lines&quot;: [<var>line</var>]
+  &quot;file&quot;: &quot;a.c&quot;,
+  &quot;functions&quot;: [&quot;$function&quot;],
+  &quot;lines&quot;: [&quot;$line&quot;]
 }
 </pre></div>
 
@@ -174,15 +176,15 @@ a compilation unit was compiled
 </p>
 <div class="smallexample">
 <pre class="smallexample">{
-  &quot;blocks&quot;: <var>blocks</var>,
-  &quot;blocks_executed&quot;: <var>blocks_executed</var>,
-  &quot;demangled_name&quot;: &quot;<var>demangled_name</var>,
-  &quot;end_column&quot;: <var>end_column</var>,
-  &quot;end_line&quot;: <var>end_line</var>,
-  &quot;execution_count&quot;: <var>execution_count</var>,
-  &quot;name&quot;: <var>name</var>,
-  &quot;start_column&quot;: <var>start_column</var>
-  &quot;start_line&quot;: <var>start_line</var>
+  &quot;blocks&quot;: 2,
+  &quot;blocks_executed&quot;: 2,
+  &quot;demangled_name&quot;: &quot;foo&quot;,
+  &quot;end_column&quot;: 1,
+  &quot;end_line&quot;: 4,
+  &quot;execution_count&quot;: 1,
+  &quot;name&quot;: &quot;foo&quot;,
+  &quot;start_column&quot;: 5,
+  &quot;start_line&quot;: 1
 }
 </pre></div>
 
@@ -217,11 +219,11 @@ this is likely to be fixed in the future.
 </p>
 <div class="smallexample">
 <pre class="smallexample">{
-  &quot;branches&quot;: [<var>branch</var>],
-  &quot;count&quot;: <var>count</var>,
-  &quot;line_number&quot;: <var>line_number</var>,
-  &quot;unexecuted_block&quot;: <var>unexecuted_block</var>
-  &quot;function_name&quot;: <var>function_name</var>,
+  &quot;branches&quot;: [&quot;$branch&quot;],
+  &quot;count&quot;: 2,
+  &quot;line_number&quot;: 15,
+  &quot;unexecuted_block&quot;: false,
+  &quot;function_name&quot;: &quot;foo&quot;,
 }
 </pre></div>
 
@@ -244,9 +246,9 @@ Fields of the <var>line</var> element have following semantics:
 </p>
 <div class="smallexample">
 <pre class="smallexample">{
-  &quot;count&quot;: <var>count</var>,
-  &quot;fallthrough&quot;: <var>fallthrough</var>,
-  &quot;throw&quot;: <var>throw</var>
+  &quot;count&quot;: 11,
+  &quot;fallthrough&quot;: true,
+  &quot;throw&quot;: false
 }
 </pre></div>
 
@@ -762,7 +764,7 @@ new execution counts and finally writes the data to the file.
 <hr>
 <div class="header">
 <p>
-Next: <a href="Gcov-and-Optimization.html#Gcov-and-Optimization" accesskey="n" rel="next">Gcov and Optimization</a>, Previous: <a href="Gcov-Intro.html#Gcov-Intro" accesskey="p" rel="prev">Gcov Intro</a>, Up: <a href="Gcov.html#Gcov" accesskey="u" rel="up">Gcov</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Option-Index.html#Option-Index" title="Index" rel="index">Index</a>]</p>
+Next: <a href="Gcov-and-Optimization.html#Gcov-and-Optimization" accesskey="n" rel="next">Gcov and Optimization</a>, Previous: <a href="Gcov-Intro.html#Gcov-Intro" accesskey="p" rel="prev">Gcov Intro</a>, Up: <a href="Gcov.html#Gcov" accesskey="u" rel="up">Gcov</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Indices.html#Indices" title="Index" rel="index">Index</a>]</p>
 </div>
 
 

@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- Copyright (C) 1988-2022 Free Software Foundation, Inc.
+<!-- Copyright (C) 1988-2023 Free Software Foundation, Inc.
 
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
@@ -67,7 +67,7 @@ Next: <a href="Functions-In-Python.html#Functions-In-Python" accesskey="n" rel="
 </div>
 <hr>
 <a name="Parameters-In-Python-1"></a>
-<h4 class="subsubsection">23.3.2.22 Parameters In Python</h4>
+<h4 class="subsubsection">23.3.2.23 Parameters In Python</h4>
 
 <a name="index-parameters-in-python"></a>
 <a name="index-python-parameters"></a>
@@ -87,7 +87,7 @@ behavior in <small>GDB</small>.  Similarly, you can define parameters that
 can be used to influence behavior in custom Python scripts and commands.
 </p>
 <dl>
-<dt><a name="index-Parameter_002e_005f_005finit_005f_005f"></a>Function: <strong>Parameter.__init__</strong> <em>(name, <var>command-class</var>, <var>parameter-class</var> <span class="roman">[</span>, <var>enum-sequence</var><span class="roman">]</span>)</em></dt>
+<dt><a name="index-Parameter_002e_005f_005finit_005f_005f"></a>Function: <strong>Parameter.__init__</strong> <em>(name, command_class, parameter_class <span class="roman">[</span>, enum_sequence<span class="roman">]</span>)</em></dt>
 <dd><p>The object initializer for <code>Parameter</code> registers the new
 parameter with <small>GDB</small>.  This initializer is normally invoked
 from the subclass&rsquo; own <code>__init__</code> method.
@@ -103,20 +103,20 @@ parameter.  In this case the parameter can subsequently be accessed in
 <p>If <var>name</var> consists of multiple words, and no prefix parameter group
 can be found, an exception is raised.
 </p>
-<p><var>command-class</var> should be one of the &lsquo;<samp>COMMAND_</samp>&rsquo; constants
+<p><var>command_class</var> should be one of the &lsquo;<samp>COMMAND_</samp>&rsquo; constants
 (see <a href="CLI-Commands-In-Python.html#CLI-Commands-In-Python">CLI Commands In Python</a>).  This argument tells <small>GDB</small> how to
 categorize the new parameter in the help system.
 </p>
-<p><var>parameter-class</var> should be one of the &lsquo;<samp>PARAM_</samp>&rsquo; constants
+<p><var>parameter_class</var> should be one of the &lsquo;<samp>PARAM_</samp>&rsquo; constants
 defined below.  This argument tells <small>GDB</small> the type of the new
 parameter; this information is used for input validation and
 completion.
 </p>
-<p>If <var>parameter-class</var> is <code>PARAM_ENUM</code>, then
-<var>enum-sequence</var> must be a sequence of strings.  These strings
+<p>If <var>parameter_class</var> is <code>PARAM_ENUM</code>, then
+<var>enum_sequence</var> must be a sequence of strings.  These strings
 represent the possible values for the parameter.
 </p>
-<p>If <var>parameter-class</var> is not <code>PARAM_ENUM</code>, then the presence
+<p>If <var>parameter_class</var> is not <code>PARAM_ENUM</code>, then the presence
 of a fourth argument will cause an exception to be thrown.
 </p>
 <p>The help text for the new parameter includes the Python documentation
@@ -240,15 +240,19 @@ Python, true and false are represented using boolean constants, and
 <a name="index-gdb_002ePARAM_005fUINTEGER"></a>
 </dd>
 <dt><code>gdb.PARAM_UINTEGER</code></dt>
-<dd><p>The value is an unsigned integer.  The value of 0 should be
-interpreted to mean &ldquo;unlimited&rdquo;.
+<dd><p>The value is an unsigned integer.  The value of <code>None</code> should be
+interpreted to mean &ldquo;unlimited&rdquo; (literal <code>'unlimited'</code> can also
+be used to set that value), and the value of 0 is reserved and should
+not be used.
 </p>
 <a name="index-PARAM_005fINTEGER"></a>
 <a name="index-gdb_002ePARAM_005fINTEGER"></a>
 </dd>
 <dt><code>gdb.PARAM_INTEGER</code></dt>
-<dd><p>The value is a signed integer.  The value of 0 should be interpreted
-to mean &ldquo;unlimited&rdquo;.
+<dd><p>The value is a signed integer.  The value of <code>None</code> should be
+interpreted to mean &ldquo;unlimited&rdquo; (literal <code>'unlimited'</code> can also
+be used to set that value), and the value of 0 is reserved and should
+not be used.
 </p>
 <a name="index-PARAM_005fSTRING"></a>
 <a name="index-gdb_002ePARAM_005fSTRING"></a>
@@ -283,23 +287,25 @@ passed through untranslated.
 <a name="index-gdb_002ePARAM_005fZINTEGER"></a>
 </dd>
 <dt><code>gdb.PARAM_ZINTEGER</code></dt>
-<dd><p>The value is an integer.  This is like <code>PARAM_INTEGER</code>, except 0
-is interpreted as itself.
+<dd><p>The value is a signed integer.  This is like <code>PARAM_INTEGER</code>,
+except that 0 is allowed and the value of <code>None</code> is not supported.
 </p>
 <a name="index-PARAM_005fZUINTEGER"></a>
 <a name="index-gdb_002ePARAM_005fZUINTEGER"></a>
 </dd>
 <dt><code>gdb.PARAM_ZUINTEGER</code></dt>
-<dd><p>The value is an unsigned integer.  This is like <code>PARAM_INTEGER</code>,
-except 0 is interpreted as itself, and the value cannot be negative.
+<dd><p>The value is an unsigned integer.  This is like <code>PARAM_UINTEGER</code>,
+except that 0 is allowed and the value of <code>None</code> is not supported.
 </p>
 <a name="index-PARAM_005fZUINTEGER_005fUNLIMITED"></a>
 <a name="index-gdb_002ePARAM_005fZUINTEGER_005fUNLIMITED"></a>
 </dd>
 <dt><code>gdb.PARAM_ZUINTEGER_UNLIMITED</code></dt>
-<dd><p>The value is a signed integer.  This is like <code>PARAM_ZUINTEGER</code>,
-except the special value -1 should be interpreted to mean
-&ldquo;unlimited&rdquo;.  Other negative values are not allowed.
+<dd><p>The value is a signed integer.  This is like <code>PARAM_INTEGER</code>
+including that the value of <code>None</code> should be interpreted to mean
+&ldquo;unlimited&rdquo; (literal <code>'unlimited'</code> can also be used to set that
+value), except that 0 is allowed, and the value cannot be negative,
+except the special value -1 is returned for the setting of &ldquo;unlimited&rdquo;.
 </p>
 <a name="index-PARAM_005fENUM"></a>
 <a name="index-gdb_002ePARAM_005fENUM"></a>

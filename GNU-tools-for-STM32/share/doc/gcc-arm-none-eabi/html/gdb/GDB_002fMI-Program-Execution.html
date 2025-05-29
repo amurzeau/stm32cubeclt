@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- Copyright (C) 1988-2022 Free Software Foundation, Inc.
+<!-- Copyright (C) 1988-2023 Free Software Foundation, Inc.
 
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
@@ -74,9 +74,9 @@ record &lsquo;<samp>*stopped</samp>&rsquo;.  Currently <small>GDB</small> only r
 asynchronously with remote targets and this interaction is mimicked in
 other cases.
 </p>
+<a name="index-_002dexec_002dcontinue"></a>
 <a name="The-_002dexec_002dcontinue-Command"></a>
 <h4 class="subheading">The <code>-exec-continue</code> Command</h4>
-<a name="index-_002dexec_002dcontinue"></a>
 
 <a name="Synopsis-30"></a>
 <h4 class="subsubheading">Synopsis</h4>
@@ -120,10 +120,24 @@ line=&quot;13&quot;,arch=&quot;i386:x86_64&quot;}
 (gdb)
 </pre></div>
 
+<p>For a &lsquo;<samp>breakpoint-hit</samp>&rsquo; stopped reason, when the breakpoint
+encountered has multiple locations, the field &lsquo;<samp>bkptno</samp>&rsquo; is
+followed by the field &lsquo;<samp>locno</samp>&rsquo;.
+</p>
+<div class="smallexample">
+<pre class="smallexample">-exec-continue
+^running
+(gdb)
+@Hello world
+*stopped,reason=&quot;breakpoint-hit&quot;,disp=&quot;keep&quot;,bkptno=&quot;2&quot;,locno=&quot;3&quot;,frame={
+func=&quot;foo&quot;,args=[],file=&quot;hello.c&quot;,fullname=&quot;/home/foo/bar/hello.c&quot;,
+line=&quot;13&quot;,arch=&quot;i386:x86_64&quot;}
+(gdb)
+</pre></div>
 
+<a name="index-_002dexec_002dfinish"></a>
 <a name="The-_002dexec_002dfinish-Command"></a>
 <h4 class="subheading">The <code>-exec-finish</code> Command</h4>
-<a name="index-_002dexec_002dfinish"></a>
 
 <a name="Synopsis-31"></a>
 <h4 class="subsubheading">Synopsis</h4>
@@ -175,9 +189,9 @@ gdb-result-var=&quot;$1&quot;,return-value=&quot;0&quot;
 </pre></div>
 
 
+<a name="index-_002dexec_002dinterrupt"></a>
 <a name="The-_002dexec_002dinterrupt-Command"></a>
 <h4 class="subheading">The <code>-exec-interrupt</code> Command</h4>
-<a name="index-_002dexec_002dinterrupt"></a>
 
 <a name="Synopsis-32"></a>
 <h4 class="subsubheading">Synopsis</h4>
@@ -230,20 +244,20 @@ fullname=&quot;/home/foo/bar/try.c&quot;,line=&quot;13&quot;,arch=&quot;i386:x86
 (gdb)
 </pre></div>
 
+<a name="index-_002dexec_002djump"></a>
 <a name="The-_002dexec_002djump-Command"></a>
 <h4 class="subheading">The <code>-exec-jump</code> Command</h4>
-<a name="index-_002dexec_002djump"></a>
 
 <a name="Synopsis-33"></a>
 <h4 class="subsubheading">Synopsis</h4>
 
 <div class="smallexample">
-<pre class="smallexample"> -exec-jump <var>location</var>
+<pre class="smallexample"> -exec-jump <var>locspec</var>
 </pre></div>
 
-<p>Resumes execution of the inferior program at the location specified by
-parameter.  See <a href="Specify-Location.html#Specify-Location">Specify Location</a>, for a description of the
-different forms of <var>location</var>.
+<p>Resumes execution of the inferior program at the address to
+which <var>locspec</var> resolves.  See <a href="Location-Specifications.html#Location-Specifications">Location Specifications</a>,
+for a description of the different forms of <var>locspec</var>.
 </p>
 <a name="GDB-Command-32"></a>
 <h4 class="subsubheading"><small>GDB</small> Command</h4>
@@ -260,9 +274,9 @@ different forms of <var>location</var>.
 </pre></div>
 
 
+<a name="index-_002dexec_002dnext"></a>
 <a name="The-_002dexec_002dnext-Command"></a>
 <h4 class="subheading">The <code>-exec-next</code> Command</h4>
-<a name="index-_002dexec_002dnext"></a>
 
 <a name="Synopsis-34"></a>
 <h4 class="subsubheading">Synopsis</h4>
@@ -298,9 +312,9 @@ source line where the function was called.
 </pre></div>
 
 
+<a name="index-_002dexec_002dnext_002dinstruction"></a>
 <a name="The-_002dexec_002dnext_002dinstruction-Command"></a>
 <h4 class="subheading">The <code>-exec-next-instruction</code> Command</h4>
-<a name="index-_002dexec_002dnext_002dinstruction"></a>
 
 <a name="Synopsis-35"></a>
 <h4 class="subsubheading">Synopsis</h4>
@@ -340,9 +354,9 @@ addr=&quot;0x000100d4&quot;,line=&quot;5&quot;,file=&quot;hello.c&quot;
 </pre></div>
 
 
+<a name="index-_002dexec_002dreturn"></a>
 <a name="The-_002dexec_002dreturn-Command"></a>
 <h4 class="subheading">The <code>-exec-return</code> Command</h4>
-<a name="index-_002dexec_002dreturn"></a>
 
 <a name="Synopsis-36"></a>
 <h4 class="subsubheading">Synopsis</h4>
@@ -391,9 +405,9 @@ arch=&quot;i386:x86_64&quot;}
 </pre></div>
 
 
+<a name="index-_002dexec_002drun"></a>
 <a name="The-_002dexec_002drun-Command"></a>
 <h4 class="subheading">The <code>-exec-run</code> Command</h4>
-<a name="index-_002dexec_002drun"></a>
 
 <a name="Synopsis-37"></a>
 <h4 class="subsubheading">Synopsis</h4>
@@ -476,9 +490,9 @@ signal-meaning=&quot;Interrupt&quot;
 
 
 
+<a name="index-_002dexec_002dstep"></a>
 <a name="The-_002dexec_002dstep-Command"></a>
 <h4 class="subheading">The <code>-exec-step</code> Command</h4>
-<a name="index-_002dexec_002dstep"></a>
 
 <a name="Synopsis-38"></a>
 <h4 class="subsubheading">Synopsis</h4>
@@ -526,9 +540,9 @@ fullname=&quot;/home/foo/bar/recursive2.c&quot;,line=&quot;11&quot;,arch=&quot;i
 </pre></div>
 
 
+<a name="index-_002dexec_002dstep_002dinstruction"></a>
 <a name="The-_002dexec_002dstep_002dinstruction-Command"></a>
 <h4 class="subheading">The <code>-exec-step-instruction</code> Command</h4>
-<a name="index-_002dexec_002dstep_002dinstruction"></a>
 
 <a name="Synopsis-39"></a>
 <h4 class="subsubheading">Synopsis</h4>
@@ -574,21 +588,21 @@ fullname=&quot;/home/foo/bar/try.c&quot;,line=&quot;10&quot;,arch=&quot;i386:x86
 </pre></div>
 
 
+<a name="index-_002dexec_002duntil"></a>
 <a name="The-_002dexec_002duntil-Command"></a>
 <h4 class="subheading">The <code>-exec-until</code> Command</h4>
-<a name="index-_002dexec_002duntil"></a>
 
 <a name="Synopsis-40"></a>
 <h4 class="subsubheading">Synopsis</h4>
 
 <div class="smallexample">
-<pre class="smallexample"> -exec-until [ <var>location</var> ]
+<pre class="smallexample"> -exec-until [ <var>locspec</var> ]
 </pre></div>
 
-<p>Executes the inferior until the <var>location</var> specified in the
-argument is reached.  If there is no argument, the inferior executes
-until a source line greater than the current one is reached.  The
-reason for stopping in this case will be &lsquo;<samp>location-reached</samp>&rsquo;.
+<p>Executes the inferior until it reaches the address to which
+<var>locspec</var> resolves.  If there is no argument, the inferior
+executes until it reaches a source line greater than the current one.
+The reason for stopping in this case will be &lsquo;<samp>location-reached</samp>&rsquo;.
 </p>
 <a name="GDB-Command-39"></a>
 <h4 class="subsubheading"><small>GDB</small> Command</h4>

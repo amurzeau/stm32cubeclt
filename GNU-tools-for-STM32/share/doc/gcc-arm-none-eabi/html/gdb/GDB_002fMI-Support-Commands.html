@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- Copyright (C) 1988-2022 Free Software Foundation, Inc.
+<!-- Copyright (C) 1988-2023 Free Software Foundation, Inc.
 
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
@@ -74,10 +74,10 @@ some commands are available to help front-ends query the debugger
 about support for these capabilities.  Similarly, it is also possible
 to query <small>GDB</small> about target support of certain features.
 </p>
-<a name="The-_002dinfo_002dgdb_002dmi_002dcommand-Command"></a>
-<h4 class="subheading">The <code>-info-gdb-mi-command</code> Command</h4>
 <a name="index-_002dinfo_002dgdb_002dmi_002dcommand"></a>
 <a name="index-_002dinfo_002dgdb_002dmi_002dcommand-1"></a>
+<a name="The-_002dinfo_002dgdb_002dmi_002dcommand-Command"></a>
+<h4 class="subheading">The <code>-info-gdb-mi-command</code> Command</h4>
 
 <a name="Synopsis-103"></a>
 <h4 class="subsubheading">Synopsis</h4>
@@ -129,10 +129,10 @@ to the debugger:
 ^done,command={exists=&quot;true&quot;}
 </pre></div>
 
-<a name="The-_002dlist_002dfeatures-Command"></a>
-<h4 class="subheading">The <code>-list-features</code> Command</h4>
 <a name="index-_002dlist_002dfeatures"></a>
 <a name="index-supported-GDB_002fMI-features_002c-list"></a>
+<a name="The-_002dlist_002dfeatures-Command"></a>
+<h4 class="subheading">The <code>-list-features</code> Command</h4>
 
 <p>Returns a list of particular features of the MI protocol that
 this version of gdb implements.  A feature can be a command,
@@ -228,11 +228,21 @@ option (see <a href="GDB_002fMI-Program-Execution.html#GDB_002fMI-Program-Execut
 <dd><p>Indicates that the <code>-data-disassemble</code> command supports the <samp>-a</samp>
 option (see <a href="GDB_002fMI-Data-Manipulation.html#GDB_002fMI-Data-Manipulation">GDB/MI Data Manipulation</a>).
 </p></dd>
+<dt>&lsquo;<samp>simple-values-ref-types</samp>&rsquo;
+<a name="index-simple_002dvalues_002dref_002dtypes"></a>
+</dt>
+<dd><p>Indicates that the <code>--simple-values</code> argument to the
+<code>-stack-list-arguments</code>, <code>-stack-list-locals</code>,
+<code>-stack-list-variables</code>, and <code>-var-list-children</code> commands
+takes reference types into account: that is, a value is considered
+simple if it is neither an array, structure, or union, nor a reference
+to an array, structure, or union.
+</p></dd>
 </dl>
 
+<a name="index-_002dlist_002dtarget_002dfeatures"></a>
 <a name="The-_002dlist_002dtarget_002dfeatures-Command"></a>
 <h4 class="subheading">The <code>-list-target-features</code> Command</h4>
-<a name="index-_002dlist_002dtarget_002dfeatures"></a>
 
 <p>Returns a list of particular features that are supported by the
 target.  Those features affect the permitted MI commands, but 

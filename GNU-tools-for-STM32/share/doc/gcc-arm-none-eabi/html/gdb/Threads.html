@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- Copyright (C) 1988-2022 Free Software Foundation, Inc.
+<!-- Copyright (C) 1988-2023 Free Software Foundation, Inc.
 
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
@@ -27,7 +27,7 @@ developing GNU and promoting software freedom." -->
 <link href="index.html#SEC_Contents" rel="contents" title="Table of Contents">
 <link href="Running.html#Running" rel="up" title="Running">
 <link href="Forks.html#Forks" rel="next" title="Forks">
-<link href="Inferiors-Connections-and-Programs.html#Inferiors-Connections-and-Programs" rel="prev" title="Inferiors Connections and Programs">
+<link href="Inferior_002dSpecific-Breakpoints.html#Inferior_002dSpecific-Breakpoints" rel="prev" title="Inferior-Specific Breakpoints">
 <style type="text/css">
 <!--
 a.summary-letter {text-decoration: none}
@@ -187,12 +187,20 @@ program&rsquo;s &ldquo;main thread&rdquo; even if the program is not multi-threa
 </p>
 <a name="index-_0024_005fthread_002c-convenience-variable"></a>
 <a name="index-_0024_005fgthread_002c-convenience-variable"></a>
+<a name="index-_0024_005finferior_005fthread_005fcount_002c-convenience-variable"></a>
 <p>The debugger convenience variables &lsquo;<samp>$_thread</samp>&rsquo; and
 &lsquo;<samp>$_gthread</samp>&rsquo; contain, respectively, the per-inferior thread number
 and the global thread number of the current thread.  You may find this
 useful in writing breakpoint conditional expressions, command scripts,
-and so forth.  See <a href="Convenience-Vars.html#Convenience-Vars">Convenience Variables</a>, for
-general information on convenience variables.
+and so forth.  The convenience variable &lsquo;<samp>$_inferior_thread_count</samp>&rsquo;
+contains the number of live threads in the current inferior.
+See <a href="Convenience-Vars.html#Convenience-Vars">Convenience Variables</a>, for general
+information on convenience variables.
+</p>
+<p>When running in non-stop mode (see <a href="Non_002dStop-Mode.html#Non_002dStop-Mode">Non-Stop Mode</a>), where new
+threads can be created, and existing threads exit, at any time,
+&lsquo;<samp>$_inferior_thread_count</samp>&rsquo; could return a different value each
+time it is evaluated.
 </p>
 <p>If <small>GDB</small> detects the program is multi-threaded, it augments the
 usual message about stopping at a breakpoint with the ID and name of
@@ -211,7 +219,7 @@ the thread that hit the breakpoint.
 <dl compact="compact">
 <dd><a name="info_005fthreads"></a><a name="index-info-threads"></a>
 </dd>
-<dt><code>info threads <span class="roman">[</span><var>thread-id-list</var><span class="roman">]</span></code></dt>
+<dt><code>info threads <span class="roman">[</span>-gid<span class="roman">]</span> <span class="roman">[</span><var>thread-id-list</var><span class="roman">]</span></code></dt>
 <dd>
 <p>Display information about one or more threads.  With no arguments
 displays information about all threads.  You can specify the list of
@@ -403,9 +411,9 @@ this command also allows you to identify a thread by its target
 is the LWP id.
 </p>
 <div class="smallexample">
-<pre class="smallexample">(GDB) thread find 26688
+<pre class="smallexample">(gdb) thread find 26688
 Thread 4 has target id 'Thread 0x41e02940 (LWP 26688)'
-(GDB) info thread 4
+(gdb) info thread 4
   Id   Target Id         Frame 
   4    Thread 0x41e02940 (LWP 26688) 0x00000031ca6cd372 in select ()
 </pre></div>

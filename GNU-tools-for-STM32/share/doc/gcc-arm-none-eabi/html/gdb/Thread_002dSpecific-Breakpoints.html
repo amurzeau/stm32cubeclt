@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- Copyright (C) 1988-2022 Free Software Foundation, Inc.
+<!-- Copyright (C) 1988-2023 Free Software Foundation, Inc.
 
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
@@ -78,11 +78,10 @@ breakpoints on all threads, or on a particular thread.
 <a name="index-thread-breakpoints"></a>
 <a name="index-break-_2026-thread-thread_002did"></a>
 </dd>
-<dt><code>break <var>location</var> thread <var>thread-id</var></code></dt>
-<dt><code>break <var>location</var> thread <var>thread-id</var> if &hellip;</code></dt>
-<dd><p><var>location</var> specifies source lines; there are several ways of
-writing them (see <a href="Specify-Location.html#Specify-Location">Specify Location</a>), but the effect is always to
-specify some source line.
+<dt><code>break <var>locspec</var> thread <var>thread-id</var></code></dt>
+<dt><code>break <var>locspec</var> thread <var>thread-id</var> if &hellip;</code></dt>
+<dd><p><var>locspec</var> specifies a code location or locations in your program.
+See <a href="Location-Specifications.html#Location-Specifications">Location Specifications</a>, for details.
 </p>
 <p>Use the qualifier &lsquo;<samp>thread <var>thread-id</var></samp>&rsquo; with a breakpoint command
 to specify that you only want <small>GDB</small> to stop the program when a
@@ -120,8 +119,12 @@ thread exit, but also when you detach from the process with the
 Process</a>), or if <small>GDB</small> loses the remote connection
 (see <a href="Remote-Debugging.html#Remote-Debugging">Remote Debugging</a>), etc.  Note that with some targets,
 <small>GDB</small> is only able to detect a thread has exited when the user
-explictly asks for the thread list with the <code>info threads</code>
+explicitly asks for the thread list with the <code>info threads</code>
 command.
+</p>
+<p>A breakpoint can&rsquo;t be both thread-specific and inferior-specific
+(see <a href="Inferior_002dSpecific-Breakpoints.html#Inferior_002dSpecific-Breakpoints">Inferior-Specific Breakpoints</a>), or task-specific (see <a href="Ada-Tasks.html#Ada-Tasks">Ada Tasks</a>); using more than one of the <code>thread</code>, <code>inferior</code>, or
+<code>task</code> keywords when creating a breakpoint will give an error.
 </p>
 <hr>
 <div class="header">

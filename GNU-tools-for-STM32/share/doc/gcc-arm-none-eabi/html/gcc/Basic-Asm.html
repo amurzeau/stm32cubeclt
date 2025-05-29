@@ -1,6 +1,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- Copyright (C) 1988-2021 Free Software Foundation, Inc.
+<!-- This file documents the use of the GNU compilers.
+
+Copyright (C) 1988-2023 Free Software Foundation, Inc.
 
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
@@ -30,7 +32,7 @@ You have freedom to copy and modify this GNU Manual, like GNU
 <meta name="distribution" content="global">
 <meta name="Generator" content="makeinfo">
 <link href="index.html#Top" rel="start" title="Top">
-<link href="Option-Index.html#Option-Index" rel="index" title="Option Index">
+<link href="Indices.html#Indices" rel="index" title="Indices">
 <link href="index.html#SEC_Contents" rel="contents" title="Table of Contents">
 <link href="Using-Assembly-Language-with-C.html#Using-Assembly-Language-with-C" rel="up" title="Using Assembly Language with C">
 <link href="Extended-Asm.html#Extended-Asm" rel="next" title="Extended Asm">
@@ -66,11 +68,11 @@ ul.no-bullet {list-style: none}
 
 </head>
 
-<body lang="en">
+<body lang="en_US">
 <a name="Basic-Asm"></a>
 <div class="header">
 <p>
-Next: <a href="Extended-Asm.html#Extended-Asm" accesskey="n" rel="next">Extended Asm</a>, Up: <a href="Using-Assembly-Language-with-C.html#Using-Assembly-Language-with-C" accesskey="u" rel="up">Using Assembly Language with C</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Option-Index.html#Option-Index" title="Index" rel="index">Index</a>]</p>
+Next: <a href="Extended-Asm.html#Extended-Asm" accesskey="n" rel="next">Extended Asm</a>, Up: <a href="Using-Assembly-Language-with-C.html#Using-Assembly-Language-with-C" accesskey="u" rel="up">Using Assembly Language with C</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Indices.html#Indices" title="Index" rel="index">Index</a>]</p>
 </div>
 <hr>
 <a name="Basic-Asm-_002d_002d_002d-Assembler-Instructions-Without-Operands"></a>
@@ -84,10 +86,12 @@ Next: <a href="Extended-Asm.html#Extended-Asm" accesskey="n" rel="next">Extended
 <pre class="example">asm <var>asm-qualifiers</var> ( <var>AssemblerInstructions</var> )
 </pre></div>
 
-<p>The <code>asm</code> keyword is a GNU extension.
-When writing code that can be compiled with <samp>-ansi</samp> and the
-various <samp>-std</samp> options, use <code>__asm__</code> instead of 
-<code>asm</code> (see <a href="Alternate-Keywords.html#Alternate-Keywords">Alternate Keywords</a>).
+<p>For the C language, the <code>asm</code> keyword is a GNU extension.
+When writing C code that can be compiled with <samp>-ansi</samp> and the
+<samp>-std</samp> options that select C dialects without GNU extensions, use
+<code>__asm__</code> instead of <code>asm</code> (see <a href="Alternate-Keywords.html#Alternate-Keywords">Alternate Keywords</a>).  For
+the C++ language, <code>asm</code> is a standard keyword, but <code>__asm__</code>
+can be used for code compiled with <samp>-fno-asm</samp>.
 </p>
 <a name="Qualifiers-1"></a>
 <h4 class="subsubheading">Qualifiers</h4>
@@ -210,7 +214,7 @@ but it may read or write any globally accessible variable.
 <hr>
 <div class="header">
 <p>
-Next: <a href="Extended-Asm.html#Extended-Asm" accesskey="n" rel="next">Extended Asm</a>, Up: <a href="Using-Assembly-Language-with-C.html#Using-Assembly-Language-with-C" accesskey="u" rel="up">Using Assembly Language with C</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Option-Index.html#Option-Index" title="Index" rel="index">Index</a>]</p>
+Next: <a href="Extended-Asm.html#Extended-Asm" accesskey="n" rel="next">Extended Asm</a>, Up: <a href="Using-Assembly-Language-with-C.html#Using-Assembly-Language-with-C" accesskey="u" rel="up">Using Assembly Language with C</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Indices.html#Indices" title="Index" rel="index">Index</a>]</p>
 </div>
 
 

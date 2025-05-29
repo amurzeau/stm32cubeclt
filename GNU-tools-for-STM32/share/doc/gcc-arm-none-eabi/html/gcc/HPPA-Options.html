@@ -1,6 +1,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- Copyright (C) 1988-2021 Free Software Foundation, Inc.
+<!-- This file documents the use of the GNU compilers.
+
+Copyright (C) 1988-2023 Free Software Foundation, Inc.
 
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
@@ -30,7 +32,7 @@ You have freedom to copy and modify this GNU Manual, like GNU
 <meta name="distribution" content="global">
 <meta name="Generator" content="makeinfo">
 <link href="index.html#Top" rel="start" title="Top">
-<link href="Option-Index.html#Option-Index" rel="index" title="Option Index">
+<link href="Indices.html#Indices" rel="index" title="Indices">
 <link href="index.html#SEC_Contents" rel="contents" title="Table of Contents">
 <link href="Submodel-Options.html#Submodel-Options" rel="up" title="Submodel Options">
 <link href="IA_002d64-Options.html#IA_002d64-Options" rel="next" title="IA-64 Options">
@@ -66,23 +68,24 @@ ul.no-bullet {list-style: none}
 
 </head>
 
-<body lang="en">
+<body lang="en_US">
 <a name="HPPA-Options"></a>
 <div class="header">
 <p>
-Next: <a href="IA_002d64-Options.html#IA_002d64-Options" accesskey="n" rel="next">IA-64 Options</a>, Previous: <a href="H8_002f300-Options.html#H8_002f300-Options" accesskey="p" rel="prev">H8/300 Options</a>, Up: <a href="Submodel-Options.html#Submodel-Options" accesskey="u" rel="up">Submodel Options</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Option-Index.html#Option-Index" title="Index" rel="index">Index</a>]</p>
+Next: <a href="IA_002d64-Options.html#IA_002d64-Options" accesskey="n" rel="next">IA-64 Options</a>, Previous: <a href="H8_002f300-Options.html#H8_002f300-Options" accesskey="p" rel="prev">H8/300 Options</a>, Up: <a href="Submodel-Options.html#Submodel-Options" accesskey="u" rel="up">Submodel Options</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Indices.html#Indices" title="Index" rel="index">Index</a>]</p>
 </div>
 <hr>
 <a name="HPPA-Options-1"></a>
-<h4 class="subsection">3.19.20 HPPA Options</h4>
+<h4 class="subsection">3.19.19 HPPA Options</h4>
 <a name="index-HPPA-Options"></a>
 
 <p>These &lsquo;<samp>-m</samp>&rsquo; options are defined for the HPPA family of computers:
 </p>
 <dl compact="compact">
-<dt><code>-march=<var>architecture-type</var></code></dt>
 <dd><a name="index-march-5"></a>
-<p>Generate code for the specified architecture.  The choices for
+</dd>
+<dt><code>-march=<var>architecture-type</var></code></dt>
+<dd><p>Generate code for the specified architecture.  The choices for
 <var>architecture-type</var> are &lsquo;<samp>1.0</samp>&rsquo; for PA 1.0, &lsquo;<samp>1.1</samp>&rsquo; for PA
 1.1, and &lsquo;<samp>2.0</samp>&rsquo; for PA 2.0 processors.  Refer to
 <samp>/usr/lib/sched.models</samp> on an HP-UX system to determine the proper
@@ -90,132 +93,96 @@ architecture option for your machine.  Code compiled for lower numbered
 architectures runs on higher numbered architectures, but not the
 other way around.
 </p>
+<a name="index-mpa_002drisc_002d1_002d0"></a>
+<a name="index-mpa_002drisc_002d1_002d1"></a>
+<a name="index-mpa_002drisc_002d2_002d0"></a>
 </dd>
 <dt><code>-mpa-risc-1-0</code></dt>
 <dt><code>-mpa-risc-1-1</code></dt>
 <dt><code>-mpa-risc-2-0</code></dt>
-<dd><a name="index-mpa_002drisc_002d1_002d0"></a>
-<a name="index-mpa_002drisc_002d1_002d1"></a>
-<a name="index-mpa_002drisc_002d2_002d0"></a>
-<p>Synonyms for <samp>-march=1.0</samp>, <samp>-march=1.1</samp>, and <samp>-march=2.0</samp> respectively.
+<dd><p>Synonyms for <samp>-march=1.0</samp>, <samp>-march=1.1</samp>, and <samp>-march=2.0</samp> respectively.
 </p>
+<a name="index-matomic_002dlibcalls"></a>
+<a name="index-mno_002datomic_002dlibcalls"></a>
+</dd>
+<dt><code>-matomic-libcalls</code></dt>
+<dd><p>Generate libcalls for atomic loads and stores when sync libcalls are disabled.
+This option is enabled by default.  It only affects the generation of
+atomic libcalls by the HPPA backend.
+</p>
+<p>Both the sync and <samp>libatomic</samp> libcall implementations use locking.
+As a result, processor stores are not atomic with respect to other
+atomic operations.  Processor loads up to DImode are atomic with
+respect to other atomic operations provided they are implemented as
+a single access.
+</p>
+<p>The PA-RISC architecture does not support any atomic operations in
+hardware except for the <code>ldcw</code> instruction.  Thus, all atomic
+support is implemented using sync and atomic libcalls.  Sync libcall
+support is in <samp>libgcc.a</samp>.  Atomic libcall support is in
+<samp>libatomic</samp>.
+</p>
+<p>This option generates <code>__atomic_exchange</code> calls for atomic stores.
+It also provides special handling for atomic DImode accesses on 32-bit
+targets.
+</p>
+<a name="index-mbig_002dswitch"></a>
+</dd>
+<dt><code>-mbig-switch</code></dt>
+<dd><p>Does nothing.  Preserved for backward compatibility.
+</p>
+<a name="index-mcaller_002dcopies"></a>
 </dd>
 <dt><code>-mcaller-copies</code></dt>
-<dd><a name="index-mcaller_002dcopies"></a>
-<p>The caller copies function arguments passed by hidden reference.  This
+<dd><p>The caller copies function arguments passed by hidden reference.  This
 option should be used with care as it is not compatible with the default
 32-bit runtime.  However, only aggregates larger than eight bytes are
 passed by hidden reference and the option provides better compatibility
 with OpenMP.
 </p>
+<a name="index-mcoherent_002dldcw"></a>
 </dd>
-<dt><code>-mjump-in-delay</code></dt>
-<dd><a name="index-mjump_002din_002ddelay"></a>
-<p>This option is ignored and provided for compatibility purposes only.
+<dt><code>-mcoherent-ldcw</code></dt>
+<dd><p>Use ldcw/ldcd coherent cache-control hint.
 </p>
+<a name="index-mdisable_002dfpregs"></a>
 </dd>
 <dt><code>-mdisable-fpregs</code></dt>
-<dd><a name="index-mdisable_002dfpregs"></a>
-<p>Prevent floating-point registers from being used in any manner.  This is
-necessary for compiling kernels that perform lazy context switching of
-floating-point registers.  If you use this option and attempt to perform
-floating-point operations, the compiler aborts.
+<dd><p>Disable floating-point registers.  Equivalent to <code>-msoft-float</code>.
 </p>
+<a name="index-mdisable_002dindexing"></a>
 </dd>
 <dt><code>-mdisable-indexing</code></dt>
-<dd><a name="index-mdisable_002dindexing"></a>
-<p>Prevent the compiler from using indexing address modes.  This avoids some
+<dd><p>Prevent the compiler from using indexing address modes.  This avoids some
 rather obscure problems when compiling MIG generated code under MACH.
 </p>
-</dd>
-<dt><code>-mno-space-regs</code></dt>
-<dd><a name="index-mno_002dspace_002dregs"></a>
-<a name="index-mspace_002dregs"></a>
-<p>Generate code that assumes the target has no space registers.  This allows
-GCC to generate faster indirect calls and use unscaled index address modes.
-</p>
-<p>Such code is suitable for level 0 PA systems and kernels.
-</p>
+<a name="index-mfast_002dindirect_002dcalls"></a>
 </dd>
 <dt><code>-mfast-indirect-calls</code></dt>
-<dd><a name="index-mfast_002dindirect_002dcalls"></a>
-<p>Generate code that assumes calls never cross space boundaries.  This
+<dd><p>Generate code that assumes calls never cross space boundaries.  This
 allows GCC to emit code that performs faster indirect calls.
 </p>
 <p>This option does not work in the presence of shared libraries or nested
 functions.
 </p>
+<a name="index-mfixed_002drange"></a>
 </dd>
 <dt><code>-mfixed-range=<var>register-range</var></code></dt>
-<dd><a name="index-mfixed_002drange"></a>
-<p>Generate code treating the given register range as fixed registers.
+<dd><p>Generate code treating the given register range as fixed registers.
 A fixed register is one that the register allocator cannot use.  This is
 useful when compiling kernel code.  A register range is specified as
 two registers separated by a dash.  Multiple register ranges can be
 specified separated by a comma.
 </p>
-</dd>
-<dt><code>-mlong-load-store</code></dt>
-<dd><a name="index-mlong_002dload_002dstore"></a>
-<p>Generate 3-instruction load and store sequences as sometimes required by
-the HP-UX 10 linker.  This is equivalent to the &lsquo;<samp>+k</samp>&rsquo; option to
-the HP compilers.
-</p>
-</dd>
-<dt><code>-mportable-runtime</code></dt>
-<dd><a name="index-mportable_002druntime"></a>
-<p>Use the portable calling conventions proposed by HP for ELF systems.
-</p>
+<a name="index-mgas"></a>
 </dd>
 <dt><code>-mgas</code></dt>
-<dd><a name="index-mgas"></a>
-<p>Enable the use of assembler directives only GAS understands.
+<dd><p>Enable the use of assembler directives only GAS understands.
 </p>
-</dd>
-<dt><code>-mschedule=<var>cpu-type</var></code></dt>
-<dd><a name="index-mschedule"></a>
-<p>Schedule code according to the constraints for the machine type
-<var>cpu-type</var>.  The choices for <var>cpu-type</var> are &lsquo;<samp>700</samp>&rsquo;
-&lsquo;<samp>7100</samp>&rsquo;, &lsquo;<samp>7100LC</samp>&rsquo;, &lsquo;<samp>7200</samp>&rsquo;, &lsquo;<samp>7300</samp>&rsquo; and &lsquo;<samp>8000</samp>&rsquo;.  Refer
-to <samp>/usr/lib/sched.models</samp> on an HP-UX system to determine the
-proper scheduling option for your machine.  The default scheduling is
-&lsquo;<samp>8000</samp>&rsquo;.
-</p>
-</dd>
-<dt><code>-mlinker-opt</code></dt>
-<dd><a name="index-mlinker_002dopt"></a>
-<p>Enable the optimization pass in the HP-UX linker.  Note this makes symbolic
-debugging impossible.  It also triggers a bug in the HP-UX 8 and HP-UX 9
-linkers in which they give bogus error messages when linking some programs.
-</p>
-</dd>
-<dt><code>-msoft-float</code></dt>
-<dd><a name="index-msoft_002dfloat-4"></a>
-<p>Generate output containing library calls for floating point.
-<strong>Warning:</strong> the requisite libraries are not available for all HPPA
-targets.  Normally the facilities of the machine&rsquo;s usual C compiler are
-used, but this cannot be done directly in cross-compilation.  You must make
-your own arrangements to provide suitable library functions for
-cross-compilation.
-</p>
-<p><samp>-msoft-float</samp> changes the calling convention in the output file;
-therefore, it is only useful if you compile <em>all</em> of a program with
-this option.  In particular, you need to compile <samp>libgcc.a</samp>, the
-library that comes with GCC, with <samp>-msoft-float</samp> in order for
-this to work.
-</p>
-</dd>
-<dt><code>-msio</code></dt>
-<dd><a name="index-msio"></a>
-<p>Generate the predefine, <code>_SIO</code>, for server IO.  The default is
-<samp>-mwsio</samp>.  This generates the predefines, <code>__hp9000s700</code>,
-<code>__hp9000s700__</code> and <code>_WSIO</code>, for workstation IO.  These
-options are available under HP-UX and HI-UX.
-</p>
+<a name="index-mgnu_002dld"></a>
 </dd>
 <dt><code>-mgnu-ld</code></dt>
-<dd><a name="index-mgnu_002dld"></a>
-<p>Use options specific to GNU <code>ld</code>.
+<dd><p>Use options specific to GNU <code>ld</code>.
 This passes <samp>-shared</samp> to <code>ld</code> when
 building a shared library.  It is the default when GCC is configured,
 explicitly or implicitly, with the GNU linker.  This option does not
@@ -227,10 +194,10 @@ finally by the user&rsquo;s <code>PATH</code>.  The linker used by GCC can be pr
 using &lsquo;<samp>which `gcc -print-prog-name=ld`</samp>&rsquo;.  This option is only available
 on the 64-bit HP-UX GCC, i.e. configured with &lsquo;<samp>hppa*64*-*-hpux*</samp>&rsquo;.
 </p>
+<a name="index-mhp_002dld"></a>
 </dd>
 <dt><code>-mhp-ld</code></dt>
-<dd><a name="index-mhp_002dld"></a>
-<p>Use options specific to HP <code>ld</code>.
+<dd><p>Use options specific to HP <code>ld</code>.
 This passes <samp>-b</samp> to <code>ld</code> when building
 a shared library and passes <samp>+Accept TypeMismatch</samp> to <code>ld</code> on all
 links.  It is the default when GCC is configured, explicitly or
@@ -243,11 +210,18 @@ configure option, GCC&rsquo;s program search path, and finally by the user&rsquo
 `gcc -print-prog-name=ld`</samp>&rsquo;.  This option is only available on the 64-bit
 HP-UX GCC, i.e. configured with &lsquo;<samp>hppa*64*-*-hpux*</samp>&rsquo;.
 </p>
+<a name="index-mlinker_002dopt"></a>
+</dd>
+<dt><code>-mlinker-opt</code></dt>
+<dd><p>Enable the optimization pass in the HP-UX linker.  Note this makes symbolic
+debugging impossible.  It also triggers a bug in the HP-UX 8 and HP-UX 9
+linkers in which they give bogus error messages when linking some programs.
+</p>
+<a name="index-mno_002dlong_002dcalls-2"></a>
+<a name="index-mlong_002dcalls-5"></a>
 </dd>
 <dt><code>-mlong-calls</code></dt>
-<dd><a name="index-mno_002dlong_002dcalls-2"></a>
-<a name="index-mlong_002dcalls-5"></a>
-<p>Generate code that uses long call sequences.  This ensures that a call
+<dd><p>Generate code that uses long call sequences.  This ensures that a call
 is always able to reach linker generated stubs.  The default is to generate
 long calls only when the distance from the call site to the beginning
 of the function or translation unit, as the case may be, exceeds a
@@ -272,10 +246,82 @@ symbol-difference or pc-relative calls should be relatively small.
 However, an indirect call is used on 32-bit ELF systems in pic code
 and it is quite long.
 </p>
+<a name="index-mlong_002dload_002dstore"></a>
+</dd>
+<dt><code>-mlong-load-store</code></dt>
+<dd><p>Generate 3-instruction load and store sequences as sometimes required by
+the HP-UX 10 linker.  This is equivalent to the &lsquo;<samp>+k</samp>&rsquo; option to
+the HP compilers.
+</p>
+<a name="index-mjump_002din_002ddelay"></a>
+</dd>
+<dt><code>-mjump-in-delay</code></dt>
+<dd><p>This option is ignored and provided for compatibility purposes only.
+</p>
+<a name="index-mno_002dspace_002dregs"></a>
+<a name="index-mspace_002dregs"></a>
+</dd>
+<dt><code>-mno-space-regs</code></dt>
+<dd><p>Generate code that assumes the target has no space registers.  This allows
+GCC to generate faster indirect calls and use unscaled index address modes.
+</p>
+<p>Such code is suitable for level 0 PA systems and kernels.
+</p>
+<a name="index-mordered"></a>
+</dd>
+<dt><code>-mordered</code></dt>
+<dd><p>Assume memory references are ordered and barriers are not needed.
+</p>
+<a name="index-mportable_002druntime"></a>
+</dd>
+<dt><code>-mportable-runtime</code></dt>
+<dd><p>Use the portable calling conventions proposed by HP for ELF systems.
+</p>
+<a name="index-mschedule"></a>
+</dd>
+<dt><code>-mschedule=<var>cpu-type</var></code></dt>
+<dd><p>Schedule code according to the constraints for the machine type
+<var>cpu-type</var>.  The choices for <var>cpu-type</var> are &lsquo;<samp>700</samp>&rsquo;
+&lsquo;<samp>7100</samp>&rsquo;, &lsquo;<samp>7100LC</samp>&rsquo;, &lsquo;<samp>7200</samp>&rsquo;, &lsquo;<samp>7300</samp>&rsquo; and &lsquo;<samp>8000</samp>&rsquo;.  Refer
+to <samp>/usr/lib/sched.models</samp> on an HP-UX system to determine the
+proper scheduling option for your machine.  The default scheduling is
+&lsquo;<samp>8000</samp>&rsquo;.
+</p>
+<a name="index-msio"></a>
+</dd>
+<dt><code>-msio</code></dt>
+<dd><p>Generate the predefine, <code>_SIO</code>, for server IO.  The default is
+<samp>-mwsio</samp>.  This generates the predefines, <code>__hp9000s700</code>,
+<code>__hp9000s700__</code> and <code>_WSIO</code>, for workstation IO.  These
+options are available under HP-UX and HI-UX.
+</p>
+<a name="index-msoft_002dfloat-4"></a>
+</dd>
+<dt><code>-msoft-float</code></dt>
+<dd><p>Generate output containing library calls for floating point.
+<strong>Warning:</strong> the requisite libraries are not available for all HPPA
+targets.  Normally the facilities of the machine&rsquo;s usual C compiler are
+used, but this cannot be done directly in cross-compilation.  You must make
+your own arrangements to provide suitable library functions for
+cross-compilation.
+</p>
+<p><samp>-msoft-float</samp> changes the calling convention in the output file;
+therefore, it is only useful if you compile <em>all</em> of a program with
+this option.  In particular, you need to compile <samp>libgcc.a</samp>, the
+library that comes with GCC, with <samp>-msoft-float</samp> in order for
+this to work.
+</p>
+<a name="index-msoft_002dmult"></a>
+</dd>
+<dt><code>-msoft-mult</code></dt>
+<dd><p>Use software integer multiplication.
+</p>
+<p>This disables the use of the <code>xmpyu</code> instruction.
+</p>
+<a name="index-march-6"></a>
 </dd>
 <dt><code>-munix=<var>unix-std</var></code></dt>
-<dd><a name="index-march-6"></a>
-<p>Generate compiler predefines and select a startfile for the specified
+<dd><p>Generate compiler predefines and select a startfile for the specified
 UNIX standard.  The choices for <var>unix-std</var> are &lsquo;<samp>93</samp>&rsquo;, &lsquo;<samp>95</samp>&rsquo;
 and &lsquo;<samp>98</samp>&rsquo;.  &lsquo;<samp>93</samp>&rsquo; is supported on all HP-UX versions.  &lsquo;<samp>95</samp>&rsquo;
 is available on HP-UX 10.10 and later.  &lsquo;<samp>98</samp>&rsquo; is available on HP-UX
@@ -299,16 +345,16 @@ option.
 standard must test, set and restore the variable <code>__xpg4_extended_mask</code>
 as appropriate.  Most GNU software doesn&rsquo;t provide this capability.
 </p>
+<a name="index-nolibdld"></a>
 </dd>
 <dt><code>-nolibdld</code></dt>
-<dd><a name="index-nolibdld"></a>
-<p>Suppress the generation of link options to search libdld.sl when the
+<dd><p>Suppress the generation of link options to search libdld.sl when the
 <samp>-static</samp> option is specified on HP-UX 10 and later.
 </p>
+<a name="index-static-2"></a>
 </dd>
 <dt><code>-static</code></dt>
-<dd><a name="index-static-2"></a>
-<p>The HP-UX implementation of setlocale in libc has a dependency on
+<dd><p>The HP-UX implementation of setlocale in libc has a dependency on
 libdld.sl.  There isn&rsquo;t an archive version of libdld.sl.  Thus,
 when the <samp>-static</samp> option is specified, special link options
 are needed to resolve this dependency.
@@ -320,10 +366,10 @@ the linkers generate dynamic binaries by default in any case.  The
 <samp>-nolibdld</samp> option can be used to prevent the GCC driver from
 adding these link options.
 </p>
+<a name="index-threads"></a>
 </dd>
 <dt><code>-threads</code></dt>
-<dd><a name="index-threads"></a>
-<p>Add support for multithreading with the <em>dce thread</em> library
+<dd><p>Add support for multithreading with the <em>dce thread</em> library
 under HP-UX.  This option sets flags for both the preprocessor and
 linker.
 </p></dd>
@@ -332,7 +378,7 @@ linker.
 <hr>
 <div class="header">
 <p>
-Next: <a href="IA_002d64-Options.html#IA_002d64-Options" accesskey="n" rel="next">IA-64 Options</a>, Previous: <a href="H8_002f300-Options.html#H8_002f300-Options" accesskey="p" rel="prev">H8/300 Options</a>, Up: <a href="Submodel-Options.html#Submodel-Options" accesskey="u" rel="up">Submodel Options</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Option-Index.html#Option-Index" title="Index" rel="index">Index</a>]</p>
+Next: <a href="IA_002d64-Options.html#IA_002d64-Options" accesskey="n" rel="next">IA-64 Options</a>, Previous: <a href="H8_002f300-Options.html#H8_002f300-Options" accesskey="p" rel="prev">H8/300 Options</a>, Up: <a href="Submodel-Options.html#Submodel-Options" accesskey="u" rel="up">Submodel Options</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Indices.html#Indices" title="Index" rel="index">Index</a>]</p>
 </div>
 
 

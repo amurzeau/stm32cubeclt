@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- Copyright (C) 1988-2022 Free Software Foundation, Inc.
+<!-- Copyright (C) 1988-2023 Free Software Foundation, Inc.
 
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
@@ -76,25 +76,95 @@ Next: <a href="Set-Watchpoints.html#Set-Watchpoints" accesskey="n" rel="next">Se
 <a name="index-latest-breakpoint"></a>
 <p>Breakpoints are set with the <code>break</code> command (abbreviated
 <code>b</code>).  The debugger convenience variable &lsquo;<samp>$bpnum</samp>&rsquo; records the
-number of the breakpoint you&rsquo;ve set most recently; see <a href="Convenience-Vars.html#Convenience-Vars">Convenience Variables</a>, for a discussion of what you can do with
-convenience variables.
+number of the breakpoint you&rsquo;ve set most recently:
+</p><div class="smallexample">
+<pre class="smallexample">(gdb) b main
+Breakpoint 1 at 0x11c6: file zeoes.c, line 24.
+(gdb) p $bpnum
+$1 = 1
+</pre></div>
+
+<p>A breakpoint may be mapped to multiple code locations for example with
+inlined functions, Ada generics, C<tt>++</tt> templates or overloaded function names.
+<small>GDB</small> then indicates the number of code locations in the breakpoint
+command output:
+</p><div class="smallexample">
+<pre class="smallexample">(gdb) b some_func
+Breakpoint 2 at 0x1179: some_func. (3 locations)
+(gdb) p $bpnum
+$2 = 2
+(gdb)
+</pre></div>
+
+<a name="index-_0024_005fhit_005fbpnum_002c-convenience-variable"></a>
+<a name="index-_0024_005fhit_005flocno_002c-convenience-variable"></a>
+<p>When your program stops on a breakpoint, the convenience variables
+&lsquo;<samp>$_hit_bpnum</samp>&rsquo; and &lsquo;<samp>$_hit_locno</samp>&rsquo; are respectively set to the number of
+the encountered breakpoint and the number of the breakpoint&rsquo;s code location:
+</p><div class="smallexample">
+<pre class="smallexample">Thread 1 &quot;zeoes&quot; hit Breakpoint 2.1, some_func () at zeoes.c:8
+8	  printf(&quot;some func\n&quot;);
+(gdb) p $_hit_bpnum
+$5 = 2
+(gdb) p $_hit_locno
+$6 = 1
+(gdb)
+</pre></div>
+
+<p>Note that &lsquo;<samp>$_hit_bpnum</samp>&rsquo; and &lsquo;<samp>$bpnum</samp>&rsquo; are not equivalent:
+&lsquo;<samp>$_hit_bpnum</samp>&rsquo; is set to the breakpoint number <b>last hit</b>, while
+&lsquo;<samp>$bpnum</samp>&rsquo; is set to the breakpoint number <b>last set</b>.
 </p>
+
+<p>If the encountered breakpoint has only one code location, &lsquo;<samp>$_hit_locno</samp>&rsquo;
+is set to 1:
+</p><div class="smallexample">
+<pre class="smallexample">Breakpoint 1, main (argc=1, argv=0x7fffffffe018) at zeoes.c:24
+24	  if (argc &gt; 1)
+(gdb) p $_hit_bpnum
+$3 = 1
+(gdb) p $_hit_locno
+$4 = 1
+(gdb)
+</pre></div>
+
+<p>The &lsquo;<samp>$_hit_bpnum</samp>&rsquo; and &lsquo;<samp>$_hit_locno</samp>&rsquo; variables can typically be used
+in a breakpoint command list.
+(see <a href="Break-Commands.html#Break-Commands">Breakpoint Command Lists</a>).  For example, as
+part of the breakpoint command list, you can disable completely the
+encountered breakpoint using <kbd>disable $_hit_bpnum</kbd> or disable the
+specific encountered breakpoint location using
+<kbd>disable $_hit_bpnum.$_hit_locno</kbd>.
+If a breakpoint has only one location, &lsquo;<samp>$_hit_locno</samp>&rsquo; is set to 1
+and the commands <kbd>disable $_hit_bpnum</kbd> and
+<kbd>disable $_hit_bpnum.$_hit_locno</kbd> both disable the breakpoint.
+</p>
+<p>You can also define aliases to easily disable the last hit location or
+last hit breakpoint:
+</p><div class="smallexample">
+<pre class="smallexample">(gdb) alias lld = disable $_hit_bpnum.$_hit_locno
+(gdb) alias lbd = disable $_hit_bpnum
+</pre></div>
+
 <dl compact="compact">
-<dt><code>break <var>location</var></code></dt>
-<dd><p>Set a breakpoint at the given <var>location</var>, which can specify a
-function name, a line number, or an address of an instruction.
-(See <a href="Specify-Location.html#Specify-Location">Specify Location</a>, for a list of all the possible ways to
-specify a <var>location</var>.)  The breakpoint will stop your program just
-before it executes any of the code in the specified <var>location</var>.
+<dt><code>break <var>locspec</var></code></dt>
+<dd><p>Set a breakpoint at all the code locations in your program that result
+from resolving the given <var>locspec</var>.  <var>locspec</var> can specify a
+function name, a line number, an address of an instruction, and more.
+See <a href="Location-Specifications.html#Location-Specifications">Location Specifications</a>, for the various forms of
+<var>locspec</var>.  The breakpoint will stop your program just before it
+executes the instruction at the address of any of the breakpoint&rsquo;s
+code locations.
 </p>
-<p>When using source languages that permit overloading of symbols, such as
-C<tt>++</tt>, a function name may refer to more than one possible place to break.
-See <a href="Ambiguous-Expressions.html#Ambiguous-Expressions">Ambiguous Expressions</a>, for a discussion of
-that situation.
+<p>When using source languages that permit overloading of symbols, such
+as C<tt>++</tt>, a function name may refer to more than one symbol, and
+thus more than one place to break.  See <a href="Ambiguous-Expressions.html#Ambiguous-Expressions">Ambiguous Expressions</a>, for a discussion of that
+situation.
 </p>
 <p>It is also possible to insert a breakpoint that will stop the program
-only if a specific thread (see <a href="Thread_002dSpecific-Breakpoints.html#Thread_002dSpecific-Breakpoints">Thread-Specific Breakpoints</a>)
-or a specific task (see <a href="Ada-Tasks.html#Ada-Tasks">Ada Tasks</a>) hits that breakpoint.
+only if a specific thread (see <a href="Thread_002dSpecific-Breakpoints.html#Thread_002dSpecific-Breakpoints">Thread-Specific Breakpoints</a>),
+specific inferior (see <a href="Inferior_002dSpecific-Breakpoints.html#Inferior_002dSpecific-Breakpoints">Inferior-Specific Breakpoints</a>), or a
+specific task (see <a href="Ada-Tasks.html#Ada-Tasks">Ada Tasks</a>) hits that breakpoint.
 </p>
 </dd>
 <dt><code>break</code></dt>
@@ -360,31 +430,16 @@ the breakpoints are conditional, this is even useful
 </p>
 <a name="index-multiple-locations_002c-breakpoints"></a>
 <a name="index-breakpoints_002c-multiple-locations"></a>
-<p>It is possible that a breakpoint corresponds to several locations
-in your program.  Examples of this situation are:
+<p>It is possible that a single logical breakpoint is set at several code
+locations in your program.  See <a href="Location-Specifications.html#Location-Specifications">Location Specifications</a>, for
+examples.
 </p>
-<ul>
-<li> Multiple functions in the program may have the same name.
-
-</li><li> For a C<tt>++</tt> constructor, the <small>GCC</small> compiler generates several
-instances of the function body, used in different cases.
-
-</li><li> For a C<tt>++</tt> template function, a given line in the function can
-correspond to any number of instantiations.
-
-</li><li> For an inlined function, a given source line can correspond to
-several places where that function is inlined.
-</li></ul>
-
-<p>In all those cases, <small>GDB</small> will insert a breakpoint at all
-the relevant locations.
-</p>
-<p>A breakpoint with multiple locations is displayed in the breakpoint
-table using several rows&mdash;one header row, followed by one row for
-each breakpoint location.  The header row has &lsquo;<samp>&lt;MULTIPLE&gt;</samp>&rsquo; in the
-address column.  The rows for individual locations contain the actual
-addresses for locations, and show the functions to which those
-locations belong.  The number column for a location is of the form
+<p>A breakpoint with multiple code locations is displayed in the
+breakpoint table using several rows&mdash;one header row, followed by one
+row for each code location.  The header row has &lsquo;<samp>&lt;MULTIPLE&gt;</samp>&rsquo; in
+the address column.  Each code location row contains the actual
+address, source file, source line and function of its code location.
+The number column for a code location is of the form
 <var>breakpoint-number</var>.<var>location-number</var>.
 </p>
 <p>For example:
@@ -410,6 +465,19 @@ in which case <small>GDB</small> acts on all the locations in the range (inclusi
 Disabling or enabling the parent breakpoint (see <a href="Disabling.html#Disabling">Disabling</a>) affects
 all of the locations that belong to that breakpoint.
 </p>
+<p>Locations that are enabled while their parent breakpoint is disabled
+won&rsquo;t trigger a break, and are denoted by <code>y-</code> in the <code>Enb</code>
+column.  For example:
+</p>
+<div class="smallexample">
+<pre class="smallexample">(gdb) info breakpoints
+Num     Type           Disp Enb Address            What
+1       breakpoint     keep n   &lt;MULTIPLE&gt;
+1.1                         y-  0x00000000000011b6 in ...
+1.2                         y-  0x00000000000011c2 in ...
+1.3                         n   0x00000000000011ce in ...
+</pre></div>
+
 <a name="index-pending-breakpoints"></a>
 <p>It&rsquo;s quite common to have a breakpoint inside a shared library.
 Shared libraries can be loaded and unloaded explicitly,
@@ -440,26 +508,28 @@ differ from regular breakpoints.  You can set conditions or commands,
 enable and disable them and perform other breakpoint operations.
 </p>
 <p><small>GDB</small> provides some additional commands for controlling what
-happens when the &lsquo;<samp>break</samp>&rsquo; command cannot resolve breakpoint
-address specification to an address:
+happens when the &lsquo;<samp>break</samp>&rsquo; command cannot resolve the location spec
+to any code location in your program (see <a href="Location-Specifications.html#Location-Specifications">Location Specifications</a>):
 </p>
 <a name="index-set-breakpoint-pending"></a>
 <a name="index-show-breakpoint-pending"></a>
 <dl compact="compact">
 <dt><code>set breakpoint pending auto</code></dt>
-<dd><p>This is the default behavior.  When <small>GDB</small> cannot find the breakpoint
-location, it queries you whether a pending breakpoint should be created.
+<dd><p>This is the default behavior.  When <small>GDB</small> cannot resolve the
+location spec, it queries you whether a pending breakpoint should be
+created.
 </p>
 </dd>
 <dt><code>set breakpoint pending on</code></dt>
-<dd><p>This indicates that an unrecognized breakpoint location should automatically
-result in a pending breakpoint being created.
+<dd><p>This indicates that when <small>GDB</small> cannot resolve the location
+spec, it should create a pending breakpoint without confirmation.
 </p>
 </dd>
 <dt><code>set breakpoint pending off</code></dt>
-<dd><p>This indicates that pending breakpoints are not to be created.  Any
-unrecognized breakpoint location results in an error.  This setting does
-not affect any pending breakpoints previously created.
+<dd><p>This indicates that pending breakpoints are not to be created.  If
+<small>GDB</small> cannot resolve the location spec, it aborts the
+breakpoint creation with an error.  This setting does not affect any
+pending breakpoints previously created.
 </p>
 </dd>
 <dt><code>show breakpoint pending</code></dt>
@@ -468,7 +538,7 @@ not affect any pending breakpoints previously created.
 </dl>
 
 <p>The settings above only affect the <code>break</code> command and its
-variants.  Once breakpoint is set, it will be automatically updated
+variants.  Once a breakpoint is set, it will be automatically updated
 as shared libraries are loaded and unloaded.
 </p>
 <a name="index-automatic-hardware-breakpoints"></a>

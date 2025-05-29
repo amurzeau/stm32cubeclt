@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- Copyright (C) 1988-2022 Free Software Foundation, Inc.
+<!-- Copyright (C) 1988-2023 Free Software Foundation, Inc.
 
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
@@ -26,7 +26,7 @@ developing GNU and promoting software freedom." -->
 <link href="Concept-Index.html#Concept-Index" rel="index" title="Concept Index">
 <link href="index.html#SEC_Contents" rel="contents" title="Table of Contents">
 <link href="Supported-Languages.html#Supported-Languages" rel="up" title="Supported Languages">
-<link href="Fortran-Operators.html#Fortran-Operators" rel="next" title="Fortran Operators">
+<link href="Fortran-Types.html#Fortran-Types" rel="next" title="Fortran Types">
 <link href="OpenCL-C-Operators.html#OpenCL-C-Operators" rel="prev" title="OpenCL C Operators">
 <style type="text/css">
 <!--
@@ -70,8 +70,8 @@ Next: <a href="Pascal.html#Pascal" accesskey="n" rel="next">Pascal</a>, Previous
 <h4 class="subsection">15.4.6 Fortran</h4>
 <a name="index-Fortran_002dspecific-support-in-GDB"></a>
 
-<p><small>GDB</small> can be used to debug programs written in Fortran, but it
-currently supports only the features of Fortran 77 language.
+<p><small>GDB</small> can be used to debug programs written in Fortran.  Note, that not
+all Fortran language features are available yet.
 </p>
 <a name="index-trailing-underscore_002c-in-Fortran-symbols"></a>
 <p>Some Fortran compilers (<small>GNU</small> Fortran 77 and Fortran 95 compilers
@@ -80,12 +80,20 @@ functions.  When you debug programs compiled by those compilers, you
 will need to refer to variables and functions with a trailing
 underscore.
 </p>
+<a name="index-Fortran-Defaults"></a>
+<p>Fortran symbols are usually case-insensitive, so <small>GDB</small> by
+default uses case-insensitive matching for Fortran symbols.  You can
+change that with the &lsquo;<samp>set case-insensitive</samp>&rsquo; command, see
+<a href="Symbols.html#Symbols">Symbols</a>, for the details.
+</p>
 <table class="menu" border="0" cellspacing="0">
-<tr><td align="left" valign="top">&bull; <a href="Fortran-Operators.html#Fortran-Operators" accesskey="1">Fortran Operators</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Fortran operators and expressions
+<tr><td align="left" valign="top">&bull; <a href="Fortran-Types.html#Fortran-Types" accesskey="1">Fortran Types</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Fortran builtin types
 </td></tr>
-<tr><td align="left" valign="top">&bull; <a href="Fortran-Defaults.html#Fortran-Defaults" accesskey="2">Fortran Defaults</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Default settings for Fortran
+<tr><td align="left" valign="top">&bull; <a href="Fortran-Operators.html#Fortran-Operators" accesskey="2">Fortran Operators</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Fortran operators and expressions
 </td></tr>
-<tr><td align="left" valign="top">&bull; <a href="Special-Fortran-Commands.html#Special-Fortran-Commands" accesskey="3">Special Fortran Commands</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Special <small>GDB</small> commands for Fortran
+<tr><td align="left" valign="top">&bull; <a href="Fortran-Intrinsics.html#Fortran-Intrinsics" accesskey="3">Fortran Intrinsics</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Fortran intrinsic functions
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Special-Fortran-Commands.html#Special-Fortran-Commands" accesskey="4">Special Fortran Commands</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Special <small>GDB</small> commands for Fortran
 </td></tr>
 </table>
 

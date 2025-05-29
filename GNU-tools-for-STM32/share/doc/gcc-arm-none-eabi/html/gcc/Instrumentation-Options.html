@@ -1,6 +1,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- Copyright (C) 1988-2021 Free Software Foundation, Inc.
+<!-- This file documents the use of the GNU compilers.
+
+Copyright (C) 1988-2023 Free Software Foundation, Inc.
 
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
@@ -30,7 +32,7 @@ You have freedom to copy and modify this GNU Manual, like GNU
 <meta name="distribution" content="global">
 <meta name="Generator" content="makeinfo">
 <link href="index.html#Top" rel="start" title="Top">
-<link href="Option-Index.html#Option-Index" rel="index" title="Option Index">
+<link href="Indices.html#Indices" rel="index" title="Indices">
 <link href="index.html#SEC_Contents" rel="contents" title="Table of Contents">
 <link href="Invoking-GCC.html#Invoking-GCC" rel="up" title="Invoking GCC">
 <link href="Preprocessor-Options.html#Preprocessor-Options" rel="next" title="Preprocessor Options">
@@ -66,11 +68,11 @@ ul.no-bullet {list-style: none}
 
 </head>
 
-<body lang="en">
+<body lang="en_US">
 <a name="Instrumentation-Options"></a>
 <div class="header">
 <p>
-Next: <a href="Preprocessor-Options.html#Preprocessor-Options" accesskey="n" rel="next">Preprocessor Options</a>, Previous: <a href="Optimize-Options.html#Optimize-Options" accesskey="p" rel="prev">Optimize Options</a>, Up: <a href="Invoking-GCC.html#Invoking-GCC" accesskey="u" rel="up">Invoking GCC</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Option-Index.html#Option-Index" title="Index" rel="index">Index</a>]</p>
+Next: <a href="Preprocessor-Options.html#Preprocessor-Options" accesskey="n" rel="next">Preprocessor Options</a>, Previous: <a href="Optimize-Options.html#Optimize-Options" accesskey="p" rel="prev">Optimize Options</a>, Up: <a href="Invoking-GCC.html#Invoking-GCC" accesskey="u" rel="up">Invoking GCC</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Indices.html#Indices" title="Index" rel="index">Index</a>]</p>
 </div>
 <hr>
 <a name="Program-Instrumentation-Options"></a>
@@ -99,12 +101,12 @@ program analysis purposes.
 <dl compact="compact">
 <dd><a name="index-prof"></a>
 <a name="index-gprof"></a>
+<a name="index-p"></a>
+<a name="index-pg"></a>
 </dd>
 <dt><code>-p</code></dt>
 <dt><code>-pg</code></dt>
-<dd><a name="index-p"></a>
-<a name="index-pg"></a>
-<p>Generate extra code to write profile information suitable for the
+<dd><p>Generate extra code to write profile information suitable for the
 analysis program <code>prof</code> (for <samp>-p</samp>) or <code>gprof</code>
 (for <samp>-pg</samp>).  You must use this option when compiling
 the source files you want data about, and you must also use it when
@@ -114,10 +116,10 @@ linking.
 suppress profiling of individual functions when compiling with these options.
 See <a href="Common-Function-Attributes.html#Common-Function-Attributes">Common Function Attributes</a>.
 </p>
+<a name="index-fprofile_002darcs"></a>
 </dd>
 <dt><code>-fprofile-arcs</code></dt>
-<dd><a name="index-fprofile_002darcs"></a>
-<p>Add code so that program flow <em>arcs</em> are instrumented.  During
+<dd><p>Add code so that program flow <em>arcs</em> are instrumented.  During
 execution the program records how many times each branch and call is
 executed and how many times it is taken or returns.  On targets that support
 constructors with priority support, profiling properly handles constructors,
@@ -134,13 +136,19 @@ explicitly specified and it is not the final executable, otherwise it is
 the basename of the source file.  In both cases any suffix is removed
 (e.g. <samp>foo.gcda</samp> for input file <samp>dir/foo.c</samp>, or
 <samp>dir/foo.gcda</samp> for output file specified as <samp>-o dir/foo.o</samp>).
-See <a href="Cross_002dprofiling.html#Cross_002dprofiling">Cross-profiling</a>.
+</p>
+<p>Note that if a command line directly links source files, the corresponding
+<var>.gcda</var> files will be prefixed with the unsuffixed name of the output file.
+E.g. <code>gcc a.c b.c -o binary</code> would generate <samp>binary-a.gcda</samp> and
+<samp>binary-b.gcda</samp> files.
+</p>
+<p>See <a href="Cross_002dprofiling.html#Cross_002dprofiling">Cross-profiling</a>.
 </p>
 <a name="index-gcov"></a>
+<a name="index-coverage"></a>
 </dd>
 <dt><code>--coverage</code></dt>
-<dd><a name="index-coverage"></a>
-
+<dd>
 <p>This option is used to compile and link code instrumented for coverage
 analysis.  The option is a synonym for <samp>-fprofile-arcs</samp>
 <samp>-ftest-coverage</samp> (when compiling) and <samp>-lgcov</samp> (when
@@ -167,6 +175,10 @@ supports locking, the data files will be correctly updated.  Unless
 a strict ISO C dialect option is in effect, <code>fork</code> calls are
 detected and correctly handled without double counting.
 
+<p>Moreover, an object file can be recompiled multiple times
+and the corresponding <samp>.gcda</samp> file merges as long as
+the source file and the compiler options are unchanged.
+</p>
 </li><li> For profile-directed optimizations, compile the source files again with
 the same optimization and code generation options plus
 <samp>-fbranch-probabilities</samp> (see <a href="Optimize-Options.html#Optimize-Options">Options that
@@ -186,10 +198,10 @@ executed.  When an arc is the only exit or only entrance to a block, the
 instrumentation code can be added to the block; otherwise, a new basic
 block must be created to hold the instrumentation code.
 </p>
+<a name="index-ftest_002dcoverage"></a>
 </dd>
 <dt><code>-ftest-coverage</code></dt>
-<dd><a name="index-ftest_002dcoverage"></a>
-<p>Produce a notes file that the <code>gcov</code> code-coverage utility
+<dd><p>Produce a notes file that the <code>gcov</code> code-coverage utility
 (see <a href="Gcov.html#Gcov"><code>gcov</code>&mdash;a Test Coverage Program</a>) can use to
 show program coverage.  Each source file&rsquo;s note file is called
 <samp><var>auxname</var>.gcno</samp>.  Refer to the <samp>-fprofile-arcs</samp> option
@@ -197,18 +209,18 @@ above for a description of <var>auxname</var> and instructions on how to
 generate test coverage data.  Coverage data matches the source files
 more closely if you do not optimize.
 </p>
+<a name="index-fprofile_002dabs_002dpath"></a>
 </dd>
 <dt><code>-fprofile-abs-path</code></dt>
-<dd><a name="index-fprofile_002dabs_002dpath"></a>
-<p>Automatically convert relative source file names to absolute path names
+<dd><p>Automatically convert relative source file names to absolute path names
 in the <samp>.gcno</samp> files.  This allows <code>gcov</code> to find the correct
 sources in projects where compilations occur with different working
 directories.
 </p>
+<a name="index-fprofile_002ddir"></a>
 </dd>
 <dt><code>-fprofile-dir=<var>path</var></code></dt>
-<dd><a name="index-fprofile_002ddir"></a>
-
+<dd>
 <p>Set the directory to search for the profile data files in to <var>path</var>.
 This option affects only the profile data generated by
 <samp>-fprofile-generate</samp>, <samp>-ftest-coverage</samp>, <samp>-fprofile-arcs</samp>
@@ -219,7 +231,8 @@ profile data file appears in the same directory as the object file.
 In order to prevent the file name clashing, if the object file name is
 not an absolute path, we mangle the absolute path of the
 <samp><var>sourcename</var>.gcda</samp> file and use it as the file name of a
-<samp>.gcda</samp> file.  See similar option <samp>-fprofile-note</samp>.
+<samp>.gcda</samp> file.  See details about the file naming in <samp>-fprofile-arcs</samp>.
+See similar option <samp>-fprofile-note</samp>.
 </p>
 <p>When an executable is run in a massive parallel environment, it is recommended
 to save profile to different folders.  That can be done with variables
@@ -236,11 +249,11 @@ in <var>path</var> that are exported during run-time:
 </dd>
 </dl>
 
+<a name="index-fprofile_002dgenerate"></a>
 </dd>
 <dt><code>-fprofile-generate</code></dt>
 <dt><code>-fprofile-generate=<var>path</var></code></dt>
-<dd><a name="index-fprofile_002dgenerate"></a>
-
+<dd>
 <p>Enable options usually used for instrumenting application to produce
 profile useful for later recompilation with profile feedback based
 optimization.  You must use <samp>-fprofile-generate</samp> both when
@@ -256,25 +269,25 @@ the profile feedback data files. See <samp>-fprofile-dir</samp>.
 <p>To optimize the program based on the collected profile information, use
 <samp>-fprofile-use</samp>.  See <a href="Optimize-Options.html#Optimize-Options">Optimize Options</a>, for more information.
 </p>
+<a name="index-fprofile_002dinfo_002dsection"></a>
 </dd>
 <dt><code>-fprofile-info-section</code></dt>
 <dt><code>-fprofile-info-section=<var>name</var></code></dt>
-<dd><a name="index-fprofile_002dinfo_002dsection"></a>
-
+<dd>
 <p>Register the profile information in the specified section instead of using a
 constructor/destructor.  The section name is <var>name</var> if it is specified,
 otherwise the section name defaults to <code>.gcov_info</code>.  A pointer to the
-profile information generated by <samp>-fprofile-arcs</samp> or
-<samp>-ftest-coverage</samp> is placed in the specified section for each
-translation unit.  This option disables the profile information registration
-through a constructor and it disables the profile information processing
-through a destructor.  This option is not intended to be used in hosted
-environments such as GNU/Linux.  It targets systems with limited resources
-which do not support constructors and destructors.  The linker could collect
-the input sections in a continuous memory block and define start and end
-symbols.  The runtime support could dump the profiling information registered
-in this linker set during program termination to a serial line for example.  A
-GNU linker script example which defines a linker output section follows:
+profile information generated by <samp>-fprofile-arcs</samp> is placed in the
+specified section for each translation unit.  This option disables the profile
+information registration through a constructor and it disables the profile
+information processing through a destructor.  This option is not intended to be
+used in hosted environments such as GNU/Linux.  It targets freestanding
+environments (for example embedded systems) with limited resources which do not
+support constructors/destructors or the C library file I/O.
+</p>
+<p>The linker could collect the input sections in a continuous memory block and
+define start and end symbols.  A GNU linker script example which defines a
+linker output section follows:
 </p>
 <div class="smallexample">
 <pre class="smallexample">  .gcov_info      :
@@ -285,18 +298,81 @@ GNU linker script example which defines a linker output section follows:
   }
 </pre></div>
 
+<p>The program could dump the profiling information registered in this linker set
+for example like this:
+</p>
+<div class="smallexample">
+<pre class="smallexample">#include &lt;gcov.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+extern const struct gcov_info *const __gcov_info_start[];
+extern const struct gcov_info *const __gcov_info_end[];
+
+static void
+dump (const void *d, unsigned n, void *arg)
+{
+  const unsigned char *c = d;
+
+  for (unsigned i = 0; i &lt; n; ++i)
+    printf (&quot;%02x&quot;, c[i]);
+}
+
+static void
+filename (const char *f, void *arg)
+{
+  __gcov_filename_to_gcfn (f, dump, arg );
+}
+
+static void *
+allocate (unsigned length, void *arg)
+{
+  return malloc (length);
+}
+
+static void
+dump_gcov_info (void)
+{
+  const struct gcov_info *const *info = __gcov_info_start;
+  const struct gcov_info *const *end = __gcov_info_end;
+
+  /* Obfuscate variable to prevent compiler optimizations.  */
+  __asm__ (&quot;&quot; : &quot;+r&quot; (info));
+
+  while (info != end)
+  {
+    void *arg = NULL;
+    __gcov_info_to_gcda (*info, filename, dump, allocate, arg);
+    putchar ('\n');
+    ++info;
+  }
+}
+
+int
+main (void)
+{
+  dump_gcov_info ();
+  return 0;
+}
+</pre></div>
+
+<p>The <code>merge-stream</code> subcommand of <code>gcov-tool</code> may be used to
+deserialize the data stream generated by the <code>__gcov_filename_to_gcfn</code> and
+<code>__gcov_info_to_gcda</code> functions and merge the profile information into
+<samp>.gcda</samp> files on the host filesystem.
+</p>
+<a name="index-fprofile_002dnote"></a>
 </dd>
 <dt><code>-fprofile-note=<var>path</var></code></dt>
-<dd><a name="index-fprofile_002dnote"></a>
-
+<dd>
 <p>If <var>path</var> is specified, GCC saves <samp>.gcno</samp> file into <var>path</var>
 location.  If you combine the option with multiple source files,
 the <samp>.gcno</samp> file will be overwritten.
 </p>
+<a name="index-fprofile_002dprefix_002dpath"></a>
 </dd>
 <dt><code>-fprofile-prefix-path=<var>path</var></code></dt>
-<dd><a name="index-fprofile_002dprefix_002dpath"></a>
-
+<dd>
 <p>This option can be used in combination with
 <samp>profile-generate=</samp><var>profile_dir</var> and
 <samp>profile-use=</samp><var>profile_dir</var> to inform GCC where is the base
@@ -309,10 +385,19 @@ In such setups <samp>-fprofile-prefix-path=</samp><var>path</var> with <var>path
 pointing to the base directory of the build can be used to strip the irrelevant
 part of the path and keep all file names relative to the main build directory.
 </p>
+<a name="index-fprofile_002dprefix_002dmap"></a>
+</dd>
+<dt><code>-fprofile-prefix-map=<var>old</var>=<var>new</var></code></dt>
+<dd><p>When compiling files residing in directory <samp><var>old</var></samp>, record
+profiling information (with <samp>--coverage</samp>)
+describing them as if the files resided in
+directory <samp><var>new</var></samp> instead.
+See also <samp>-ffile-prefix-map</samp> and <samp>-fcanon-prefix-map</samp>.
+</p>
+<a name="index-fprofile_002dupdate"></a>
 </dd>
 <dt><code>-fprofile-update=<var>method</var></code></dt>
-<dd><a name="index-fprofile_002dupdate"></a>
-
+<dd>
 <p>Alter the update method for an application instrumented for profile
 feedback based optimization.  The <var>method</var> argument should be one of
 &lsquo;<samp>single</samp>&rsquo;, &lsquo;<samp>atomic</samp>&rsquo; or &lsquo;<samp>prefer-atomic</samp>&rsquo;.
@@ -327,30 +412,30 @@ when supported by a target, or to &lsquo;<samp>single</samp>&rsquo; otherwise.  
 automatically selects &lsquo;<samp>prefer-atomic</samp>&rsquo; when <samp>-pthread</samp>
 is present in the command line.
 </p>
+<a name="index-fprofile_002dfilter_002dfiles"></a>
 </dd>
 <dt><code>-fprofile-filter-files=<var>regex</var></code></dt>
-<dd><a name="index-fprofile_002dfilter_002dfiles"></a>
-
+<dd>
 <p>Instrument only functions from files whose name matches
 any of the regular expressions (separated by semi-colons).
 </p>
 <p>For example, <samp>-fprofile-filter-files=main\.c;module.*\.c</samp> will instrument
 only <samp>main.c</samp> and all C files starting with &rsquo;module&rsquo;.
 </p>
+<a name="index-fprofile_002dexclude_002dfiles"></a>
 </dd>
 <dt><code>-fprofile-exclude-files=<var>regex</var></code></dt>
-<dd><a name="index-fprofile_002dexclude_002dfiles"></a>
-
+<dd>
 <p>Instrument only functions from files whose name does not match
 any of the regular expressions (separated by semi-colons).
 </p>
 <p>For example, <samp>-fprofile-exclude-files=/usr/.*</samp> will prevent instrumentation
 of all files that are located in the <samp>/usr/</samp> folder.
 </p>
+<a name="index-fprofile_002dreproducible"></a>
 </dd>
 <dt><code>-fprofile-reproducible=<span class="roman">[</span>multithreaded<span class="roman">|</span>parallel-runs<span class="roman">|</span>serial<span class="roman">]</span></code></dt>
-<dd><a name="index-fprofile_002dreproducible"></a>
-<p>Control level of reproducibility of profile gathered by
+<dd><p>Control level of reproducibility of profile gathered by
 <code>-fprofile-generate</code>.  This makes it possible to rebuild program
 with same outcome which is useful, for example, for distribution
 packages.
@@ -377,10 +462,10 @@ instrumented program in parallel (such as with <code>make -j</code>). This
 reduces quality of gathered data, in particular of indirect call
 profiling.
 </p>
+<a name="index-fsanitize_003daddress"></a>
 </dd>
 <dt><code>-fsanitize=address</code></dt>
-<dd><a name="index-fsanitize_003daddress"></a>
-<p>Enable AddressSanitizer, a fast memory error detector.
+<dd><p>Enable AddressSanitizer, a fast memory error detector.
 Memory access instructions are instrumented to detect
 out-of-bounds and use-after-free bugs.
 The option enables <samp>-fsanitize-address-use-after-scope</samp>.
@@ -394,16 +479,26 @@ The option cannot be combined with <samp>-fsanitize=thread</samp> or
 <samp>-fsanitize=hwaddress</samp>.  Note that the only target
 <samp>-fsanitize=hwaddress</samp> is currently supported on is AArch64.
 </p>
+<p>To get more accurate stack traces, it is possible to use options such as
+<samp>-O0</samp>, <samp>-O1</samp>, or <samp>-Og</samp> (which, for instance, prevent
+most function inlining), <samp>-fno-optimize-sibling-calls</samp> (which prevents
+optimizing sibling and tail recursive calls; this option is implicit for
+<samp>-O0</samp>, <samp>-O1</samp>, or <samp>-Og</samp>), or <samp>-fno-ipa-icf</samp> (which
+disables Identical Code Folding for functions).  Since multiple runs of the
+program may yield backtraces with different addresses due to ASLR (Address
+Space Layout Randomization), it may be desirable to turn ASLR off.  On Linux,
+this can be achieved with &lsquo;<samp>setarch `uname -m` -R ./prog</samp>&rsquo;.
+</p>
+<a name="index-fsanitize_003dkernel_002daddress"></a>
 </dd>
 <dt><code>-fsanitize=kernel-address</code></dt>
-<dd><a name="index-fsanitize_003dkernel_002daddress"></a>
-<p>Enable AddressSanitizer for Linux kernel.
-See <a href="https://github.com/google/kasan">https://github.com/google/kasan</a> for more details.
+<dd><p>Enable AddressSanitizer for Linux kernel.
+See <a href="https://github.com/google/kernel-sanitizers">https://github.com/google/kernel-sanitizers</a> for more details.
 </p>
+<a name="index-fsanitize_003dhwaddress"></a>
 </dd>
 <dt><code>-fsanitize=hwaddress</code></dt>
-<dd><a name="index-fsanitize_003dhwaddress"></a>
-<p>Enable Hardware-assisted AddressSanitizer, which uses a hardware ability to
+<dd><p>Enable Hardware-assisted AddressSanitizer, which uses a hardware ability to
 ignore the top byte of a pointer to allow the detection of memory errors with
 a low memory overhead.
 Memory access instructions are instrumented to detect out-of-bounds and
@@ -417,10 +512,10 @@ the available options are shown at startup of the instrumented program.
 The option cannot be combined with <samp>-fsanitize=thread</samp> or
 <samp>-fsanitize=address</samp>, and is currently only available on AArch64.
 </p>
+<a name="index-fsanitize_003dkernel_002dhwaddress"></a>
 </dd>
 <dt><code>-fsanitize=kernel-hwaddress</code></dt>
-<dd><a name="index-fsanitize_003dkernel_002dhwaddress"></a>
-<p>Enable Hardware-assisted AddressSanitizer for compilation of the Linux kernel.
+<dd><p>Enable Hardware-assisted AddressSanitizer for compilation of the Linux kernel.
 Similar to <samp>-fsanitize=kernel-address</samp> but using an alternate
 instrumentation method, and similar to <samp>-fsanitize=hwaddress</samp> but with
 instrumentation differences necessary for compiling the Linux kernel.
@@ -434,10 +529,10 @@ possible by specifying the command-line options
 <samp>--param hwasan-instrument-allocas=1</samp> respectively. Using a random frame
 tag is not implemented for kernel instrumentation.
 </p>
+<a name="index-fsanitize_003dpointer_002dcompare"></a>
 </dd>
 <dt><code>-fsanitize=pointer-compare</code></dt>
-<dd><a name="index-fsanitize_003dpointer_002dcompare"></a>
-<p>Instrument comparison operation (&lt;, &lt;=, &gt;, &gt;=) with pointer operands.
+<dd><p>Instrument comparison operation (&lt;, &lt;=, &gt;, &gt;=) with pointer operands.
 The option must be combined with either <samp>-fsanitize=kernel-address</samp> or
 <samp>-fsanitize=address</samp>
 The option cannot be combined with <samp>-fsanitize=thread</samp>.
@@ -446,10 +541,10 @@ add <code>detect_invalid_pointer_pairs=2</code> to the environment variable
 <code>ASAN_OPTIONS</code>. Using <code>detect_invalid_pointer_pairs=1</code> detects
 invalid operation only when both pointers are non-null.
 </p>
+<a name="index-fsanitize_003dpointer_002dsubtract"></a>
 </dd>
 <dt><code>-fsanitize=pointer-subtract</code></dt>
-<dd><a name="index-fsanitize_003dpointer_002dsubtract"></a>
-<p>Instrument subtraction with pointer operands.
+<dd><p>Instrument subtraction with pointer operands.
 The option must be combined with either <samp>-fsanitize=kernel-address</samp> or
 <samp>-fsanitize=address</samp>
 The option cannot be combined with <samp>-fsanitize=thread</samp>.
@@ -458,10 +553,41 @@ add <code>detect_invalid_pointer_pairs=2</code> to the environment variable
 <code>ASAN_OPTIONS</code>. Using <code>detect_invalid_pointer_pairs=1</code> detects
 invalid operation only when both pointers are non-null.
 </p>
+<a name="index-fsanitize_003dshadow_002dcall_002dstack"></a>
+</dd>
+<dt><code>-fsanitize=shadow-call-stack</code></dt>
+<dd><p>Enable ShadowCallStack, a security enhancement mechanism used to protect
+programs against return address overwrites (e.g. stack buffer overflows.)
+It works by saving a function&rsquo;s return address to a separately allocated
+shadow call stack in the function prologue and restoring the return address
+from the shadow call stack in the function epilogue.  Instrumentation only
+occurs in functions that need to save the return address to the stack.
+</p>
+<p>Currently it only supports the aarch64 platform.  It is specifically
+designed for linux kernels that enable the CONFIG_SHADOW_CALL_STACK option.
+For the user space programs, runtime support is not currently provided
+in libc and libgcc.  Users who want to use this feature in user space need
+to provide their own support for the runtime.  It should be noted that
+this may cause the ABI rules to be broken.
+</p>
+<p>On aarch64, the instrumentation makes use of the platform register <code>x18</code>.
+This generally means that any code that may run on the same thread as code
+compiled with ShadowCallStack must be compiled with the flag
+<samp>-ffixed-x18</samp>, otherwise functions compiled without
+<samp>-ffixed-x18</samp> might clobber <code>x18</code> and so corrupt the shadow
+stack pointer.
+</p>
+<p>Also, because there is no userspace runtime support, code compiled with
+ShadowCallStack cannot use exception handling.  Use <samp>-fno-exceptions</samp>
+to turn off exceptions.
+</p>
+<p>See <a href="https://clang.llvm.org/docs/ShadowCallStack.html">https://clang.llvm.org/docs/ShadowCallStack.html</a> for more
+details.
+</p>
+<a name="index-fsanitize_003dthread"></a>
 </dd>
 <dt><code>-fsanitize=thread</code></dt>
-<dd><a name="index-fsanitize_003dthread"></a>
-<p>Enable ThreadSanitizer, a fast data race detector.
+<dd><p>Enable ThreadSanitizer, a fast data race detector.
 Memory access instructions are instrumented to detect
 data race bugs.  See <a href="https://github.com/google/sanitizers/wiki#threadsanitizer">https://github.com/google/sanitizers/wiki#threadsanitizer</a> for more
 details. The run-time behavior can be influenced using the <code>TSAN_OPTIONS</code>
@@ -475,91 +601,94 @@ The option cannot be combined with <samp>-fsanitize=address</samp>,
 operating on invalid memory addresses with non-call exceptions
 (<samp>-fnon-call-exceptions</samp>).
 </p>
+<a name="index-fsanitize_003dleak"></a>
 </dd>
 <dt><code>-fsanitize=leak</code></dt>
-<dd><a name="index-fsanitize_003dleak"></a>
-<p>Enable LeakSanitizer, a memory leak detector.
-This option only matters for linking of executables and
-the executable is linked against a library that overrides <code>malloc</code>
+<dd><p>Enable LeakSanitizer, a memory leak detector.
+This option only matters for linking of executables.
+The executable is linked against a library that overrides <code>malloc</code>
 and other allocator functions.  See
 <a href="https://github.com/google/sanitizers/wiki/AddressSanitizerLeakSanitizer">https://github.com/google/sanitizers/wiki/AddressSanitizerLeakSanitizer</a> for more
 details.  The run-time behavior can be influenced using the
 <code>LSAN_OPTIONS</code> environment variable.
 The option cannot be combined with <samp>-fsanitize=thread</samp>.
 </p>
+<a name="index-fsanitize_003dundefined"></a>
 </dd>
 <dt><code>-fsanitize=undefined</code></dt>
-<dd><a name="index-fsanitize_003dundefined"></a>
-<p>Enable UndefinedBehaviorSanitizer, a fast undefined behavior detector.
+<dd><p>Enable UndefinedBehaviorSanitizer, a fast undefined behavior detector.
 Various computations are instrumented to detect undefined behavior
 at runtime.  See <a href="https://clang.llvm.org/docs/UndefinedBehaviorSanitizer.html">https://clang.llvm.org/docs/UndefinedBehaviorSanitizer.html</a> for more details.   The run-time behavior can be influenced using the
 <code>UBSAN_OPTIONS</code> environment variable.  Current suboptions are:
 </p>
 <dl compact="compact">
+<dd>
+<a name="index-fsanitize_003dshift"></a>
+</dd>
 <dt><code>-fsanitize=shift</code></dt>
-<dd><a name="index-fsanitize_003dshift"></a>
-<p>This option enables checking that the result of a shift operation is
+<dd><p>This option enables checking that the result of a shift operation is
 not undefined.  Note that what exactly is considered undefined differs
 slightly between C and C++, as well as between ISO C90 and C99, etc.
 This option has two suboptions, <samp>-fsanitize=shift-base</samp> and
 <samp>-fsanitize=shift-exponent</samp>.
 </p>
+<a name="index-fsanitize_003dshift_002dexponent"></a>
 </dd>
 <dt><code>-fsanitize=shift-exponent</code></dt>
-<dd><a name="index-fsanitize_003dshift_002dexponent"></a>
-<p>This option enables checking that the second argument of a shift operation
+<dd><p>This option enables checking that the second argument of a shift operation
 is not negative and is smaller than the precision of the promoted first
 argument.
 </p>
+<a name="index-fsanitize_003dshift_002dbase"></a>
 </dd>
 <dt><code>-fsanitize=shift-base</code></dt>
-<dd><a name="index-fsanitize_003dshift_002dbase"></a>
-<p>If the second argument of a shift operation is within range, check that the
+<dd><p>If the second argument of a shift operation is within range, check that the
 result of a shift operation is not undefined.  Note that what exactly is
 considered undefined differs slightly between C and C++, as well as between
 ISO C90 and C99, etc.
 </p>
+<a name="index-fsanitize_003dinteger_002ddivide_002dby_002dzero"></a>
 </dd>
 <dt><code>-fsanitize=integer-divide-by-zero</code></dt>
-<dd><a name="index-fsanitize_003dinteger_002ddivide_002dby_002dzero"></a>
-<p>Detect integer division by zero as well as <code>INT_MIN / -1</code> division.
+<dd><p>Detect integer division by zero.
 </p>
+<a name="index-fsanitize_003dunreachable"></a>
 </dd>
 <dt><code>-fsanitize=unreachable</code></dt>
-<dd><a name="index-fsanitize_003dunreachable"></a>
-<p>With this option, the compiler turns the <code>__builtin_unreachable</code>
+<dd><p>With this option, the compiler turns the <code>__builtin_unreachable</code>
 call into a diagnostics message call instead.  When reaching the
 <code>__builtin_unreachable</code> call, the behavior is undefined.
 </p>
+<a name="index-fsanitize_003dvla_002dbound"></a>
 </dd>
 <dt><code>-fsanitize=vla-bound</code></dt>
-<dd><a name="index-fsanitize_003dvla_002dbound"></a>
-<p>This option instructs the compiler to check that the size of a variable
+<dd><p>This option instructs the compiler to check that the size of a variable
 length array is positive.
 </p>
+<a name="index-fsanitize_003dnull"></a>
 </dd>
 <dt><code>-fsanitize=null</code></dt>
-<dd><a name="index-fsanitize_003dnull"></a>
-<p>This option enables pointer checking.  Particularly, the application
+<dd><p>This option enables pointer checking.  Particularly, the application
 built with this option turned on will issue an error message when it
 tries to dereference a NULL pointer, or if a reference (possibly an
 rvalue reference) is bound to a NULL pointer, or if a method is invoked
 on an object pointed by a NULL pointer.
 </p>
+<a name="index-fsanitize_003dreturn"></a>
 </dd>
 <dt><code>-fsanitize=return</code></dt>
-<dd><a name="index-fsanitize_003dreturn"></a>
-<p>This option enables return statement checking.  Programs
+<dd><p>This option enables return statement checking.  Programs
 built with this option turned on will issue an error message
 when the end of a non-void function is reached without actually
 returning a value.  This option works in C++ only.
 </p>
+<a name="index-fsanitize_003dsigned_002dinteger_002doverflow"></a>
 </dd>
 <dt><code>-fsanitize=signed-integer-overflow</code></dt>
-<dd><a name="index-fsanitize_003dsigned_002dinteger_002doverflow"></a>
-<p>This option enables signed integer overflow checking.  We check that
+<dd><p>This option enables signed integer overflow checking.  We check that
 the result of <code>+</code>, <code>*</code>, and both unary and binary <code>-</code>
-does not overflow in the signed arithmetics.  Note, integer promotion
+does not overflow in the signed arithmetics.  This also detects
+<code>INT_MIN / -1</code> signed division.  Note, integer promotion
 rules must be taken into account.  That is, the following is not an
 overflow:
 </p><div class="smallexample">
@@ -567,103 +696,106 @@ overflow:
 a++;
 </pre></div>
 
+<a name="index-fsanitize_003dbounds"></a>
 </dd>
 <dt><code>-fsanitize=bounds</code></dt>
-<dd><a name="index-fsanitize_003dbounds"></a>
-<p>This option enables instrumentation of array bounds.  Various out of bounds
+<dd><p>This option enables instrumentation of array bounds.  Various out of bounds
 accesses are detected.  Flexible array members, flexible array member-like
-arrays, and initializers of variables with static storage are not instrumented.
+arrays, and initializers of variables with static storage are not
+instrumented, with the exception of flexible array member-like arrays
+for which <code>-fstrict-flex-arrays</code> or <code>-fstrict-flex-arrays=</code>
+options or <code>strict_flex_array</code> attributes say they shouldn&rsquo;t be treated
+like flexible array member-like arrays.
 </p>
+<a name="index-fsanitize_003dbounds_002dstrict"></a>
 </dd>
 <dt><code>-fsanitize=bounds-strict</code></dt>
-<dd><a name="index-fsanitize_003dbounds_002dstrict"></a>
-<p>This option enables strict instrumentation of array bounds.  Most out of bounds
-accesses are detected, including flexible array members and flexible array
-member-like arrays.  Initializers of variables with static storage are not
-instrumented.
+<dd><p>This option enables strict instrumentation of array bounds.  Most out of bounds
+accesses are detected, including flexible array member-like arrays.
+Initializers of variables with static storage are not instrumented.
 </p>
+<a name="index-fsanitize_003dalignment"></a>
 </dd>
 <dt><code>-fsanitize=alignment</code></dt>
-<dd><a name="index-fsanitize_003dalignment"></a>
-
+<dd>
 <p>This option enables checking of alignment of pointers when they are
 dereferenced, or when a reference is bound to insufficiently aligned target,
 or when a method or constructor is invoked on insufficiently aligned object.
 </p>
+<a name="index-fsanitize_003dobject_002dsize"></a>
 </dd>
 <dt><code>-fsanitize=object-size</code></dt>
-<dd><a name="index-fsanitize_003dobject_002dsize"></a>
-<p>This option enables instrumentation of memory references using the
-<code>__builtin_object_size</code> function.  Various out of bounds pointer
-accesses are detected.
+<dd><p>This option enables instrumentation of memory references using the
+<code>__builtin_dynamic_object_size</code> function.  Various out of bounds
+pointer accesses are detected.
 </p>
+<a name="index-fsanitize_003dfloat_002ddivide_002dby_002dzero"></a>
 </dd>
 <dt><code>-fsanitize=float-divide-by-zero</code></dt>
-<dd><a name="index-fsanitize_003dfloat_002ddivide_002dby_002dzero"></a>
-<p>Detect floating-point division by zero.  Unlike other similar options,
+<dd><p>Detect floating-point division by zero.  Unlike other similar options,
 <samp>-fsanitize=float-divide-by-zero</samp> is not enabled by
 <samp>-fsanitize=undefined</samp>, since floating-point division by zero can
 be a legitimate way of obtaining infinities and NaNs.
 </p>
+<a name="index-fsanitize_003dfloat_002dcast_002doverflow"></a>
 </dd>
 <dt><code>-fsanitize=float-cast-overflow</code></dt>
-<dd><a name="index-fsanitize_003dfloat_002dcast_002doverflow"></a>
-<p>This option enables floating-point type to integer conversion checking.
+<dd><p>This option enables floating-point type to integer conversion checking.
 We check that the result of the conversion does not overflow.
 Unlike other similar options, <samp>-fsanitize=float-cast-overflow</samp> is
 not enabled by <samp>-fsanitize=undefined</samp>.
 This option does not work well with <code>FE_INVALID</code> exceptions enabled.
 </p>
+<a name="index-fsanitize_003dnonnull_002dattribute"></a>
 </dd>
 <dt><code>-fsanitize=nonnull-attribute</code></dt>
-<dd><a name="index-fsanitize_003dnonnull_002dattribute"></a>
-
+<dd>
 <p>This option enables instrumentation of calls, checking whether null values
 are not passed to arguments marked as requiring a non-null value by the
 <code>nonnull</code> function attribute.
 </p>
+<a name="index-fsanitize_003dreturns_002dnonnull_002dattribute"></a>
 </dd>
 <dt><code>-fsanitize=returns-nonnull-attribute</code></dt>
-<dd><a name="index-fsanitize_003dreturns_002dnonnull_002dattribute"></a>
-
+<dd>
 <p>This option enables instrumentation of return statements in functions
 marked with <code>returns_nonnull</code> function attribute, to detect returning
 of null values from such functions.
 </p>
+<a name="index-fsanitize_003dbool"></a>
 </dd>
 <dt><code>-fsanitize=bool</code></dt>
-<dd><a name="index-fsanitize_003dbool"></a>
-
+<dd>
 <p>This option enables instrumentation of loads from bool.  If a value other
 than 0/1 is loaded, a run-time error is issued.
 </p>
+<a name="index-fsanitize_003denum"></a>
 </dd>
 <dt><code>-fsanitize=enum</code></dt>
-<dd><a name="index-fsanitize_003denum"></a>
-
+<dd>
 <p>This option enables instrumentation of loads from an enum type.  If
 a value outside the range of values for the enum type is loaded,
 a run-time error is issued.
 </p>
+<a name="index-fsanitize_003dvptr"></a>
 </dd>
 <dt><code>-fsanitize=vptr</code></dt>
-<dd><a name="index-fsanitize_003dvptr"></a>
-
+<dd>
 <p>This option enables instrumentation of C++ member function calls, member
 accesses and some conversions between pointers to base and derived classes,
 to verify the referenced object has the correct dynamic type.
 </p>
+<a name="index-fsanitize_003dpointer_002doverflow"></a>
 </dd>
 <dt><code>-fsanitize=pointer-overflow</code></dt>
-<dd><a name="index-fsanitize_003dpointer_002doverflow"></a>
-
+<dd>
 <p>This option enables instrumentation of pointer arithmetics.  If the pointer
 arithmetics overflows, a run-time error is issued.
 </p>
+<a name="index-fsanitize_003dbuiltin"></a>
 </dd>
 <dt><code>-fsanitize=builtin</code></dt>
-<dd><a name="index-fsanitize_003dbuiltin"></a>
-
+<dd>
 <p>This option enables instrumentation of arguments to selected builtin
 functions.  If an invalid value is passed to such arguments, a run-time
 error is issued.  E.g.&nbsp;passing 0 as the argument to <code>__builtin_ctz</code>
@@ -673,36 +805,41 @@ by this option.
 </dd>
 </dl>
 
+<p>Note that sanitizers tend to increase the rate of false positive
+warnings, most notably those around <samp>-Wmaybe-uninitialized</samp>.
+We recommend against combining <samp>-Werror</samp> and [the use of]
+sanitizers.
+</p>
 <p>While <samp>-ftrapv</samp> causes traps for signed overflows to be emitted,
 <samp>-fsanitize=undefined</samp> gives a diagnostic message.
 This currently works only for the C family of languages.
 </p>
+<a name="index-fno_002dsanitize_003dall"></a>
 </dd>
 <dt><code>-fno-sanitize=all</code></dt>
-<dd><a name="index-fno_002dsanitize_003dall"></a>
-
+<dd>
 <p>This option disables all previously enabled sanitizers.
 <samp>-fsanitize=all</samp> is not allowed, as some sanitizers cannot be used
 together.
 </p>
+<a name="index-fasan_002dshadow_002doffset"></a>
 </dd>
 <dt><code>-fasan-shadow-offset=<var>number</var></code></dt>
-<dd><a name="index-fasan_002dshadow_002doffset"></a>
-<p>This option forces GCC to use custom shadow offset in AddressSanitizer checks.
+<dd><p>This option forces GCC to use custom shadow offset in AddressSanitizer checks.
 It is useful for experimenting with different shadow memory layouts in
 Kernel AddressSanitizer.
 </p>
+<a name="index-fsanitize_002dsections"></a>
 </dd>
 <dt><code>-fsanitize-sections=<var>s1</var>,<var>s2</var>,...</code></dt>
-<dd><a name="index-fsanitize_002dsections"></a>
-<p>Sanitize global variables in selected user-defined sections.  <var>si</var> may
+<dd><p>Sanitize global variables in selected user-defined sections.  <var>si</var> may
 contain wildcards.
 </p>
+<a name="index-fsanitize_002drecover"></a>
+<a name="index-fno_002dsanitize_002drecover"></a>
 </dd>
 <dt><code>-fsanitize-recover<span class="roman">[</span>=<var>opts</var><span class="roman">]</span></code></dt>
-<dd><a name="index-fsanitize_002drecover"></a>
-<a name="index-fno_002dsanitize_002drecover"></a>
-<p><samp>-fsanitize-recover=</samp> controls error recovery mode for sanitizers
+<dd><p><samp>-fsanitize-recover=</samp> controls error recovery mode for sanitizers
 mentioned in comma-separated list of <var>opts</var>.  Enabling this option
 for a sanitizer component causes it to attempt to continue
 running the program as if no error happened.  This means multiple
@@ -738,31 +875,56 @@ equivalent to specifying an <var>opts</var> list of:
 <pre class="smallexample">undefined,float-cast-overflow,float-divide-by-zero,bounds-strict
 </pre></div>
 
+<a name="index-fsanitize_002daddress_002duse_002dafter_002dscope"></a>
 </dd>
 <dt><code>-fsanitize-address-use-after-scope</code></dt>
-<dd><a name="index-fsanitize_002daddress_002duse_002dafter_002dscope"></a>
-<p>Enable sanitization of local variables to detect use-after-scope bugs.
+<dd><p>Enable sanitization of local variables to detect use-after-scope bugs.
 The option sets <samp>-fstack-reuse</samp> to &lsquo;<samp>none</samp>&rsquo;.
 </p>
+<a name="index-fsanitize_002dtrap"></a>
+<a name="index-fno_002dsanitize_002dtrap"></a>
+</dd>
+<dt><code>-fsanitize-trap<span class="roman">[</span>=<var>opts</var><span class="roman">]</span></code></dt>
+<dd><p>The <samp>-fsanitize-trap=</samp> option instructs the compiler to
+report for sanitizers mentioned in comma-separated list of <var>opts</var>
+undefined behavior using <code>__builtin_trap</code> rather than a <code>libubsan</code>
+library routine.  If this option is enabled for certain sanitizer,
+it takes precedence over the <samp>-fsanitizer-recover=</samp> for that
+sanitizer, <code>__builtin_trap</code> will be emitted and be fatal regardless
+of whether recovery is enabled or disabled using <samp>-fsanitize-recover=</samp>.
+</p>
+<p>The advantage of this is that the <code>libubsan</code> library is not needed
+and is not linked in, so this is usable even in freestanding environments.
+</p>
+<p>Currently this feature works with <samp>-fsanitize=undefined</samp> (and its suboptions
+except for <samp>-fsanitize=vptr</samp>), <samp>-fsanitize=float-cast-overflow</samp>,
+<samp>-fsanitize=float-divide-by-zero</samp> and
+<samp>-fsanitize=bounds-strict</samp>.  <code>-fsanitize-trap=all</code> can be also
+specified, which enables it for <code>undefined</code> suboptions,
+<samp>-fsanitize=float-cast-overflow</samp>,
+<samp>-fsanitize=float-divide-by-zero</samp> and
+<samp>-fsanitize=bounds-strict</samp>.
+If <code>-fsanitize-trap=undefined</code> or <code>-fsanitize-trap=all</code> is used
+and <code>-fsanitize=vptr</code> is enabled on the command line, the
+instrumentation is silently ignored as the instrumentation always needs
+<code>libubsan</code> support, <samp>-fsanitize-trap=vptr</samp> is not allowed.
+</p>
+<a name="index-fsanitize_002dundefined_002dtrap_002don_002derror"></a>
 </dd>
 <dt><code>-fsanitize-undefined-trap-on-error</code></dt>
-<dd><a name="index-fsanitize_002dundefined_002dtrap_002don_002derror"></a>
-<p>The <samp>-fsanitize-undefined-trap-on-error</samp> option instructs the compiler to
-report undefined behavior using <code>__builtin_trap</code> rather than
-a <code>libubsan</code> library routine.  The advantage of this is that the
-<code>libubsan</code> library is not needed and is not linked in, so this
-is usable even in freestanding environments.
+<dd><p>The <samp>-fsanitize-undefined-trap-on-error</samp> option is deprecated
+equivalent of <samp>-fsanitize-trap=all</samp>.
 </p>
+<a name="index-fsanitize_002dcoverage_003dtrace_002dpc"></a>
 </dd>
 <dt><code>-fsanitize-coverage=trace-pc</code></dt>
-<dd><a name="index-fsanitize_002dcoverage_003dtrace_002dpc"></a>
-<p>Enable coverage-guided fuzzing code instrumentation.
+<dd><p>Enable coverage-guided fuzzing code instrumentation.
 Inserts a call to <code>__sanitizer_cov_trace_pc</code> into every basic block.
 </p>
+<a name="index-fsanitize_002dcoverage_003dtrace_002dcmp"></a>
 </dd>
 <dt><code>-fsanitize-coverage=trace-cmp</code></dt>
-<dd><a name="index-fsanitize_002dcoverage_003dtrace_002dcmp"></a>
-<p>Enable dataflow guided fuzzing code instrumentation.
+<dd><p>Enable dataflow guided fuzzing code instrumentation.
 Inserts a call to <code>__sanitizer_cov_trace_cmp1</code>,
 <code>__sanitizer_cov_trace_cmp2</code>, <code>__sanitizer_cov_trace_cmp4</code> or
 <code>__sanitizer_cov_trace_cmp8</code> for integral comparison with both operands
@@ -774,10 +936,10 @@ operand constant, <code>__sanitizer_cov_trace_cmpf</code> or
 <code>__sanitizer_cov_trace_cmpd</code> for float or double comparisons and
 <code>__sanitizer_cov_trace_switch</code> for switch statements.
 </p>
+<a name="index-fcf_002dprotection"></a>
 </dd>
 <dt><code>-fcf-protection=<span class="roman">[</span>full<span class="roman">|</span>branch<span class="roman">|</span>return<span class="roman">|</span>none<span class="roman">|</span>check<span class="roman">]</span></code></dt>
-<dd><a name="index-fcf_002dprotection"></a>
-<p>Enable code instrumentation of control-flow transfers to increase
+<dd><p>Enable code instrumentation of control-flow transfers to increase
 program security by checking that target addresses of control-flow
 transfer instructions (such as indirect function call, function return,
 indirect jump) are valid.  This prevents diverting the flow of control
@@ -811,10 +973,30 @@ which functions and calls should be skipped from instrumentation
 on Intel Control-flow Enforcement Technology (CET) which works for
 i686 processor or newer.
 </p>
+<a name="index-fharden_002dcompares"></a>
+</dd>
+<dt><code>-fharden-compares</code></dt>
+<dd><p>For every logical test that survives gimple optimizations and is
+<em>not</em> the condition in a conditional branch (for example,
+conditions tested for conditional moves, or to store in boolean
+variables), emit extra code to compute and verify the reversed
+condition, and to call <code>__builtin_trap</code> if the results do not
+match.  Use with &lsquo;<samp>-fharden-conditional-branches</samp>&rsquo; to cover all
+conditionals.
+</p>
+<a name="index-fharden_002dconditional_002dbranches"></a>
+</dd>
+<dt><code>-fharden-conditional-branches</code></dt>
+<dd><p>For every non-vectorized conditional branch that survives gimple
+optimizations, emit extra code to compute and verify the reversed
+condition, and to call <code>__builtin_trap</code> if the result is
+unexpected.  Use with &lsquo;<samp>-fharden-compares</samp>&rsquo; to cover all
+conditionals.
+</p>
+<a name="index-fstack_002dprotector"></a>
 </dd>
 <dt><code>-fstack-protector</code></dt>
-<dd><a name="index-fstack_002dprotector"></a>
-<p>Emit extra code to check for buffer overflows, such as stack smashing
+<dd><p>Emit extra code to check for buffer overflows, such as stack smashing
 attacks.  This is done by adding a guard variable to functions with
 vulnerable objects.  This includes functions that call <code>alloca</code>, and
 functions with buffers larger than or equal to 8 bytes.  The guards are
@@ -824,30 +1006,30 @@ exits.  Only variables that are actually allocated on the stack are
 considered, optimized away variables or variables allocated in registers
 don&rsquo;t count.
 </p>
+<a name="index-fstack_002dprotector_002dall"></a>
 </dd>
 <dt><code>-fstack-protector-all</code></dt>
-<dd><a name="index-fstack_002dprotector_002dall"></a>
-<p>Like <samp>-fstack-protector</samp> except that all functions are protected.
+<dd><p>Like <samp>-fstack-protector</samp> except that all functions are protected.
 </p>
+<a name="index-fstack_002dprotector_002dstrong"></a>
 </dd>
 <dt><code>-fstack-protector-strong</code></dt>
-<dd><a name="index-fstack_002dprotector_002dstrong"></a>
-<p>Like <samp>-fstack-protector</samp> but includes additional functions to
+<dd><p>Like <samp>-fstack-protector</samp> but includes additional functions to
 be protected &mdash; those that have local array definitions, or have
 references to local frame addresses.  Only variables that are actually
 allocated on the stack are considered, optimized away variables or variables
 allocated in registers don&rsquo;t count.
 </p>
+<a name="index-fstack_002dprotector_002dexplicit"></a>
 </dd>
 <dt><code>-fstack-protector-explicit</code></dt>
-<dd><a name="index-fstack_002dprotector_002dexplicit"></a>
-<p>Like <samp>-fstack-protector</samp> but only protects those functions which
+<dd><p>Like <samp>-fstack-protector</samp> but only protects those functions which
 have the <code>stack_protect</code> attribute.
 </p>
+<a name="index-fstack_002dcheck"></a>
 </dd>
 <dt><code>-fstack-check</code></dt>
-<dd><a name="index-fstack_002dcheck"></a>
-<p>Generate code to verify that you do not go beyond the boundary of the
+<dd><p>Generate code to verify that you do not go beyond the boundary of the
 stack.  You should specify this flag if you are running in an
 environment with multiple threads, but you only rarely need to specify it in
 a single-threaded environment since stack overflow is automatically
@@ -886,10 +1068,10 @@ and stack overflows.  &lsquo;<samp>specific</samp>&rsquo; is an excellent choice
 Ada code.  It is not generally sufficient to protect against stack-clash
 attacks.  To protect against those you want &lsquo;<samp>-fstack-clash-protection</samp>&rsquo;.
 </p>
+<a name="index-fstack_002dclash_002dprotection"></a>
 </dd>
 <dt><code>-fstack-clash-protection</code></dt>
-<dd><a name="index-fstack_002dclash_002dprotection"></a>
-<p>Generate code to prevent stack clash style attacks.  When this option is
+<dd><p>Generate code to prevent stack clash style attacks.  When this option is
 enabled, the compiler will only allocate one page of stack space at a time
 and each page is accessed immediately after allocation.  Thus, it prevents
 allocations from jumping over any stack guard page provided by the
@@ -901,14 +1083,14 @@ allocations.  <samp>-fstack-clash-protection</samp> may also provide limited
 protection for static stack allocations if the target supports
 <samp>-fstack-check=specific</samp>.
 </p>
+<a name="index-fstack_002dlimit_002dregister"></a>
+<a name="index-fstack_002dlimit_002dsymbol"></a>
+<a name="index-fno_002dstack_002dlimit"></a>
 </dd>
 <dt><code>-fstack-limit-register=<var>reg</var></code></dt>
 <dt><code>-fstack-limit-symbol=<var>sym</var></code></dt>
 <dt><code>-fno-stack-limit</code></dt>
-<dd><a name="index-fstack_002dlimit_002dregister"></a>
-<a name="index-fstack_002dlimit_002dsymbol"></a>
-<a name="index-fno_002dstack_002dlimit"></a>
-<p>Generate code to ensure that the stack does not grow beyond a certain value,
+<dd><p>Generate code to ensure that the stack does not grow beyond a certain value,
 either the value of a register or the address of a symbol.  If a larger
 stack is required, a signal is raised at run time.  For most targets,
 the signal is raised before the stack overruns the boundary, so
@@ -923,10 +1105,10 @@ of 128KB.  Note that this may only work with the GNU linker.
 <p>You can locally override stack limit checking by using the
 <code>no_stack_limit</code> function attribute (see <a href="Function-Attributes.html#Function-Attributes">Function Attributes</a>).
 </p>
+<a name="index-fsplit_002dstack"></a>
 </dd>
 <dt><code>-fsplit-stack</code></dt>
-<dd><a name="index-fsplit_002dstack"></a>
-<p>Generate code to automatically split the stack before it overflows.
+<dd><p>Generate code to automatically split the stack before it overflows.
 The resulting program has a discontiguous stack which can only
 overflow if the program is unable to allocate any more memory.  This
 is most useful when running threaded programs, as it is no longer
@@ -943,10 +1125,10 @@ without <samp>-fsplit-stack</samp> always has a large stack.  Support for
 this is implemented in the gold linker in GNU binutils release 2.21
 and later.
 </p>
+<a name="index-fvtable_002dverify"></a>
 </dd>
 <dt><code>-fvtable-verify=<span class="roman">[</span>std<span class="roman">|</span>preinit<span class="roman">|</span>none<span class="roman">]</span></code></dt>
-<dd><a name="index-fvtable_002dverify"></a>
-<p>This option is only available when compiling C++ code.
+<dd><p>This option is only available when compiling C++ code.
 It turns on (or off, if using <samp>-fvtable-verify=none</samp>) the security
 feature that verifies at run time, for every virtual call, that
 the vtable pointer through which the call is made is valid for the type of
@@ -968,10 +1150,10 @@ libraries have been loaded and initialized.
 values specified, &lsquo;<samp>none</samp>&rsquo; takes highest priority over both &lsquo;<samp>std</samp>&rsquo; and
 &lsquo;<samp>preinit</samp>&rsquo;; &lsquo;<samp>preinit</samp>&rsquo; takes priority over &lsquo;<samp>std</samp>&rsquo;.
 </p>
+<a name="index-fvtv_002ddebug"></a>
 </dd>
 <dt><code>-fvtv-debug</code></dt>
-<dd><a name="index-fvtv_002ddebug"></a>
-<p>When used in conjunction with <samp>-fvtable-verify=std</samp> or 
+<dd><p>When used in conjunction with <samp>-fvtable-verify=std</samp> or 
 <samp>-fvtable-verify=preinit</samp>, causes debug versions of the 
 runtime functions for the vtable verification feature to be called.  
 This flag also causes the compiler to log information about which 
@@ -983,10 +1165,10 @@ if that is defined or the current working directory otherwise.
 <p>Note:  This feature <em>appends</em> data to the log file. If you want a fresh log
 file, be sure to delete any existing one.
 </p>
+<a name="index-fvtv_002dcounts"></a>
 </dd>
 <dt><code>-fvtv-counts</code></dt>
-<dd><a name="index-fvtv_002dcounts"></a>
-<p>This is a debugging flag.  When used in conjunction with
+<dd><p>This is a debugging flag.  When used in conjunction with
 <samp>-fvtable-verify=std</samp> or <samp>-fvtable-verify=preinit</samp>, this
 causes the compiler to keep track of the total number of virtual calls
 it encounters and the number of verifications it inserts.  It also
@@ -1002,10 +1184,10 @@ in the same directory.
 <p>Note:  This feature <em>appends</em> data to the log files.  To get fresh log
 files, be sure to delete any existing ones.
 </p>
+<a name="index-finstrument_002dfunctions"></a>
 </dd>
 <dt><code>-finstrument-functions</code></dt>
-<dd><a name="index-finstrument_002dfunctions"></a>
-<p>Generate instrumentation calls for entry and exit to functions.  Just
+<dd><p>Generate instrumentation calls for entry and exit to functions.  Just
 after function entry and just before function exit, the following
 profiling functions are called with the address of the current
 function and its call site.  (On some platforms,
@@ -1042,10 +1224,27 @@ cannot safely be called (perhaps signal handlers, if the profiling
 routines generate output or allocate memory).
 See <a href="Common-Function-Attributes.html#Common-Function-Attributes">Common Function Attributes</a>.
 </p>
+<a name="index-finstrument_002dfunctions_002donce"></a>
+</dd>
+<dt><code>-finstrument-functions-once</code></dt>
+<dd><p>This is similar to <samp>-finstrument-functions</samp>, but the profiling
+functions are called only once per instrumented function, i.e. the first
+profiling function is called after the first entry into the instrumented
+function and the second profiling function is called before the exit
+corresponding to this first entry.
+</p>
+<p>The definition of <code>once</code> for the purpose of this option is a little
+vague because the implementation is not protected against data races.
+As a result, the implementation only guarantees that the profiling
+functions are called at <em>least</em> once per process and at <em>most</em>
+once per thread, but the calls are always paired, that is to say, if a
+thread calls the first function, then it will call the second function,
+unless it never reaches the exit of the instrumented function.
+</p>
+<a name="index-finstrument_002dfunctions_002dexclude_002dfile_002dlist"></a>
 </dd>
 <dt><code>-finstrument-functions-exclude-file-list=<var>file</var>,<var>file</var>,&hellip;</code></dt>
-<dd><a name="index-finstrument_002dfunctions_002dexclude_002dfile_002dlist"></a>
-
+<dd>
 <p>Set the list of functions that are excluded from instrumentation (see
 the description of <samp>-finstrument-functions</samp>).  If the file that
 contains a function definition matches with one of <var>file</var>, then
@@ -1067,10 +1266,10 @@ contain <samp>/bits/stl</samp> or <samp>include/sys</samp>.
 <samp>-finstrument-functions-exclude-file-list='\,\,tmp'</samp>
 (note the single quote surrounding the option).
 </p>
+<a name="index-finstrument_002dfunctions_002dexclude_002dfunction_002dlist"></a>
 </dd>
 <dt><code>-finstrument-functions-exclude-function-list=<var>sym</var>,<var>sym</var>,&hellip;</code></dt>
-<dd><a name="index-finstrument_002dfunctions_002dexclude_002dfunction_002dlist"></a>
-
+<dd>
 <p>This is similar to <samp>-finstrument-functions-exclude-file-list</samp>,
 but this option sets the list of function names to be excluded from
 instrumentation.  The function name to be matched is its user-visible
@@ -1081,10 +1280,10 @@ of the function name, it is considered to be a match.  For C99 and C++
 extended identifiers, the function name must be given in UTF-8, not
 using universal character names.
 </p>
+<a name="index-fpatchable_002dfunction_002dentry"></a>
 </dd>
 <dt><code>-fpatchable-function-entry=<var>N</var>[,<var>M</var>]</code></dt>
-<dd><a name="index-fpatchable_002dfunction_002dentry"></a>
-<p>Generate <var>N</var> NOPs right at the beginning
+<dd><p>Generate <var>N</var> NOPs right at the beginning
 of each function, with the function entry point before the <var>M</var>th NOP.
 If <var>M</var> is omitted, it defaults to <code>0</code> so the
 function entry points to the address just at the first NOP.
@@ -1108,9 +1307,13 @@ the area size or to remove it completely on a single function.
 If <code>N=0</code>, no pad location is recorded.
 </p>
 <p>The NOP instructions are inserted at&mdash;and maybe before, depending on
-<var>M</var>&mdash;the function entry address, even before the prologue.
+<var>M</var>&mdash;the function entry address, even before the prologue.  On
+PowerPC with the ELFv2 ABI, for a function with dual entry points,
+the local entry point is this function entry address.
 </p>
-<p>The maximum value of <var>N</var> and <var>M</var> is 65535.
+<p>The maximum value of <var>N</var> and <var>M</var> is 65535.  On PowerPC with the
+ELFv2 ABI, for a function with dual entry points, the supported values
+for <var>M</var> are 0, 2, 6 and 14.
 </p></dd>
 </dl>
 
@@ -1118,7 +1321,7 @@ If <code>N=0</code>, no pad location is recorded.
 <hr>
 <div class="header">
 <p>
-Next: <a href="Preprocessor-Options.html#Preprocessor-Options" accesskey="n" rel="next">Preprocessor Options</a>, Previous: <a href="Optimize-Options.html#Optimize-Options" accesskey="p" rel="prev">Optimize Options</a>, Up: <a href="Invoking-GCC.html#Invoking-GCC" accesskey="u" rel="up">Invoking GCC</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Option-Index.html#Option-Index" title="Index" rel="index">Index</a>]</p>
+Next: <a href="Preprocessor-Options.html#Preprocessor-Options" accesskey="n" rel="next">Preprocessor Options</a>, Previous: <a href="Optimize-Options.html#Optimize-Options" accesskey="p" rel="prev">Optimize Options</a>, Up: <a href="Invoking-GCC.html#Invoking-GCC" accesskey="u" rel="up">Invoking GCC</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Indices.html#Indices" title="Index" rel="index">Index</a>]</p>
 </div>
 
 

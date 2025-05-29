@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- Copyright (C) 1988-2022 Free Software Foundation, Inc.
+<!-- Copyright (C) 1988-2023 Free Software Foundation, Inc.
 
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
@@ -134,7 +134,7 @@ terminated themselves.
 <dd><p>The task is waiting for created tasks to complete activation.
 </p>
 </dd>
-<dt><code>Accept Statement</code></dt>
+<dt><code>Accept or Select Term</code></dt>
 <dd><p>The task is waiting on an accept or selective wait statement.
 </p>
 </dd>
@@ -163,8 +163,24 @@ waiting on a terminate Phase.
 finish terminating.
 </p>
 </dd>
+<dt><code>Asynchronous Hold</code></dt>
+<dd><p>The task has been held by <code>Ada.Asynchronous_Task_Control.Hold_Task</code>.
+</p>
+</dd>
+<dt><code>Activating</code></dt>
+<dd><p>The task has been created and is being made runnable.
+</p>
+</dd>
+<dt><code>Selective Wait</code></dt>
+<dd><p>The task is waiting in a selective wait statement.
+</p>
+</dd>
 <dt><code>Accepting RV with <var>taskno</var></code></dt>
 <dd><p>The task is accepting a rendez-vous with the task <var>taskno</var>.
+</p>
+</dd>
+<dt><code>Waiting on RV with <var>taskno</var></code></dt>
+<dd><p>The task is waiting for a rendez-vous with the task <var>taskno</var>.
 </p></dd>
 </dl>
 
@@ -178,7 +194,7 @@ finish terminating.
 <a name="index-info-task-taskno"></a>
 </dd>
 <dt><code>info task <var>taskno</var></code></dt>
-<dd><p>This command shows detailed informations on the specified task, as in
+<dd><p>This command shows detailed information on the specified task, as in
 the following example:
 </p><div class="smallexample">
 <pre class="smallexample">(gdb) info tasks
@@ -273,15 +289,14 @@ information.
 <p>Flags <code>-c</code> and <code>-s</code> cannot be used together.
 </p>
 </dd>
-<dt><code>break <var>location</var> task <var>taskno</var></code></dt>
-<dt><code>break <var>location</var> task <var>taskno</var> if &hellip;</code></dt>
+<dt><code>break <var>locspec</var> task <var>taskno</var></code></dt>
+<dt><code>break <var>locspec</var> task <var>taskno</var> if &hellip;</code></dt>
 <dd><a name="index-breakpoints-and-tasks_002c-in-Ada"></a>
 <a name="index-task-breakpoints_002c-in-Ada"></a>
 <a name="index-break-_2026-task-taskno-_0028Ada_0029"></a>
 <p>These commands are like the <code>break &hellip; thread &hellip;</code>
-command (see <a href="Thread-Stops.html#Thread-Stops">Thread Stops</a>).  The
-<var>location</var> argument specifies source lines, as described
-in <a href="Specify-Location.html#Specify-Location">Specify Location</a>.
+command (see <a href="Thread-Stops.html#Thread-Stops">Thread Stops</a>).  See <a href="Location-Specifications.html#Location-Specifications">Location Specifications</a>, for
+the various forms of <var>locspec</var>.
 </p>
 <p>Use the qualifier &lsquo;<samp>task <var>taskno</var></samp>&rsquo; with a breakpoint command
 to specify that you only want <small>GDB</small> to stop the program when a

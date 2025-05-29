@@ -1,6 +1,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- Copyright (C) 1988-2021 Free Software Foundation, Inc.
+<!-- This file documents the use of the GNU compilers.
+
+Copyright (C) 1988-2023 Free Software Foundation, Inc.
 
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
@@ -30,7 +32,7 @@ You have freedom to copy and modify this GNU Manual, like GNU
 <meta name="distribution" content="global">
 <meta name="Generator" content="makeinfo">
 <link href="index.html#Top" rel="start" title="Top">
-<link href="Option-Index.html#Option-Index" rel="index" title="Option Index">
+<link href="Indices.html#Indices" rel="index" title="Indices">
 <link href="index.html#SEC_Contents" rel="contents" title="Table of Contents">
 <link href="Invoking-GCC.html#Invoking-GCC" rel="up" title="Invoking GCC">
 <link href="Precompiled-Headers.html#Precompiled-Headers" rel="next" title="Precompiled Headers">
@@ -66,11 +68,11 @@ ul.no-bullet {list-style: none}
 
 </head>
 
-<body lang="en">
+<body lang="en_US">
 <a name="Environment-Variables"></a>
 <div class="header">
 <p>
-Next: <a href="Precompiled-Headers.html#Precompiled-Headers" accesskey="n" rel="next">Precompiled Headers</a>, Previous: <a href="Spec-Files.html#Spec-Files" accesskey="p" rel="prev">Spec Files</a>, Up: <a href="Invoking-GCC.html#Invoking-GCC" accesskey="u" rel="up">Invoking GCC</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Option-Index.html#Option-Index" title="Index" rel="index">Index</a>]</p>
+Next: <a href="Precompiled-Headers.html#Precompiled-Headers" accesskey="n" rel="next">Precompiled Headers</a>, Previous: <a href="Spec-Files.html#Spec-Files" accesskey="p" rel="prev">Spec Files</a>, Up: <a href="Invoking-GCC.html#Invoking-GCC" accesskey="u" rel="up">Invoking GCC</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Indices.html#Indices" title="Index" rel="index">Index</a>]</p>
 </div>
 <hr>
 <a name="Environment-Variables-Affecting-GCC"></a>
@@ -89,16 +91,17 @@ in turn take precedence over those specified by the configuration of GCC.
 See <a href="http://gcc.gnu.org/onlinedocs/gccint/Driver.html#Driver">Controlling the Compilation Driver <samp>gcc</samp></a> in <cite>GNU Compiler Collection (GCC) Internals</cite>.
 </p>
 <dl compact="compact">
-<dt><code>LANG</code></dt>
-<dt><code>LC_CTYPE</code></dt>
-<dt><code>LC_MESSAGES</code></dt>
-<dt><code>LC_ALL</code></dt>
 <dd><a name="index-LANG"></a>
 <a name="index-LC_005fCTYPE"></a>
 <a name="index-LC_005fMESSAGES"></a>
 <a name="index-LC_005fALL"></a>
 <a name="index-locale"></a>
-<p>These environment variables control the way that GCC uses
+</dd>
+<dt><code>LANG</code></dt>
+<dt><code>LC_CTYPE</code></dt>
+<dt><code>LC_MESSAGES</code></dt>
+<dt><code>LC_ALL</code></dt>
+<dd><p>These environment variables control the way that GCC uses
 localization information which allows GCC to work with different
 national conventions.  GCC inspects the locale categories
 <code>LC_CTYPE</code> and <code>LC_MESSAGES</code> if it has been configured to do
@@ -121,26 +124,26 @@ and <code>LC_MESSAGES</code> default to the value of the <code>LANG</code>
 environment variable.  If none of these variables are set, GCC
 defaults to traditional C English behavior.
 </p>
+<a name="index-TMPDIR"></a>
 </dd>
 <dt><code>TMPDIR</code></dt>
-<dd><a name="index-TMPDIR"></a>
-<p>If <code>TMPDIR</code> is set, it specifies the directory to use for temporary
+<dd><p>If <code>TMPDIR</code> is set, it specifies the directory to use for temporary
 files.  GCC uses temporary files to hold the output of one stage of
 compilation which is to be used as input to the next stage: for example,
 the output of the preprocessor, which is the input to the compiler
 proper.
 </p>
+<a name="index-GCC_005fCOMPARE_005fDEBUG"></a>
 </dd>
 <dt><code>GCC_COMPARE_DEBUG</code></dt>
-<dd><a name="index-GCC_005fCOMPARE_005fDEBUG"></a>
-<p>Setting <code>GCC_COMPARE_DEBUG</code> is nearly equivalent to passing
+<dd><p>Setting <code>GCC_COMPARE_DEBUG</code> is nearly equivalent to passing
 <samp>-fcompare-debug</samp> to the compiler driver.  See the documentation
 of this option for more details.
 </p>
+<a name="index-GCC_005fEXEC_005fPREFIX"></a>
 </dd>
 <dt><code>GCC_EXEC_PREFIX</code></dt>
-<dd><a name="index-GCC_005fEXEC_005fPREFIX"></a>
-<p>If <code>GCC_EXEC_PREFIX</code> is set, it specifies a prefix to use in the
+<dd><p>If <code>GCC_EXEC_PREFIX</code> is set, it specifies a prefix to use in the
 names of the subprograms executed by the compiler.  No slash is added
 when this prefix is combined with the name of a subprogram, but you can
 specify a prefix that ends with a slash if you wish.
@@ -173,18 +176,18 @@ If a standard directory begins with the configured
 <var>prefix</var> then the value of <var>prefix</var> is replaced by
 <code>GCC_EXEC_PREFIX</code> when looking for header files.
 </p>
+<a name="index-COMPILER_005fPATH"></a>
 </dd>
 <dt><code>COMPILER_PATH</code></dt>
-<dd><a name="index-COMPILER_005fPATH"></a>
-<p>The value of <code>COMPILER_PATH</code> is a colon-separated list of
+<dd><p>The value of <code>COMPILER_PATH</code> is a colon-separated list of
 directories, much like <code>PATH</code>.  GCC tries the directories thus
 specified when searching for subprograms, if it cannot find the
 subprograms using <code>GCC_EXEC_PREFIX</code>.
 </p>
+<a name="index-LIBRARY_005fPATH"></a>
 </dd>
 <dt><code>LIBRARY_PATH</code></dt>
-<dd><a name="index-LIBRARY_005fPATH"></a>
-<p>The value of <code>LIBRARY_PATH</code> is a colon-separated list of
+<dd><p>The value of <code>LIBRARY_PATH</code> is a colon-separated list of
 directories, much like <code>PATH</code>.  When configured as a native compiler,
 GCC tries the directories thus specified when searching for special
 linker files, if it cannot find them using <code>GCC_EXEC_PREFIX</code>.  Linking
@@ -192,11 +195,11 @@ using GCC also uses these directories when searching for ordinary
 libraries for the <samp>-l</samp> option (but directories specified with
 <samp>-L</samp> come first).
 </p>
+<a name="index-LANG-1"></a>
+<a name="index-locale-definition"></a>
 </dd>
 <dt><code>LANG</code></dt>
-<dd><a name="index-LANG-1"></a>
-<a name="index-locale-definition"></a>
-<p>This variable is used to pass locale information to the compiler.  One way in
+<dd><p>This variable is used to pass locale information to the compiler.  One way in
 which this information is used is to determine the character set to be used
 when character literals, string literals and comments are parsed in C and C++.
 When the compiler is configured to allow multibyte characters,
@@ -218,10 +221,10 @@ the following values for <code>LANG</code> are recognized:
 compiler uses <code>mblen</code> and <code>mbtowc</code> as defined by the default locale to
 recognize and translate multibyte characters.
 </p>
+<a name="index-GCC_005fEXTRA_005fDIAGNOSTIC_005fOUTPUT"></a>
 </dd>
 <dt><code>GCC_EXTRA_DIAGNOSTIC_OUTPUT</code></dt>
-<dd><a name="index-GCC_005fEXTRA_005fDIAGNOSTIC_005fOUTPUT"></a>
-<p>If <code>GCC_EXTRA_DIAGNOSTIC_OUTPUT</code> is set to one of the following values,
+<dd><p>If <code>GCC_EXTRA_DIAGNOSTIC_OUTPUT</code> is set to one of the following values,
 then additional text will be emitted to stderr when fix-it hints are
 emitted.  <samp>-fdiagnostics-parseable-fixits</samp> and
 <samp>-fno-diagnostics-parseable-fixits</samp> take precedence over this
@@ -285,12 +288,12 @@ beginning or end of a path.  For instance, if the value of
 effect as &lsquo;<samp><span class="nolinebreak">-I.</span>&nbsp;<span class="nolinebreak">-I/special/include</span><!-- /@w --></samp>&rsquo;.
 </p>
 
+<a name="index-dependencies-for-make-as-output"></a>
 </dd>
 <dt><code>DEPENDENCIES_OUTPUT</code>
 <a name="index-DEPENDENCIES_005fOUTPUT"></a>
 </dt>
-<dd><a name="index-dependencies-for-make-as-output"></a>
-<p>If this variable is set, its value specifies how to output
+<dd><p>If this variable is set, its value specifies how to output
 dependencies for Make based on the non-system header files processed
 by the compiler.  System header files are ignored in the dependency
 output.
@@ -306,12 +309,12 @@ the options <samp>-MM</samp> and <samp>-MF</samp>
 (see <a href="Preprocessor-Options.html#Preprocessor-Options">Preprocessor Options</a>),
 with an optional <samp>-MT</samp> switch too.
 </p>
+<a name="index-dependencies-for-make-as-output-1"></a>
 </dd>
 <dt><code>SUNPRO_DEPENDENCIES</code>
 <a name="index-SUNPRO_005fDEPENDENCIES"></a>
 </dt>
-<dd><a name="index-dependencies-for-make-as-output-1"></a>
-<p>This variable is the same as <code>DEPENDENCIES_OUTPUT</code> (see above),
+<dd><p>This variable is the same as <code>DEPENDENCIES_OUTPUT</code> (see above),
 except that system header files are not ignored, so it implies
 <samp>-M</samp> rather than <samp>-MM</samp>.  However, the dependence on the
 main input file is omitted.
@@ -343,7 +346,7 @@ process.
 <hr>
 <div class="header">
 <p>
-Next: <a href="Precompiled-Headers.html#Precompiled-Headers" accesskey="n" rel="next">Precompiled Headers</a>, Previous: <a href="Spec-Files.html#Spec-Files" accesskey="p" rel="prev">Spec Files</a>, Up: <a href="Invoking-GCC.html#Invoking-GCC" accesskey="u" rel="up">Invoking GCC</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Option-Index.html#Option-Index" title="Index" rel="index">Index</a>]</p>
+Next: <a href="Precompiled-Headers.html#Precompiled-Headers" accesskey="n" rel="next">Precompiled Headers</a>, Previous: <a href="Spec-Files.html#Spec-Files" accesskey="p" rel="prev">Spec Files</a>, Up: <a href="Invoking-GCC.html#Invoking-GCC" accesskey="u" rel="up">Invoking GCC</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Indices.html#Indices" title="Index" rel="index">Index</a>]</p>
 </div>
 
 

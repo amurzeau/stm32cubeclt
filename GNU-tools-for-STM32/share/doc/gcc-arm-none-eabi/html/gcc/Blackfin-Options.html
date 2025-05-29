@@ -1,6 +1,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- Copyright (C) 1988-2021 Free Software Foundation, Inc.
+<!-- This file documents the use of the GNU compilers.
+
+Copyright (C) 1988-2023 Free Software Foundation, Inc.
 
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
@@ -30,7 +32,7 @@ You have freedom to copy and modify this GNU Manual, like GNU
 <meta name="distribution" content="global">
 <meta name="Generator" content="makeinfo">
 <link href="index.html#Top" rel="start" title="Top">
-<link href="Option-Index.html#Option-Index" rel="index" title="Option Index">
+<link href="Indices.html#Indices" rel="index" title="Indices">
 <link href="index.html#SEC_Contents" rel="contents" title="Table of Contents">
 <link href="Submodel-Options.html#Submodel-Options" rel="up" title="Submodel Options">
 <link href="C6X-Options.html#C6X-Options" rel="next" title="C6X Options">
@@ -66,11 +68,11 @@ ul.no-bullet {list-style: none}
 
 </head>
 
-<body lang="en">
+<body lang="en_US">
 <a name="Blackfin-Options"></a>
 <div class="header">
 <p>
-Next: <a href="C6X-Options.html#C6X-Options" accesskey="n" rel="next">C6X Options</a>, Previous: <a href="AVR-Options.html#AVR-Options" accesskey="p" rel="prev">AVR Options</a>, Up: <a href="Submodel-Options.html#Submodel-Options" accesskey="u" rel="up">Submodel Options</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Option-Index.html#Option-Index" title="Index" rel="index">Index</a>]</p>
+Next: <a href="C6X-Options.html#C6X-Options" accesskey="n" rel="next">C6X Options</a>, Previous: <a href="AVR-Options.html#AVR-Options" accesskey="p" rel="prev">AVR Options</a>, Up: <a href="Submodel-Options.html#Submodel-Options" accesskey="u" rel="up">Submodel Options</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Indices.html#Indices" title="Index" rel="index">Index</a>]</p>
 </div>
 <hr>
 <a name="Blackfin-Options-1"></a>
@@ -78,9 +80,10 @@ Next: <a href="C6X-Options.html#C6X-Options" accesskey="n" rel="next">C6X Option
 <a name="index-Blackfin-Options"></a>
 
 <dl compact="compact">
-<dt><code>-mcpu=<var>cpu</var><span class="roman">[</span>-<var>sirevision</var><span class="roman">]</span></code></dt>
 <dd><a name="index-mcpu_003d"></a>
-<p>Specifies the name of the target Blackfin processor.  Currently, <var>cpu</var>
+</dd>
+<dt><code>-mcpu=<var>cpu</var><span class="roman">[</span>-<var>sirevision</var><span class="roman">]</span></code></dt>
+<dd><p>Specifies the name of the target Blackfin processor.  Currently, <var>cpu</var>
 can be one of &lsquo;<samp>bf512</samp>&rsquo;, &lsquo;<samp>bf514</samp>&rsquo;, &lsquo;<samp>bf516</samp>&rsquo;, &lsquo;<samp>bf518</samp>&rsquo;,
 &lsquo;<samp>bf522</samp>&rsquo;, &lsquo;<samp>bf523</samp>&rsquo;, &lsquo;<samp>bf524</samp>&rsquo;, &lsquo;<samp>bf525</samp>&rsquo;, &lsquo;<samp>bf526</samp>&rsquo;,
 &lsquo;<samp>bf527</samp>&rsquo;, &lsquo;<samp>bf531</samp>&rsquo;, &lsquo;<samp>bf532</samp>&rsquo;, &lsquo;<samp>bf533</samp>&rsquo;,
@@ -110,125 +113,125 @@ provided by libgloss to be linked in if <samp>-msim</samp> is not given.
 <p>Note that support for &lsquo;<samp>bf561</samp>&rsquo; is incomplete.  For &lsquo;<samp>bf561</samp>&rsquo;,
 only the preprocessor macro is defined.
 </p>
+<a name="index-msim"></a>
 </dd>
 <dt><code>-msim</code></dt>
-<dd><a name="index-msim"></a>
-<p>Specifies that the program will be run on the simulator.  This causes
+<dd><p>Specifies that the program will be run on the simulator.  This causes
 the simulator BSP provided by libgloss to be linked in.  This option
 has effect only for &lsquo;<samp>bfin-elf</samp>&rsquo; toolchain.
 Certain other options, such as <samp>-mid-shared-library</samp> and
 <samp>-mfdpic</samp>, imply <samp>-msim</samp>.
 </p>
+<a name="index-momit_002dleaf_002dframe_002dpointer-1"></a>
 </dd>
 <dt><code>-momit-leaf-frame-pointer</code></dt>
-<dd><a name="index-momit_002dleaf_002dframe_002dpointer-1"></a>
-<p>Don&rsquo;t keep the frame pointer in a register for leaf functions.  This
+<dd><p>Don&rsquo;t keep the frame pointer in a register for leaf functions.  This
 avoids the instructions to save, set up and restore frame pointers and
 makes an extra register available in leaf functions.
 </p>
+<a name="index-mspecld_002danomaly"></a>
 </dd>
 <dt><code>-mspecld-anomaly</code></dt>
-<dd><a name="index-mspecld_002danomaly"></a>
-<p>When enabled, the compiler ensures that the generated code does not
+<dd><p>When enabled, the compiler ensures that the generated code does not
 contain speculative loads after jump instructions. If this option is used,
 <code>__WORKAROUND_SPECULATIVE_LOADS</code> is defined.
 </p>
+<a name="index-mno_002dspecld_002danomaly"></a>
+<a name="index-mspecld_002danomaly-1"></a>
 </dd>
 <dt><code>-mno-specld-anomaly</code></dt>
-<dd><a name="index-mno_002dspecld_002danomaly"></a>
-<a name="index-mspecld_002danomaly-1"></a>
-<p>Don&rsquo;t generate extra code to prevent speculative loads from occurring.
+<dd><p>Don&rsquo;t generate extra code to prevent speculative loads from occurring.
 </p>
+<a name="index-mcsync_002danomaly"></a>
 </dd>
 <dt><code>-mcsync-anomaly</code></dt>
-<dd><a name="index-mcsync_002danomaly"></a>
-<p>When enabled, the compiler ensures that the generated code does not
+<dd><p>When enabled, the compiler ensures that the generated code does not
 contain CSYNC or SSYNC instructions too soon after conditional branches.
 If this option is used, <code>__WORKAROUND_SPECULATIVE_SYNCS</code> is defined.
 </p>
+<a name="index-mno_002dcsync_002danomaly"></a>
+<a name="index-mcsync_002danomaly-1"></a>
 </dd>
 <dt><code>-mno-csync-anomaly</code></dt>
-<dd><a name="index-mno_002dcsync_002danomaly"></a>
-<a name="index-mcsync_002danomaly-1"></a>
-<p>Don&rsquo;t generate extra code to prevent CSYNC or SSYNC instructions from
+<dd><p>Don&rsquo;t generate extra code to prevent CSYNC or SSYNC instructions from
 occurring too soon after a conditional branch.
 </p>
+<a name="index-mlow64k"></a>
 </dd>
 <dt><code>-mlow64k</code></dt>
-<dd><a name="index-mlow64k"></a>
-<p>When enabled, the compiler is free to take advantage of the knowledge that
+<dd><p>When enabled, the compiler is free to take advantage of the knowledge that
 the entire program fits into the low 64k of memory.
 </p>
+<a name="index-mno_002dlow64k"></a>
 </dd>
 <dt><code>-mno-low64k</code></dt>
-<dd><a name="index-mno_002dlow64k"></a>
-<p>Assume that the program is arbitrarily large.  This is the default.
+<dd><p>Assume that the program is arbitrarily large.  This is the default.
 </p>
+<a name="index-mstack_002dcheck_002dl1"></a>
 </dd>
 <dt><code>-mstack-check-l1</code></dt>
-<dd><a name="index-mstack_002dcheck_002dl1"></a>
-<p>Do stack checking using information placed into L1 scratchpad memory by the
+<dd><p>Do stack checking using information placed into L1 scratchpad memory by the
 uClinux kernel.
 </p>
+<a name="index-mid_002dshared_002dlibrary"></a>
 </dd>
 <dt><code>-mid-shared-library</code></dt>
-<dd><a name="index-mid_002dshared_002dlibrary"></a>
-<p>Generate code that supports shared libraries via the library ID method.
+<dd><p>Generate code that supports shared libraries via the library ID method.
 This allows for execute in place and shared libraries in an environment
 without virtual memory management.  This option implies <samp>-fPIC</samp>.
 With a &lsquo;<samp>bfin-elf</samp>&rsquo; target, this option implies <samp>-msim</samp>.
 </p>
+<a name="index-mno_002did_002dshared_002dlibrary"></a>
+<a name="index-mid_002dshared_002dlibrary-1"></a>
 </dd>
 <dt><code>-mno-id-shared-library</code></dt>
-<dd><a name="index-mno_002did_002dshared_002dlibrary"></a>
-<a name="index-mid_002dshared_002dlibrary-1"></a>
-<p>Generate code that doesn&rsquo;t assume ID-based shared libraries are being used.
+<dd><p>Generate code that doesn&rsquo;t assume ID-based shared libraries are being used.
 This is the default.
 </p>
+<a name="index-mleaf_002did_002dshared_002dlibrary"></a>
 </dd>
 <dt><code>-mleaf-id-shared-library</code></dt>
-<dd><a name="index-mleaf_002did_002dshared_002dlibrary"></a>
-<p>Generate code that supports shared libraries via the library ID method,
+<dd><p>Generate code that supports shared libraries via the library ID method,
 but assumes that this library or executable won&rsquo;t link against any other
 ID shared libraries.  That allows the compiler to use faster code for jumps
 and calls.
 </p>
+<a name="index-mno_002dleaf_002did_002dshared_002dlibrary"></a>
+<a name="index-mleaf_002did_002dshared_002dlibrary-1"></a>
 </dd>
 <dt><code>-mno-leaf-id-shared-library</code></dt>
-<dd><a name="index-mno_002dleaf_002did_002dshared_002dlibrary"></a>
-<a name="index-mleaf_002did_002dshared_002dlibrary-1"></a>
-<p>Do not assume that the code being compiled won&rsquo;t link against any ID shared
+<dd><p>Do not assume that the code being compiled won&rsquo;t link against any ID shared
 libraries.  Slower code is generated for jump and call insns.
 </p>
+<a name="index-mshared_002dlibrary_002did"></a>
 </dd>
 <dt><code>-mshared-library-id=n</code></dt>
-<dd><a name="index-mshared_002dlibrary_002did"></a>
-<p>Specifies the identification number of the ID-based shared library being
+<dd><p>Specifies the identification number of the ID-based shared library being
 compiled.  Specifying a value of 0 generates more compact code; specifying
 other values forces the allocation of that number to the current
 library but is no more space- or time-efficient than omitting this option.
 </p>
+<a name="index-msep_002ddata"></a>
 </dd>
 <dt><code>-msep-data</code></dt>
-<dd><a name="index-msep_002ddata"></a>
-<p>Generate code that allows the data segment to be located in a different
+<dd><p>Generate code that allows the data segment to be located in a different
 area of memory from the text segment.  This allows for execute in place in
 an environment without virtual memory management by eliminating relocations
 against the text section.
 </p>
+<a name="index-mno_002dsep_002ddata"></a>
+<a name="index-msep_002ddata-1"></a>
 </dd>
 <dt><code>-mno-sep-data</code></dt>
-<dd><a name="index-mno_002dsep_002ddata"></a>
-<a name="index-msep_002ddata-1"></a>
-<p>Generate code that assumes that the data segment follows the text segment.
+<dd><p>Generate code that assumes that the data segment follows the text segment.
 This is the default.
 </p>
+<a name="index-mlong_002dcalls-3"></a>
+<a name="index-mno_002dlong_002dcalls-1"></a>
 </dd>
 <dt><code>-mlong-calls</code></dt>
 <dt><code>-mno-long-calls</code></dt>
-<dd><a name="index-mlong_002dcalls-3"></a>
-<a name="index-mno_002dlong_002dcalls-1"></a>
-<p>Tells the compiler to perform function calls by first loading the
+<dd><p>Tells the compiler to perform function calls by first loading the
 address of the function into a register and then performing a subroutine
 call on this register.  This switch is needed if the target function
 lies outside of the 24-bit addressing range of the offset-based
@@ -239,23 +242,23 @@ version of subroutine call instruction.
 switches have no effect on how the compiler generates code to handle
 function calls via function pointers.
 </p>
+<a name="index-mfast_002dfp"></a>
 </dd>
 <dt><code>-mfast-fp</code></dt>
-<dd><a name="index-mfast_002dfp"></a>
-<p>Link with the fast floating-point library. This library relaxes some of
+<dd><p>Link with the fast floating-point library. This library relaxes some of
 the IEEE floating-point standard&rsquo;s rules for checking inputs against
 Not-a-Number (NAN), in the interest of performance.
 </p>
+<a name="index-minline_002dplt"></a>
 </dd>
 <dt><code>-minline-plt</code></dt>
-<dd><a name="index-minline_002dplt"></a>
-<p>Enable inlining of PLT entries in function calls to functions that are
+<dd><p>Enable inlining of PLT entries in function calls to functions that are
 not known to bind locally.  It has no effect without <samp>-mfdpic</samp>.
 </p>
+<a name="index-mmulticore"></a>
 </dd>
 <dt><code>-mmulticore</code></dt>
-<dd><a name="index-mmulticore"></a>
-<p>Build a standalone application for multicore Blackfin processors. 
+<dd><p>Build a standalone application for multicore Blackfin processors. 
 This option causes proper start files and link scripts supporting 
 multicore to be used, and defines the macro <code>__BFIN_MULTICORE</code>. 
 It can only be used with <samp>-mcpu=bf561<span class="roman">[</span>-<var>sirevision</var><span class="roman">]</span></samp>. 
@@ -269,37 +272,37 @@ should be named as <code>coreb_main</code>.
 <p>If this option is not used, the single-core application programming
 model is used.
 </p>
+<a name="index-mcorea"></a>
 </dd>
 <dt><code>-mcorea</code></dt>
-<dd><a name="index-mcorea"></a>
-<p>Build a standalone application for Core A of BF561 when using
+<dd><p>Build a standalone application for Core A of BF561 when using
 the one-application-per-core programming model. Proper start files
 and link scripts are used to support Core A, and the macro
 <code>__BFIN_COREA</code> is defined.
 This option can only be used in conjunction with <samp>-mmulticore</samp>.
 </p>
+<a name="index-mcoreb"></a>
 </dd>
 <dt><code>-mcoreb</code></dt>
-<dd><a name="index-mcoreb"></a>
-<p>Build a standalone application for Core B of BF561 when using
+<dd><p>Build a standalone application for Core B of BF561 when using
 the one-application-per-core programming model. Proper start files
 and link scripts are used to support Core B, and the macro
 <code>__BFIN_COREB</code> is defined. When this option is used, <code>coreb_main</code>
 should be used instead of <code>main</code>. 
 This option can only be used in conjunction with <samp>-mmulticore</samp>.
 </p>
+<a name="index-msdram"></a>
 </dd>
 <dt><code>-msdram</code></dt>
-<dd><a name="index-msdram"></a>
-<p>Build a standalone application for SDRAM. Proper start files and
+<dd><p>Build a standalone application for SDRAM. Proper start files and
 link scripts are used to put the application into SDRAM, and the macro
 <code>__BFIN_SDRAM</code> is defined.
 The loader should initialize SDRAM before loading the application.
 </p>
+<a name="index-micplb"></a>
 </dd>
 <dt><code>-micplb</code></dt>
-<dd><a name="index-micplb"></a>
-<p>Assume that ICPLBs are enabled at run time.  This has an effect on certain
+<dd><p>Assume that ICPLBs are enabled at run time.  This has an effect on certain
 anomaly workarounds.  For Linux targets, the default is to assume ICPLBs
 are enabled; for standalone applications the default is off.
 </p></dd>
@@ -308,7 +311,7 @@ are enabled; for standalone applications the default is off.
 <hr>
 <div class="header">
 <p>
-Next: <a href="C6X-Options.html#C6X-Options" accesskey="n" rel="next">C6X Options</a>, Previous: <a href="AVR-Options.html#AVR-Options" accesskey="p" rel="prev">AVR Options</a>, Up: <a href="Submodel-Options.html#Submodel-Options" accesskey="u" rel="up">Submodel Options</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Option-Index.html#Option-Index" title="Index" rel="index">Index</a>]</p>
+Next: <a href="C6X-Options.html#C6X-Options" accesskey="n" rel="next">C6X Options</a>, Previous: <a href="AVR-Options.html#AVR-Options" accesskey="p" rel="prev">AVR Options</a>, Up: <a href="Submodel-Options.html#Submodel-Options" accesskey="u" rel="up">Submodel Options</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Indices.html#Indices" title="Index" rel="index">Index</a>]</p>
 </div>
 
 

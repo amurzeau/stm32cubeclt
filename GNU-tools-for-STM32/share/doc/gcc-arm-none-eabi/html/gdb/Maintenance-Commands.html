@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- Copyright (C) 1988-2022 Free Software Foundation, Inc.
+<!-- Copyright (C) 1988-2023 Free Software Foundation, Inc.
 
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
@@ -81,8 +81,8 @@ messages, see <a href="Debugging-Output.html#Debugging-Output">Debugging Output<
 <dd><a name="index-maint-agent"></a>
 <a name="index-maint-agent_002deval"></a>
 </dd>
-<dt><code>maint agent <span class="roman">[</span>-at <var>location</var><span class="roman">,</span><span class="roman">]</span> <var>expression</var></code></dt>
-<dt><code>maint agent-eval <span class="roman">[</span>-at <var>location</var><span class="roman">,</span><span class="roman">]</span> <var>expression</var></code></dt>
+<dt><code>maint agent <span class="roman">[</span>-at <var>linespec</var><span class="roman">,</span><span class="roman">]</span> <var>expression</var></code></dt>
+<dt><code>maint agent-eval <span class="roman">[</span>-at <var>linespec</var><span class="roman">,</span><span class="roman">]</span> <var>expression</var></code></dt>
 <dd><p>Translate the given <var>expression</var> into remote agent bytecodes.
 This command is useful for debugging the Agent Expression mechanism
 (see <a href="Agent-Expressions.html#Agent-Expressions">Agent Expressions</a>).  The &lsquo;<samp>agent</samp>&rsquo; version produces an
@@ -93,7 +93,8 @@ globb</code> will include bytecodes to record four bytes of memory at each
 of the addresses of <code>globa</code> and <code>globb</code>, while discarding
 the result of the addition, while an evaluation expression will do the
 addition and return the sum.
-If <code>-at</code> is given, generate remote agent bytecode for <var>location</var>.
+If <code>-at</code> is given, generate remote agent bytecode for all the
+addresses to which <var>linespec</var> resolves (see <a href="Linespec-Locations.html#Linespec-Locations">Linespec Locations</a>).
 If not, generate remote agent bytecode for current frame PC address.
 </p>
 <a name="index-maint-agent_002dprintf"></a>
@@ -221,6 +222,47 @@ packet history.
 <dt><code>maint info jit</code></dt>
 <dd><p>Print information about JIT code objects loaded in the current inferior.
 </p>
+<a name="maint-info-python_002ddisassemblers"></a><a name="index-maint-info-python_002ddisassemblers"></a>
+</dd>
+<dt><code>maint info python-disassemblers</code></dt>
+<dd><p>This command is defined within the <code>gdb.disassembler</code> Python
+module (see <a href="Disassembly-In-Python.html#Disassembly-In-Python">Disassembly In Python</a>), and will only be present after
+that module has been imported.  To force the module to be imported do
+the following:
+</p>
+<div class="smallexample">
+<pre class="smallexample">(gdb) python import gdb.disassembler
+</pre></div>
+
+<p>This command lists all the architectures for which a disassembler is
+currently registered, and the name of the disassembler.  If a
+disassembler is registered for all architectures, then this is listed
+last against the &lsquo;<samp>GLOBAL</samp>&rsquo; architecture.
+</p>
+<p>If one of the disassemblers would be selected for the architecture of
+the current inferior, then this disassembler will be marked.
+</p>
+<p>The following example shows a situation in which two disassemblers are
+registered, initially the &lsquo;<samp>i386</samp>&rsquo; disassembler matches the current
+architecture, then the architecture is changed, now the &lsquo;<samp>GLOBAL</samp>&rsquo;
+disassembler matches.
+</p>
+<div class="smallexample">
+<pre class="smallexample">(gdb) show architecture
+The target architecture is set to &quot;auto&quot; (currently &quot;i386&quot;).
+(gdb) maint info python-disassemblers
+Architecture        Disassember Name
+i386                Disassembler_1	(Matches current architecture)
+GLOBAL              Disassembler_2
+</pre><pre class="smallexample">(gdb) set architecture arm
+The target architecture is set to &quot;arm&quot;.
+(gdb) maint info python-disassemblers
+quit
+Architecture        Disassember Name
+i386                Disassembler_1
+GLOBAL              Disassembler_2	(Matches current architecture)
+</pre></div>
+
 <a name="index-set-displaced_002dstepping"></a>
 <a name="index-show-displaced_002dstepping"></a>
 <a name="index-displaced-stepping-support"></a>
@@ -345,6 +387,18 @@ Create a core file? (y or n) <kbd>n</kbd>
 (gdb)
 </pre></div>
 
+<a name="index-maint-set-debuginfod-download_002dsections"></a>
+<a name="index-maint-show-debuginfod-download_002dsections"></a>
+<a name="index-debuginfod_002c-maintenance-commands"></a>
+</dd>
+<dt><code>maint set debuginfod download-sections</code></dt>
+<dt><code>maint set debuginfod download-sections <span class="roman">[</span>on|off<span class="roman">]</span></code></dt>
+<dt><code>maint show debuginfod download-sections</code></dt>
+<dd><p>Controls whether <small>GDB</small> will attempt to download individual
+ELF/DWARF sections from <code>debuginfod</code>.  If disabled, only
+whole debug info files will be downloaded; this could result
+in <small>GDB</small> downloading larger amounts of data.
+</p>
 <a name="index-GDB-internal-error"></a>
 <a name="index-internal-errors_002c-control-of-GDB-behavior"></a>
 <a name="index-demangler-crashes-2"></a>
@@ -487,6 +541,24 @@ The program being debugged stopped while in a function called from GDB.
 
 <p>Takes an optional file parameter.
 </p>
+<a name="index-maint-print-frame_002did"></a>
+</dd>
+<dt><code>maint print frame-id</code></dt>
+<dt><code>maint print frame-id <var>level</var></code></dt>
+<dd><p>Print <small>GDB</small>&rsquo;s internal frame-id for the frame at relative
+<var>level</var>, or for the currently selected frame when <var>level</var> is
+not given.
+</p>
+<p>If used, <var>level</var> should be an integer, as displayed in the
+<code>backtrace</code> output.
+</p>
+<div class="smallexample">
+<pre class="smallexample">(gdb) maint print frame-id
+frame-id for frame #0: {stack=0x7fffffffac70,code=0x0000000000401106,!special}
+(gdb) maint print frame-id 2
+frame-id for frame #2: {stack=0x7fffffffac90,code=0x000000000040111c,!special}
+</pre></div>
+
 <a name="index-maint-print-registers"></a>
 <a name="index-maint-print-raw_002dregisters"></a>
 <a name="index-maint-print-cooked_002dregisters"></a>
@@ -630,6 +702,15 @@ that symbol is described.  The type chain produced by this command is
 a recursive definition of the data type as stored in <small>GDB</small>&rsquo;s
 data structures, including its flags and contained types.
 </p>
+<a name="index-maint-print-record_002dinstruction"></a>
+</dd>
+<dt><code>maint print record-instruction</code></dt>
+<dt><code>maint print record-instruction <var>N</var></code></dt>
+<dd><p>print how GDB recorded a given instruction.  If <var>n</var> is not positive
+number, it prints the values stored by the inferior before the <var>n</var>-th previous
+instruction was exectued.  If <var>n</var> is positive, print the values after the <var>n</var>-th
+following instruction is executed.  If <var>n</var> is not given, 0 is assumed.
+</p>
 <a name="index-maint-selftest"></a>
 <a name="index-self-tests"></a>
 </dd>
@@ -722,6 +803,11 @@ with the DWARF frame unwinders enabled.
 </p>
 <p>If DWARF frame unwinders are not supported for a particular target
 architecture, then enabling this flag does not cause them to be used.
+</p>
+<a name="index-maint-info-frame_002dunwinders"></a>
+</dd>
+<dt><code>maint info frame-unwinders</code></dt>
+<dd><p>List the frame unwinders currently in effect, starting with the highest priority.
 </p>
 <a name="index-maint-set-worker_002dthreads"></a>
 <a name="index-maint-show-worker_002dthreads"></a>
@@ -829,6 +915,18 @@ has been resized.  This setting is intended for use by the test suite,
 where it would otherwise be difficult to determine when a resize and
 refresh has been completed.
 </p>
+<a name="index-maint-set-tui_002dleft_002dmargin_002dverbose"></a>
+<a name="index-maint-show-tui_002dleft_002dmargin_002dverbose"></a>
+</dd>
+<dt><code>maint set tui-left-margin-verbose</code></dt>
+<dt><code>maint show tui-left-margin-verbose</code></dt>
+<dd><p>Control whether the left margin of the TUI source and disassembly windows
+uses &lsquo;<samp>_</samp>&rsquo; and &lsquo;<samp>0</samp>&rsquo; at locations where otherwise there would be a
+space.  The default is <code>off</code>, which means spaces are used.  The
+setting is intended to make it clear where the left margin begins and
+ends, to avoid incorrectly interpreting a space as being part of the
+the left margin.
+</p>
 <a name="index-maint-set-per_002dcommand"></a>
 <a name="index-maint-show-per_002dcommand"></a>
 </dd>
@@ -912,6 +1010,36 @@ styling, if it is available.
 library when <small>GDB</small> is linked against the GNU Source Highlight
 library.
 </p>
+<a name="maint_005flibopcodes_005fstyling"></a><a name="index-maint-set-libopcodes_002dstyling-enabled"></a>
+<a name="index-maint-show-libopcodes_002dstyling-enabled"></a>
+</dd>
+<dt><code>maint set libopcodes-styling enabled <span class="roman">[</span>on|off<span class="roman">]</span></code></dt>
+<dt><code>maint show libopcodes-styling enabled</code></dt>
+<dd><p>Control whether <small>GDB</small> should use its builtin disassembler
+(<samp>libopcodes</samp>) to style disassembler output (see <a href="Output-Styling.html#Output-Styling">Output Styling</a>).  The builtin disassembler does not support styling for all
+architectures.
+</p>
+<p>When this option is &lsquo;<samp>off</samp>&rsquo; the builtin disassembler will not be
+used for styling, <small>GDB</small> will fall back to using the Python
+Pygments package if possible.
+</p>
+<p>Trying to set this option &lsquo;<samp>on</samp>&rsquo; for an architecture that the
+builtin disassembler is unable to style will give an error, otherwise,
+the builtin disassembler will be used to style disassembler output.
+</p>
+<p>This option is &lsquo;<samp>on</samp>&rsquo; by default for supported architectures.
+</p>
+<p>This option is useful for debugging <small>GDB</small>&rsquo;s use of the Pygments
+library when <small>GDB</small> is built for an architecture that supports
+styling with the builtin disassembler
+</p>
+<a name="index-maint-info-screen"></a>
+<a name="index-show-screen-characteristics"></a>
+</dd>
+<dt><code>maint info screen</code></dt>
+<dd><p>Print various characteristics of the screen, such as various notions
+of width and height.
+</p>
 <a name="index-maint-space"></a>
 <a name="index-memory-used-by-commands"></a>
 </dd>
@@ -991,6 +1119,13 @@ give an error.
 <p>For platforms that do support creating the backtrace this feature is
 <code>on</code> by default.
 </p>
+<a name="index-maint-wait_002dfor_002dindex_002dcache"></a>
+</dd>
+<dt><code>maint wait-for-index-cache</code></dt>
+<dd><p>Wait until all pending writes to the index cache have completed.  This
+is used by the test suite to avoid races when the index cache is being
+updated by a worker thread.
+</p>
 <a name="index-maint-with"></a>
 </dd>
 <dt><code>maint with <var>setting</var> [<var>value</var>] [-- <var>command</var>]</code></dt>
@@ -998,6 +1133,28 @@ give an error.
 variables.  This is used by the testsuite to exercise the <code>with</code>
 command&rsquo;s infrastructure.
 </p>
+<a name="index-maint-ignore_002dprobes"></a>
+</dd>
+<dt><code>maint ignore-probes [<var>-v</var>|<var>-verbose</var>] [<var>provider</var> [<var>name</var> [<var>objfile</var>]]]</code></dt>
+<dt><code>maint ignore-probes <var>-reset</var></code></dt>
+<dd><p>Set or reset the ignore-probes filter.  The <var>provider</var>, <var>name</var>
+and <var>objfile</var> arguments are as in <code>enable probes</code> and
+<code>disable probes</code> (see <a href="Static-Probe-Points.html#enable-probes">enable probes</a>).  Only supported for
+SystemTap probes.
+</p>
+<p>Here&rsquo;s an example of using <code>maint ignore-probes</code>:
+</p><div class="smallexample">
+<pre class="smallexample">(gdb) maint ignore-probes -verbose libc ^longjmp$
+ignore-probes filter has been set to:
+PROVIDER: 'libc'
+PROBE_NAME: '^longjmp$'
+OBJNAME: ''
+(gdb) start
+&lt;... more output ...&gt;
+Ignoring SystemTap probe libc longjmp in /lib64/libc.so.6.^M
+Ignoring SystemTap probe libc longjmp in /lib64/libc.so.6.^M
+Ignoring SystemTap probe libc longjmp in /lib64/libc.so.6.^M
+</pre></div>
 </dd>
 </dl>
 

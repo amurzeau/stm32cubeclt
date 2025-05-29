@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- Copyright (C) 1988-2021 Free Software Foundation, Inc.
+<!-- Copyright (C) 1988-2023 Free Software Foundation, Inc.
 
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
@@ -208,9 +208,9 @@ preserve functionality of inline assembly constructs using the
 <dl>
 <dt><a name="index-FIND_005fBASE_005fTERM"></a>Macro: <strong>FIND_BASE_TERM</strong> <em>(<var>x</var>)</em></dt>
 <dd><p>A C expression to determine the base term of address <var>x</var>,
-or to provide a simplified version of <var>x</var> from which <samp>alias.c</samp>
+or to provide a simplified version of <var>x</var> from which <samp>alias.cc</samp>
 can easily find the base term.  This macro is used in only two places:
-<code>find_base_value</code> and <code>find_base_term</code> in <samp>alias.c</samp>.
+<code>find_base_value</code> and <code>find_base_term</code> in <samp>alias.cc</samp>.
 </p>
 <p>It is always safe for this macro to not be defined.  It exists so
 that alias analysis can understand machine-dependent addresses.
@@ -438,18 +438,24 @@ correct for most targets.
 
 <dl>
 <dt><a name="index-TARGET_005fVECTORIZE_005fVECTOR_005fALIGNMENT_005fREACHABLE"></a>Target Hook: <em>bool</em> <strong>TARGET_VECTORIZE_VECTOR_ALIGNMENT_REACHABLE</strong> <em>(const_tree <var>type</var>, bool <var>is_packed</var>)</em></dt>
-<dd><p>Return true if vector alignment is reachable (by peeling N iterations) for the given scalar type <var>type</var>.  <var>is_packed</var> is false if the scalar access using <var>type</var> is known to be naturally aligned.
+<dd><p>Return true if vector alignment is reachable (by peeling N iterations)
+for the given scalar type <var>type</var>.  <var>is_packed</var> is false if the scalar
+access using <var>type</var> is known to be naturally aligned.
 </p></dd></dl>
 
 <dl>
-<dt><a name="index-TARGET_005fVECTORIZE_005fVEC_005fPERM_005fCONST"></a>Target Hook: <em>bool</em> <strong>TARGET_VECTORIZE_VEC_PERM_CONST</strong> <em>(machine_mode <var>mode</var>, rtx <var>output</var>, rtx <var>in0</var>, rtx <var>in1</var>, const vec_perm_indices <var>&amp;sel</var>)</em></dt>
+<dt><a name="index-TARGET_005fVECTORIZE_005fVEC_005fPERM_005fCONST"></a>Target Hook: <em>bool</em> <strong>TARGET_VECTORIZE_VEC_PERM_CONST</strong> <em>(machine_mode <var>mode</var>, machine_mode <var>op_mode</var>, rtx <var>output</var>, rtx <var>in0</var>, rtx <var>in1</var>, const vec_perm_indices <var>&amp;sel</var>)</em></dt>
 <dd><p>This hook is used to test whether the target can permute up to two
-vectors of mode <var>mode</var> using the permutation vector <code>sel</code>, and
-also to emit such a permutation.  In the former case <var>in0</var>, <var>in1</var>
-and <var>out</var> are all null.  In the latter case <var>in0</var> and <var>in1</var> are
-the source vectors and <var>out</var> is the destination vector; all three are
-registers of mode <var>mode</var>.  <var>in1</var> is the same as <var>in0</var> if
-<var>sel</var> describes a permutation on one vector instead of two.
+vectors of mode <var>op_mode</var> using the permutation vector <code>sel</code>,
+producing a vector of mode <var>mode</var>.  The hook is also used to emit such
+a permutation.
+</p>
+<p>When the hook is being used to test whether the target supports a permutation,
+<var>in0</var>, <var>in1</var>, and <var>out</var> are all null.  When the hook is being used
+to emit a permutation, <var>in0</var> and <var>in1</var> are the source vectors of mode
+<var>op_mode</var> and <var>out</var> is the destination vector of mode <var>mode</var>.
+<var>in1</var> is the same as <var>in0</var> if <var>sel</var> describes a permutation on one
+vector instead of two.
 </p>
 <p>Return true if the operation is possible, emitting instructions for it
 if rtxes are provided.
@@ -460,6 +466,15 @@ try the equivalent byte operation.  If that also fails, it will try forcing
 the selector into a register and using the <var>vec_perm<var>mode</var></var>
 instruction pattern.  There is no need for the hook to handle these two
 implementation approaches itself.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-TARGET_005fVECTORIZE_005fPREFERRED_005fDIV_005fAS_005fSHIFTS_005fOVER_005fMULT"></a>Target Hook: <em>bool</em> <strong>TARGET_VECTORIZE_PREFERRED_DIV_AS_SHIFTS_OVER_MULT</strong> <em>(const_tree <var>type</var>)</em></dt>
+<dd><p>Sometimes it is possible to implement a vector division using a sequence
+of two addition-shift pairs, giving four instructions in total.
+Return true if taking this approach for <var>vectype</var> is likely
+to be better than using a sequence involving highpart multiplication.
+Default is false if <code>can_mult_highpart_p</code>, otherwise true.
 </p></dd></dl>
 
 <dl>
@@ -583,23 +598,15 @@ all zeros.  GCC can then try to branch around the instruction instead.
 </p></dd></dl>
 
 <dl>
-<dt><a name="index-TARGET_005fVECTORIZE_005fINIT_005fCOST"></a>Target Hook: <em>void *</em> <strong>TARGET_VECTORIZE_INIT_COST</strong> <em>(class loop *<var>loop_info</var>)</em></dt>
-<dd><p>This hook should initialize target-specific data structures in preparation for modeling the costs of vectorizing a loop or basic block.  The default allocates three unsigned integers for accumulating costs for the prologue, body, and epilogue of the loop or basic block.  If <var>loop_info</var> is non-NULL, it identifies the loop being vectorized; otherwise a single block is being vectorized.
-</p></dd></dl>
-
-<dl>
-<dt><a name="index-TARGET_005fVECTORIZE_005fADD_005fSTMT_005fCOST"></a>Target Hook: <em>unsigned</em> <strong>TARGET_VECTORIZE_ADD_STMT_COST</strong> <em>(class vec_info *<var></var>, void *<var>data</var>, int <var>count</var>, enum vect_cost_for_stmt <var>kind</var>, class _stmt_vec_info *<var>stmt_info</var>, tree <var>vectype</var>, int <var>misalign</var>, enum vect_cost_model_location <var>where</var>)</em></dt>
-<dd><p>This hook should update the target-specific <var>data</var> in response to adding <var>count</var> copies of the given <var>kind</var> of statement to a loop or basic block.  The default adds the builtin vectorizer cost for the copies of the statement to the accumulator specified by <var>where</var>, (the prologue, body, or epilogue) and returns the amount added.  The return value should be viewed as a tentative cost that may later be revised.
-</p></dd></dl>
-
-<dl>
-<dt><a name="index-TARGET_005fVECTORIZE_005fFINISH_005fCOST"></a>Target Hook: <em>void</em> <strong>TARGET_VECTORIZE_FINISH_COST</strong> <em>(void *<var>data</var>, unsigned *<var>prologue_cost</var>, unsigned *<var>body_cost</var>, unsigned *<var>epilogue_cost</var>)</em></dt>
-<dd><p>This hook should complete calculations of the cost of vectorizing a loop or basic block based on <var>data</var>, and return the prologue, body, and epilogue costs as unsigned integers.  The default returns the value of the three accumulators.
-</p></dd></dl>
-
-<dl>
-<dt><a name="index-TARGET_005fVECTORIZE_005fDESTROY_005fCOST_005fDATA"></a>Target Hook: <em>void</em> <strong>TARGET_VECTORIZE_DESTROY_COST_DATA</strong> <em>(void *<var>data</var>)</em></dt>
-<dd><p>This hook should release <var>data</var> and any related data structures allocated by TARGET_VECTORIZE_INIT_COST.  The default releases the accumulator.
+<dt><a name="index-TARGET_005fVECTORIZE_005fCREATE_005fCOSTS"></a>Target Hook: <em>class vector_costs *</em> <strong>TARGET_VECTORIZE_CREATE_COSTS</strong> <em>(vec_info *<var>vinfo</var>, bool <var>costing_for_scalar</var>)</em></dt>
+<dd><p>This hook should initialize target-specific data structures in preparation
+for modeling the costs of vectorizing a loop or basic block.  The default
+allocates three unsigned integers for accumulating costs for the prologue,
+body, and epilogue of the loop or basic block.  If <var>loop_info</var> is
+non-NULL, it identifies the loop being vectorized; otherwise a single block
+is being vectorized.  If <var>costing_for_scalar</var> is true, it indicates the
+current cost model is for the scalar version of a loop or block; otherwise
+it is for the vector version.
 </p></dd></dl>
 
 <dl>
@@ -621,10 +628,13 @@ stores.
 </p></dd></dl>
 
 <dl>
-<dt><a name="index-TARGET_005fSIMD_005fCLONE_005fCOMPUTE_005fVECSIZE_005fAND_005fSIMDLEN"></a>Target Hook: <em>int</em> <strong>TARGET_SIMD_CLONE_COMPUTE_VECSIZE_AND_SIMDLEN</strong> <em>(struct cgraph_node *<var></var>, struct cgraph_simd_clone *<var></var>, <var>tree</var>, <var>int</var>)</em></dt>
+<dt><a name="index-TARGET_005fSIMD_005fCLONE_005fCOMPUTE_005fVECSIZE_005fAND_005fSIMDLEN"></a>Target Hook: <em>int</em> <strong>TARGET_SIMD_CLONE_COMPUTE_VECSIZE_AND_SIMDLEN</strong> <em>(struct cgraph_node *<var></var>, struct cgraph_simd_clone *<var></var>, <var>tree</var>, <var>int</var>, <var>bool</var>)</em></dt>
 <dd><p>This hook should set <var>vecsize_mangle</var>, <var>vecsize_int</var>, <var>vecsize_float</var>
 fields in <var>simd_clone</var> structure pointed by <var>clone_info</var> argument and also
 <var>simdlen</var> field if it was previously 0.
+<var>vecsize_mangle</var> is a marker for the backend only. <var>vecsize_int</var> and
+<var>vecsize_float</var> should be left zero on targets where the number of lanes is
+not determined by the bitsize (in which case <var>simdlen</var> is always used).
 The hook should return 0 if SIMD clones shouldn&rsquo;t be emitted,
 or number of <var>vecsize_mangle</var> variants that should be emitted.
 </p></dd></dl>
@@ -712,6 +722,52 @@ and &lsquo;<samp><var>ops</var>[1]</samp>&rsquo; are conditionally added togethe
 <p>This hook is only relevant if the target supports conditional patterns
 like <code>cond_add<var>m</var></code>.  The default implementation returns a zero
 constant of type <var>type</var>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-TARGET_005fGOACC_005fADJUST_005fPRIVATE_005fDECL"></a>Target Hook: <em>tree</em> <strong>TARGET_GOACC_ADJUST_PRIVATE_DECL</strong> <em>(location_t <var>loc</var>, tree <var>var</var>, int <var>level</var>)</em></dt>
+<dd><p>This hook, if defined, is used by accelerator target back-ends to adjust
+OpenACC variable declarations that should be made private to the given
+parallelism level (i.e. <code>GOMP_DIM_GANG</code>, <code>GOMP_DIM_WORKER</code> or
+<code>GOMP_DIM_VECTOR</code>).  A typical use for this hook is to force variable
+declarations at the <code>gang</code> level to reside in GPU shared memory.
+<var>loc</var> may be used for diagnostic purposes.
+</p>
+<p>You may also use the <code>TARGET_GOACC_EXPAND_VAR_DECL</code> hook if the
+adjusted variable declaration needs to be expanded to RTL in a non-standard
+way.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-TARGET_005fGOACC_005fEXPAND_005fVAR_005fDECL"></a>Target Hook: <em>rtx</em> <strong>TARGET_GOACC_EXPAND_VAR_DECL</strong> <em>(tree <var>var</var>)</em></dt>
+<dd><p>This hook, if defined, is used by accelerator target back-ends to expand
+specially handled kinds of <code>VAR_DECL</code> expressions.  A particular use is
+to place variables with specific attributes inside special accelarator
+memories.  A return value of <code>NULL</code> indicates that the target does not
+handle this <code>VAR_DECL</code>, and normal RTL expanding is resumed.
+</p>
+<p>Only define this hook if your accelerator target needs to expand certain
+<code>VAR_DECL</code> nodes in a way that differs from the default.  You can also adjust
+private variables at OpenACC device-lowering time using the
+<code>TARGET_GOACC_ADJUST_PRIVATE_DECL</code> target hook.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-TARGET_005fGOACC_005fCREATE_005fWORKER_005fBROADCAST_005fRECORD"></a>Target Hook: <em>tree</em> <strong>TARGET_GOACC_CREATE_WORKER_BROADCAST_RECORD</strong> <em>(tree <var>rec</var>, bool <var>sender</var>, const char *<var>name</var>, unsigned HOST_WIDE_INT <var>offset</var>)</em></dt>
+<dd><p>Create a record used to propagate local-variable state from an active
+worker to other workers.  A possible implementation might adjust the type
+of REC to place the new variable in shared GPU memory.
+</p>
+<p>Presence of this target hook indicates that middle end neutering/broadcasting
+be used.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-TARGET_005fGOACC_005fSHARED_005fMEM_005fLAYOUT"></a>Target Hook: <em>void</em> <strong>TARGET_GOACC_SHARED_MEM_LAYOUT</strong> <em>(unsigned HOST_WIDE_INT *<var></var>, unsigned HOST_WIDE_INT *<var></var>, <var>int[]</var>, unsigned <var>HOST_WIDE_INT[]</var>, unsigned <var>HOST_WIDE_INT[]</var>)</em></dt>
+<dd><p>Lay out a fixed shared-memory region on the target.  The LO and HI
+arguments should be set to a range of addresses that can be used for worker
+broadcasting. The dimensions, reduction size and gang-private size
+arguments are for the current offload region.
 </p></dd></dl>
 
 <hr>

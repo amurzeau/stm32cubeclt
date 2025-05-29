@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- Copyright (C) 1988-2021 Free Software Foundation, Inc.
+<!-- Copyright (C) 1988-2023 Free Software Foundation, Inc.
 
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
@@ -82,9 +82,9 @@ distributions such as that of GNU Binutils.  It also contains several
 subdirectories that contain parts of GCC and its runtime libraries:
 </p>
 <dl compact="compact">
-<dt><samp>boehm-gc</samp></dt>
-<dd><p>The Boehm conservative garbage collector, optionally used as part of
-the ObjC runtime library when configured with <samp>--enable-objc-gc</samp>.
+<dt><samp>c++tools</samp></dt>
+<dd><p>Contains the sources for the g++-mapper-server, a tool used with
+C++ modules.
 </p>
 </dd>
 <dt><samp>config</samp></dt>
@@ -116,6 +116,10 @@ language front ends, and testsuites.  See <a href="gcc-Directory.html#gcc-Direct
 <dd><p>Support tools for GNAT.
 </p>
 </dd>
+<dt><samp>gotools</samp></dt>
+<dd><p>Support tools for Go.
+</p>
+</dd>
 <dt><samp>include</samp></dt>
 <dd><p>Headers for the <code>libiberty</code> library.
 </p>
@@ -132,6 +136,19 @@ include it in <code>libc</code>.
 <dt><samp>libatomic</samp></dt>
 <dd><p>The runtime support library for atomic operations (e.g. for <code>__sync</code>
 and <code>__atomic</code>).
+</p>
+</dd>
+<dt><samp>libbacktrace</samp></dt>
+<dd><p>A library that allows GCC to produce backtraces when it crashes.
+</p>
+</dd>
+<dt><samp>libcc1</samp></dt>
+<dd><p>A library that allows GDB to make use of the compiler.
+</p>
+</dd>
+<dt><samp>libcody</samp></dt>
+<dd><p>A compiler dynamism library to allow communication between compilers and
+build systems, for purposes such as C++ modules.
 </p>
 </dd>
 <dt><samp>libcpp</samp></dt>
@@ -152,6 +169,10 @@ and <code>__atomic</code>).
 </dd>
 <dt><samp>libgfortran</samp></dt>
 <dd><p>The Fortran runtime library.
+</p>
+</dd>
+<dt><samp>libgm2</samp></dt>
+<dd><p>The Modula-2 runtime library.
 </p>
 </dd>
 <dt><samp>libgo</samp></dt>
@@ -177,13 +198,19 @@ about this library.
 <dd><p>The Objective-C and Objective-C++ runtime library.
 </p>
 </dd>
+<dt><samp>libphobos</samp></dt>
+<dd><p>The D standard and runtime library.  The bulk of this library is mirrored
+from the <a href="https://github.com/dlang">master D repositories</a>.
+</p>
+</dd>
 <dt><samp>libquadmath</samp></dt>
 <dd><p>The runtime support library for quad-precision math operations.
 </p>
 </dd>
-<dt><samp>libphobos</samp></dt>
-<dd><p>The D standard and runtime library.  The bulk of this library is mirrored
-from the <a href="https://github.com/dlang">master D repositories</a>.
+<dt><samp>libsanitizer</samp></dt>
+<dd><p>Libraries for various sanitizers.  The bulk of this directory is mirrored
+from the <a href="https://github.com/google/sanitizers">Google sanitizers
+repositories</a>.
 </p>
 </dd>
 <dt><samp>libssp</samp></dt>
@@ -192,6 +219,10 @@ from the <a href="https://github.com/dlang">master D repositories</a>.
 </dd>
 <dt><samp>libstdc++-v3</samp></dt>
 <dd><p>The C++ runtime library.
+</p>
+</dd>
+<dt><samp>libvtv</samp></dt>
+<dd><p>The vtable verification library.
 </p>
 </dd>
 <dt><samp>lto-plugin</samp></dt>
@@ -211,7 +242,7 @@ uncompressing GCC&rsquo;s intermediate language in LTO object files.
 <p>The build system in the top level directory, including how recursion
 into subdirectories works and how building runtime libraries for
 multilibs is handled, is documented in a separate manual, included
-with GNU Binutils.  See <a href="../configure/index.html#Top">GNU configure and build system</a> in <cite>The GNU configure and build system</cite>, for details.
+with GNU Binutils.
 </p>
 <hr>
 <div class="header">

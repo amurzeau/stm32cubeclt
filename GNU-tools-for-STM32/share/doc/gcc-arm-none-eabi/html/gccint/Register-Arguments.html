@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- Copyright (C) 1988-2021 Free Software Foundation, Inc.
+<!-- Copyright (C) 1988-2023 Free Software Foundation, Inc.
 
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
@@ -91,12 +91,6 @@ the previous arguments.
 <p>The return value is usually either a <code>reg</code> RTX for the hard
 register in which to pass the argument, or zero to pass the argument
 on the stack.
-</p>
-<p>The return value can be a <code>const_int</code> which means argument is
-passed in a target specific slot with specified number.  Target hooks
-should be used to store or load argument in such case.  See
-<code>TARGET_STORE_BOUNDS_FOR_ARG</code> and <code>TARGET_LOAD_BOUNDS_FOR_ARG</code>
-for more information.
 </p>
 <p>The value of the expression can also be a <code>parallel</code> RTX.  This is
 used when an argument is passed in multiple locations.  The mode of the
@@ -429,7 +423,7 @@ type of <var>type</var>. If <var>type</var> is not a valid va_list type, it retu
 <dd><p>This hook performs target-specific gimplification of
 <code>VA_ARG_EXPR</code>.  The first two parameters correspond to the
 arguments to <code>va_arg</code>; the latter two are as in
-<code>gimplify.c:gimplify_expr</code>.
+<code>gimplify.cc:gimplify_expr</code>.
 </p></dd></dl>
 
 <dl>
@@ -441,7 +435,11 @@ hook returns true for both <code>ptr_mode</code> and <code>Pmode</code>.
 
 <dl>
 <dt><a name="index-TARGET_005fREF_005fMAY_005fALIAS_005fERRNO"></a>Target Hook: <em>bool</em> <strong>TARGET_REF_MAY_ALIAS_ERRNO</strong> <em>(ao_ref *<var>ref</var>)</em></dt>
-<dd><p>Define this to return nonzero if the memory reference <var>ref</var>  may alias with the system C library errno location.  The default  version of this hook assumes the system C library errno location  is either a declaration of type int or accessed by dereferencing  a pointer to int.
+<dd><p>Define this to return nonzero if the memory reference <var>ref</var>
+may alias with the system C library errno location.  The default
+version of this hook assumes the system C library errno location
+is either a declaration of type int or accessed by dereferencing
+a pointer to int.
 </p></dd></dl>
 
 <dl>
@@ -463,7 +461,7 @@ must work.
 <p>The default version of this hook returns true for any mode
 required to handle the basic C types (as defined by the port).
 Included here are the double-word arithmetic supported by the
-code in <samp>optabs.c</samp>.
+code in <samp>optabs.cc</samp>.
 </p></dd></dl>
 
 <dl>

@@ -1,6 +1,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- Copyright (C) 1988-2021 Free Software Foundation, Inc.
+<!-- This file documents the use of the GNU compilers.
+
+Copyright (C) 1988-2023 Free Software Foundation, Inc.
 
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
@@ -30,7 +32,7 @@ You have freedom to copy and modify this GNU Manual, like GNU
 <meta name="distribution" content="global">
 <meta name="Generator" content="makeinfo">
 <link href="index.html#Top" rel="start" title="Top">
-<link href="Option-Index.html#Option-Index" rel="index" title="Option Index">
+<link href="Indices.html#Indices" rel="index" title="Indices">
 <link href="index.html#SEC_Contents" rel="contents" title="Table of Contents">
 <link href="PowerPC-AltiVec_002fVSX-Built_002din-Functions.html#PowerPC-AltiVec_002fVSX-Built_002din-Functions" rel="up" title="PowerPC AltiVec/VSX Built-in Functions">
 <link href="PowerPC-Hardware-Transactional-Memory-Built_002din-Functions.html#PowerPC-Hardware-Transactional-Memory-Built_002din-Functions" rel="next" title="PowerPC Hardware Transactional Memory Built-in Functions">
@@ -66,11 +68,11 @@ ul.no-bullet {list-style: none}
 
 </head>
 
-<body lang="en">
+<body lang="en_US">
 <a name="PowerPC-AltiVec-Built_002din-Functions-Available-on-ISA-3_002e1"></a>
 <div class="header">
 <p>
-Previous: <a href="PowerPC-AltiVec-Built_002din-Functions-Available-on-ISA-3_002e0.html#PowerPC-AltiVec-Built_002din-Functions-Available-on-ISA-3_002e0" accesskey="p" rel="prev">PowerPC AltiVec Built-in Functions Available on ISA 3.0</a>, Up: <a href="PowerPC-AltiVec_002fVSX-Built_002din-Functions.html#PowerPC-AltiVec_002fVSX-Built_002din-Functions" accesskey="u" rel="up">PowerPC AltiVec/VSX Built-in Functions</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Option-Index.html#Option-Index" title="Index" rel="index">Index</a>]</p>
+Previous: <a href="PowerPC-AltiVec-Built_002din-Functions-Available-on-ISA-3_002e0.html#PowerPC-AltiVec-Built_002din-Functions-Available-on-ISA-3_002e0" accesskey="p" rel="prev">PowerPC AltiVec Built-in Functions Available on ISA 3.0</a>, Up: <a href="PowerPC-AltiVec_002fVSX-Built_002din-Functions.html#PowerPC-AltiVec_002fVSX-Built_002din-Functions" accesskey="u" rel="up">PowerPC AltiVec/VSX Built-in Functions</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Indices.html#Indices" title="Index" rel="index">Index</a>]</p>
 </div>
 <hr>
 <a name="PowerPC-AltiVec-Built_002din-Functions-Available-on-ISA-3_002e1-1"></a>
@@ -82,7 +84,7 @@ PowerPC family of processors, starting with ISA 3.1 (<samp>-mcpu=power10</samp>)
 
 <div class="smallexample">
 <pre class="smallexample">vector unsigned long long int
-</pre><pre class="smallexample">vec_cfuge (vector unsigned long long int, vector unsigned long long int)
+</pre><pre class="smallexample">vec_cfuge (vector unsigned long long int, vector unsigned long long int);
 </pre></div>
 <p>Perform a vector centrifuge operation, as if implemented by the
 <code>vcfuged</code> instruction.
@@ -90,7 +92,7 @@ PowerPC family of processors, starting with ISA 3.1 (<samp>-mcpu=power10</samp>)
 </p>
 <div class="smallexample">
 <pre class="smallexample">vector unsigned long long int
-</pre><pre class="smallexample">vec_cntlzm (vector unsigned long long int, vector unsigned long long int)
+</pre><pre class="smallexample">vec_cntlzm (vector unsigned long long int, vector unsigned long long int);
 </pre></div>
 <p>Perform a vector count leading zeros under bit mask operation, as if
 implemented by the <code>vclzdm</code> instruction.
@@ -98,7 +100,7 @@ implemented by the <code>vclzdm</code> instruction.
 </p>
 <div class="smallexample">
 <pre class="smallexample">vector unsigned long long int
-</pre><pre class="smallexample">vec_cnttzm (vector unsigned long long int, vector unsigned long long int)
+</pre><pre class="smallexample">vec_cnttzm (vector unsigned long long int, vector unsigned long long int);
 </pre></div>
 <p>Perform a vector count trailing zeros under bit mask operation, as if
 implemented by the <code>vctzdm</code> instruction.
@@ -106,9 +108,9 @@ implemented by the <code>vctzdm</code> instruction.
 </p>
 <div class="smallexample">
 <pre class="smallexample">vector signed char
-</pre><pre class="smallexample">vec_clrl (vector signed char a, unsigned int n)
+</pre><pre class="smallexample">vec_clrl (vector signed char <var>a</var>, unsigned int <var>n</var>);
 </pre><pre class="smallexample">vector unsigned char
-</pre><pre class="smallexample">vec_clrl (vector unsigned char a, unsigned int n)
+</pre><pre class="smallexample">vec_clrl (vector unsigned char <var>a</var>, unsigned int <var>n</var>);
 </pre></div>
 <p>Clear the left-most <code>(16 - n)</code> bytes of vector argument <code>a</code>, as if
 implemented by the <code>vclrlb</code> instruction on a big-endian target
@@ -118,9 +120,9 @@ value of <code>n</code> that is greater than 16 is treated as if it equaled 16.
 </p>
 <div class="smallexample">
 <pre class="smallexample">vector signed char
-</pre><pre class="smallexample">vec_clrr (vector signed char a, unsigned int n)
+</pre><pre class="smallexample">vec_clrr (vector signed char <var>a</var>, unsigned int <var>n</var>);
 </pre><pre class="smallexample">vector unsigned char
-</pre><pre class="smallexample">vec_clrr (vector unsigned char a, unsigned int n)
+</pre><pre class="smallexample">vec_clrr (vector unsigned char <var>a</var>, unsigned int <var>n</var>);
 </pre></div>
 <p>Clear the right-most <code>(16 - n)</code> bytes of vector argument <code>a</code>, as if
 implemented by the <code>vclrrb</code> instruction on a big-endian target
@@ -130,7 +132,7 @@ value of <code>n</code> that is greater than 16 is treated as if it equaled 16.
 </p>
 <div class="smallexample">
 <pre class="smallexample">vector unsigned long long int
-</pre><pre class="smallexample">vec_gnb (vector unsigned __int128, const unsigned char)
+</pre><pre class="smallexample">vec_gnb (vector unsigned __int128, const unsigned char);
 </pre></div>
 <p>Perform a 128-bit vector gather  operation, as if implemented by the
 <code>vgnb</code> instruction.  The second argument must be a literal
@@ -142,13 +144,13 @@ integer value between 2 and 7 inclusive.
 </p>
 <div class="smallexample">
 <pre class="smallexample">vector unsigned long long int
-</pre><pre class="smallexample">vec_extractl (vector unsigned char, vector unsigned char, unsigned int)
+</pre><pre class="smallexample">vec_extractl (vector unsigned char, vector unsigned char, unsigned int);
 </pre><pre class="smallexample">vector unsigned long long int
-</pre><pre class="smallexample">vec_extractl (vector unsigned short, vector unsigned short, unsigned int)
+</pre><pre class="smallexample">vec_extractl (vector unsigned short, vector unsigned short, unsigned int);
 </pre><pre class="smallexample">vector unsigned long long int
-</pre><pre class="smallexample">vec_extractl (vector unsigned int, vector unsigned int, unsigned int)
+</pre><pre class="smallexample">vec_extractl (vector unsigned int, vector unsigned int, unsigned int);
 </pre><pre class="smallexample">vector unsigned long long int
-</pre><pre class="smallexample">vec_extractl (vector unsigned long long, vector unsigned long long, unsigned int)
+</pre><pre class="smallexample">vec_extractl (vector unsigned long long, vector unsigned long long, unsigned int);
 </pre></div>
 <p>Extract an element from two concatenated vectors starting at the given byte index
 in natural-endian order, and place it zero-extended in doubleword 1 of the result
@@ -169,15 +171,15 @@ consistent with the limitation on <code>vec_perm</code>.
 </p>
 <div class="smallexample">
 <pre class="smallexample">vector unsigned long long int
-</pre><pre class="smallexample">vec_extracth (vector unsigned char, vector unsigned char, unsigned int)
+</pre><pre class="smallexample">vec_extracth (vector unsigned char, vector unsigned char, unsigned int);
 </pre><pre class="smallexample">vector unsigned long long int
 </pre><pre class="smallexample">vec_extracth (vector unsigned short, vector unsigned short,
-</pre><pre class="smallexample">unsigned int)
+</pre><pre class="smallexample">unsigned int);
 </pre><pre class="smallexample">vector unsigned long long int
-</pre><pre class="smallexample">vec_extracth (vector unsigned int, vector unsigned int, unsigned int)
+</pre><pre class="smallexample">vec_extracth (vector unsigned int, vector unsigned int, unsigned int);
 </pre><pre class="smallexample">vector unsigned long long int
 </pre><pre class="smallexample">vec_extracth (vector unsigned long long, vector unsigned long long,
-</pre><pre class="smallexample">unsigned int)
+</pre><pre class="smallexample">unsigned int);
 </pre></div>
 <p>Extract an element from two concatenated vectors starting at the given byte
 index.  The index is based on big endian order for a little endian system.
@@ -200,7 +202,7 @@ limitation on <code>vec_perm</code>.
 <a name="index-vec_005fextracth"></a>
 </p><div class="smallexample">
 <pre class="smallexample">vector unsigned long long int
-</pre><pre class="smallexample">vec_pdep (vector unsigned long long int, vector unsigned long long int)
+</pre><pre class="smallexample">vec_pdep (vector unsigned long long int, vector unsigned long long int);
 </pre></div>
 <p>Perform a vector parallel bits deposit operation, as if implemented by
 the <code>vpdepd</code> instruction.
@@ -478,17 +480,17 @@ contained in the first two arguments.
 </p>
 <div class="smallexample">
 <pre class="smallexample">vector unsigned long long int
-</pre><pre class="smallexample">vec_pext (vector unsigned long long int, vector unsigned long long int)
+</pre><pre class="smallexample">vec_pext (vector unsigned long long int, vector unsigned long long int);
 </pre></div>
 <p>Perform a vector parallel bit extract operation, as if implemented by
 the <code>vpextd</code> instruction.
 <a name="index-vec_005fpext"></a>
 </p>
 <div class="smallexample">
-<pre class="smallexample">vector unsigned char vec_stril (vector unsigned char)
-</pre><pre class="smallexample">vector signed char vec_stril (vector signed char)
-</pre><pre class="smallexample">vector unsigned short vec_stril (vector unsigned short)
-</pre><pre class="smallexample">vector signed short vec_stril (vector signed short)
+<pre class="smallexample">vector unsigned char vec_stril (vector unsigned char);
+</pre><pre class="smallexample">vector signed char vec_stril (vector signed char);
+</pre><pre class="smallexample">vector unsigned short vec_stril (vector unsigned short);
+</pre><pre class="smallexample">vector signed short vec_stril (vector signed short);
 </pre></div>
 <p>Isolate the left-most non-zero elements of the incoming vector argument,
 replacing all elements to the right of the left-most zero element
@@ -499,10 +501,10 @@ little-endian targets.
 <a name="index-vec_005fstril"></a>
 </p>
 <div class="smallexample">
-<pre class="smallexample">int vec_stril_p (vector unsigned char)
-</pre><pre class="smallexample">int vec_stril_p (vector signed char)
-</pre><pre class="smallexample">int short vec_stril_p (vector unsigned short)
-</pre><pre class="smallexample">int vec_stril_p (vector signed short)
+<pre class="smallexample">int vec_stril_p (vector unsigned char);
+</pre><pre class="smallexample">int vec_stril_p (vector signed char);
+</pre><pre class="smallexample">int short vec_stril_p (vector unsigned short);
+</pre><pre class="smallexample">int vec_stril_p (vector signed short);
 </pre></div>
 <p>Return a non-zero value if and only if the argument contains a zero
 element.  The typical implementation uses
@@ -513,10 +515,10 @@ zero element if the same argument is also passed to <code>vec_stril</code>.
 <a name="index-vec_005fstril_005fp"></a>
 </p>
 <div class="smallexample">
-<pre class="smallexample">vector unsigned char vec_strir (vector unsigned char)
-</pre><pre class="smallexample">vector signed char vec_strir (vector signed char)
-</pre><pre class="smallexample">vector unsigned short vec_strir (vector unsigned short)
-</pre><pre class="smallexample">vector signed short vec_strir (vector signed short)
+<pre class="smallexample">vector unsigned char vec_strir (vector unsigned char);
+</pre><pre class="smallexample">vector signed char vec_strir (vector signed char);
+</pre><pre class="smallexample">vector unsigned short vec_strir (vector unsigned short);
+</pre><pre class="smallexample">vector signed short vec_strir (vector signed short);
 </pre></div>
 <p>Isolate the right-most non-zero elements of the incoming vector argument,
 replacing all elements to the left of the right-most zero element
@@ -527,10 +529,10 @@ little-endian targets.
 <a name="index-vec_005fstrir"></a>
 </p>
 <div class="smallexample">
-<pre class="smallexample">int vec_strir_p (vector unsigned char)
-</pre><pre class="smallexample">int vec_strir_p (vector signed char)
-</pre><pre class="smallexample">int short vec_strir_p (vector unsigned short)
-</pre><pre class="smallexample">int vec_strir_p (vector signed short)
+<pre class="smallexample">int vec_strir_p (vector unsigned char);
+</pre><pre class="smallexample">int vec_strir_p (vector signed char);
+</pre><pre class="smallexample">int short vec_strir_p (vector unsigned short);
+</pre><pre class="smallexample">int vec_strir_p (vector signed short);
 </pre></div>
 <p>Return a non-zero value if and only if the argument contains a zero
 element.  The typical implementation uses
@@ -543,19 +545,19 @@ zero element if the same argument is also passed to <code>vec_strir</code>.
 <div class="smallexample">
 <pre class="smallexample">vector unsigned char
 </pre><pre class="smallexample">vec_ternarylogic (vector unsigned char, vector unsigned char,
-</pre><pre class="smallexample">            vector unsigned char, const unsigned int)
+</pre><pre class="smallexample">            vector unsigned char, const unsigned int);
 </pre><pre class="smallexample">vector unsigned short
 </pre><pre class="smallexample">vec_ternarylogic (vector unsigned short, vector unsigned short,
-</pre><pre class="smallexample">            vector unsigned short, const unsigned int)
+</pre><pre class="smallexample">            vector unsigned short, const unsigned int);
 </pre><pre class="smallexample">vector unsigned int
 </pre><pre class="smallexample">vec_ternarylogic (vector unsigned int, vector unsigned int,
-</pre><pre class="smallexample">            vector unsigned int, const unsigned int)
+</pre><pre class="smallexample">            vector unsigned int, const unsigned int);
 </pre><pre class="smallexample">vector unsigned long long int
 </pre><pre class="smallexample">vec_ternarylogic (vector unsigned long long int, vector unsigned long long int,
-</pre><pre class="smallexample">            vector unsigned long long int, const unsigned int)
+</pre><pre class="smallexample">            vector unsigned long long int, const unsigned int);
 </pre><pre class="smallexample">vector unsigned __int128
 </pre><pre class="smallexample">vec_ternarylogic (vector unsigned __int128, vector unsigned __int128,
-</pre><pre class="smallexample">            vector unsigned __int128, const unsigned int)
+</pre><pre class="smallexample">            vector unsigned __int128, const unsigned int);
 </pre></div>
 <p>Perform a 128-bit vector evaluate operation, as if implemented by the
 <code>xxeval</code> instruction.  The fourth argument must be a literal
@@ -563,20 +565,20 @@ integer value between 0 and 255 inclusive.
 <a name="index-vec_005fternarylogic"></a>
 </p>
 <div class="smallexample">
-<pre class="smallexample">vector unsigned char vec_genpcvm (vector unsigned char, const int)
-</pre><pre class="smallexample">vector unsigned short vec_genpcvm (vector unsigned short, const int)
-</pre><pre class="smallexample">vector unsigned int vec_genpcvm (vector unsigned int, const int)
+<pre class="smallexample">vector unsigned char vec_genpcvm (vector unsigned char, const int);
+</pre><pre class="smallexample">vector unsigned short vec_genpcvm (vector unsigned short, const int);
+</pre><pre class="smallexample">vector unsigned int vec_genpcvm (vector unsigned int, const int);
 </pre><pre class="smallexample">vector unsigned int vec_genpcvm (vector unsigned long long int,
-</pre><pre class="smallexample">                                         const int)
+</pre><pre class="smallexample">                                         const int);
 </pre></div>
 
 <p>Vector Integer Multiply/Divide/Modulo
 </p>
 <div class="smallexample">
 <pre class="smallexample">vector signed int
-</pre><pre class="smallexample">vec_mulh (vector signed int a, vector signed int b)
+</pre><pre class="smallexample">vec_mulh (vector signed int <var>a</var>, vector signed int <var>b</var>);
 </pre><pre class="smallexample">vector unsigned int
-</pre><pre class="smallexample">vec_mulh (vector unsigned int a, vector unsigned int b)
+</pre><pre class="smallexample">vec_mulh (vector unsigned int <var>a</var>, vector unsigned int <var>b</var>);
 </pre></div>
 
 <p>For each integer value <code>i</code> from 0 to 3, do the following. The integer
@@ -586,9 +588,9 @@ into word element <code>i</code> of the vector returned.
 </p>
 <div class="smallexample">
 <pre class="smallexample">vector signed long long
-</pre><pre class="smallexample">vec_mulh (vector signed long long a, vector signed long long b)
+</pre><pre class="smallexample">vec_mulh (vector signed long long <var>a</var>, vector signed long long <var>b</var>);
 </pre><pre class="smallexample">vector unsigned long long
-</pre><pre class="smallexample">vec_mulh (vector unsigned long long a, vector unsigned long long b)
+</pre><pre class="smallexample">vec_mulh (vector unsigned long long <var>a</var>, vector unsigned long long <var>b</var>);
 </pre></div>
 
 <p>For each integer value <code>i</code> from 0 to 1, do the following. The integer
@@ -598,9 +600,9 @@ are placed into doubleword element <code>i</code> of the vector returned.
 </p>
 <div class="smallexample">
 <pre class="smallexample">vector unsigned long long
-</pre><pre class="smallexample">vec_mul (vector unsigned long long a, vector unsigned long long b)
+</pre><pre class="smallexample">vec_mul (vector unsigned long long <var>a</var>, vector unsigned long long <var>b</var>);
 </pre><pre class="smallexample">vector signed long long
-</pre><pre class="smallexample">vec_mul (vector signed long long a, vector signed long long b)
+</pre><pre class="smallexample">vec_mul (vector signed long long <var>a</var>, vector signed long long <var>b</var>);
 </pre></div>
 
 <p>For each integer value <code>i</code> from 0 to 1, do the following. The integer
@@ -610,9 +612,9 @@ are placed into doubleword element <code>i</code> of the vector returned.
 </p>
 <div class="smallexample">
 <pre class="smallexample">vector signed int
-</pre><pre class="smallexample">vec_div (vector signed int a, vector signed int b)
+</pre><pre class="smallexample">vec_div (vector signed int <var>a</var>, vector signed int <var>b</var>);
 </pre><pre class="smallexample">vector unsigned int
-</pre><pre class="smallexample">vec_div (vector unsigned int a, vector unsigned int b)
+</pre><pre class="smallexample">vec_div (vector unsigned int <var>a</var>, vector unsigned int <var>b</var>);
 </pre></div>
 
 <p>For each integer value <code>i</code> from 0 to 3, do the following. The integer in
@@ -623,9 +625,9 @@ the vector returned. If an attempt is made to perform any of the divisions
 </p>
 <div class="smallexample">
 <pre class="smallexample">vector signed long long
-</pre><pre class="smallexample">vec_div (vector signed long long a, vector signed long long b)
+</pre><pre class="smallexample">vec_div (vector signed long long <var>a</var>, vector signed long long <var>b</var>);
 </pre><pre class="smallexample">vector unsigned long long
-</pre><pre class="smallexample">vec_div (vector unsigned long long a, vector unsigned long long b)
+</pre><pre class="smallexample">vec_div (vector unsigned long long <var>a</var>, vector unsigned long long <var>b</var>);
 </pre></div>
 
 <p>For each integer value <code>i</code> from 0 to 1, do the following. The integer in
@@ -637,9 +639,9 @@ the quotient is undefined.
 </p>
 <div class="smallexample">
 <pre class="smallexample">vector signed int
-</pre><pre class="smallexample">vec_dive (vector signed int a, vector signed int b)
+</pre><pre class="smallexample">vec_dive (vector signed int <var>a</var>, vector signed int <var>b</var>);
 </pre><pre class="smallexample">vector unsigned int
-</pre><pre class="smallexample">vec_dive (vector unsigned int a, vector unsigned int b)
+</pre><pre class="smallexample">vec_dive (vector unsigned int <var>a</var>, vector unsigned int <var>b</var>);
 </pre></div>
 
 <p>For each integer value <code>i</code> from 0 to 3, do the following. The integer in
@@ -651,9 +653,9 @@ divisions &lt;anything&gt; Ã· 0 then the quotient is undefined.
 </p>
 <div class="smallexample">
 <pre class="smallexample">vector signed long long
-</pre><pre class="smallexample">vec_dive (vector signed long long a, vector signed long long b)
+</pre><pre class="smallexample">vec_dive (vector signed long long <var>a</var>, vector signed long long <var>b</var>);
 </pre><pre class="smallexample">vector unsigned long long
-</pre><pre class="smallexample">vec_dive (vector unsigned long long a, vector unsigned long long b)
+</pre><pre class="smallexample">vec_dive (vector unsigned long long <var>a</var>, vector unsigned long long <var>b</var>);
 </pre></div>
 
 <p>For each integer value <code>i</code> from 0 to 1, do the following. The integer in
@@ -665,9 +667,9 @@ quotient cannot be represented in 64 bits, or if an attempt is made to perform
 </p>
 <div class="smallexample">
 <pre class="smallexample">vector signed int
-</pre><pre class="smallexample">vec_mod (vector signed int a, vector signed int b)
+</pre><pre class="smallexample">vec_mod (vector signed int <var>a</var>, vector signed int <var>b</var>);
 </pre><pre class="smallexample">vector unsigned int
-</pre><pre class="smallexample">vec_mod (vector unsigned int a, vector unsigned int b)
+</pre><pre class="smallexample">vec_mod (vector unsigned int <var>a</var>, vector unsigned int <var>b</var>);
 </pre></div>
 
 <p>For each integer value <code>i</code> from 0 to 3, do the following. The integer in
@@ -678,9 +680,9 @@ the vector returned.  If an attempt is made to perform any of the divisions
 </p>
 <div class="smallexample">
 <pre class="smallexample">vector signed long long
-</pre><pre class="smallexample">vec_mod (vector signed long long a, vector signed long long b)
+</pre><pre class="smallexample">vec_mod (vector signed long long <var>a</var>, vector signed long long <var>b</var>);
 </pre><pre class="smallexample">vector unsigned long long
-</pre><pre class="smallexample">vec_mod (vector unsigned long long a, vector unsigned long long b)
+</pre><pre class="smallexample">vec_mod (vector unsigned long long <var>a</var>, vector unsigned long long <var>b</var>);
 </pre></div>
 
 <p>For each integer value <code>i</code> from 0 to 1, do the following. The integer in
@@ -695,14 +697,14 @@ immediate value is either 0, 1, 2 or 3.
 <a name="index-vec_005fgenpcvm"></a>
 </p>
 <div class="smallexample">
-<pre class="smallexample">vector unsigned __int128 vec_rl (vector unsigned __int128 A,
-</pre><pre class="smallexample">                                         vector unsigned __int128 B);
-</pre><pre class="smallexample">vector signed __int128 vec_rl (vector signed __int128 A,
-</pre><pre class="smallexample">                                       vector unsigned __int128 B);
+<pre class="smallexample">vector unsigned __int128 vec_rl (vector unsigned __int128 <var>A</var>,
+</pre><pre class="smallexample">                                         vector unsigned __int128 <var>B</var>);
+</pre><pre class="smallexample">vector signed __int128 vec_rl (vector signed __int128 <var>A</var>,
+</pre><pre class="smallexample">                                       vector unsigned __int128 <var>B</var>);
 </pre></div>
 
-<p>Result value: Each element of R is obtained by rotating the corresponding element
-of A left by the number of bits specified by the corresponding element of B.
+<p>Result value: Each element of <var>R</var> is obtained by rotating the corresponding element
+of <var>A</var> left by the number of bits specified by the corresponding element of <var>B</var>.
 </p>
 
 <div class="smallexample">
@@ -736,28 +738,28 @@ input.  The shift is obtained from the third input in the 7-bit field bits
 [125:131] where all bits counted from zero at the left.
 </p>
 <div class="smallexample">
-<pre class="smallexample">vector unsigned __int128 vec_sl(vector unsigned __int128 A, vector unsigned __int128 B);
-</pre><pre class="smallexample">vector signed __int128 vec_sl(vector signed __int128 A, vector unsigned __int128 B);
+<pre class="smallexample">vector unsigned __int128 vec_sl(vector unsigned __int128 <var>A</var>, vector unsigned __int128 <var>B</var>);
+</pre><pre class="smallexample">vector signed __int128 vec_sl(vector signed __int128 <var>A</var>, vector unsigned __int128 <var>B</var>);
 </pre></div>
 
-<p>Result value: Each element of R is obtained by shifting the corresponding element of
-A left by the number of bits specified by the corresponding element of B.
+<p>Result value: Each element of <var>R</var> is obtained by shifting the corresponding element of
+<var>A</var> left by the number of bits specified by the corresponding element of <var>B</var>.
 </p>
 <div class="smallexample">
-<pre class="smallexample">vector unsigned __int128 vec_sr(vector unsigned __int128 A, vector unsigned __int128 B);
-</pre><pre class="smallexample">vector signed __int128 vec_sr(vector signed __int128 A, vector unsigned __int128 B);
+<pre class="smallexample">vector unsigned __int128 vec_sr(vector unsigned __int128 <var>A</var>, vector unsigned __int128 <var>B</var>);
+</pre><pre class="smallexample">vector signed __int128 vec_sr(vector signed __int128 <var>A</var>, vector unsigned __int128 <var>B</var>);
 </pre></div>
 
-<p>Result value: Each element of R is obtained by shifting the corresponding element of
-A right by the number of bits specified by the corresponding element of B.
+<p>Result value: Each element of <var>R</var> is obtained by shifting the corresponding element of
+<var>A</var> right by the number of bits specified by the corresponding element of <var>B</var>.
 </p>
 <div class="smallexample">
-<pre class="smallexample">vector unsigned __int128 vec_sra(vector unsigned __int128 A, vector unsigned __int128 B);
-</pre><pre class="smallexample">vector signed __int128 vec_sra(vector signed __int128 A, vector unsigned __int128 B);
+<pre class="smallexample">vector unsigned __int128 vec_sra(vector unsigned __int128 <var>A</var>, vector unsigned __int128 <var>B</var>);
+</pre><pre class="smallexample">vector signed __int128 vec_sra(vector signed __int128 <var>A</var>, vector unsigned __int128 <var>B</var>);
 </pre></div>
 
-<p>Result value: Each element of R is obtained by arithmetic shifting the corresponding
-element of A right by the number of bits specified by the corresponding element of B.
+<p>Result value: Each element of <var>R</var> is obtained by arithmetic shifting the corresponding
+element of <var>A</var> right by the number of bits specified by the corresponding element of <var>B</var>.
 </p>
 <div class="smallexample">
 <pre class="smallexample">vector unsigned __int128 vec_mule (vector unsigned long long,
@@ -868,7 +870,7 @@ int vec_any_le (vector unsigned __int128, vector unsigned __int128);
 <hr>
 <div class="header">
 <p>
-Previous: <a href="PowerPC-AltiVec-Built_002din-Functions-Available-on-ISA-3_002e0.html#PowerPC-AltiVec-Built_002din-Functions-Available-on-ISA-3_002e0" accesskey="p" rel="prev">PowerPC AltiVec Built-in Functions Available on ISA 3.0</a>, Up: <a href="PowerPC-AltiVec_002fVSX-Built_002din-Functions.html#PowerPC-AltiVec_002fVSX-Built_002din-Functions" accesskey="u" rel="up">PowerPC AltiVec/VSX Built-in Functions</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Option-Index.html#Option-Index" title="Index" rel="index">Index</a>]</p>
+Previous: <a href="PowerPC-AltiVec-Built_002din-Functions-Available-on-ISA-3_002e0.html#PowerPC-AltiVec-Built_002din-Functions-Available-on-ISA-3_002e0" accesskey="p" rel="prev">PowerPC AltiVec Built-in Functions Available on ISA 3.0</a>, Up: <a href="PowerPC-AltiVec_002fVSX-Built_002din-Functions.html#PowerPC-AltiVec_002fVSX-Built_002din-Functions" accesskey="u" rel="up">PowerPC AltiVec/VSX Built-in Functions</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Indices.html#Indices" title="Index" rel="index">Index</a>]</p>
 </div>
 
 

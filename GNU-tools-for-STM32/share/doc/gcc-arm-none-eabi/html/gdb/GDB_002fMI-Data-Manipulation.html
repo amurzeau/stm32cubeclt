@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- Copyright (C) 1988-2022 Free Software Foundation, Inc.
+<!-- Copyright (C) 1988-2023 Free Software Foundation, Inc.
 
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
@@ -78,19 +78,21 @@ examine memory and registers, evaluate expressions, etc.
 see <a href="Memory.html#addressable-memory-unit">addressable memory unit</a>.
 </p>
 
+<a name="index-_002ddata_002ddisassemble"></a>
 <a name="The-_002ddata_002ddisassemble-Command"></a>
 <h4 class="subheading">The <code>-data-disassemble</code> Command</h4>
-<a name="index-_002ddata_002ddisassemble"></a>
 
 <a name="Synopsis-64"></a>
 <h4 class="subsubheading">Synopsis</h4>
 
 <div class="smallexample">
 <pre class="smallexample"> -data-disassemble
-    [ -s <var>start-addr</var> -e <var>end-addr</var> ]
-  | [ -a <var>addr</var> ]
-  | [ -f <var>filename</var> -l <var>linenum</var> [ -n <var>lines</var> ] ]
-  -- <var>mode</var>
+  ( -s <var>start-addr</var> -e <var>end-addr</var>
+  | -a <var>addr</var>
+  | -f <var>filename</var> -l <var>linenum</var> [ -n <var>lines</var> ] )
+  [ --opcodes <var>opcodes-mode</var> ]
+  [ --source ]
+  [ -- <var>mode</var> ]
 </pre></div>
 
 <p>Where:
@@ -124,17 +126,63 @@ displayed; if <var>lines</var> is higher than the number of lines between
 <var>start-addr</var> and <var>end-addr</var>, only the lines up to <var>end-addr</var>
 are displayed.
 </p></dd>
+<dt>&lsquo;<samp><var>opcodes-mode</var></samp>&rsquo;</dt>
+<dd><p>can only be used with <var>mode</var> 0, and should be one of the following:
+</p><dl compact="compact">
+<dt>&lsquo;<samp>none</samp>&rsquo;</dt>
+<dd><p>no opcode information will be included in the result.
+</p>
+</dd>
+<dt>&lsquo;<samp>bytes</samp>&rsquo;</dt>
+<dd><p>opcodes will be included in the result, the opcodes will be formatted
+as for <kbd>disassemble /b</kbd>.
+</p>
+</dd>
+<dt>&lsquo;<samp>display</samp>&rsquo;</dt>
+<dd><p>opcodes will be included in the result, the opcodes will be formatted
+as for <kbd>disassemble /r</kbd>.
+</p></dd>
+</dl>
+</dd>
 <dt>&lsquo;<samp><var>mode</var></samp>&rsquo;</dt>
-<dd><p>is one of:
-</p><ul>
-<li> 0 disassembly only
-</li><li> 1 mixed source and disassembly (deprecated)
-</li><li> 2 disassembly with raw opcodes
-</li><li> 3 mixed source and disassembly with raw opcodes (deprecated)
-</li><li> 4 mixed source and disassembly
-</li><li> 5 mixed source and disassembly with raw opcodes
-</li></ul>
-
+<dd><p>the use of <var>mode</var> is deprecated in favour of using the
+<code>--opcodes</code> and <code>--source</code> options.  When no <var>mode</var> is
+given, <var>mode</var> 0 will be assumed.  However, the <var>mode</var> is still
+available for backward compatibility.  The <var>mode</var> should be one of:
+</p><dl compact="compact">
+<dt>&lsquo;<samp>0</samp>&rsquo;</dt>
+<dd><p><em>disassembly only</em>, this is the default mode if no mode is
+specified.
+</p>
+</dd>
+<dt>&lsquo;<samp>1</samp>&rsquo;</dt>
+<dd><p><em>mixed source and disassembly (deprecated)</em>, it is not possible
+to recreate this mode using <code>--opcodes</code> and <code>--source</code>
+options.
+</p>
+</dd>
+<dt>&lsquo;<samp>2</samp>&rsquo;</dt>
+<dd><p><em>disassembly with raw opcodes</em>, this mode is equivalent to using
+<var>mode</var> 0 and passing <code>--opcodes bytes</code> to the command.
+</p>
+</dd>
+<dt>&lsquo;<samp>3</samp>&rsquo;</dt>
+<dd><p><em>mixed source and disassembly with raw opcodes (deprecated)</em>, it
+is not possible to recreate this mode using <code>--opcodes</code> and
+<code>--source</code> options.
+</p>
+</dd>
+<dt>&lsquo;<samp>4</samp>&rsquo;</dt>
+<dd><p><em>mixed source and disassembly</em>, this mode is equivalent to using
+<var>mode</var> 0 and passing <code>--source</code> to the command.
+</p>
+</dd>
+<dt>&lsquo;<samp>5</samp>&rsquo;</dt>
+<dd><p><em>mixed source and disassembly with raw opcodes</em>, this mode is
+equivalent to using <var>mode</var> 0 and passing <code>--opcodes bytes</code>
+and <code>--source</code> to the command.
+</p></dd>
+</dl>
 <p>Modes 1 and 3 are deprecated.  The output is &ldquo;source centric&rdquo;
 which hasn&rsquo;t proved useful in practice.
 See <a href="Machine-Code.html#Machine-Code">Machine Code</a>, for a discussion of the difference between
@@ -142,15 +190,19 @@ See <a href="Machine-Code.html#Machine-Code">Machine Code</a>, for a discussion 
 </p></dd>
 </dl>
 
+<p>The <code>--source</code> can only be used with <var>mode</var> 0.  Passing this
+option will include the source code in the disassembly result as if
+<var>mode</var> 4 or 5 had been used.
+</p>
 <a name="Result-6"></a>
 <h4 class="subsubheading">Result</h4>
 
 <p>The result of the <code>-data-disassemble</code> command will be a list named
-&lsquo;<samp>asm_insns</samp>&rsquo;, the contents of this list depend on the <var>mode</var>
-used with the <code>-data-disassemble</code> command.
+&lsquo;<samp>asm_insns</samp>&rsquo;, the contents of this list depend on the options used
+with the <code>-data-disassemble</code> command.
 </p>
-<p>For modes 0 and 2 the &lsquo;<samp>asm_insns</samp>&rsquo; list contains tuples with the
-following fields:
+<p>For modes 0 and 2, and when the <code>--source</code> option is not used, the
+&lsquo;<samp>asm_insns</samp>&rsquo; list contains tuples with the following fields:
 </p>
 <dl compact="compact">
 <dt><code>address</code></dt>
@@ -170,14 +222,29 @@ following fields:
 </p>
 </dd>
 <dt><code>opcodes</code></dt>
-<dd><p>This field is only present for modes 2, 3 and 5.  This contains the raw opcode
-bytes for the &lsquo;<samp>inst</samp>&rsquo; field.
+<dd><p>This field is only present for modes 2, 3 and 5, or when the
+<code>--opcodes</code> option &lsquo;<samp>bytes</samp>&rsquo; or &lsquo;<samp>display</samp>&rsquo; is used.  This
+contains the raw opcode bytes for the &lsquo;<samp>inst</samp>&rsquo; field.
 </p>
-</dd>
+<p>When the &lsquo;<samp>--opcodes</samp>&rsquo; option is not passed to
+<code>-data-disassemble</code>, or the &lsquo;<samp>bytes</samp>&rsquo; value is passed to
+&lsquo;<samp>--opcodes</samp>&rsquo;, then the bytes are formatted as a series of single
+bytes, in hex, in ascending address order, with a single space between
+each byte.  This format is equivalent to the &lsquo;<samp>/b</samp>&rsquo; option being
+used with the <kbd>disassemble</kbd> command
+(see <a href="Machine-Code.html#disassemble"><kbd>disassemble</kbd></a>).
+</p>
+<p>When &lsquo;<samp>--opcodes</samp>&rsquo; is passed the value &lsquo;<samp>display</samp>&rsquo; then the bytes
+are formatted in the natural instruction display order.  This means
+multiple bytes can be grouped together, and the bytes might be
+byte-swapped.  This format is equivalent to the &lsquo;<samp>/r</samp>&rsquo; option being
+used with the <kbd>disassemble</kbd> command.
+</p></dd>
 </dl>
 
-<p>For modes 1, 3, 4 and 5 the &lsquo;<samp>asm_insns</samp>&rsquo; list contains tuples named
-&lsquo;<samp>src_and_asm_line</samp>&rsquo;, each of which has the following fields:
+<p>For modes 1, 3, 4 and 5, or when the <code>--source</code> option is used, the
+&lsquo;<samp>asm_insns</samp>&rsquo; list contains tuples named &lsquo;<samp>src_and_asm_line</samp>&rsquo;,
+each of which has the following fields:
 </p>
 <dl compact="compact">
 <dt><code>line</code></dt>
@@ -297,9 +364,9 @@ inst=&quot;sethi  %hi(0x11800), %o2&quot;}]}]
 </pre></div>
 
 
+<a name="index-_002ddata_002devaluate_002dexpression"></a>
 <a name="The-_002ddata_002devaluate_002dexpression-Command"></a>
 <h4 class="subheading">The <code>-data-evaluate-expression</code> Command</h4>
-<a name="index-_002ddata_002devaluate_002dexpression"></a>
 
 <a name="Synopsis-65"></a>
 <h4 class="subsubheading">Synopsis</h4>
@@ -343,9 +410,9 @@ output.
 </pre></div>
 
 
+<a name="index-_002ddata_002dlist_002dchanged_002dregisters"></a>
 <a name="The-_002ddata_002dlist_002dchanged_002dregisters-Command"></a>
 <h4 class="subheading">The <code>-data-list-changed-registers</code> Command</h4>
-<a name="index-_002ddata_002dlist_002dchanged_002dregisters"></a>
 
 <a name="Synopsis-66"></a>
 <h4 class="subsubheading">Synopsis</h4>
@@ -385,9 +452,9 @@ line=&quot;5&quot;,arch=&quot;powerpc&quot;}
 </pre></div>
 
 
+<a name="index-_002ddata_002dlist_002dregister_002dnames"></a>
 <a name="The-_002ddata_002dlist_002dregister_002dnames-Command"></a>
 <h4 class="subheading">The <code>-data-list-register-names</code> Command</h4>
-<a name="index-_002ddata_002dlist_002dregister_002dnames"></a>
 
 <a name="Synopsis-67"></a>
 <h4 class="subsubheading">Synopsis</h4>
@@ -430,9 +497,9 @@ corresponding command &lsquo;<samp>gdb_regnames</samp>&rsquo;.
 (gdb)
 </pre></div>
 
+<a name="index-_002ddata_002dlist_002dregister_002dvalues"></a>
 <a name="The-_002ddata_002dlist_002dregister_002dvalues-Command"></a>
 <h4 class="subheading">The <code>-data-list-register-values</code> Command</h4>
-<a name="index-_002ddata_002dlist_002dregister_002dvalues"></a>
 
 <a name="Synopsis-68"></a>
 <h4 class="subsubheading">Synopsis</h4>
@@ -531,9 +598,9 @@ don&rsquo;t appear in the actual output):
 </pre></div>
 
 
+<a name="index-_002ddata_002dread_002dmemory"></a>
 <a name="The-_002ddata_002dread_002dmemory-Command"></a>
 <h4 class="subheading">The <code>-data-read-memory</code> Command</h4>
-<a name="index-_002ddata_002dread_002dmemory"></a>
 
 <p>This command is deprecated, use <code>-data-read-memory-bytes</code> instead.
 </p>
@@ -656,9 +723,9 @@ next-page=&quot;0x000013c0&quot;,prev-page=&quot;0x00001380&quot;,memory=[
 (gdb)
 </pre></div>
 
+<a name="index-_002ddata_002dread_002dmemory_002dbytes"></a>
 <a name="The-_002ddata_002dread_002dmemory_002dbytes-Command"></a>
 <h4 class="subheading">The <code>-data-read-memory-bytes</code> Command</h4>
-<a name="index-_002ddata_002dread_002dmemory_002dbytes"></a>
 
 <a name="Synopsis-70"></a>
 <h4 class="subsubheading">Synopsis</h4>
@@ -751,9 +818,9 @@ the start address passed to <code>-data-read-memory-bytes</code>.
 </pre></div>
 
 
+<a name="index-_002ddata_002dwrite_002dmemory_002dbytes"></a>
 <a name="The-_002ddata_002dwrite_002dmemory_002dbytes-Command"></a>
 <h4 class="subheading">The <code>-data-write-memory-bytes</code> Command</h4>
-<a name="index-_002ddata_002dwrite_002dmemory_002dbytes"></a>
 
 <a name="Synopsis-71"></a>
 <h4 class="subsubheading">Synopsis</h4>

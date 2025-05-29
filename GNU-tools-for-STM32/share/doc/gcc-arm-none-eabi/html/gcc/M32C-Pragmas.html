@@ -1,6 +1,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- Copyright (C) 1988-2021 Free Software Foundation, Inc.
+<!-- This file documents the use of the GNU compilers.
+
+Copyright (C) 1988-2023 Free Software Foundation, Inc.
 
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
@@ -30,10 +32,10 @@ You have freedom to copy and modify this GNU Manual, like GNU
 <meta name="distribution" content="global">
 <meta name="Generator" content="makeinfo">
 <link href="index.html#Top" rel="start" title="Top">
-<link href="Option-Index.html#Option-Index" rel="index" title="Option Index">
+<link href="Indices.html#Indices" rel="index" title="Indices">
 <link href="index.html#SEC_Contents" rel="contents" title="Table of Contents">
 <link href="Pragmas.html#Pragmas" rel="up" title="Pragmas">
-<link href="MeP-Pragmas.html#MeP-Pragmas" rel="next" title="MeP Pragmas">
+<link href="PRU-Pragmas.html#PRU-Pragmas" rel="next" title="PRU Pragmas">
 <link href="ARM-Pragmas.html#ARM-Pragmas" rel="prev" title="ARM Pragmas">
 <style type="text/css">
 <!--
@@ -66,30 +68,31 @@ ul.no-bullet {list-style: none}
 
 </head>
 
-<body lang="en">
+<body lang="en_US">
 <a name="M32C-Pragmas"></a>
 <div class="header">
 <p>
-Next: <a href="MeP-Pragmas.html#MeP-Pragmas" accesskey="n" rel="next">MeP Pragmas</a>, Previous: <a href="ARM-Pragmas.html#ARM-Pragmas" accesskey="p" rel="prev">ARM Pragmas</a>, Up: <a href="Pragmas.html#Pragmas" accesskey="u" rel="up">Pragmas</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Option-Index.html#Option-Index" title="Index" rel="index">Index</a>]</p>
+Next: <a href="PRU-Pragmas.html#PRU-Pragmas" accesskey="n" rel="next">PRU Pragmas</a>, Previous: <a href="ARM-Pragmas.html#ARM-Pragmas" accesskey="p" rel="prev">ARM Pragmas</a>, Up: <a href="Pragmas.html#Pragmas" accesskey="u" rel="up">Pragmas</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Indices.html#Indices" title="Index" rel="index">Index</a>]</p>
 </div>
 <hr>
 <a name="M32C-Pragmas-1"></a>
 <h4 class="subsection">6.62.3 M32C Pragmas</h4>
 
 <dl compact="compact">
-<dt><code>GCC memregs <var>number</var></code></dt>
 <dd><a name="index-pragma_002c-memregs"></a>
-<p>Overrides the command-line option <code>-memregs=</code> for the current
+</dd>
+<dt><code>GCC memregs <var>number</var></code></dt>
+<dd><p>Overrides the command-line option <code>-memregs=</code> for the current
 file.  Use with care!  This pragma must be before any function in the
 file, and mixing different memregs values in different objects may
 make them incompatible.  This pragma is useful when a
 performance-critical function uses a memreg for temporary values,
 as it may allow you to reduce the number of memregs used.
 </p>
+<a name="index-pragma_002c-address"></a>
 </dd>
 <dt><code>ADDRESS <var>name</var> <var>address</var></code></dt>
-<dd><a name="index-pragma_002c-address"></a>
-<p>For any declared symbols matching <var>name</var>, this does three things
+<dd><p>For any declared symbols matching <var>name</var>, this does three things
 to that symbol: it forces the symbol to be located at the given
 address (a number), it forces the symbol to be volatile, and it
 changes the symbol&rsquo;s scope to be static.  This pragma exists for

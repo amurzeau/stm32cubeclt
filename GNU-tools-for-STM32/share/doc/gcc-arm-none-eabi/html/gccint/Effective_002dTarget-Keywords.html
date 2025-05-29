@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- Copyright (C) 1988-2021 Free Software Foundation, Inc.
+<!-- Copyright (C) 1988-2023 Free Software Foundation, Inc.
 
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
@@ -344,6 +344,11 @@ so that vector loops can handle partial as well as full vectors.
 <dd><p>Target supports vector masked stores.
 </p>
 </dd>
+<dt><code>vect_gather_load_ifn</code></dt>
+<dd><p>Target supports vector gather loads using internal functions
+(rather than via built-in functions or emulation).
+</p>
+</dd>
 <dt><code>vect_scatter_store</code></dt>
 <dd><p>Target supports vector scatter stores.
 </p>
@@ -473,6 +478,14 @@ circumstances.
 <dd><p>Target has variable-length vectors.
 </p>
 </dd>
+<dt><code>vect64</code></dt>
+<dd><p>Target supports vectors of 64 bits.
+</p>
+</dd>
+<dt><code>vect32</code></dt>
+<dd><p>Target supports vectors of 32 bits.
+</p>
+</dd>
 <dt><code>vect_widen_sum_hi_to_si</code></dt>
 <dd><p>Target supports a vector widening summation of <code>short</code> operands
 into <code>int</code> results, or can promote (unpack) from <code>short</code>
@@ -513,6 +526,11 @@ into <code>long</code> results.
 </dd>
 <dt><code>vect_udot_qi</code></dt>
 <dd><p>Target supports a vector dot-product of <code>unsigned char</code>.
+</p>
+</dd>
+<dt><code>vect_usdot_qi</code></dt>
+<dd><p>Target supports a vector dot-product where one operand of the multiply is
+<code>signed char</code> and the other of <code>unsigned char</code>.
 </p>
 </dd>
 <dt><code>vect_sdot_hi</code></dt>
@@ -594,6 +612,74 @@ and from <code>char</code> to <code>int</code>.
 <dt><code>vect_partial_vectors</code></dt>
 <dd><p>Target supports loop vectorization with partial vectors and
 <code>vect-partial-vector-usage</code> is nonzero.
+</p>
+</dd>
+<dt><code>vect_slp_v2qi_store_align</code></dt>
+<dd><p>Target supports vectorization of 2-byte char stores with 2-byte aligned
+address at plain <samp>-O2</samp>.
+</p>
+</dd>
+<dt><code>vect_slp_v4qi_store_align</code></dt>
+<dd><p>Target supports vectorization of 4-byte char stores with 4-byte aligned
+address at plain <samp>-O2</samp>.
+</p>
+</dd>
+<dt><code>vect_slp_v4qi_store_unalign</code></dt>
+<dd><p>Target supports vectorization of 4-byte char stores with unaligned address
+at plain <samp>-O2</samp>.
+</p>
+</dd>
+<dt><code>struct_4char_block_move</code></dt>
+<dd><p>Target supports block move for 8-byte aligned 4-byte size struct initialization.
+</p>
+</dd>
+<dt><code>vect_slp_v4qi_store_unalign_1</code></dt>
+<dd><p>Target supports vectorization of 4-byte char stores with unaligned address
+or store them with constant pool at plain <samp>-O2</samp>.
+</p>
+</dd>
+<dt><code>struct_8char_block_move</code></dt>
+<dd><p>Target supports block move for 8-byte aligned 8-byte size struct initialization.
+</p>
+</dd>
+<dt><code>vect_slp_v8qi_store_unalign_1</code></dt>
+<dd><p>Target supports vectorization of 8-byte char stores with unaligned address
+or store them with constant pool at plain <samp>-O2</samp>.
+</p>
+</dd>
+<dt><code>struct_16char_block_move</code></dt>
+<dd><p>Target supports block move for 8-byte aligned 16-byte size struct
+initialization.
+</p>
+</dd>
+<dt><code>vect_slp_v16qi_store_unalign_1</code></dt>
+<dd><p>Target supports vectorization of 16-byte char stores with unaligned address
+or store them with constant pool at plain <samp>-O2</samp>.
+</p>
+</dd>
+<dt><code>vect_slp_v2hi_store_align</code></dt>
+<dd><p>Target supports vectorization of 4-byte short stores with 4-byte aligned
+addressat plain <samp>-O2</samp>.
+</p>
+</dd>
+<dt><code>vect_slp_v2hi_store_unalign</code></dt>
+<dd><p>Target supports vectorization of 4-byte short stores with unaligned address
+at plain <samp>-O2</samp>.
+</p>
+</dd>
+<dt><code>vect_slp_v4hi_store_unalign</code></dt>
+<dd><p>Target supports vectorization of 8-byte short stores with unaligned address
+at plain <samp>-O2</samp>.
+</p>
+</dd>
+<dt><code>vect_slp_v2si_store_align</code></dt>
+<dd><p>Target supports vectorization of 8-byte int stores with 8-byte aligned address
+at plain <samp>-O2</samp>.
+</p>
+</dd>
+<dt><code>vect_slp_v4si_store_unalign</code></dt>
+<dd><p>Target supports vectorization of 16-byte int stores with unaligned address
+at plain <samp>-O2</samp>.
 </p></dd>
 </dl>
 
@@ -638,6 +724,10 @@ test system can execute decimal floating point tests.
 </dd>
 <dt><code>hard_dfp</code></dt>
 <dd><p>Target generates decimal floating point instructions with current options.
+</p>
+</dd>
+<dt><code>dfp_bid</code></dt>
+<dd><p>Target uses the BID format for decimal floating point.
 </p></dd>
 </dl>
 
@@ -847,6 +937,12 @@ Product extension. Some multilibs may be incompatible with these options.
 Implies arm_v8_2a_dotprod_neon_ok.
 </p>
 </dd>
+<dt><code>arm_v8_2a_i8mm_neon_hw</code></dt>
+<dd><p>ARM target supports executing instructions from ARMv8.2-A with the 8-bit
+Matrix Multiply extension.  Some multilibs may be incompatible with these
+options.  Implies arm_v8_2a_i8mm_ok.
+</p>
+</dd>
 <dt><code>arm_fp16fml_neon_ok</code></dt>
 <dd><a name="arm_005ffp16fml_005fneon_005fok"></a><p>ARM target supports extensions to generate the <code>VFMAL</code> and <code>VFMLS</code>
 half-precision floating-point instructions available from ARMv8.2-A and
@@ -898,6 +994,11 @@ Some multilibs may be incompatible with these options.
 <dd><p>ARM target supports options to generate instructions from ARMv8.1-M with
 the Custom Datapath Extension (CDE) and M-Profile Vector Extension (MVE).
 Some multilibs may be incompatible with these options.
+</p>
+</dd>
+<dt><code>arm_pacbti_hw</code></dt>
+<dd><p>Test system supports executing Pointer Authentication and Branch Target
+Identification instructions.
 </p>
 </dd>
 <dt><code>arm_prefer_ldrd_strd</code></dt>
@@ -956,8 +1057,8 @@ in <a href="#arm_005fcoproc3_005fok">arm_coproc3_ok</a> in addition the followin
 Some multilibs may be incompatible with these options.
 </p>
 </dd>
-<dt><code>arm_qbit_ok</code></dt>
-<dd><a name="arm_005fqbit_005fok"></a><p>ARM Target supports options suitable for accessing the Q-bit manipulation
+<dt><code>arm_sat_ok</code></dt>
+<dd><a name="arm_005fsat_005fok"></a><p>ARM Target supports options suitable for accessing the saturation
 intrinsics from <code>arm_acle.h</code>.
 Some multilibs may be incompatible with these options.
 </p>
@@ -976,6 +1077,10 @@ Some multilibs may be incompatible with these options.
 <dd><a name="arm_005fhard_005fok"></a><p>ARM target supports the <code>-mfloat-abi=hard</code> option.
 </p>
 </dd>
+<dt><code>arm_mve</code></dt>
+<dd><a name="arm_005fmve"></a><p>ARM target supports generating MVE instructions.
+</p>
+</dd>
 <dt><code>arm_v8_1_lob_ok</code></dt>
 <dd><a name="arm_005fv8_005f1_005flob_005fok"></a><p>ARM Target supports executing the Armv8.1-M Mainline Low Overhead Loop
 instructions <code>DLS</code> and <code>LE</code>.
@@ -992,6 +1097,14 @@ executing the Armv8.1-M Mainline Low Overhead Loop instructions
 <dd><p>ARM target generates Thumb-2 code for <code>-mthumb</code> but does not
 support executing the Armv8.1-M Mainline Low Overhead Loop
 instructions <code>DLS</code> and <code>LE</code>.
+</p>
+</dd>
+<dt><code>mbranch_protection_ok</code></dt>
+<dd><p>ARM target supporting <code>-mbranch-protection=standard</code>.
+</p>
+</dd>
+<dt><code>arm_pacbti_hw</code></dt>
+<dd><p>Test system supports for executing non nop pacbti instructions.
 </p>
 </dd>
 </dl>
@@ -1206,8 +1319,22 @@ setting is Power9 or later.
 </p></dd>
 </dl>
 
+<a name="RISC_002dV-specific-attributes"></a>
+<h4 class="subsubsection">7.2.3.12 RISC-V specific attributes</h4>
+
+<dl compact="compact">
+<dt><code>rv32</code></dt>
+<dd><p>Test system has an integer register width of 32 bits.
+</p>
+</dd>
+<dt><code>rv64</code></dt>
+<dd><p>Test system has an integer register width of 64 bits.
+</p>
+</dd>
+</dl>
+
 <a name="Other-hardware-attributes"></a>
-<h4 class="subsubsection">7.2.3.12 Other hardware attributes</h4>
+<h4 class="subsubsection">7.2.3.13 Other hardware attributes</h4>
 
 <dl compact="compact">
 <dt><code>autoincdec</code></dt>
@@ -1246,6 +1373,18 @@ setting is Power9 or later.
 <dd><p>Target supports the execution of <code>avx512vp2intersect</code> instructions.
 </p>
 </dd>
+<dt><code>avxifma</code></dt>
+<dd><p>Target supports the execution of <code>avxifma</code> instructions.
+</p>
+</dd>
+<dt><code>avxneconvert</code></dt>
+<dd><p>Target supports the execution of <code>avxneconvert</code> instructions.
+</p>
+</dd>
+<dt><code>avxvnniint8</code></dt>
+<dd><p>Target supports the execution of <code>avxvnniint8</code> instructions.
+</p>
+</dd>
 <dt><code>amx_tile</code></dt>
 <dd><p>Target supports the execution of <code>amx-tile</code> instructions.
 </p>
@@ -1258,8 +1397,44 @@ setting is Power9 or later.
 <dd><p>Target supports the execution of <code>amx-bf16</code> instructions.
 </p>
 </dd>
+<dt><code>amx_complex</code></dt>
+<dd><p>Target supports the execution of <code>amx-complex</code> instructions.
+</p>
+</dd>
+<dt><code>amx_fp16</code></dt>
+<dd><p>Target supports the execution of <code>amx-fp16</code> instructions.
+</p>
+</dd>
 <dt><code>cell_hw</code></dt>
 <dd><p>Test system can execute AltiVec and Cell PPU instructions.
+</p>
+</dd>
+<dt><code>clz</code></dt>
+<dd><p>Target supports a clz optab on int.
+</p>
+</dd>
+<dt><code>clzl</code></dt>
+<dd><p>Target supports a clz optab on long.
+</p>
+</dd>
+<dt><code>clzll</code></dt>
+<dd><p>Target supports a clz optab on long long.
+</p>
+</dd>
+<dt><code>ctz</code></dt>
+<dd><p>Target supports a ctz optab on int.
+</p>
+</dd>
+<dt><code>ctzl</code></dt>
+<dd><p>Target supports a ctz optab on long.
+</p>
+</dd>
+<dt><code>ctzll</code></dt>
+<dd><p>Target supports a ctz optab on long long.
+</p>
+</dd>
+<dt><code>cmpccxadd</code></dt>
+<dd><p>Target supports the execution of <code>cmpccxadd</code> instructions.
 </p>
 </dd>
 <dt><code>coldfire_fpu</code></dt>
@@ -1284,6 +1459,26 @@ setting is Power9 or later.
 </dd>
 <dt><code>pie_copyreloc</code></dt>
 <dd><p>The x86-64 target linker supports PIE with copy reloc.
+</p>
+</dd>
+<dt><code>popcount</code></dt>
+<dd><p>Target supports a popcount optab on int.
+</p>
+</dd>
+<dt><code>popcountl</code></dt>
+<dd><p>Target supports a popcount optab on long.
+</p>
+</dd>
+<dt><code>popcountll</code></dt>
+<dd><p>Target supports a popcount optab on long long.
+</p>
+</dd>
+<dt><code>prefetchi</code></dt>
+<dd><p>Target supports the execution of <code>prefetchi</code> instructions.
+</p>
+</dd>
+<dt><code>raoint</code></dt>
+<dd><p>Target supports the execution of <code>raoint</code> instructions.
 </p>
 </dd>
 <dt><code>rdrand</code></dt>
@@ -1335,7 +1530,7 @@ or <code>EM_SPARCV9</code> executables.
 </dl>
 
 <a name="Environment-attributes"></a>
-<h4 class="subsubsection">7.2.3.13 Environment attributes</h4>
+<h4 class="subsubsection">7.2.3.14 Environment attributes</h4>
 
 <dl compact="compact">
 <dt><code>c</code></dt>
@@ -1438,6 +1633,10 @@ those functions.
 the code size of Newlib formatted I/O functions.
 </p>
 </dd>
+<dt><code>posix_memalign</code></dt>
+<dd><p>Target supports <code>posix_memalign</code>.
+</p>
+</dd>
 <dt><code>pow10</code></dt>
 <dd><p>Target provides <code>pow10</code> function.
 </p>
@@ -1448,6 +1647,10 @@ the code size of Newlib formatted I/O functions.
 </dd>
 <dt><code>pthread_h</code></dt>
 <dd><p>Target has <code>pthread.h</code>.
+</p>
+</dd>
+<dt><code>sockets</code></dt>
+<dd><p>Target can compile using <code>sys/socket.h</code> with no errors or warnings.
 </p>
 </dd>
 <dt><code>run_expensive_tests</code></dt>
@@ -1492,6 +1695,10 @@ can be included without error when <samp>-mbig-endian</samp> is passed.
 <dd><p>Target supports trampolines.
 </p>
 </dd>
+<dt><code>two_plus_gigs</code></dt>
+<dd><p>Target supports linking programs with 2+GiB of data.
+</p>
+</dd>
 <dt><code>uclibc</code></dt>
 <dd><p>Target supports uClibc.
 </p>
@@ -1510,11 +1717,15 @@ can be included without error when <samp>-mbig-endian</samp> is passed.
 </dd>
 <dt><code>wchar</code></dt>
 <dd><p>Target supports wide characters.
+</p>
+</dd>
+<dt><code>weak_undefined</code></dt>
+<dd><p>Target supports weak undefined symbols
 </p></dd>
 </dl>
 
 <a name="Other-attributes"></a>
-<h4 class="subsubsection">7.2.3.14 Other attributes</h4>
+<h4 class="subsubsection">7.2.3.15 Other attributes</h4>
 
 <dl compact="compact">
 <dt><code>R_flag_in_section</code></dt>
@@ -1529,12 +1740,16 @@ can be included without error when <samp>-mbig-endian</samp> is passed.
 <dd><p>Target supports <samp>-branch-cost=N</samp>.
 </p>
 </dd>
+<dt><code>const_volatile_readonly_section</code></dt>
+<dd><p>Target places const volatile variables in readonly sections.
+</p>
+</dd>
 <dt><code>cxa_atexit</code></dt>
 <dd><p>Target uses <code>__cxa_atexit</code>.
 </p>
 </dd>
 <dt><code>default_packed</code></dt>
-<dd><p>Target has packed layout of structure members by default.
+<dd><a name="default_005fpacked"></a><p>Target has packed layout of structure members by default.
 </p>
 </dd>
 <dt><code>exceptions</code></dt>
@@ -1621,9 +1836,22 @@ with <samp>-r</samp> and <samp>-flto</samp> options.
 32 bits or less.
 </p>
 </dd>
+<dt><code>tail_call</code></dt>
+<dd><p>Target supports tail-call optimizations.
+</p>
+</dd>
 <dt><code>target_natural_alignment_64</code></dt>
 <dd><p>Target uses natural alignment (aligned to type size) for types of
 64 bits or less.
+</p>
+</dd>
+<dt><code>no_alignment_constraints</code></dt>
+<dd><p>Target defines __BIGGEST_ALIGNMENT__=1.  Hence target imposes
+no alignment constraints.  This is similar, but not necessarily
+the same as <a href="#default_005fpacked">default_packed</a>.  Although <code>BIGGEST_FIELD_ALIGNMENT</code>
+defaults to <code>BIGGEST_ALIGNMENT</code> for most targets, it is possible
+for a target to set those two with different values and have different
+alignment constraints for aggregate and non-aggregate types.
 </p>
 </dd>
 <dt><code>noinit</code></dt>
@@ -1743,11 +1971,16 @@ constant.
 </dd>
 <dt><code>lgccjit</code></dt>
 <dd><p>Target supports -lgccjit, i.e. libgccjit.so can be linked into jit tests.
+</p>
+</dd>
+<dt><code>__OPTIMIZE__</code></dt>
+<dd><p>Optimizations are enabled (<code>__OPTIMIZE__</code>) per the current
+compiler flags.
 </p></dd>
 </dl>
 
 <a name="Local-to-tests-in-gcc_002etarget_002fi386"></a>
-<h4 class="subsubsection">7.2.3.15 Local to tests in <code>gcc.target/i386</code></h4>
+<h4 class="subsubsection">7.2.3.16 Local to tests in <code>gcc.target/i386</code></h4>
 
 <dl compact="compact">
 <dt><code>3dnow</code></dt>
@@ -1805,7 +2038,7 @@ position of profiling calls such that they precede the prologue.
 </dl>
 
 <a name="Local-to-tests-in-gcc_002etest_002dframework"></a>
-<h4 class="subsubsection">7.2.3.16 Local to tests in <code>gcc.test-framework</code></h4>
+<h4 class="subsubsection">7.2.3.17 Local to tests in <code>gcc.test-framework</code></h4>
 
 <dl compact="compact">
 <dt><code>no</code></dt>

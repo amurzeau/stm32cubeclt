@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- Copyright (C) 1988-2022 Free Software Foundation, Inc.
+<!-- Copyright (C) 1988-2023 Free Software Foundation, Inc.
 
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
@@ -181,9 +181,9 @@ how it can be used.
 <a name="Description-And-Use-of-Operations-on-Variable-Objects"></a>
 <h4 class="subheading">Description And Use of Operations on Variable Objects</h4>
 
+<a name="index-_002denable_002dpretty_002dprinting"></a>
 <a name="The-_002denable_002dpretty_002dprinting-Command"></a>
 <h4 class="subheading">The <code>-enable-pretty-printing</code> Command</h4>
-<a name="index-_002denable_002dpretty_002dprinting"></a>
 
 <div class="smallexample">
 <pre class="smallexample">-enable-pretty-printing
@@ -199,12 +199,9 @@ request that this functionality be enabled.
 <p>Note that if Python support has not been compiled into <small>GDB</small>,
 this command will still succeed (and do nothing).
 </p>
-<p>This feature is currently (as of <small>GDB</small> 7.0) experimental, and
-may work differently in future versions of <small>GDB</small>.
-</p>
+<a name="index-_002dvar_002dcreate"></a>
 <a name="The-_002dvar_002dcreate-Command"></a>
 <h4 class="subheading">The <code>-var-create</code> Command</h4>
-<a name="index-_002dvar_002dcreate"></a>
 
 <a name="Synopsis-48"></a>
 <h4 class="subsubheading">Synopsis</h4>
@@ -267,8 +264,9 @@ reliable for a dynamic varobj.  Instead, you must examine the
 </dd>
 <dt>&lsquo;<samp>value</samp>&rsquo;</dt>
 <dd><p>The varobj&rsquo;s scalar value.  For a varobj whose type is some sort of
-aggregate (e.g., a <code>struct</code>), or for a dynamic varobj, this value
-will not be interesting.
+aggregate (e.g., a <code>struct</code>), this value will not be interesting.
+For a dynamic varobj, this value comes directly from the Python
+pretty-printer object&rsquo;s <code>to_string</code> method.
 </p>
 </dd>
 <dt>&lsquo;<samp>type</samp>&rsquo;</dt>
@@ -310,9 +308,9 @@ value comes directly from the Python pretty-printer object&rsquo;s
 </pre></div>
 
 
+<a name="index-_002dvar_002ddelete"></a>
 <a name="The-_002dvar_002ddelete-Command"></a>
 <h4 class="subheading">The <code>-var-delete</code> Command</h4>
-<a name="index-_002dvar_002ddelete"></a>
 
 <a name="Synopsis-49"></a>
 <h4 class="subsubheading">Synopsis</h4>
@@ -327,9 +325,9 @@ With the &lsquo;<samp>-c</samp>&rsquo; option, just deletes the children.
 <p>Returns an error if the object <var>name</var> is not found.
 </p>
 
+<a name="index-_002dvar_002dset_002dformat"></a>
 <a name="The-_002dvar_002dset_002dformat-Command"></a>
 <h4 class="subheading">The <code>-var-set-format</code> Command</h4>
-<a name="index-_002dvar_002dset_002dformat"></a>
 
 <a name="Synopsis-50"></a>
 <h4 class="subsubheading">Synopsis</h4>
@@ -360,9 +358,9 @@ zero-hexadecimal format.
 <p>For a variable with children, the format is set only on the 
 variable itself, and the children are not affected.  
 </p>
+<a name="index-_002dvar_002dshow_002dformat"></a>
 <a name="The-_002dvar_002dshow_002dformat-Command"></a>
 <h4 class="subheading">The <code>-var-show-format</code> Command</h4>
-<a name="index-_002dvar_002dshow_002dformat"></a>
 
 <a name="Synopsis-51"></a>
 <h4 class="subsubheading">Synopsis</h4>
@@ -379,9 +377,9 @@ variable itself, and the children are not affected.
 </pre></div>
 
 
+<a name="index-_002dvar_002dinfo_002dnum_002dchildren"></a>
 <a name="The-_002dvar_002dinfo_002dnum_002dchildren-Command"></a>
 <h4 class="subheading">The <code>-var-info-num-children</code> Command</h4>
-<a name="index-_002dvar_002dinfo_002dnum_002dchildren"></a>
 
 <a name="Synopsis-52"></a>
 <h4 class="subsubheading">Synopsis</h4>
@@ -401,9 +399,9 @@ It will return the current number of children, but more children may
 be available.
 </p>
 
+<a name="index-_002dvar_002dlist_002dchildren"></a>
 <a name="The-_002dvar_002dlist_002dchildren-Command"></a>
 <h4 class="subheading">The <code>-var-list-children</code> Command</h4>
-<a name="index-_002dvar_002dlist_002dchildren"></a>
 
 <a name="Synopsis-53"></a>
 <h4 class="subsubheading">Synopsis</h4>
@@ -530,9 +528,9 @@ remaining after the end of the selected range.
 </pre></div>
 
 
+<a name="index-_002dvar_002dinfo_002dtype"></a>
 <a name="The-_002dvar_002dinfo_002dtype-Command"></a>
 <h4 class="subheading">The <code>-var-info-type</code> Command</h4>
-<a name="index-_002dvar_002dinfo_002dtype"></a>
 
 <a name="Synopsis-54"></a>
 <h4 class="subsubheading">Synopsis</h4>
@@ -550,9 +548,9 @@ returned as a string in the same format as it is output by the
 </pre></div>
 
 
+<a name="index-_002dvar_002dinfo_002dexpression"></a>
 <a name="The-_002dvar_002dinfo_002dexpression-Command"></a>
 <h4 class="subheading">The <code>-var-info-expression</code> Command</h4>
-<a name="index-_002dvar_002dinfo_002dexpression"></a>
 
 <a name="Synopsis-55"></a>
 <h4 class="subsubheading">Synopsis</h4>
@@ -580,9 +578,9 @@ found in <a href="Supported-Languages.html#Supported-Languages">Supported Langua
 includes those expressions, so the <code>-var-info-expression</code> command
 is of limited use.
 </p>
+<a name="index-_002dvar_002dinfo_002dpath_002dexpression"></a>
 <a name="The-_002dvar_002dinfo_002dpath_002dexpression-Command"></a>
 <h4 class="subheading">The <code>-var-info-path-expression</code> Command</h4>
-<a name="index-_002dvar_002dinfo_002dpath_002dexpression"></a>
 
 <a name="Synopsis-56"></a>
 <h4 class="subsubheading">Synopsis</h4>
@@ -611,9 +609,9 @@ and will give an error when invoked on one.
 ^done,path_expr=((Base)c).m_size)
 </pre></div>
 
+<a name="index-_002dvar_002dshow_002dattributes"></a>
 <a name="The-_002dvar_002dshow_002dattributes-Command"></a>
 <h4 class="subheading">The <code>-var-show-attributes</code> Command</h4>
-<a name="index-_002dvar_002dshow_002dattributes"></a>
 
 <a name="Synopsis-57"></a>
 <h4 class="subsubheading">Synopsis</h4>
@@ -630,9 +628,9 @@ and will give an error when invoked on one.
 
 <p>where <var>attr</var> is <code>{ { editable | noneditable } | TBD }</code>.
 </p>
+<a name="index-_002dvar_002devaluate_002dexpression"></a>
 <a name="The-_002dvar_002devaluate_002dexpression-Command"></a>
 <h4 class="subheading">The <code>-var-evaluate-expression</code> Command</h4>
-<a name="index-_002dvar_002devaluate_002dexpression"></a>
 
 <a name="Synopsis-58"></a>
 <h4 class="subsubheading">Synopsis</h4>
@@ -656,9 +654,9 @@ can be changed using the <code>-var-set-format</code> command.
 <p>Note that one must invoke <code>-var-list-children</code> for a variable
 before the value of a child variable can be evaluated.
 </p>
+<a name="index-_002dvar_002dassign"></a>
 <a name="The-_002dvar_002dassign-Command"></a>
 <h4 class="subheading">The <code>-var-assign</code> Command</h4>
-<a name="index-_002dvar_002dassign"></a>
 
 <a name="Synopsis-59"></a>
 <h4 class="subsubheading">Synopsis</h4>
@@ -685,9 +683,9 @@ subsequent <code>-var-update</code> list.
 (gdb)
 </pre></div>
 
+<a name="index-_002dvar_002dupdate"></a>
 <a name="The-_002dvar_002dupdate-Command"></a>
 <h4 class="subheading">The <code>-var-update</code> Command</h4>
-<a name="index-_002dvar_002dupdate"></a>
 
 <a name="Synopsis-60"></a>
 <h4 class="subsubheading">Synopsis</h4>
@@ -828,10 +826,10 @@ type_changed=&quot;false&quot;}]
 (gdb)
 </pre></div>
 
-<a name="The-_002dvar_002dset_002dfrozen-Command"></a>
-<h4 class="subheading">The <code>-var-set-frozen</code> Command</h4>
 <a name="index-_002dvar_002dset_002dfrozen"></a>
-<a name="g_t_002dvar_002dset_002dfrozen"></a>
+<a name="g_t_002dvar_002dset_002dfrozen"></a><a name="The-_002dvar_002dset_002dfrozen-Command"></a>
+<h4 class="subheading">The <code>-var-set-frozen</code> Command</h4>
+
 <a name="Synopsis-61"></a>
 <h4 class="subsubheading">Synopsis</h4>
 
@@ -861,10 +859,10 @@ Unfreezing a variable does not update it, only subsequent
 (gdb)
 </pre></div>
 
-<a name="The-_002dvar_002dset_002dupdate_002drange-command"></a>
-<h4 class="subheading">The <code>-var-set-update-range</code> command</h4>
 <a name="index-_002dvar_002dset_002dupdate_002drange"></a>
-<a name="g_t_002dvar_002dset_002dupdate_002drange"></a>
+<a name="g_t_002dvar_002dset_002dupdate_002drange"></a><a name="The-_002dvar_002dset_002dupdate_002drange-command"></a>
+<h4 class="subheading">The <code>-var-set-update-range</code> command</h4>
+
 <a name="Synopsis-62"></a>
 <h4 class="subsubheading">Synopsis</h4>
 
@@ -889,10 +887,10 @@ children will be reported.  Otherwise, children starting at <var>from</var>
 ^done
 </pre></div>
 
-<a name="The-_002dvar_002dset_002dvisualizer-command"></a>
-<h4 class="subheading">The <code>-var-set-visualizer</code> command</h4>
 <a name="index-_002dvar_002dset_002dvisualizer"></a>
-<a name="g_t_002dvar_002dset_002dvisualizer"></a>
+<a name="g_t_002dvar_002dset_002dvisualizer"></a><a name="The-_002dvar_002dset_002dvisualizer-command"></a>
+<h4 class="subheading">The <code>-var-set-visualizer</code> command</h4>
+
 <a name="Synopsis-63"></a>
 <h4 class="subsubheading">Synopsis</h4>
 

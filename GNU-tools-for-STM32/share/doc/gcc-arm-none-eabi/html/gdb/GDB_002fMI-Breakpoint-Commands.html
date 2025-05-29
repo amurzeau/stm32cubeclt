@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- Copyright (C) 1988-2022 Free Software Foundation, Inc.
+<!-- Copyright (C) 1988-2023 Free Software Foundation, Inc.
 
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
@@ -74,9 +74,9 @@ Next: <a href="GDB_002fMI-Catchpoint-Commands.html#GDB_002fMI-Catchpoint-Command
 <p>This section documents <small>GDB/MI</small> commands for manipulating
 breakpoints.
 </p>
+<a name="index-_002dbreak_002dafter"></a>
 <a name="The-_002dbreak_002dafter-Command"></a>
 <h4 class="subheading">The <code>-break-after</code> Command</h4>
-<a name="index-_002dbreak_002dafter"></a>
 
 <a name="Synopsis-1"></a>
 <h4 class="subsubheading">Synopsis</h4>
@@ -125,9 +125,9 @@ line=&quot;5&quot;,thread-groups=[&quot;i1&quot;],times=&quot;0&quot;,ignore=&qu
 </pre></div>
 
 
+<a name="index-_002dbreak_002dcommands"></a>
 <a name="The-_002dbreak_002dcommands-Command"></a>
 <h4 class="subheading">The <code>-break-commands</code> Command</h4>
-<a name="index-_002dbreak_002dcommands"></a>
 
 <a name="Synopsis-2"></a>
 <h4 class="subsubheading">Synopsis</h4>
@@ -164,9 +164,9 @@ times=&quot;0&quot;}
 (gdb)
 </pre></div>
 
+<a name="index-_002dbreak_002dcondition"></a>
 <a name="The-_002dbreak_002dcondition-Command"></a>
 <h4 class="subheading">The <code>-break-condition</code> Command</h4>
-<a name="index-_002dbreak_002dcondition"></a>
 
 <a name="Synopsis-3"></a>
 <h4 class="subsubheading">Synopsis</h4>
@@ -210,9 +210,9 @@ line=&quot;5&quot;,cond=&quot;1&quot;,thread-groups=[&quot;i1&quot;],times=&quot
 (gdb)
 </pre></div>
 
+<a name="index-_002dbreak_002ddelete"></a>
 <a name="The-_002dbreak_002ddelete-Command"></a>
 <h4 class="subheading">The <code>-break-delete</code> Command</h4>
-<a name="index-_002dbreak_002ddelete"></a>
 
 <a name="Synopsis-4"></a>
 <h4 class="subsubheading">Synopsis</h4>
@@ -249,9 +249,9 @@ body=[]}
 (gdb)
 </pre></div>
 
+<a name="index-_002dbreak_002ddisable"></a>
 <a name="The-_002dbreak_002ddisable-Command"></a>
 <h4 class="subheading">The <code>-break-disable</code> Command</h4>
-<a name="index-_002dbreak_002ddisable"></a>
 
 <a name="Synopsis-5"></a>
 <h4 class="subsubheading">Synopsis</h4>
@@ -290,9 +290,9 @@ line=&quot;5&quot;,thread-groups=[&quot;i1&quot;],times=&quot;0&quot;}]}
 (gdb)
 </pre></div>
 
+<a name="index-_002dbreak_002denable"></a>
 <a name="The-_002dbreak_002denable-Command"></a>
 <h4 class="subheading">The <code>-break-enable</code> Command</h4>
-<a name="index-_002dbreak_002denable"></a>
 
 <a name="Synopsis-6"></a>
 <h4 class="subsubheading">Synopsis</h4>
@@ -330,9 +330,9 @@ line=&quot;5&quot;,thread-groups=[&quot;i1&quot;],times=&quot;0&quot;}]}
 (gdb)
 </pre></div>
 
+<a name="index-_002dbreak_002dinfo"></a>
 <a name="The-_002dbreak_002dinfo-Command"></a>
 <h4 class="subheading">The <code>-break-info</code> Command</h4>
-<a name="index-_002dbreak_002dinfo"></a>
 
 <a name="Synopsis-7"></a>
 <h4 class="subsubheading">Synopsis</h4>
@@ -355,20 +355,20 @@ table.
 <h4 class="subsubheading">Example</h4>
 <p>N.A.
 </p>
-<a name="The-_002dbreak_002dinsert-Command"></a>
-<h4 class="subheading">The <code>-break-insert</code> Command</h4>
 <a name="index-_002dbreak_002dinsert"></a>
-<a name="g_t_002dbreak_002dinsert"></a>
+<a name="g_t_002dbreak_002dinsert"></a><a name="The-_002dbreak_002dinsert-Command"></a>
+<h4 class="subheading">The <code>-break-insert</code> Command</h4>
+
 <a name="Synopsis-8"></a>
 <h4 class="subsubheading">Synopsis</h4>
 
 <div class="smallexample">
 <pre class="smallexample"> -break-insert [ -t ] [ -h ] [ -f ] [ -d ] [ -a ] [ --qualified ]
     [ -c <var>condition</var> ] [ --force-condition ] [ -i <var>ignore-count</var> ]
-    [ -p <var>thread-id</var> ] [ <var>location</var> ]
+    [ -p <var>thread-id</var> ] [ -g <var>thread-group-id</var> ] [ <var>locspec</var> ]
 </pre></div>
 
-<p>If specified, <var>location</var>, can be one of:
+<p>If specified, <var>locspec</var>, can be one of:
 </p>
 <dl compact="compact">
 <dt><var>linespec location</var></dt>
@@ -415,10 +415,10 @@ of either &lsquo;<samp>--function</samp>&rsquo; or &lsquo;<samp>--line</samp>&rs
 <dd><p>Insert a hardware breakpoint.
 </p></dd>
 <dt>&lsquo;<samp>-f</samp>&rsquo;</dt>
-<dd><p>If <var>location</var> cannot be parsed (for example if it
+<dd><p>If <var>locspec</var> cannot be resolved (for example if it
 refers to unknown files or functions), create a pending
-breakpoint. Without this flag, <small>GDB</small> will report
-an error, and won&rsquo;t create a breakpoint, if <var>location</var>
+breakpoint.  Without this flag, <small>GDB</small> will report
+an error, and won&rsquo;t create a breakpoint, if <var>locspec</var>
 cannot be parsed.
 </p></dd>
 <dt>&lsquo;<samp>-d</samp>&rsquo;</dt>
@@ -440,7 +440,14 @@ all of the breakpoint locations.
 </p></dd>
 <dt>&lsquo;<samp>-p <var>thread-id</var></samp>&rsquo;</dt>
 <dd><p>Restrict the breakpoint to the thread with the specified global
-<var>thread-id</var>.
+<var>thread-id</var>.  <var>thread-id</var> must be a valid thread-id at the
+time the breakpoint is requested.  Breakpoints created with a
+<var>thread-id</var> will automatically be deleted when the corresponding
+thread exits.
+</p></dd>
+<dt>&lsquo;<samp>-g <var>thread-group-id</var></samp>&rsquo;</dt>
+<dd><p>Restrict the breakpoint to the thread group with the specified
+<var>thread-group-id</var>.
 </p></dd>
 <dt>&lsquo;<samp>--qualified</samp>&rsquo;</dt>
 <dd><p>This option makes <small>GDB</small> interpret a function name specified as
@@ -495,9 +502,9 @@ times=&quot;0&quot;}]}
 (gdb)
 </pre></div>
 
+<a name="index-_002ddprintf_002dinsert"></a>
 <a name="The-_002ddprintf_002dinsert-Command"></a>
 <h4 class="subheading">The <code>-dprintf-insert</code> Command</h4>
-<a name="index-_002ddprintf_002dinsert"></a>
 
 <a name="Synopsis-9"></a>
 <h4 class="subsubheading">Synopsis</h4>
@@ -505,11 +512,15 @@ times=&quot;0&quot;}]}
 <div class="smallexample">
 <pre class="smallexample"> -dprintf-insert [ -t ] [ -f ] [ -d ] [ --qualified ]
     [ -c <var>condition</var> ] [--force-condition] [ -i <var>ignore-count</var> ]
-    [ -p <var>thread-id</var> ] [ <var>location</var> ] [ <var>format</var> ]
-    [ <var>argument</var> ]
+    [ -p <var>thread-id</var> ] [ <var>locspec</var> ] <var>format</var>
+    [ <var>argument</var>&hellip; ]
 </pre></div>
 
-<p>If supplied, <var>location</var> and <code>--qualified</code> may be specified
+<p>Insert a new dynamic print breakpoint at the given location.
+See <a href="Dynamic-Printf.html#Dynamic-Printf">Dynamic Printf</a>.  <var>format</var> is the format to use, and any
+remaining arguments are passed as expressions to substitute.
+</p>
+<p>If supplied, <var>locspec</var> and <code>--qualified</code> may be specified
 the same way as for the <code>-break-insert</code> command.
 See <a href="#g_t_002dbreak_002dinsert">-break-insert</a>.
 </p>
@@ -520,10 +531,10 @@ See <a href="#g_t_002dbreak_002dinsert">-break-insert</a>.
 <dd><p>Insert a temporary breakpoint.
 </p></dd>
 <dt>&lsquo;<samp>-f</samp>&rsquo;</dt>
-<dd><p>If <var>location</var> cannot be parsed (for example, if it
+<dd><p>If <var>locspec</var> cannot be parsed (for example, if it
 refers to unknown files or functions), create a pending
 breakpoint.  Without this flag, <small>GDB</small> will report
-an error, and won&rsquo;t create a breakpoint, if <var>location</var>
+an error, and won&rsquo;t create a breakpoint, if <var>locspec</var>
 cannot be parsed.
 </p></dd>
 <dt>&lsquo;<samp>-d</samp>&rsquo;</dt>
@@ -567,21 +578,21 @@ resulting breakpoint.
 4^done,bkpt={number=&quot;1&quot;,type=&quot;dprintf&quot;,disp=&quot;keep&quot;,enabled=&quot;y&quot;,
 addr=&quot;0x000000000040061b&quot;,func=&quot;foo&quot;,file=&quot;mi-dprintf.c&quot;,
 fullname=&quot;mi-dprintf.c&quot;,line=&quot;25&quot;,thread-groups=[&quot;i1&quot;],
-times=&quot;0&quot;,script={&quot;printf \&quot;At foo entry\\n\&quot;&quot;,&quot;continue&quot;},
+times=&quot;0&quot;,script=[&quot;printf \&quot;At foo entry\\n\&quot;&quot;,&quot;continue&quot;],
 original-location=&quot;foo&quot;}
 (gdb)
 5-dprintf-insert 26 &quot;arg=%d, g=%d\n&quot; arg g
 5^done,bkpt={number=&quot;2&quot;,type=&quot;dprintf&quot;,disp=&quot;keep&quot;,enabled=&quot;y&quot;,
 addr=&quot;0x000000000040062a&quot;,func=&quot;foo&quot;,file=&quot;mi-dprintf.c&quot;,
 fullname=&quot;mi-dprintf.c&quot;,line=&quot;26&quot;,thread-groups=[&quot;i1&quot;],
-times=&quot;0&quot;,script={&quot;printf \&quot;arg=%d, g=%d\\n\&quot;, arg, g&quot;,&quot;continue&quot;},
+times=&quot;0&quot;,script=[&quot;printf \&quot;arg=%d, g=%d\\n\&quot;, arg, g&quot;,&quot;continue&quot;],
 original-location=&quot;mi-dprintf.c:26&quot;}
 (gdb)
 </pre></div>
 
+<a name="index-_002dbreak_002dlist"></a>
 <a name="The-_002dbreak_002dlist-Command"></a>
 <h4 class="subheading">The <code>-break-list</code> Command</h4>
-<a name="index-_002dbreak_002dlist"></a>
 
 <a name="Synopsis-10"></a>
 <h4 class="subsubheading">Synopsis</h4>
@@ -667,9 +678,9 @@ body=[]}
 (gdb)
 </pre></div>
 
+<a name="index-_002dbreak_002dpasscount"></a>
 <a name="The-_002dbreak_002dpasscount-Command"></a>
 <h4 class="subheading">The <code>-break-passcount</code> Command</h4>
-<a name="index-_002dbreak_002dpasscount"></a>
 
 <a name="Synopsis-11"></a>
 <h4 class="subsubheading">Synopsis</h4>
@@ -683,9 +694,9 @@ body=[]}
 is not a tracepoint, error is emitted.  This corresponds to CLI
 command &lsquo;<samp>passcount</samp>&rsquo;.
 </p>
+<a name="index-_002dbreak_002dwatch"></a>
 <a name="The-_002dbreak_002dwatch-Command"></a>
 <h4 class="subheading">The <code>-break-watch</code> Command</h4>
-<a name="index-_002dbreak_002dwatch"></a>
 
 <a name="Synopsis-12"></a>
 <h4 class="subsubheading">Synopsis</h4>

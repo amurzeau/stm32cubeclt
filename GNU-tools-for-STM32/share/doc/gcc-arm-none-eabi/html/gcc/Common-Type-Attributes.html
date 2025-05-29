@@ -1,6 +1,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- Copyright (C) 1988-2021 Free Software Foundation, Inc.
+<!-- This file documents the use of the GNU compilers.
+
+Copyright (C) 1988-2023 Free Software Foundation, Inc.
 
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
@@ -30,7 +32,7 @@ You have freedom to copy and modify this GNU Manual, like GNU
 <meta name="distribution" content="global">
 <meta name="Generator" content="makeinfo">
 <link href="index.html#Top" rel="start" title="Top">
-<link href="Option-Index.html#Option-Index" rel="index" title="Option Index">
+<link href="Indices.html#Indices" rel="index" title="Indices">
 <link href="index.html#SEC_Contents" rel="contents" title="Table of Contents">
 <link href="Type-Attributes.html#Type-Attributes" rel="up" title="Type Attributes">
 <link href="ARC-Type-Attributes.html#ARC-Type-Attributes" rel="next" title="ARC Type Attributes">
@@ -66,11 +68,11 @@ ul.no-bullet {list-style: none}
 
 </head>
 
-<body lang="en">
+<body lang="en_US">
 <a name="Common-Type-Attributes"></a>
 <div class="header">
 <p>
-Next: <a href="ARC-Type-Attributes.html#ARC-Type-Attributes" accesskey="n" rel="next">ARC Type Attributes</a>, Up: <a href="Type-Attributes.html#Type-Attributes" accesskey="u" rel="up">Type Attributes</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Option-Index.html#Option-Index" title="Index" rel="index">Index</a>]</p>
+Next: <a href="ARC-Type-Attributes.html#ARC-Type-Attributes" accesskey="n" rel="next">ARC Type Attributes</a>, Up: <a href="Type-Attributes.html#Type-Attributes" accesskey="u" rel="up">Type Attributes</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Indices.html#Indices" title="Index" rel="index">Index</a>]</p>
 </div>
 <hr>
 <a name="Common-Type-Attributes-1"></a>
@@ -216,11 +218,11 @@ when the structure field has the misaligned offset:
 
 <p>This warning can be disabled by <samp>-Wno-if-not-aligned</samp>.
 </p>
+<a name="index-alloc_005fsize-type-attribute"></a>
 </dd>
 <dt><code>alloc_size (<var>position</var>)</code></dt>
 <dt><code>alloc_size (<var>position-1</var>, <var>position-2</var>)</code></dt>
-<dd><a name="index-alloc_005fsize-type-attribute"></a>
-<p>The <code>alloc_size</code> type attribute may be applied to the definition
+<dd><p>The <code>alloc_size</code> type attribute may be applied to the definition
 of a type of a function that returns a pointer and takes at least one
 argument of an integer type.  It indicates that the returned pointer
 points to an object whose size is given by the function argument at
@@ -244,11 +246,11 @@ is given by the product of arguments 1 and 2, and that
 <code>malloc_type</code>, like the standard C function <code>malloc</code>,
 returns an object whose size is given by argument 1 to the function.
 </p>
+<a name="index-copy-type-attribute"></a>
 </dd>
 <dt><code>copy</code></dt>
 <dt><code>copy (<var>expression</var>)</code></dt>
-<dd><a name="index-copy-type-attribute"></a>
-<p>The <code>copy</code> attribute applies the set of attributes with which
+<dd><p>The <code>copy</code> attribute applies the set of attributes with which
 the type of the <var>expression</var> has been declared to the declaration
 of the type to which the attribute is applied.  The attribute is
 designed for libraries that define aliases that are expected to
@@ -277,11 +279,11 @@ A { /* <span class="roman">&hellip;</span> */ };
 struct __attribute__ ((copy ( (struct A *)0)) B { /* <span class="roman">&hellip;</span> */ };
 </pre></div>
 
+<a name="index-deprecated-type-attribute"></a>
 </dd>
 <dt><code>deprecated</code></dt>
 <dt><code>deprecated (<var>msg</var>)</code></dt>
-<dd><a name="index-deprecated-type-attribute"></a>
-<p>The <code>deprecated</code> attribute results in a warning if the type
+<dd><p>The <code>deprecated</code> attribute results in a warning if the type
 is used anywhere in the source file.  This is useful when identifying
 types that are expected to be removed in a future version of a program.
 If possible, the warning also includes the location of the declaration
@@ -315,10 +317,22 @@ variables (see <a href="Function-Attributes.html#Function-Attributes">Function A
 <p>The message attached to the attribute is affected by the setting of
 the <samp>-fmessage-length</samp> option.
 </p>
+<a name="index-unavailable-type-attribute"></a>
+</dd>
+<dt><code>unavailable</code></dt>
+<dt><code>unavailable (<var>msg</var>)</code></dt>
+<dd><p>The <code>unavailable</code> attribute behaves in the same manner as the
+<code>deprecated</code> one, but emits an error rather than a warning.  It is
+used to indicate that a (perhaps previously <code>deprecated</code>) type is
+no longer usable.
+</p>
+<p>The <code>unavailable</code> attribute can also be used for functions and
+variables (see <a href="Function-Attributes.html#Function-Attributes">Function Attributes</a>, see <a href="Variable-Attributes.html#Variable-Attributes">Variable Attributes</a>.)
+</p>
+<a name="index-designated_005finit-type-attribute"></a>
 </dd>
 <dt><code>designated_init</code></dt>
-<dd><a name="index-designated_005finit-type-attribute"></a>
-<p>This attribute may only be applied to structure types.  It indicates
+<dd><p>This attribute may only be applied to structure types.  It indicates
 that any initialization of an object of this type must use designated
 initializers rather than positional initializers.  The intent of this
 attribute is to allow the programmer to indicate that a structure&rsquo;s
@@ -328,10 +342,10 @@ initialization will result in future breakage.
 <p>GCC emits warnings based on this attribute by default; use
 <samp>-Wno-designated-init</samp> to suppress them.
 </p>
+<a name="index-may_005falias-type-attribute"></a>
 </dd>
 <dt><code>may_alias</code></dt>
-<dd><a name="index-may_005falias-type-attribute"></a>
-<p>Accesses through pointers to types with this attribute are not subject
+<dd><p>Accesses through pointers to types with this attribute are not subject
 to type-based alias analysis, but are instead assumed to be able to alias
 any other type of objects.
 In the context of section 6.5 paragraph 7 of the C99 standard,
@@ -369,10 +383,10 @@ declaration, the above program would abort when compiled with
 <samp>-fstrict-aliasing</samp>, which is on by default at <samp>-O2</samp> or
 above.
 </p>
+<a name="index-mode-type-attribute"></a>
 </dd>
 <dt><code>mode (<var>mode</var>)</code></dt>
-<dd><a name="index-mode-type-attribute"></a>
-<p>This attribute specifies the data type for the declaration&mdash;whichever
+<dd><p>This attribute specifies the data type for the declaration&mdash;whichever
 type corresponds to the mode <var>mode</var>.  This in effect lets you
 request an integer or floating-point type according to its width.
 </p>
@@ -383,10 +397,10 @@ indicate the mode corresponding to a one-byte integer, <code>word</code> or
 <code>__word__</code> for the mode of a one-word integer, and <code>pointer</code>
 or <code>__pointer__</code> for the mode used to represent pointers.
 </p>
+<a name="index-packed-type-attribute"></a>
 </dd>
 <dt><code>packed</code></dt>
-<dd><a name="index-packed-type-attribute"></a>
-<p>This attribute, attached to a <code>struct</code>, <code>union</code>, or C++ <code>class</code>
+<dd><p>This attribute, attached to a <code>struct</code>, <code>union</code>, or C++ <code>class</code>
 type definition, specifies that each of its members (other than zero-width
 bit-fields) is placed to minimize the memory required.  This is equivalent
 to specifying the <code>packed</code> attribute on each of the members.
@@ -423,10 +437,10 @@ of an <code>enum</code>, <code>struct</code>, <code>union</code>, or <code>class
 not on a <code>typedef</code> that does not also define the enumerated type,
 structure, union, or class.
 </p>
+<a name="index-scalar_005fstorage_005forder-type-attribute"></a>
 </dd>
 <dt><code>scalar_storage_order (&quot;<var>endianness</var>&quot;)</code></dt>
-<dd><a name="index-scalar_005fstorage_005forder-type-attribute"></a>
-<p>When attached to a <code>union</code> or a <code>struct</code>, this attribute sets
+<dd><p>When attached to a <code>union</code> or a <code>struct</code>, this attribute sets
 the storage order, aka endianness, of the scalar fields of the type, as
 well as the array fields whose component is scalar.  The supported
 endiannesses are <code>big-endian</code> and <code>little-endian</code>.  The attribute
@@ -434,6 +448,9 @@ has no effects on fields which are themselves a <code>union</code>, a <code>stru
 or an array whose component is a <code>union</code> or a <code>struct</code>, and it is
 possible for these fields to have a different scalar storage order than the
 enclosing type.
+</p>
+<p>Note that neither pointer nor vector fields are considered scalar fields in
+this context, so the attribute has no effects on these fields.
 </p>
 <p>This attribute is supported only for targets that use a uniform default
 scalar storage order (fortunately, most of them), i.e. targets that store
@@ -461,13 +478,14 @@ The second case is nevertheless allowed to be able to perform a block copy
 from or to the array.
 </p>
 <p>Moreover, the use of type punning or aliasing to toggle the storage order
-is not supported; that is to say, a given scalar object cannot be accessed
-through distinct types that assign a different storage order to it.
+is not supported; that is to say, if a given scalar object can be accessed
+through distinct types that assign a different storage order to it, then the
+behavior is undefined.
 </p>
+<a name="index-transparent_005funion-type-attribute"></a>
 </dd>
 <dt><code>transparent_union</code></dt>
-<dd><a name="index-transparent_005funion-type-attribute"></a>
-
+<dd>
 <p>This attribute, attached to a <code>union</code> type definition, indicates
 that any function parameter having that union type causes calls to that
 function to be treated in a special way.
@@ -525,10 +543,10 @@ int w2 () { union wait w; return wait (&amp;w); }
 }
 </pre></div>
 
+<a name="index-unused-type-attribute"></a>
 </dd>
 <dt><code>unused</code></dt>
-<dd><a name="index-unused-type-attribute"></a>
-<p>When attached to a type (including a <code>union</code> or a <code>struct</code>),
+<dd><p>When attached to a type (including a <code>union</code> or a <code>struct</code>),
 this attribute means that variables of that type are meant to appear
 possibly unused.  GCC does not produce a warning for any variables of
 that type, even if the variable appears to do nothing.  This is often
@@ -536,10 +554,10 @@ the case with lock or thread classes, which are usually defined and then
 not referenced, but contain constructors and destructors that have
 nontrivial bookkeeping functions.
 </p>
+<a name="index-vector_005fsize-type-attribute"></a>
 </dd>
 <dt><code>vector_size (<var>bytes</var>)</code></dt>
-<dd><a name="index-vector_005fsize-type-attribute"></a>
-<p>This attribute specifies the vector size for the type, measured in bytes.
+<dd><p>This attribute specifies the vector size for the type, measured in bytes.
 The type to which it applies is known as the <em>base type</em>.  The <var>bytes</var>
 argument must be a positive power-of-two multiple of the base type size.  For
 example, the following declarations:
@@ -569,10 +587,10 @@ type.
 <p>declares <code>get_flt_vec16</code> to be a function returning a 16-byte vector
 with the base type <code>float</code>.
 </p>
+<a name="index-visibility-type-attribute"></a>
 </dd>
 <dt><code>visibility</code></dt>
-<dd><a name="index-visibility-type-attribute"></a>
-<p>In C++, attribute visibility (see <a href="Function-Attributes.html#Function-Attributes">Function Attributes</a>) can also be
+<dd><p>In C++, attribute visibility (see <a href="Function-Attributes.html#Function-Attributes">Function Attributes</a>) can also be
 applied to class, struct, union and enum types.  Unlike other type
 attributes, the attribute must appear between the initial keyword and
 the name of the type; it cannot appear after the body of the type.
@@ -584,10 +602,10 @@ and caught in another, the class must have default visibility.
 Otherwise the two shared objects are unable to use the same
 typeinfo node and exception handling will break.
 </p>
+<a name="index-objc_005froot_005fclass-type-attribute"></a>
 </dd>
 <dt><code>objc_root_class <span class="roman">(Objective-C and Objective-C++ only)</span></code></dt>
-<dd><a name="index-objc_005froot_005fclass-type-attribute"></a>
-<p>This attribute marks a class as being a root class, and thus allows
+<dd><p>This attribute marks a class as being a root class, and thus allows
 the compiler to elide any warnings about a missing superclass and to
 make additional checks for mandatory methods as needed.
 </p>
@@ -601,7 +619,7 @@ packed))</samp>&rsquo;.
 <hr>
 <div class="header">
 <p>
-Next: <a href="ARC-Type-Attributes.html#ARC-Type-Attributes" accesskey="n" rel="next">ARC Type Attributes</a>, Up: <a href="Type-Attributes.html#Type-Attributes" accesskey="u" rel="up">Type Attributes</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Option-Index.html#Option-Index" title="Index" rel="index">Index</a>]</p>
+Next: <a href="ARC-Type-Attributes.html#ARC-Type-Attributes" accesskey="n" rel="next">ARC Type Attributes</a>, Up: <a href="Type-Attributes.html#Type-Attributes" accesskey="u" rel="up">Type Attributes</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Indices.html#Indices" title="Index" rel="index">Index</a>]</p>
 </div>
 
 

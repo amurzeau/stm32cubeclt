@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- Copyright (C) 1988-2021 Free Software Foundation, Inc.
+<!-- Copyright (C) 1988-2023 Free Software Foundation, Inc.
 
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
@@ -77,9 +77,9 @@ Previous: <a href="GIMPLE-API.html#GIMPLE-API" accesskey="p" rel="prev">GIMPLE A
 <h3 class="section">26.2 The Language</h3>
 <a name="index-The-Language"></a>
 
-<p>The language to write expression simplifications in resembles other
-domain-specific languages GCC uses.  Thus it is lispy.  Lets start
-with an example from the match.pd file:
+<p>The language in which to write expression simplifications resembles
+other domain-specific languages GCC uses.  Thus it is lispy.  Let&rsquo;s
+start with an example from the match.pd file:
 </p>
 <div class="smallexample">
 <pre class="smallexample">(simplify
@@ -99,7 +99,7 @@ function code names in all-caps, like <code>BUILT_IN_SQRT</code>.
 </p>
 <p><code>@n</code> denotes a so-called capture.  It captures the operand and lets
 you refer to it in other places of the match-and-simplify.  In the
-above example it is refered to in the replacement expression.  Captures
+above example it is referred to in the replacement expression.  Captures
 are <code>@</code> followed by a number or an identifier.
 </p>
 <div class="smallexample">
@@ -109,10 +109,10 @@ are <code>@</code> followed by a number or an identifier.
 </pre></div>
 
 <p>In this example <code>@0</code> is mentioned twice which constrains the matched
-expression to have two equal operands.  Usually matches are constraint
-to equal types.  If operands may be constants and conversions are involved
+expression to have two equal operands.  Usually matches are constrained
+to equal types.  If operands may be constants and conversions are involved,
 matching by value might be preferred in which case use <code>@@0</code> to
-denote a by value match and the specific operand you want to refer to
+denote a by-value match and the specific operand you want to refer to
 in the result part.  This example also introduces
 operands written in C code.  These can be used in the expression
 replacements and are supposed to evaluate to a tree node which has to
@@ -128,7 +128,7 @@ be a valid GIMPLE operand (so you cannot generate expressions in C code).
 <p>Here <code>@0</code> captures the first operand of the trunc_mod expression
 which is also predicated with <code>integer_zerop</code>.  Expression operands
 may be either expressions, predicates or captures.  Captures
-can be unconstrained or capture expresions or predicates.
+can be unconstrained or capture expressions or predicates.
 </p>
 <p>This example introduces an optional operand of simplify,
 the if-expression.  This condition is evaluated after the
@@ -218,9 +218,9 @@ no other condition evaluated to true.
 </pre></div>
 
 <p>In the above example, <code>@2</code> captures the result of the expression
-<code>(addr @0)</code>.  For outermost expression only its type can be captured,
-and the keyword <code>type</code> is reserved for this purpose.  The above
-example also gives a way to conditionalize patterns to only apply
+<code>(addr @0)</code>.  For the outermost expression only its type can be
+captured, and the keyword <code>type</code> is reserved for this purpose.  The
+above example also gives a way to conditionalize patterns to only apply
 to <code>GIMPLE</code> or <code>GENERIC</code> by means of using the pre-defined
 preprocessor macros <code>GIMPLE</code> and <code>GENERIC</code> and using
 preprocessor directives.
@@ -313,9 +313,9 @@ them via
 <p>So this example iterates over <code>plus</code>, <code>minus</code>, <code>mult</code>
 and <code>trunc_div</code>.
 </p>
-<p>Using operator lists can also remove the need to explicitely write
+<p>Using operator lists can also remove the need to explicitly write
 a <code>for</code>.  All operator list uses that appear in a <code>simplify</code>
-or <code>match</code> pattern in operator positions will implicitely
+or <code>match</code> pattern in operator positions will implicitly
 be added to a new <code>for</code>.  For example
 </p>
 <div class="smallexample">
@@ -358,7 +358,7 @@ type of a generated expression with the <code>:type</code> syntax where
 <code>type</code> needs to be an identifier that refers to the desired type.
 Usually the types of the generated result expressions are
 determined from the context, but sometimes like in the above case
-it is required that you specify them explicitely.
+it is required that you specify them explicitly.
 </p>
 <p>Another modifier for generated expressions is <code>!</code> which
 tells the machinery to only consider the simplification in case
@@ -373,8 +373,10 @@ for example
 
 <p>which moves the outer <code>plus</code> operation to the inner arms
 of the <code>vec_cond</code> expression but only if the actual plus
-operations both simplify.  Note this is currently only supported
-for code generation targeting <code>GIMPLE</code>.
+operations both simplify.  Note that on <code>GENERIC</code> a simple
+operand means that the result satisfies <code>!EXPR_P</code> which
+can be limiting if the operation itself simplifies but the
+remaining operand is an (unrelated) expression.
 </p>
 <p>As intermediate conversions are often optional there is a way to
 avoid the need to repeat patterns both with and without such
@@ -399,7 +401,7 @@ have access to two additional conditional converts as in
 including predicates you declare yourself with <code>match</code>.
 </p>
 <p>Predicates available from the GCC middle-end need to be made
-available explicitely via <code>define_predicates</code>:
+available explicitly via <code>define_predicates</code>:
 </p>
 <div class="smallexample">
 <pre class="smallexample">(define_predicates

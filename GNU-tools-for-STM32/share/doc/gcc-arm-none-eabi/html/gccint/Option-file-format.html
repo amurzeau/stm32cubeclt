@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- Copyright (C) 1988-2021 Free Software Foundation, Inc.
+<!-- Copyright (C) 1988-2023 Free Software Foundation, Inc.
 
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
@@ -121,7 +121,7 @@ These records have two fields: the string &lsquo;<samp>HeaderInclude</samp>&rsqu
 name of the include file.
 
 </li><li> A variable record to record any additional files that the
-<samp>options.c</samp> or <samp>options-save.c</samp> file should include.  This
+<samp>options.cc</samp> or <samp>options-save.cc</samp> file should include.  This
 is useful to provide
 inline functions needed for target variables and/or <code>#ifdef</code>
 sequences to properly set up the initialization.  These records have
@@ -188,6 +188,22 @@ be accepted by the driver.  This is used for cases such as
 <samp>-march=native</samp> that are processed by the driver so that
 &lsquo;<samp>gcc -v</samp>&rsquo; shows how the options chosen depended on the system on
 which the compiler was run.
+</p>
+</dd>
+<dt><code>Set(<var>number</var>)</code></dt>
+<dd><p>This property is optional, required for enumerations used in
+<code>EnumSet</code> options.  <var>number</var> should be decimal number between
+1 and 64 inclusive and divides the enumeration into a set of
+sets of mutually exclusive arguments.  Arguments with the same
+<var>number</var> can&rsquo;t be specified together in the same option, but
+arguments with different <var>number</var> can.  <var>value</var> needs to be
+chosen such that a mask of all <var>value</var> values from the same set
+<var>number</var> bitwise ored doesn&rsquo;t overlap with masks for other sets.
+When <code>-foption=arg_from_set1,arg_from_set4</code> and
+<code>-fno-option=arg_from_set3</code> are used, the effect is that previous
+value of the <code>Var</code> will get bits from set 1 and 4 masks cleared,
+ored <code>Value</code> of <code>arg_from_set1</code> and <code>arg_from_set4</code>
+and then will get bits from set 3 mask cleared.
 </p></dd>
 </dl>
 
@@ -199,7 +215,7 @@ which the compiler was run.
 contains the <code>Undocumented</code> property).
 </li></ol>
 
-<p>By default, all options beginning with &ldquo;f&rdquo;, &ldquo;W&rdquo; or &ldquo;m&rdquo; are
+<p>By default, all options beginning with &ldquo;f&rdquo;, &ldquo;g&rdquo;, &ldquo;W&rdquo; or &ldquo;m&rdquo; are
 implicitly assumed to take a &ldquo;no-&rdquo; form.  This form should not be
 listed separately.  If an option beginning with one of these letters
 does not have a &ldquo;no-&rdquo; form, you can use the <code>RejectNegative</code>
@@ -212,6 +228,17 @@ help text contains a tab character, the text to the left of the tab is
 used instead of the option&rsquo;s name and the text to the right of the
 tab forms the help text.  This allows you to elaborate on what type
 of argument the option takes.
+</p>
+<p>There is no support for different help texts for different languages.
+If an option is supported for multiple languages, use a generic
+description that is correct for all of them.
+</p>
+<p>If an option has multiple option definition records (in different
+front ends&rsquo; <samp>*.opt</samp> files, and/or <samp>gcc/common.opt</samp>, for
+example), convention is to not duplicate the help text for each of
+them, but instead put a comment like <code>; documented in common.opt</code>
+in place of the help text for all but one of the multiple option
+definition records.
 </p>
 </li><li> A target mask record.  These records have one field of the form
 &lsquo;<samp>Mask(<var>x</var>)</samp>&rsquo;.  The options-processing script will automatically

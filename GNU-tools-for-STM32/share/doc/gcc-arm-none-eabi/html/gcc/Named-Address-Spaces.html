@@ -1,6 +1,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- Copyright (C) 1988-2021 Free Software Foundation, Inc.
+<!-- This file documents the use of the GNU compilers.
+
+Copyright (C) 1988-2023 Free Software Foundation, Inc.
 
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
@@ -30,7 +32,7 @@ You have freedom to copy and modify this GNU Manual, like GNU
 <meta name="distribution" content="global">
 <meta name="Generator" content="makeinfo">
 <link href="index.html#Top" rel="start" title="Top">
-<link href="Option-Index.html#Option-Index" rel="index" title="Option Index">
+<link href="Indices.html#Indices" rel="index" title="Indices">
 <link href="index.html#SEC_Contents" rel="contents" title="Table of Contents">
 <link href="C-Extensions.html#C-Extensions" rel="up" title="C Extensions">
 <link href="Zero-Length.html#Zero-Length" rel="next" title="Zero Length">
@@ -66,11 +68,11 @@ ul.no-bullet {list-style: none}
 
 </head>
 
-<body lang="en">
+<body lang="en_US">
 <a name="Named-Address-Spaces"></a>
 <div class="header">
 <p>
-Next: <a href="Zero-Length.html#Zero-Length" accesskey="n" rel="next">Zero Length</a>, Previous: <a href="Fixed_002dPoint.html#Fixed_002dPoint" accesskey="p" rel="prev">Fixed-Point</a>, Up: <a href="C-Extensions.html#C-Extensions" accesskey="u" rel="up">C Extensions</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Option-Index.html#Option-Index" title="Index" rel="index">Index</a>]</p>
+Next: <a href="Zero-Length.html#Zero-Length" accesskey="n" rel="next">Zero Length</a>, Previous: <a href="Fixed_002dPoint.html#Fixed_002dPoint" accesskey="p" rel="prev">Fixed-Point</a>, Up: <a href="C-Extensions.html#C-Extensions" accesskey="u" rel="up">C Extensions</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Indices.html#Indices" title="Index" rel="index">Index</a>]</p>
 </div>
 <hr>
 <a name="Named-Address-Spaces-1"></a>
@@ -81,7 +83,7 @@ Next: <a href="Zero-Length.html#Zero-Length" accesskey="n" rel="next">Zero Lengt
 defined in the N1275 draft of ISO/IEC DTR 18037.  Support for named
 address spaces in GCC will evolve as the draft technical report
 changes.  Calling conventions for any target might also change.  At
-present, only the AVR, M32C, RL78, and x86 targets support
+present, only the AVR, M32C, PRU, RL78, and x86 targets support
 address spaces other than the generic address space.
 </p>
 <p>Address space identifiers may be used exactly like any other C type
@@ -116,33 +118,34 @@ to generate the right instructions to access this data without
 using (inline) assembler code, special address spaces are needed.
 </p>
 <dl compact="compact">
-<dt><code>__flash</code></dt>
 <dd><a name="index-_005f_005fflash-AVR-Named-Address-Spaces"></a>
-<p>The <code>__flash</code> qualifier locates data in the
+</dd>
+<dt><code>__flash</code></dt>
+<dd><p>The <code>__flash</code> qualifier locates data in the
 <code>.progmem.data</code> section. Data is read using the <code>LPM</code>
 instruction. Pointers to this address space are 16 bits wide.
 </p>
+<a name="index-_005f_005fflash1-AVR-Named-Address-Spaces"></a>
+<a name="index-_005f_005fflash2-AVR-Named-Address-Spaces"></a>
+<a name="index-_005f_005fflash3-AVR-Named-Address-Spaces"></a>
+<a name="index-_005f_005fflash4-AVR-Named-Address-Spaces"></a>
+<a name="index-_005f_005fflash5-AVR-Named-Address-Spaces"></a>
 </dd>
 <dt><code>__flash1</code></dt>
 <dt><code>__flash2</code></dt>
 <dt><code>__flash3</code></dt>
 <dt><code>__flash4</code></dt>
 <dt><code>__flash5</code></dt>
-<dd><a name="index-_005f_005fflash1-AVR-Named-Address-Spaces"></a>
-<a name="index-_005f_005fflash2-AVR-Named-Address-Spaces"></a>
-<a name="index-_005f_005fflash3-AVR-Named-Address-Spaces"></a>
-<a name="index-_005f_005fflash4-AVR-Named-Address-Spaces"></a>
-<a name="index-_005f_005fflash5-AVR-Named-Address-Spaces"></a>
-<p>These are 16-bit address spaces locating data in section
+<dd><p>These are 16-bit address spaces locating data in section
 <code>.progmem<var>N</var>.data</code> where <var>N</var> refers to
 address space <code>__flash<var>N</var></code>.
 The compiler sets the <code>RAMPZ</code> segment register appropriately 
 before reading data by means of the <code>ELPM</code> instruction.
 </p>
+<a name="index-_005f_005fmemx-AVR-Named-Address-Spaces"></a>
 </dd>
 <dt><code>__memx</code></dt>
-<dd><a name="index-_005f_005fmemx-AVR-Named-Address-Spaces"></a>
-<p>This is a 24-bit address space that linearizes flash and RAM:
+<dd><p>This is a 24-bit address space that linearizes flash and RAM:
 If the high bit of the address is set, data is read from
 RAM using the lower two bytes as RAM address.
 If the high bit of the address is clear, data is read from flash
@@ -208,7 +211,7 @@ locates data in flash but
 accesses to these data read from generic address space, i.e.
 from RAM,
 so that you need special accessors like <code>pgm_read_byte</code>
-from <a href="http://nongnu.org/avr-libc/user-manual/"><span class="nolinebreak">AVR-LibC</span></a><!-- /@w -->
+from <a href="https://www.nongnu.org/avr-libc/user-manual/"><span class="nolinebreak">AVR-LibC</span></a><!-- /@w -->
 together with attribute <code>progmem</code>.
 </p>
 <p><b>Limitations and caveats</b>
@@ -257,8 +260,26 @@ order to access memory beyond the first 64&nbsp;Ki bytes.  If
 <code>__far</code> is used with the M32CM or M32C CPU variants, it has no
 effect.
 </p>
+<a name="PRU-Named-Address-Spaces"></a>
+<h4 class="subsection">6.17.3 PRU Named Address Spaces</h4>
+<a name="index-_005f_005fregio_005fsymbol-PRU-Named-Address-Spaces"></a>
+
+<p>On the PRU target, variables qualified with <code>__regio_symbol</code> are
+aliases used to access the special I/O CPU registers.  They must be
+declared as <code>extern</code> because such variables will not be allocated in
+any data memory.  They must also be marked as <code>volatile</code>, and can
+only be 32-bit integer types.  The only names those variables can have
+are <code>__R30</code> and <code>__R31</code>, representing respectively the
+<code>R30</code> and <code>R31</code> special I/O CPU registers.  Hence the following
+example is the only valid usage of <code>__regio_symbol</code>:
+</p>
+<div class="smallexample">
+<pre class="smallexample">extern volatile __regio_symbol uint32_t __R30;
+extern volatile __regio_symbol uint32_t __R31;
+</pre></div>
+
 <a name="RL78-Named-Address-Spaces"></a>
-<h4 class="subsection">6.17.3 RL78 Named Address Spaces</h4>
+<h4 class="subsection">6.17.4 RL78 Named Address Spaces</h4>
 <a name="index-_005f_005ffar-RL78-Named-Address-Spaces"></a>
 
 <p>On the RL78 target, variables qualified with <code>__far</code> are accessed
@@ -267,18 +288,19 @@ addresses.  Non-far variables are assumed to appear in the topmost
 64&nbsp;KiB of the address space.
 </p>
 <a name="x86-Named-Address-Spaces"></a>
-<h4 class="subsection">6.17.4 x86 Named Address Spaces</h4>
+<h4 class="subsection">6.17.5 x86 Named Address Spaces</h4>
 <a name="index-x86-named-address-spaces"></a>
 
 <p>On the x86 target, variables may be declared as being relative
 to the <code>%fs</code> or <code>%gs</code> segments.
 </p>
 <dl compact="compact">
-<dt><code>__seg_fs</code></dt>
-<dt><code>__seg_gs</code></dt>
 <dd><a name="index-_005f_005fseg_005ffs-x86-named-address-space"></a>
 <a name="index-_005f_005fseg_005fgs-x86-named-address-space"></a>
-<p>The object is accessed with the respective segment override prefix.
+</dd>
+<dt><code>__seg_fs</code></dt>
+<dt><code>__seg_gs</code></dt>
+<dd><p>The object is accessed with the respective segment override prefix.
 </p>
 <p>The respective segment base must be set via some method specific to
 the operating system.  Rather than require an expensive system call
@@ -297,7 +319,7 @@ defined when these address spaces are supported.
 <hr>
 <div class="header">
 <p>
-Next: <a href="Zero-Length.html#Zero-Length" accesskey="n" rel="next">Zero Length</a>, Previous: <a href="Fixed_002dPoint.html#Fixed_002dPoint" accesskey="p" rel="prev">Fixed-Point</a>, Up: <a href="C-Extensions.html#C-Extensions" accesskey="u" rel="up">C Extensions</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Option-Index.html#Option-Index" title="Index" rel="index">Index</a>]</p>
+Next: <a href="Zero-Length.html#Zero-Length" accesskey="n" rel="next">Zero Length</a>, Previous: <a href="Fixed_002dPoint.html#Fixed_002dPoint" accesskey="p" rel="prev">Fixed-Point</a>, Up: <a href="C-Extensions.html#C-Extensions" accesskey="u" rel="up">C Extensions</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Indices.html#Indices" title="Index" rel="index">Index</a>]</p>
 </div>
 
 

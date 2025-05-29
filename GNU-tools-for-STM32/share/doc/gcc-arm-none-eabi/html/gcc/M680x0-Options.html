@@ -1,6 +1,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- Copyright (C) 1988-2021 Free Software Foundation, Inc.
+<!-- This file documents the use of the GNU compilers.
+
+Copyright (C) 1988-2023 Free Software Foundation, Inc.
 
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
@@ -30,7 +32,7 @@ You have freedom to copy and modify this GNU Manual, like GNU
 <meta name="distribution" content="global">
 <meta name="Generator" content="makeinfo">
 <link href="index.html#Top" rel="start" title="Top">
-<link href="Option-Index.html#Option-Index" rel="index" title="Option Index">
+<link href="Indices.html#Indices" rel="index" title="Indices">
 <link href="index.html#SEC_Contents" rel="contents" title="Table of Contents">
 <link href="Submodel-Options.html#Submodel-Options" rel="up" title="Submodel Options">
 <link href="MCore-Options.html#MCore-Options" rel="next" title="MCore Options">
@@ -66,11 +68,11 @@ ul.no-bullet {list-style: none}
 
 </head>
 
-<body lang="en">
+<body lang="en_US">
 <a name="M680x0-Options"></a>
 <div class="header">
 <p>
-Next: <a href="MCore-Options.html#MCore-Options" accesskey="n" rel="next">MCore Options</a>, Previous: <a href="M32R_002fD-Options.html#M32R_002fD-Options" accesskey="p" rel="prev">M32R/D Options</a>, Up: <a href="Submodel-Options.html#Submodel-Options" accesskey="u" rel="up">Submodel Options</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Option-Index.html#Option-Index" title="Index" rel="index">Index</a>]</p>
+Next: <a href="MCore-Options.html#MCore-Options" accesskey="n" rel="next">MCore Options</a>, Previous: <a href="M32R_002fD-Options.html#M32R_002fD-Options" accesskey="p" rel="prev">M32R/D Options</a>, Up: <a href="Submodel-Options.html#Submodel-Options" accesskey="u" rel="up">Submodel Options</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Indices.html#Indices" title="Index" rel="index">Index</a>]</p>
 </div>
 <hr>
 <a name="M680x0-Options-1"></a>
@@ -83,9 +85,10 @@ the compiler was configured; the defaults for the most common choices
 are given below.
 </p>
 <dl compact="compact">
+<dd><a name="index-march-8"></a>
+</dd>
 <dt><code>-march=<var>arch</var></code></dt>
-<dd><a name="index-march-7"></a>
-<p>Generate code for a specific M680x0 or ColdFire instruction set
+<dd><p>Generate code for a specific M680x0 or ColdFire instruction set
 architecture.  Permissible values of <var>arch</var> for M680x0
 architectures are: &lsquo;<samp>68000</samp>&rsquo;, &lsquo;<samp>68010</samp>&rsquo;, &lsquo;<samp>68020</samp>&rsquo;,
 &lsquo;<samp>68030</samp>&rsquo;, &lsquo;<samp>68040</samp>&rsquo;, &lsquo;<samp>68060</samp>&rsquo; and &lsquo;<samp>cpu32</samp>&rsquo;.  ColdFire
@@ -101,17 +104,17 @@ code for a ColdFire target.  The <var>arch</var> in this macro is one of the
 that runs on a family of similar processors but that is optimized
 for a particular microarchitecture.
 </p>
+<a name="index-mcpu-7"></a>
 </dd>
 <dt><code>-mcpu=<var>cpu</var></code></dt>
-<dd><a name="index-mcpu-6"></a>
-<p>Generate code for a specific M680x0 or ColdFire processor.
+<dd><p>Generate code for a specific M680x0 or ColdFire processor.
 The M680x0 <var>cpu</var>s are: &lsquo;<samp>68000</samp>&rsquo;, &lsquo;<samp>68010</samp>&rsquo;, &lsquo;<samp>68020</samp>&rsquo;,
 &lsquo;<samp>68030</samp>&rsquo;, &lsquo;<samp>68040</samp>&rsquo;, &lsquo;<samp>68060</samp>&rsquo;, &lsquo;<samp>68302</samp>&rsquo;, &lsquo;<samp>68332</samp>&rsquo;
 and &lsquo;<samp>cpu32</samp>&rsquo;.  The ColdFire <var>cpu</var>s are given by the table
 below, which also classifies the CPUs into families:
 </p>
 <table>
-<tr><td width="20%"><strong>Family</strong></td><td width="80%"><strong>&lsquo;<samp>-mcpu</samp>&rsquo; arguments</strong></td></tr>
+<thead><tr><th width="20%"><strong>Family</strong></th><th width="80%"><strong>&lsquo;<samp>-mcpu</samp>&rsquo; arguments</strong></th></tr></thead>
 <tr><td width="20%">&lsquo;<samp>51</samp>&rsquo;</td><td width="80%">&lsquo;<samp>51</samp>&rsquo; &lsquo;<samp>51ac</samp>&rsquo; &lsquo;<samp>51ag</samp>&rsquo; &lsquo;<samp>51cn</samp>&rsquo; &lsquo;<samp>51em</samp>&rsquo; &lsquo;<samp>51je</samp>&rsquo; &lsquo;<samp>51jf</samp>&rsquo; &lsquo;<samp>51jg</samp>&rsquo; &lsquo;<samp>51jm</samp>&rsquo; &lsquo;<samp>51mm</samp>&rsquo; &lsquo;<samp>51qe</samp>&rsquo; &lsquo;<samp>51qm</samp>&rsquo;</td></tr>
 <tr><td width="20%">&lsquo;<samp>5206</samp>&rsquo;</td><td width="80%">&lsquo;<samp>5202</samp>&rsquo; &lsquo;<samp>5204</samp>&rsquo; &lsquo;<samp>5206</samp>&rsquo;</td></tr>
 <tr><td width="20%">&lsquo;<samp>5206e</samp>&rsquo;</td><td width="80%">&lsquo;<samp>5206e</samp>&rsquo;</td></tr>
@@ -145,10 +148,10 @@ below, which also classifies the CPUs into families:
 <var>cpu</var> is selected.  It also defines <code>__mcf_family_<var>family</var></code>,
 where the value of <var>family</var> is given by the table above.
 </p>
+<a name="index-mtune-9"></a>
 </dd>
 <dt><code>-mtune=<var>tune</var></code></dt>
-<dd><a name="index-mtune-8"></a>
-<p>Tune the code for a particular microarchitecture within the
+<dd><p>Tune the code for a particular microarchitecture within the
 constraints set by <samp>-march</samp> and <samp>-mcpu</samp>.
 The M680x0 microarchitectures are: &lsquo;<samp>68000</samp>&rsquo;, &lsquo;<samp>68010</samp>&rsquo;,
 &lsquo;<samp>68020</samp>&rsquo;, &lsquo;<samp>68030</samp>&rsquo;, &lsquo;<samp>68040</samp>&rsquo;, &lsquo;<samp>68060</samp>&rsquo;
@@ -172,45 +175,45 @@ it defines the macros for every architecture in the range.
 ColdFire microarchitecture <var>uarch</var>, where <var>uarch</var> is one
 of the arguments given above.
 </p>
+<a name="index-m68000"></a>
+<a name="index-mc68000"></a>
 </dd>
 <dt><code>-m68000</code></dt>
 <dt><code>-mc68000</code></dt>
-<dd><a name="index-m68000"></a>
-<a name="index-mc68000"></a>
-<p>Generate output for a 68000.  This is the default
+<dd><p>Generate output for a 68000.  This is the default
 when the compiler is configured for 68000-based systems.
 It is equivalent to <samp>-march=68000</samp>.
 </p>
 <p>Use this option for microcontrollers with a 68000 or EC000 core,
 including the 68008, 68302, 68306, 68307, 68322, 68328 and 68356.
 </p>
+<a name="index-m68010"></a>
 </dd>
 <dt><code>-m68010</code></dt>
-<dd><a name="index-m68010"></a>
-<p>Generate output for a 68010.  This is the default
+<dd><p>Generate output for a 68010.  This is the default
 when the compiler is configured for 68010-based systems.
 It is equivalent to <samp>-march=68010</samp>.
 </p>
+<a name="index-m68020"></a>
+<a name="index-mc68020"></a>
 </dd>
 <dt><code>-m68020</code></dt>
 <dt><code>-mc68020</code></dt>
-<dd><a name="index-m68020"></a>
-<a name="index-mc68020"></a>
-<p>Generate output for a 68020.  This is the default
+<dd><p>Generate output for a 68020.  This is the default
 when the compiler is configured for 68020-based systems.
 It is equivalent to <samp>-march=68020</samp>.
 </p>
+<a name="index-m68030"></a>
 </dd>
 <dt><code>-m68030</code></dt>
-<dd><a name="index-m68030"></a>
-<p>Generate output for a 68030.  This is the default when the compiler is
+<dd><p>Generate output for a 68030.  This is the default when the compiler is
 configured for 68030-based systems.  It is equivalent to
 <samp>-march=68030</samp>.
 </p>
+<a name="index-m68040"></a>
 </dd>
 <dt><code>-m68040</code></dt>
-<dd><a name="index-m68040"></a>
-<p>Generate output for a 68040.  This is the default when the compiler is
+<dd><p>Generate output for a 68040.  This is the default when the compiler is
 configured for 68040-based systems.  It is equivalent to
 <samp>-march=68040</samp>.
 </p>
@@ -218,10 +221,10 @@ configured for 68040-based systems.  It is equivalent to
 emulated by software on the 68040.  Use this option if your 68040 does not
 have code to emulate those instructions.
 </p>
+<a name="index-m68060"></a>
 </dd>
 <dt><code>-m68060</code></dt>
-<dd><a name="index-m68060"></a>
-<p>Generate output for a 68060.  This is the default when the compiler is
+<dd><p>Generate output for a 68060.  This is the default when the compiler is
 configured for 68060-based systems.  It is equivalent to
 <samp>-march=68060</samp>.
 </p>
@@ -229,10 +232,10 @@ configured for 68060-based systems.  It is equivalent to
 have to be emulated by software on the 68060.  Use this option if your 68060
 does not have code to emulate those instructions.
 </p>
+<a name="index-mcpu32"></a>
 </dd>
 <dt><code>-mcpu32</code></dt>
-<dd><a name="index-mcpu32"></a>
-<p>Generate output for a CPU32.  This is the default
+<dd><p>Generate output for a CPU32.  This is the default
 when the compiler is configured for CPU32-based systems.
 It is equivalent to <samp>-march=cpu32</samp>.
 </p>
@@ -240,10 +243,10 @@ It is equivalent to <samp>-march=cpu32</samp>.
 CPU32 or CPU32+ core, including the 68330, 68331, 68332, 68333, 68334,
 68336, 68340, 68341, 68349 and 68360.
 </p>
+<a name="index-m5200"></a>
 </dd>
 <dt><code>-m5200</code></dt>
-<dd><a name="index-m5200"></a>
-<p>Generate output for a 520X ColdFire CPU.  This is the default
+<dd><p>Generate output for a 520X ColdFire CPU.  This is the default
 when the compiler is configured for 520X-based systems.
 It is equivalent to <samp>-mcpu=5206</samp>, and is now deprecated
 in favor of that option.
@@ -251,82 +254,82 @@ in favor of that option.
 <p>Use this option for microcontroller with a 5200 core, including
 the MCF5202, MCF5203, MCF5204 and MCF5206.
 </p>
+<a name="index-m5206e"></a>
 </dd>
 <dt><code>-m5206e</code></dt>
-<dd><a name="index-m5206e"></a>
-<p>Generate output for a 5206e ColdFire CPU.  The option is now
+<dd><p>Generate output for a 5206e ColdFire CPU.  The option is now
 deprecated in favor of the equivalent <samp>-mcpu=5206e</samp>.
 </p>
+<a name="index-m528x"></a>
 </dd>
 <dt><code>-m528x</code></dt>
-<dd><a name="index-m528x"></a>
-<p>Generate output for a member of the ColdFire 528X family.
+<dd><p>Generate output for a member of the ColdFire 528X family.
 The option is now deprecated in favor of the equivalent
 <samp>-mcpu=528x</samp>.
 </p>
+<a name="index-m5307"></a>
 </dd>
 <dt><code>-m5307</code></dt>
-<dd><a name="index-m5307"></a>
-<p>Generate output for a ColdFire 5307 CPU.  The option is now deprecated
+<dd><p>Generate output for a ColdFire 5307 CPU.  The option is now deprecated
 in favor of the equivalent <samp>-mcpu=5307</samp>.
 </p>
+<a name="index-m5407"></a>
 </dd>
 <dt><code>-m5407</code></dt>
-<dd><a name="index-m5407"></a>
-<p>Generate output for a ColdFire 5407 CPU.  The option is now deprecated
+<dd><p>Generate output for a ColdFire 5407 CPU.  The option is now deprecated
 in favor of the equivalent <samp>-mcpu=5407</samp>.
 </p>
+<a name="index-mcfv4e"></a>
 </dd>
 <dt><code>-mcfv4e</code></dt>
-<dd><a name="index-mcfv4e"></a>
-<p>Generate output for a ColdFire V4e family CPU (e.g. 547x/548x).
+<dd><p>Generate output for a ColdFire V4e family CPU (e.g. 547x/548x).
 This includes use of hardware floating-point instructions.
 The option is equivalent to <samp>-mcpu=547x</samp>, and is now
 deprecated in favor of that option.
 </p>
+<a name="index-m68020_002d40"></a>
 </dd>
 <dt><code>-m68020-40</code></dt>
-<dd><a name="index-m68020_002d40"></a>
-<p>Generate output for a 68040, without using any of the new instructions.
+<dd><p>Generate output for a 68040, without using any of the new instructions.
 This results in code that can run relatively efficiently on either a
 68020/68881 or a 68030 or a 68040.  The generated code does use the
 68881 instructions that are emulated on the 68040.
 </p>
 <p>The option is equivalent to <samp>-march=68020</samp> <samp>-mtune=68020-40</samp>.
 </p>
+<a name="index-m68020_002d60"></a>
 </dd>
 <dt><code>-m68020-60</code></dt>
-<dd><a name="index-m68020_002d60"></a>
-<p>Generate output for a 68060, without using any of the new instructions.
+<dd><p>Generate output for a 68060, without using any of the new instructions.
 This results in code that can run relatively efficiently on either a
 68020/68881 or a 68030 or a 68040.  The generated code does use the
 68881 instructions that are emulated on the 68060.
 </p>
 <p>The option is equivalent to <samp>-march=68020</samp> <samp>-mtune=68020-60</samp>.
 </p>
+<a name="index-mhard_002dfloat-2"></a>
+<a name="index-m68881"></a>
 </dd>
 <dt><code>-mhard-float</code></dt>
 <dt><code>-m68881</code></dt>
-<dd><a name="index-mhard_002dfloat-2"></a>
-<a name="index-m68881"></a>
-<p>Generate floating-point instructions.  This is the default for 68020
+<dd><p>Generate floating-point instructions.  This is the default for 68020
 and above, and for ColdFire devices that have an FPU.  It defines the
 macro <code>__HAVE_68881__</code> on M680x0 targets and <code>__mcffpu__</code>
 on ColdFire targets.
 </p>
+<a name="index-msoft_002dfloat-6"></a>
 </dd>
 <dt><code>-msoft-float</code></dt>
-<dd><a name="index-msoft_002dfloat-5"></a>
-<p>Do not generate floating-point instructions; use library calls instead.
+<dd><p>Do not generate floating-point instructions; use library calls instead.
 This is the default for 68000, 68010, and 68832 targets.  It is also
 the default for ColdFire devices that have no FPU.
 </p>
+<a name="index-mdiv-1"></a>
+<a name="index-mno_002ddiv"></a>
 </dd>
 <dt><code>-mdiv</code></dt>
 <dt><code>-mno-div</code></dt>
-<dd><a name="index-mdiv-1"></a>
-<a name="index-mno_002ddiv"></a>
-<p>Generate (do not generate) ColdFire hardware divide and remainder
+<dd><p>Generate (do not generate) ColdFire hardware divide and remainder
 instructions.  If <samp>-march</samp> is used without <samp>-mcpu</samp>,
 the default is &ldquo;on&rdquo; for ColdFire architectures and &ldquo;off&rdquo; for M680x0
 architectures.  Otherwise, the default is taken from the target CPU
@@ -336,37 +339,37 @@ example, the default is &ldquo;off&rdquo; for <samp>-mcpu=5206</samp> and &ldquo
 </p>
 <p>GCC defines the macro <code>__mcfhwdiv__</code> when this option is enabled.
 </p>
+<a name="index-mshort"></a>
 </dd>
 <dt><code>-mshort</code></dt>
-<dd><a name="index-mshort"></a>
-<p>Consider type <code>int</code> to be 16 bits wide, like <code>short int</code>.
+<dd><p>Consider type <code>int</code> to be 16 bits wide, like <code>short int</code>.
 Additionally, parameters passed on the stack are also aligned to a
 16-bit boundary even on targets whose API mandates promotion to 32-bit.
 </p>
+<a name="index-mno_002dshort"></a>
 </dd>
 <dt><code>-mno-short</code></dt>
-<dd><a name="index-mno_002dshort"></a>
-<p>Do not consider type <code>int</code> to be 16 bits wide.  This is the default.
+<dd><p>Do not consider type <code>int</code> to be 16 bits wide.  This is the default.
 </p>
+<a name="index-mnobitfield"></a>
+<a name="index-mno_002dbitfield"></a>
 </dd>
 <dt><code>-mnobitfield</code></dt>
 <dt><code>-mno-bitfield</code></dt>
-<dd><a name="index-mnobitfield"></a>
-<a name="index-mno_002dbitfield"></a>
-<p>Do not use the bit-field instructions.  The <samp>-m68000</samp>, <samp>-mcpu32</samp>
+<dd><p>Do not use the bit-field instructions.  The <samp>-m68000</samp>, <samp>-mcpu32</samp>
 and <samp>-m5200</samp> options imply <samp><span class="nolinebreak">-mnobitfield</span></samp><!-- /@w -->.
 </p>
+<a name="index-mbitfield"></a>
 </dd>
 <dt><code>-mbitfield</code></dt>
-<dd><a name="index-mbitfield"></a>
-<p>Do use the bit-field instructions.  The <samp>-m68020</samp> option implies
+<dd><p>Do use the bit-field instructions.  The <samp>-m68020</samp> option implies
 <samp>-mbitfield</samp>.  This is the default if you use a configuration
 designed for a 68020.
 </p>
+<a name="index-mrtd"></a>
 </dd>
 <dt><code>-mrtd</code></dt>
-<dd><a name="index-mrtd"></a>
-<p>Use a different function-calling convention, in which functions
+<dd><p>Use a different function-calling convention, in which functions
 that take a fixed number of arguments return with the <code>rtd</code>
 instruction, which pops their arguments while returning.  This
 saves one instruction in the caller since there is no need to pop
@@ -390,12 +393,12 @@ harmlessly ignored.)
 </p>
 <p>The default is <samp>-mno-rtd</samp>.
 </p>
+<a name="index-malign_002dint"></a>
+<a name="index-mno_002dalign_002dint"></a>
 </dd>
 <dt><code>-malign-int</code></dt>
 <dt><code>-mno-align-int</code></dt>
-<dd><a name="index-malign_002dint"></a>
-<a name="index-mno_002dalign_002dint"></a>
-<p>Control whether GCC aligns <code>int</code>, <code>long</code>, <code>long long</code>,
+<dd><p>Control whether GCC aligns <code>int</code>, <code>long</code>, <code>long long</code>,
 <code>float</code>, <code>double</code>, and <code>long double</code> variables on a 32-bit
 boundary (<samp>-malign-int</samp>) or a 16-bit boundary (<samp>-mno-align-int</samp>).
 Aligning variables on 32-bit boundaries produces code that runs somewhat
@@ -412,12 +415,12 @@ allowing at most a 16-bit offset for pc-relative addressing.  <samp>-fPIC</samp>
 not presently supported with <samp>-mpcrel</samp>, though this could be supported for
 68020 and higher processors.
 </p>
+<a name="index-mno_002dstrict_002dalign-1"></a>
+<a name="index-mstrict_002dalign-2"></a>
 </dd>
 <dt><code>-mno-strict-align</code></dt>
 <dt><code>-mstrict-align</code></dt>
-<dd><a name="index-mno_002dstrict_002dalign-1"></a>
-<a name="index-mstrict_002dalign-1"></a>
-<p>Do not (do) assume that unaligned memory references are handled by
+<dd><p>Do not (do) assume that unaligned memory references are handled by
 the system.
 </p>
 </dd>
@@ -450,12 +453,12 @@ compiled.  Specifying a value of 0 generates more compact code; specifying
 other values forces the allocation of that number to the current
 library, but is no more space- or time-efficient than omitting this option.
 </p>
+<a name="index-mxgot"></a>
+<a name="index-mno_002dxgot"></a>
 </dd>
 <dt><code>-mxgot</code></dt>
 <dt><code>-mno-xgot</code></dt>
-<dd><a name="index-mxgot"></a>
-<a name="index-mno_002dxgot"></a>
-<p>When generating position-independent code for ColdFire, generate code
+<dd><p>When generating position-independent code for ColdFire, generate code
 that works if the GOT has more than 8192 entries.  This code is
 larger and slower than code generated without this option.  On M680x0
 processors, this option is not needed; <samp>-fPIC</samp> suffices.
@@ -483,10 +486,10 @@ object file that accesses more than 8192 GOT entries.  Very few do.
 <p>These options have no effect unless GCC is generating
 position-independent code.
 </p>
+<a name="index-mlong_002djump_002dtable_002doffsets"></a>
 </dd>
 <dt><code>-mlong-jump-table-offsets</code></dt>
-<dd><a name="index-mlong_002djump_002dtable_002doffsets"></a>
-<p>Use 32-bit offsets in <code>switch</code> tables.  The default is to use
+<dd><p>Use 32-bit offsets in <code>switch</code> tables.  The default is to use
 16-bit offsets.
 </p>
 </dd>
@@ -495,7 +498,7 @@ position-independent code.
 <hr>
 <div class="header">
 <p>
-Next: <a href="MCore-Options.html#MCore-Options" accesskey="n" rel="next">MCore Options</a>, Previous: <a href="M32R_002fD-Options.html#M32R_002fD-Options" accesskey="p" rel="prev">M32R/D Options</a>, Up: <a href="Submodel-Options.html#Submodel-Options" accesskey="u" rel="up">Submodel Options</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Option-Index.html#Option-Index" title="Index" rel="index">Index</a>]</p>
+Next: <a href="MCore-Options.html#MCore-Options" accesskey="n" rel="next">MCore Options</a>, Previous: <a href="M32R_002fD-Options.html#M32R_002fD-Options" accesskey="p" rel="prev">M32R/D Options</a>, Up: <a href="Submodel-Options.html#Submodel-Options" accesskey="u" rel="up">Submodel Options</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Indices.html#Indices" title="Index" rel="index">Index</a>]</p>
 </div>
 
 

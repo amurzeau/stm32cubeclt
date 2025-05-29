@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- Copyright (C) 1988-2021 Free Software Foundation, Inc.
+<!-- Copyright (C) 1988-2023 Free Software Foundation, Inc.
 
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
@@ -179,27 +179,44 @@ should use <code>TARGET_HANDLE_C_OPTION</code> instead.
 
 <dl>
 <dt><a name="index-TARGET_005fOBJC_005fCONSTRUCT_005fSTRING_005fOBJECT"></a>C Target Hook: <em>tree</em> <strong>TARGET_OBJC_CONSTRUCT_STRING_OBJECT</strong> <em>(tree <var>string</var>)</em></dt>
-<dd><p>Targets may provide a string object type that can be used within and between C, C++ and their respective Objective-C dialects. A string object might, for example, embed encoding and length information. These objects are considered opaque to the compiler and handled as references. An ideal implementation makes the composition of the string object match that of the Objective-C <code>NSString</code> (<code>NXString</code> for GNUStep), allowing efficient interworking between C-only and Objective-C code. If a target implements string objects then this hook should return a reference to such an object constructed from the normal &lsquo;C&rsquo; string representation provided in <var>string</var>. At present, the hook is used by Objective-C only, to obtain a common-format string object when the target provides one.
+<dd><p>Targets may provide a string object type that can be used within
+and between C, C++ and their respective Objective-C dialects.
+A string object might, for example, embed encoding and length information.
+These objects are considered opaque to the compiler and handled as references.
+An ideal implementation makes the composition of the string object
+match that of the Objective-C <code>NSString</code> (<code>NXString</code> for GNUStep),
+allowing efficient interworking between C-only and Objective-C code.
+If a target implements string objects then this hook should return a
+reference to such an object constructed from the normal &lsquo;C&rsquo; string
+representation provided in <var>string</var>.
+At present, the hook is used by Objective-C only, to obtain a
+ common-format string object when the target provides one.
 </p></dd></dl>
 
 <dl>
 <dt><a name="index-TARGET_005fOBJC_005fDECLARE_005fUNRESOLVED_005fCLASS_005fREFERENCE"></a>C Target Hook: <em>void</em> <strong>TARGET_OBJC_DECLARE_UNRESOLVED_CLASS_REFERENCE</strong> <em>(const char *<var>classname</var>)</em></dt>
-<dd><p>Declare that Objective C class <var>classname</var> is referenced  by the current TU.
+<dd><p>Declare that Objective C class <var>classname</var> is referenced
+by the current TU.
 </p></dd></dl>
 
 <dl>
 <dt><a name="index-TARGET_005fOBJC_005fDECLARE_005fCLASS_005fDEFINITION"></a>C Target Hook: <em>void</em> <strong>TARGET_OBJC_DECLARE_CLASS_DEFINITION</strong> <em>(const char *<var>classname</var>)</em></dt>
-<dd><p>Declare that Objective C class <var>classname</var> is defined  by the current TU.
+<dd><p>Declare that Objective C class <var>classname</var> is defined
+by the current TU.
 </p></dd></dl>
 
 <dl>
 <dt><a name="index-TARGET_005fSTRING_005fOBJECT_005fREF_005fTYPE_005fP"></a>C Target Hook: <em>bool</em> <strong>TARGET_STRING_OBJECT_REF_TYPE_P</strong> <em>(const_tree <var>stringref</var>)</em></dt>
-<dd><p>If a target implements string objects then this hook should return <code>true</code> if <var>stringref</var> is a valid reference to such an object.
+<dd><p>If a target implements string objects then this hook should return
+<code>true</code> if <var>stringref</var> is a valid reference to such an object.
 </p></dd></dl>
 
 <dl>
 <dt><a name="index-TARGET_005fCHECK_005fSTRING_005fOBJECT_005fFORMAT_005fARG"></a>C Target Hook: <em>void</em> <strong>TARGET_CHECK_STRING_OBJECT_FORMAT_ARG</strong> <em>(tree <var>format_arg</var>, tree <var>args_list</var>)</em></dt>
-<dd><p>If a target implements string objects then this hook should should  provide a facility to check the function arguments in <var>args_list</var>  against the format specifiers in <var>format_arg</var> where the type of  <var>format_arg</var> is one recognized as a valid string reference type.
+<dd><p>If a target implements string objects then this hook should
+provide a facility to check the function arguments in <var>args_list</var>
+against the format specifiers in <var>format_arg</var> where the type of
+<var>format_arg</var> is one recognized as a valid string reference type.
 </p></dd></dl>
 
 <dl>
@@ -243,6 +260,24 @@ options are changed via <code>#pragma GCC optimize</code> or by using the
 </p></dd></dl>
 
 <dl>
+<dt><a name="index-TARGET_005fCOMPUTE_005fMULTILIB"></a>Common Target Hook: <em>const char *</em> <strong>TARGET_COMPUTE_MULTILIB</strong> <em>(const struct switchstr *<var>switches</var>, int <var>n_switches</var>, const char *<var>multilib_dir</var>, const char *<var>multilib_defaults</var>, const char *<var>multilib_select</var>, const char *<var>multilib_matches</var>, const char *<var>multilib_exclusions</var>, const char *<var>multilib_reuse</var>)</em></dt>
+<dd><p>Some targets like RISC-V might have complicated multilib reuse rules which
+are hard to implement with the current multilib scheme.  This hook allows
+targets to override the result from the built-in multilib mechanism.
+<var>switches</var> is the raw option list with <var>n_switches</var> items;
+<var>multilib_dir</var> is the multi-lib result which is computed by the built-in
+multi-lib mechanism;
+<var>multilib_defaults</var> is the default options list for multi-lib;
+<var>multilib_select</var> is the string containing the list of supported
+multi-libs, and the option checking list.
+<var>multilib_matches</var>, <var>multilib_exclusions</var>, and <var>multilib_reuse</var>
+are corresponding to <var>MULTILIB_MATCHES</var>, <var>MULTILIB_EXCLUSIONS</var>,
+and <var>MULTILIB_REUSE</var>.
+The default definition does nothing but return <var>multilib_dir</var> directly.
+</p></dd></dl>
+
+
+<dl>
 <dt><a name="index-SWITCHABLE_005fTARGET"></a>Macro: <strong>SWITCHABLE_TARGET</strong></dt>
 <dd><p>Some targets need to switch between substantially different subtargets
 during compilation.  For example, the MIPS target has one subtarget for
@@ -264,7 +299,13 @@ is 0.
 
 <dl>
 <dt><a name="index-TARGET_005fFLOAT_005fEXCEPTIONS_005fROUNDING_005fSUPPORTED_005fP"></a>Target Hook: <em>bool</em> <strong>TARGET_FLOAT_EXCEPTIONS_ROUNDING_SUPPORTED_P</strong> <em>(void)</em></dt>
-<dd><p>Returns true if the target supports IEEE 754 floating-point exceptions and rounding modes, false otherwise.  This is intended to relate to the <code>float</code> and <code>double</code> types, but not necessarily <code>long double</code>. By default, returns true if the <code>adddf3</code> instruction pattern is available and false otherwise, on the assumption that hardware floating point supports exceptions and rounding modes but software floating point does not.
+<dd><p>Returns true if the target supports IEEE 754 floating-point exceptions
+and rounding modes, false otherwise.  This is intended to relate to the
+<code>float</code> and <code>double</code> types, but not necessarily <code>long double</code>.
+By default, returns true if the <code>adddf3</code> instruction pattern is
+available and false otherwise, on the assumption that hardware floating
+point supports exceptions and rounding modes but software floating point
+does not.
 </p></dd></dl>
 
 <hr>

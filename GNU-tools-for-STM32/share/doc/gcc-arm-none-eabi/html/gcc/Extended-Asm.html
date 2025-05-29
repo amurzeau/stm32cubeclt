@@ -1,6 +1,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- Copyright (C) 1988-2021 Free Software Foundation, Inc.
+<!-- This file documents the use of the GNU compilers.
+
+Copyright (C) 1988-2023 Free Software Foundation, Inc.
 
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
@@ -30,7 +32,7 @@ You have freedom to copy and modify this GNU Manual, like GNU
 <meta name="distribution" content="global">
 <meta name="Generator" content="makeinfo">
 <link href="index.html#Top" rel="start" title="Top">
-<link href="Option-Index.html#Option-Index" rel="index" title="Option Index">
+<link href="Indices.html#Indices" rel="index" title="Indices">
 <link href="index.html#SEC_Contents" rel="contents" title="Table of Contents">
 <link href="Using-Assembly-Language-with-C.html#Using-Assembly-Language-with-C" rel="up" title="Using Assembly Language with C">
 <link href="Constraints.html#Constraints" rel="next" title="Constraints">
@@ -66,11 +68,11 @@ ul.no-bullet {list-style: none}
 
 </head>
 
-<body lang="en">
+<body lang="en_US">
 <a name="Extended-Asm"></a>
 <div class="header">
 <p>
-Next: <a href="Constraints.html#Constraints" accesskey="n" rel="next">Constraints</a>, Previous: <a href="Basic-Asm.html#Basic-Asm" accesskey="p" rel="prev">Basic Asm</a>, Up: <a href="Using-Assembly-Language-with-C.html#Using-Assembly-Language-with-C" accesskey="u" rel="up">Using Assembly Language with C</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Option-Index.html#Option-Index" title="Index" rel="index">Index</a>]</p>
+Next: <a href="Constraints.html#Constraints" accesskey="n" rel="next">Constraints</a>, Previous: <a href="Basic-Asm.html#Basic-Asm" accesskey="p" rel="prev">Basic Asm</a>, Up: <a href="Using-Assembly-Language-with-C.html#Using-Assembly-Language-with-C" accesskey="u" rel="up">Using Assembly Language with C</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Indices.html#Indices" title="Index" rel="index">Index</a>]</p>
 </div>
 <hr>
 <a name="Extended-Asm-_002d-Assembler-Instructions-with-C-Expression-Operands"></a>
@@ -551,8 +553,9 @@ ensures that modifying <var>a</var> does not affect the address referenced by
 is undefined if <var>a</var> is modified before using <var>b</var>.
 </p>
 <p><code>asm</code> supports operand modifiers on operands (for example &lsquo;<samp>%k2</samp>&rsquo; 
-instead of simply &lsquo;<samp>%2</samp>&rsquo;). Typically these qualifiers are hardware 
-dependent. The list of supported modifiers for x86 is found at 
+instead of simply &lsquo;<samp>%2</samp>&rsquo;). <a href="#GenericOperandmodifiers">Generic Operand modifiers</a> lists the modifiers that are available
+on all targets.  Other modifiers are hardware dependent.
+For example, the list of supported modifiers for x86 is found at
 <a href="#x86Operandmodifiers">x86 Operand modifiers</a>.
 </p>
 <p>If the C code that follows the <code>asm</code> makes no use of any of the output 
@@ -852,8 +855,9 @@ optimizers may discard the <code>asm</code> statement as unneeded
 (see <a href="#Volatile">Volatile</a>).
 </p>
 <p><code>asm</code> supports operand modifiers on operands (for example &lsquo;<samp>%k2</samp>&rsquo; 
-instead of simply &lsquo;<samp>%2</samp>&rsquo;). Typically these qualifiers are hardware 
-dependent. The list of supported modifiers for x86 is found at 
+instead of simply &lsquo;<samp>%2</samp>&rsquo;). <a href="#GenericOperandmodifiers">Generic Operand modifiers</a> lists the modifiers that are available
+on all targets.  Other modifiers are hardware dependent.
+For example, the list of supported modifiers for x86 is found at
 <a href="#x86Operandmodifiers">x86 Operand modifiers</a>.
 </p>
 <p>In this example using the fictitious <code>combine</code> instruction, the 
@@ -1205,8 +1209,23 @@ lab:
 }
 </pre></div>
 
+<a name="GenericOperandmodifiers"></a><a name="Generic-Operand-Modifiers"></a>
+<h4 class="subsubsection">6.47.2.8 Generic Operand Modifiers</h4>
+<p>The following table shows the modifiers supported by all targets and their effects:
+</p>
+<table>
+<thead><tr><th width="15%">Modifier</th><th width="70%">Description</th><th width="15%">Example</th></tr></thead>
+<tr><td width="15%"><code>c</code></td><td width="70%">Require a constant operand and print the constant expression with no punctuation.</td><td width="15%"><code>%c0</code></td></tr>
+<tr><td width="15%"><code>n</code></td><td width="70%">Like &lsquo;<samp>%c</samp>&rsquo; except that the value of the constant is negated before printing.</td><td width="15%"><code>%n0</code></td></tr>
+<tr><td width="15%"><code>a</code></td><td width="70%">Substitute a memory reference, with the actual operand treated as the address.
+This may be useful when outputting a &ldquo;load address&rdquo; instruction, because
+often the assembler syntax for such an instruction requires you to write the
+operand as if it were a memory reference.</td><td width="15%"><code>%a0</code></td></tr>
+<tr><td width="15%"><code>l</code></td><td width="70%">Print the label name with no punctuation.</td><td width="15%"><code>%l0</code></td></tr>
+</table>
+
 <a name="x86Operandmodifiers"></a><a name="x86-Operand-Modifiers"></a>
-<h4 class="subsubsection">6.47.2.8 x86 Operand Modifiers</h4>
+<h4 class="subsubsection">6.47.2.9 x86 Operand Modifiers</h4>
 
 <p>References to input, output, and goto operands in the assembler template
 of extended <code>asm</code> statements can use 
@@ -1299,7 +1318,7 @@ delimiterprint the opcode suffix of s.</td><td><code>%s1</code></td><td><code>$2
 
 
 <a name="x86floatingpointasmoperands"></a><a name="x86-Floating_002dPoint-asm-Operands"></a>
-<h4 class="subsubsection">6.47.2.9 x86 Floating-Point <code>asm</code> Operands</h4>
+<h4 class="subsubsection">6.47.2.10 x86 Floating-Point <code>asm</code> Operands</h4>
 
 <p>On x86 targets, there are several rules on the usage of stack-like registers
 in the operands of an <code>asm</code>.  These rules apply only to the operands
@@ -1386,7 +1405,7 @@ for the compiler to know that <code>fyl2xp1</code> pops both inputs.
 </pre></div>
 
 <a name="msp430Operandmodifiers"></a><a name="MSP430-Operand-Modifiers"></a>
-<h4 class="subsubsection">6.47.2.10 MSP430 Operand Modifiers</h4>
+<h4 class="subsubsection">6.47.2.11 MSP430 Operand Modifiers</h4>
 
 <p>The list below describes the supported modifiers and their effects for MSP430.
 </p>
@@ -1421,12 +1440,27 @@ constant.  Used to select the specified bit position.</td></tr>
 <tr><td width="10%"><code>x</code></td><td width="90%">Equivialent to <code>X</code>, but only for pointers.</td></tr>
 </table>
 
+<a name="loongarchOperandmodifiers"></a><a name="LoongArch-Operand-Modifiers"></a>
+<h4 class="subsubsection">6.47.2.12 LoongArch Operand Modifiers</h4>
+
+<p>The list below describes the supported modifiers and their effects for LoongArch.
+</p>
+<table>
+<thead><tr><th width="10%">Modifier</th><th width="90%">Description</th></tr></thead>
+<tr><td width="10%"><code>d</code></td><td width="90%">Same as <code>c</code>.</td></tr>
+<tr><td width="10%"><code>i</code></td><td width="90%">Print the character &rdquo;<code>i</code>&rdquo; if the operand is not a register.</td></tr>
+<tr><td width="10%"><code>m</code></td><td width="90%">Same as <code>c</code>, but the printed value is <code>operand - 1</code>.</td></tr>
+<tr><td width="10%"><code>X</code></td><td width="90%">Print a constant integer operand in hexadecimal.</td></tr>
+<tr><td width="10%"><code>z</code></td><td width="90%">Print the operand in its unmodified form, followed by a comma.</td></tr>
+</table>
+
+
 
 
 <hr>
 <div class="header">
 <p>
-Next: <a href="Constraints.html#Constraints" accesskey="n" rel="next">Constraints</a>, Previous: <a href="Basic-Asm.html#Basic-Asm" accesskey="p" rel="prev">Basic Asm</a>, Up: <a href="Using-Assembly-Language-with-C.html#Using-Assembly-Language-with-C" accesskey="u" rel="up">Using Assembly Language with C</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Option-Index.html#Option-Index" title="Index" rel="index">Index</a>]</p>
+Next: <a href="Constraints.html#Constraints" accesskey="n" rel="next">Constraints</a>, Previous: <a href="Basic-Asm.html#Basic-Asm" accesskey="p" rel="prev">Basic Asm</a>, Up: <a href="Using-Assembly-Language-with-C.html#Using-Assembly-Language-with-C" accesskey="u" rel="up">Using Assembly Language with C</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Indices.html#Indices" title="Index" rel="index">Index</a>]</p>
 </div>
 
 

@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- Copyright (C) 1988-2021 Free Software Foundation, Inc.
+<!-- Copyright (C) 1988-2023 Free Software Foundation, Inc.
 
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
@@ -103,25 +103,12 @@ type is the same as that of the first operand.  The range of that array
 type determines the amount of data these expressions access.
 </p>
 </dd>
-<dt><code>TARGET_MEM_REF</code></dt>
-<dd><p>These nodes represent memory accesses whose address directly map to
-an addressing mode of the target architecture.  The first argument
-is <code>TMR_SYMBOL</code> and must be a <code>VAR_DECL</code> of an object with
-a fixed address.  The second argument is <code>TMR_BASE</code> and the
-third one is <code>TMR_INDEX</code>.  The fourth argument is
-<code>TMR_STEP</code> and must be an <code>INTEGER_CST</code>.  The fifth
-argument is <code>TMR_OFFSET</code> and must be an <code>INTEGER_CST</code>.
-Any of the arguments may be NULL if the appropriate component
-does not appear in the address.  Address of the <code>TARGET_MEM_REF</code>
-is determined in the following way.
-</p>
-<div class="smallexample">
-<pre class="smallexample">&amp;TMR_SYMBOL + TMR_BASE + TMR_INDEX * TMR_STEP + TMR_OFFSET
-</pre></div>
-
-<p>The sixth argument is the reference to the original memory access, which
-is preserved for the purposes of the RTL alias analysis.  The seventh
-argument is a tag representing the results of tree level alias analysis.
+<dt><code>COMPONENT_REF</code></dt>
+<dd><p>These nodes represent non-static data member accesses.  The first
+operand is the object (rather than a pointer to it); the second operand
+is the <code>FIELD_DECL</code> for the data member.  The third operand represents
+the byte offset of the field, but should not be used directly; call
+<code>component_ref_field_offset</code> instead.
 </p>
 </dd>
 <dt><code>ADDR_EXPR</code></dt>
@@ -147,18 +134,35 @@ pointer or reference type.
 <dd><p>These nodes are used to represent the object pointed to by a pointer
 offset by a constant.
 The first operand is the pointer being dereferenced; it will always have
-pointer or reference type.  The second operand is a pointer constant.
-Its type is specifying the type to be used for type-based alias analysis.
+pointer or reference type.  The second operand is a pointer constant
+serving as constant offset applied to the pointer being dereferenced
+with its type specifying the type to be used for type-based alias analysis.
+The type of the node specifies the alignment of the access.
 </p>
 </dd>
-<dt><code>COMPONENT_REF</code></dt>
-<dd><p>These nodes represent non-static data member accesses.  The first
-operand is the object (rather than a pointer to it); the second operand
-is the <code>FIELD_DECL</code> for the data member.  The third operand represents
-the byte offset of the field, but should not be used directly; call
-<code>component_ref_field_offset</code> instead.
+<dt><code>TARGET_MEM_REF</code></dt>
+<dd><p>These nodes represent memory accesses whose address directly map to
+an addressing mode of the target architecture.  The first argument
+is <code>TMR_BASE</code> and is a pointer to the object being accessed.
+The second argument is <code>TMR_OFFSET</code> which is a pointer constant
+with dual purpose serving both as constant offset and holder of
+the type used for type-based alias analysis.  The first two operands
+have exactly the same semantics as <code>MEM_REF</code>.  The third
+and fourth operand are <code>TMR_INDEX</code> and <code>TMR_STEP</code> where
+the former is an integer and the latter an integer constant.  The
+fifth and last operand is <code>TMR_INDEX2</code> which is an alternate
+non-constant offset.  Any of the third to last operands may be
+<code>NULL</code> if the corresponding component does not appear in
+the address, but <code>TMR_INDEX</code> and <code>TMR_STEP</code> shall be
+always supplied in pair.  The Address of the <code>TARGET_MEM_REF</code>
+is determined in the following way.
 </p>
+<div class="smallexample">
+<pre class="smallexample">TMR_BASE + TMR_OFFSET + TMR_INDEX * TMR_STEP + TMR_INDEX2
+</pre></div>
 
+<p>The type of the node specifies the alignment of the access.
+</p>
 </dd>
 </dl>
 

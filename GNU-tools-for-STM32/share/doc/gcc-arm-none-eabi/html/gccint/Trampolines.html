@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- Copyright (C) 1988-2021 Free Software Foundation, Inc.
+<!-- Copyright (C) 1988-2023 Free Software Foundation, Inc.
 
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
@@ -109,6 +109,11 @@ addresses.  Since GCC&rsquo;s generic function descriptors are
 not ABI-compliant, this option is typically used only on a
 per-language basis (notably by Ada) or when it can otherwise be
 applied to the whole program.
+</p>
+<p>For languages other than Ada, the <code>-ftrampolines</code> and
+<code>-fno-trampolines</code> options currently have no effect, and
+trampolines are always generated on platforms that need them
+for nested functions.
 </p>
 <p>Define the following hook if your backend either implements ABI-specified
 descriptor support, or can use GCC&rsquo;s generic descriptor implementation

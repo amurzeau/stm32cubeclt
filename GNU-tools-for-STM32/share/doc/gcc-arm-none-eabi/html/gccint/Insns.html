@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- Copyright (C) 1988-2021 Free Software Foundation, Inc.
+<!-- Copyright (C) 1988-2023 Free Software Foundation, Inc.
 
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
@@ -266,7 +266,7 @@ equivalent to testing whether &lsquo;<samp>LABEL_KIND (label) == LABEL_NORMAL</s
 The only place that cares about the distinction between static, global,
 and weak alternate entry points, besides the front-end code that creates
 them, is the function <code>output_alternate_entry_point</code>, in
-<samp>final.c</samp>.
+<samp>final.cc</samp>.
 </p>
 <p>To set the kind of a label, use the <code>SET_LABEL_KIND</code> macro.
 </p>
@@ -486,15 +486,6 @@ such insns.
 a symbolic representation that locates the pattern in the <samp>md</samp>
 file as some small positive or negative offset from a named pattern.
 </p>
-<a name="index-LOG_005fLINKS"></a>
-</dd>
-<dt><code>LOG_LINKS (<var>i</var>)</code></dt>
-<dd><p>A list (chain of <code>insn_list</code> expressions) giving information about
-dependencies between instructions within a basic block.  Neither a jump
-nor a label may come between the related insns.  These are only used by
-the schedulers and by combine.  This is a deprecated data structure.
-Def-use and use-def chains are now preferred.
-</p>
 <a name="index-REG_005fNOTES"></a>
 </dd>
 <dt><code>REG_NOTES (<var>i</var>)</code></dt>
@@ -504,23 +495,9 @@ information pertaining to the registers used in this insn.
 </p></dd>
 </dl>
 
-<p>The <code>LOG_LINKS</code> field of an insn is a chain of <code>insn_list</code>
-expressions.  Each of these has two operands: the first is an insn,
-and the second is another <code>insn_list</code> expression (the next one in
-the chain).  The last <code>insn_list</code> in the chain has a null pointer
-as second operand.  The significant thing about the chain is which
-insns appear in it (as first operands of <code>insn_list</code>
-expressions).  Their order is not significant.
-</p>
-<p>This list is originally set up by the flow analysis pass; it is a null
-pointer until then.  Flow only adds links for those data dependencies
-which can be used for instruction combination.  For each insn, the flow
-analysis pass adds a link to insns which store into registers values
-that are used for the first time in this insn.
-</p>
-<p>The <code>REG_NOTES</code> field of an insn is a chain similar to the
-<code>LOG_LINKS</code> field but it includes <code>expr_list</code> and <code>int_list</code>
-expressions in addition to <code>insn_list</code> expressions.  There are several
+<p>The <code>REG_NOTES</code> field of an insn is a chain that includes
+<code>expr_list</code> and <code>int_list</code> expressions as well as <code>insn_list</code>
+expressions.  There are several
 kinds of register notes, which are distinguished by the machine mode, which
 in a register note is really understood as being an <code>enum reg_note</code>.
 The first operand <var>op</var> of the note is data whose meaning depends on
@@ -535,8 +512,7 @@ register note.  Its counterpart, the macro <code>PUT_REG_NOTE_KIND
 </p>
 <p>Register notes are of three classes: They may say something about an
 input to an insn, they may say something about an output of an insn, or
-they may create a linkage between two insns.  There are also a set
-of values that are only used in <code>LOG_LINKS</code>.
+they may create a linkage between two insns.
 </p>
 <p>These register notes annotate inputs to an insn:
 </p>
@@ -686,28 +662,6 @@ need only check for <code>REG_EQUIV</code> notes.
 <p>These notes describe linkages between insns.  They occur in pairs: one
 insn has one of a pair of notes that points to a second insn, which has
 the inverse note pointing back to the first insn.
-</p>
-<dl compact="compact">
-<dd><a name="index-REG_005fCC_005fSETTER"></a>
-<a name="index-REG_005fCC_005fUSER"></a>
-</dd>
-<dt><code>REG_CC_SETTER</code></dt>
-<dt><code>REG_CC_USER</code></dt>
-<dd><p>On machines that use <code>cc0</code>, the insns which set and use <code>cc0</code>
-set and use <code>cc0</code> are adjacent.  However, when branch delay slot
-filling is done, this may no longer be true.  In this case a
-<code>REG_CC_USER</code> note will be placed on the insn setting <code>cc0</code> to
-point to the insn using <code>cc0</code> and a <code>REG_CC_SETTER</code> note will
-be placed on the insn using <code>cc0</code> to point to the insn setting
-<code>cc0</code>.
-</p></dd>
-</dl>
-
-<p>These values are only used in the <code>LOG_LINKS</code> field, and indicate
-the type of dependency that each link represents.  Links which indicate
-a data dependence (a read after write dependence) do not use any code,
-they simply have mode <code>VOIDmode</code>, and are printed without any
-descriptive text.
 </p>
 <dl compact="compact">
 <dd><a name="index-REG_005fDEP_005fTRUE"></a>

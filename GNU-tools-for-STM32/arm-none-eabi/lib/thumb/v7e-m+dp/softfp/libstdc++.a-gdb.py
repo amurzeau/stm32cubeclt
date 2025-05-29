@@ -1,5 +1,5 @@
 # -*- python -*-
-# Copyright (C) 2009-2021 Free Software Foundation, Inc.
+# Copyright (C) 2009-2023 Free Software Foundation, Inc.
 
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -19,8 +19,8 @@ import gdb
 import os
 import os.path
 
-pythondir = '/build/gnu-tools-for-stm32_11.3.rel1.20230519-1941/install-native/share/gcc-arm-none-eabi'
-libdir = '/build/gnu-tools-for-stm32_11.3.rel1.20230519-1941/install-native/arm-none-eabi/lib/thumb/v7e-m+dp/softfp'
+pythondir = '/build/gnu-tools-for-stm32_13.3.rel1.20240926-1715/install-native/share/gcc-arm-none-eabi'
+libdir = '/build/gnu-tools-for-stm32_13.3.rel1.20240926-1715/install-native/arm-none-eabi/lib/thumb/v7e-m+dp/softfp'
 
 # This file might be loaded when there is no current objfile.  This
 # can happen if the user loads it manually.  In this case we don't

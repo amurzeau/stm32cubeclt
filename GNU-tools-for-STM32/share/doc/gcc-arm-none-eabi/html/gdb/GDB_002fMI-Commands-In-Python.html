@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- Copyright (C) 1988-2022 Free Software Foundation, Inc.
+<!-- Copyright (C) 1988-2023 Free Software Foundation, Inc.
 
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
@@ -67,7 +67,7 @@ Next: <a href="Parameters-In-Python.html#Parameters-In-Python" accesskey="n" rel
 </div>
 <hr>
 <a name="GDB_002fMI-Commands-In-Python-1"></a>
-<h4 class="subsubsection">23.3.2.21 <small>GDB/MI</small> Commands In Python</h4>
+<h4 class="subsubsection">23.3.2.22 <small>GDB/MI</small> Commands In Python</h4>
 
 <a name="index-MI-commands-in-python"></a>
 <a name="index-commands-in-python_002c-GDB_002fMI"></a>
@@ -162,10 +162,10 @@ will uninstall the command, removing it from the set of available
 commands.  Setting this attribute to <code>True</code> will install the
 command for use.  If there is already a Python command with this name
 installed, the currently installed command will be uninstalled, and
-this command installed in its place.
+this command installed in its stead.
 </p></dd></dl>
 
-<p>The following code snippet shows how a two trivial MI command can be
+<p>The following code snippet shows how some trivial MI commands can be
 implemented in Python:
 </p>
 <div class="smallexample">
@@ -213,6 +213,36 @@ commands have been added:
 -echo-string abc def ghi
 ^done,string=&quot;abc, def, ghi&quot;
 (gdb)
+</pre></div>
+
+<p>Conversely, it is possible to execute <small>GDB/MI</small> commands from
+Python, with the results being a Python object and not a
+specially-formatted string.  This is done with the
+<code>gdb.execute_mi</code> function.
+</p>
+<dl>
+<dt><a name="index-gdb_002eexecute_005fmi"></a>Function: <strong>gdb.execute_mi</strong> <em>(command <span class="roman">[</span>, arg <span class="roman">]</span>&hellip;)</em></dt>
+<dd><p>Invoke a <small>GDB/MI</small> command.  <var>command</var> is the name of the
+command, a string.  The arguments, <var>arg</var>, are passed to the
+command.  Each argument must also be a string.
+</p>
+<p>This function returns a Python dictionary whose contents reflect the
+corresponding <small>GDB/MI</small> command&rsquo;s output.  Refer to the
+documentation for these commands for details.  Lists are represented
+as Python lists, and tuples are represented as Python dictionaries.
+</p>
+<p>If the command fails, it will raise a Python exception.
+</p></dd></dl>
+
+<p>Here is how this works using the commands from the example above:
+</p>
+<div class="smallexample">
+<pre class="smallexample">(gdb) python print(gdb.execute_mi(&quot;-echo-dict&quot;, &quot;abc&quot;, &quot;def&quot;, &quot;ghi&quot;))
+{'dict': {'argv': ['abc', 'def', 'ghi']}}
+(gdb) python print(gdb.execute_mi(&quot;-echo-list&quot;, &quot;abc&quot;, &quot;def&quot;, &quot;ghi&quot;))
+{'list': ['abc', 'def', 'ghi']}
+(gdb) python print(gdb.execute_mi(&quot;-echo-string&quot;, &quot;abc&quot;, &quot;def&quot;, &quot;ghi&quot;))
+{'string': 'abc, def, ghi'}
 </pre></div>
 
 <hr>

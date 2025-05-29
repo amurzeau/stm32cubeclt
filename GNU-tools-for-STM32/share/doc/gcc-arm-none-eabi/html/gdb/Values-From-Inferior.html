@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- Copyright (C) 1988-2022 Free Software Foundation, Inc.
+<!-- Copyright (C) 1988-2023 Free Software Foundation, Inc.
 
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
@@ -67,7 +67,7 @@ Next: <a href="Types-In-Python.html#Types-In-Python" accesskey="n" rel="next">Ty
 </div>
 <hr>
 <a name="Values-From-Inferior-1"></a>
-<h4 class="subsubsection">23.3.2.3 Values From Inferior</h4>
+<h4 class="subsubsection">23.3.2.4 Values From Inferior</h4>
 <a name="index-values-from-inferior_002c-with-Python"></a>
 <a name="index-python_002c-working-with-values-from-inferior"></a>
 
@@ -125,6 +125,13 @@ structure, then <code>bar</code> can also be accessed as follows:
 </p>
 <div class="smallexample">
 <pre class="smallexample">bar = some_val[foo_field]
+</pre></div>
+
+<p>If a <code>gdb.Value</code> has array or pointer type, an integer index can
+be used to access elements.
+</p>
+<div class="smallexample">
+<pre class="smallexample">result = some_array[23]
 </pre></div>
 
 <p>A <code>gdb.Value</code> that represents a function can be executed via
@@ -201,7 +208,7 @@ method is invoked.
 <p>The following methods are provided:
 </p>
 <dl>
-<dt><a name="index-Value_002e_005f_005finit_005f_005f"></a>Function: <strong>Value.__init__</strong> <em>(<var>val</var>)</em></dt>
+<dt><a name="index-Value_002e_005f_005finit_005f_005f"></a>Function: <strong>Value.__init__</strong> <em>(val)</em></dt>
 <dd><p>Many Python values can be converted directly to a <code>gdb.Value</code> via
 this object initializer.  Specifically:
 </p>
@@ -245,7 +252,7 @@ its result is used.
 </dd></dl>
 
 <dl>
-<dt><a name="index-Value_002e_005f_005finit_005f_005f-1"></a>Function: <strong>Value.__init__</strong> <em>(<var>val</var>, <var>type</var>)</em></dt>
+<dt><a name="index-Value_002e_005f_005finit_005f_005f-1"></a>Function: <strong>Value.__init__</strong> <em>(val, type)</em></dt>
 <dd><p>This second form of the <code>gdb.Value</code> constructor returns a
 <code>gdb.Value</code> of type <var>type</var> where the value contents are taken
 from the Python buffer object specified by <var>val</var>.  The number of
@@ -254,6 +261,13 @@ size of <var>type</var>.
 </p>
 <p>If <var>type</var> is <code>None</code> then this version of <code>__init__</code>
 behaves as though <var>type</var> was not passed at all.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-Value_002eassign"></a>Function: <strong>Value.assign</strong> <em>(rhs)</em></dt>
+<dd><p>Assign <var>rhs</var> to this value, and return <code>None</code>.  If this value
+cannot be assigned to, or if the assignment is invalid for some reason
+(for example a type-checking failure), an exception will be thrown.
 </p></dd></dl>
 
 <dl>
@@ -437,6 +451,11 @@ address, <code>False</code> if it shouldn&rsquo;t (see <code>set print address</
 <a href="Print-Settings.html#Print-Settings">Print Settings</a>).
 </p>
 </dd>
+<dt><code>nibbles</code></dt>
+<dd><p><code>True</code> if binary values should be displayed in groups of four bits,
+known as nibbles.  <code>False</code> if it shouldn&rsquo;t (see <a href="Print-Settings.html#Print-Settings">set print nibbles</a>).
+</p>
+</dd>
 <dt><code>deref_refs</code></dt>
 <dd><p><code>True</code> if C<tt>++</tt> references should be resolved to the value they
 refer to, <code>False</code> (the default) if they shouldn&rsquo;t.  Note that, unlike
@@ -458,6 +477,12 @@ the <em>declared</em> type should be used.  (See <code>set print object</code> i
 <dd><p><code>True</code> if static members should be included in the string
 representation of a C<tt>++</tt> object, <code>False</code> if they shouldn&rsquo;t (see
 <code>set print static-members</code> in <a href="Print-Settings.html#Print-Settings">Print Settings</a>).
+</p>
+</dd>
+<dt><code>max_characters</code></dt>
+<dd><p>Number of string characters to print, <code>0</code> to follow
+<code>max_elements</code>, or <code>UINT_MAX</code> to print an unlimited number
+of characters (see <code>set print characters</code> in <a href="Print-Settings.html#Print-Settings">Print Settings</a>).
 </p>
 </dd>
 <dt><code>max_elements</code></dt>
@@ -493,9 +518,24 @@ Additionally, <small>GDB</small> only styles some value contents, so not
 every output string will contain escape sequences.
 </p>
 <p>When <code>False</code>, which is the default, no output styling is applied.
+</p>
+</dd>
+<dt><code>summary</code></dt>
+<dd><p><code>True</code> when just a summary should be printed.  In this mode,
+scalar values are printed in their entirety, but aggregates such as
+structures or unions are omitted.  This mode is used by <code>set
+print frame-arguments scalars</code> (see <a href="Print-Settings.html#Print-Settings">Print Settings</a>).
 </p></dd>
 </dl>
 </dd></dl>
+
+<dl>
+<dt><a name="index-Value_002eto_005farray"></a>Function: <strong>Value.to_array</strong> <em>()</em></dt>
+<dd><p>If this value is array-like (see <a href="Types-In-Python.html#Type_002eis_005farray_005flike">Type.is_array_like</a>), then this
+method converts it to an array, which is returned.  If this value is
+already an array, it is simply returned.  Otherwise, an exception is
+throw.
+</p></dd></dl>
 
 <dl>
 <dt><a name="index-Value_002estring"></a>Function: <strong>Value.string</strong> <em>(<span class="roman">[</span>encoding<span class="roman">[</span>, errors<span class="roman">[</span>, length<span class="roman">]]]</span>)</em></dt>

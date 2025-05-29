@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- Copyright (C) 1988-2021 Free Software Foundation, Inc.
+<!-- Copyright (C) 1988-2023 Free Software Foundation, Inc.
 
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
@@ -329,6 +329,22 @@ not matched by <var>regexp</var> then the check fails and <var>comment</var> is
 included in the <code>FAIL</code> message.
 </p>
 </dd>
+<dt><code>{ dg-note <var>regexp</var> [<var>comment</var> [{ target/xfail <var>selector</var> } [<var>line</var>] ]] }</code></dt>
+<dd><p>The line is expected to get a &lsquo;<samp>note</samp>&rsquo; message.
+If there is no message for that line or if the text of that message is
+not matched by <var>regexp</var> then the check fails and <var>comment</var> is
+included in the <code>FAIL</code> message.
+</p>
+<p>By default, any <em>excess</em> &lsquo;<samp>note</samp>&rsquo; messages are pruned, meaning
+their appearance doesn&rsquo;t trigger <em>excess errors</em>.
+However, if &lsquo;<samp>dg-note</samp>&rsquo; is used at least once in a testcase,
+they&rsquo;re not pruned and instead must <em>all</em> be handled explicitly.
+Thus, if looking for just single instances of messages with
+&lsquo;<samp>note: </samp>&rsquo; prefixes without caring for all of them, use
+&lsquo;<samp>dg-message &quot;note: [&hellip;]&quot;</samp>&rsquo; instead of &lsquo;<samp>dg-note</samp>&rsquo;, or use
+&lsquo;<samp>dg-note</samp>&rsquo; together with &lsquo;<samp>dg-prune-output &quot;note: &quot;</samp>&rsquo;.
+</p>
+</dd>
 <dt><code>{ dg-bogus <var>regexp</var> [<var>comment</var> [{ target/xfail <var>selector</var> } [<var>line</var>] ]] }</code></dt>
 <dd><p>This DejaGnu directive appears on a source line that should not get a
 message matching <var>regexp</var>, or else specifies the source line
@@ -340,7 +356,8 @@ targets.
 <dt><code>{ dg-line <var>linenumvar</var> }</code></dt>
 <dd><p>This DejaGnu directive sets the variable <var>linenumvar</var> to the line number of
 the source line.  The variable <var>linenumvar</var> can then be used in subsequent
-<code>dg-error</code>, <code>dg-warning</code>, <code>dg-message</code> and <code>dg-bogus</code>
+<code>dg-error</code>, <code>dg-warning</code>, <code>dg-message</code>, <code>dg-note</code>
+and <code>dg-bogus</code>
 directives.  For example:
 </p>
 <div class="smallexample">
@@ -353,7 +370,9 @@ float a; /* { dg-error &quot;conflicting types of&quot; } */
 <dt><code>{ dg-excess-errors <var>comment</var> [{ target/xfail <var>selector</var> }] }</code></dt>
 <dd><p>This DejaGnu directive indicates that the test is expected to fail due
 to compiler messages that are not handled by &lsquo;<samp>dg-error</samp>&rsquo;,
-&lsquo;<samp>dg-warning</samp>&rsquo; or &lsquo;<samp>dg-bogus</samp>&rsquo;.  For this directive &lsquo;<samp>xfail</samp>&rsquo;
+&lsquo;<samp>dg-warning</samp>&rsquo;, <code>dg-message</code>, &lsquo;<samp>dg-note</samp>&rsquo; or
+&lsquo;<samp>dg-bogus</samp>&rsquo;.
+For this directive &lsquo;<samp>xfail</samp>&rsquo;
 has the same effect as &lsquo;<samp>target</samp>&rsquo;.
 </p>
 </dd>

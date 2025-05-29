@@ -1,6 +1,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- Copyright (C) 1988-2021 Free Software Foundation, Inc.
+<!-- This file documents the use of the GNU compilers.
+
+Copyright (C) 1988-2023 Free Software Foundation, Inc.
 
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
@@ -30,11 +32,11 @@ You have freedom to copy and modify this GNU Manual, like GNU
 <meta name="distribution" content="global">
 <meta name="Generator" content="makeinfo">
 <link href="index.html#Top" rel="start" title="Top">
-<link href="Option-Index.html#Option-Index" rel="index" title="Option Index">
+<link href="Indices.html#Indices" rel="index" title="Indices">
 <link href="index.html#SEC_Contents" rel="contents" title="Table of Contents">
 <link href="Submodel-Options.html#Submodel-Options" rel="up" title="Submodel Options">
 <link href="MIPS-Options.html#MIPS-Options" rel="next" title="MIPS Options">
-<link href="MeP-Options.html#MeP-Options" rel="prev" title="MeP Options">
+<link href="MCore-Options.html#MCore-Options" rel="prev" title="MCore Options">
 <style type="text/css">
 <!--
 a.summary-letter {text-decoration: none}
@@ -66,110 +68,112 @@ ul.no-bullet {list-style: none}
 
 </head>
 
-<body lang="en">
+<body lang="en_US">
 <a name="MicroBlaze-Options"></a>
 <div class="header">
 <p>
-Next: <a href="MIPS-Options.html#MIPS-Options" accesskey="n" rel="next">MIPS Options</a>, Previous: <a href="MeP-Options.html#MeP-Options" accesskey="p" rel="prev">MeP Options</a>, Up: <a href="Submodel-Options.html#Submodel-Options" accesskey="u" rel="up">Submodel Options</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Option-Index.html#Option-Index" title="Index" rel="index">Index</a>]</p>
+Next: <a href="MIPS-Options.html#MIPS-Options" accesskey="n" rel="next">MIPS Options</a>, Previous: <a href="MCore-Options.html#MCore-Options" accesskey="p" rel="prev">MCore Options</a>, Up: <a href="Submodel-Options.html#Submodel-Options" accesskey="u" rel="up">Submodel Options</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Indices.html#Indices" title="Index" rel="index">Index</a>]</p>
 </div>
 <hr>
 <a name="MicroBlaze-Options-1"></a>
-<h4 class="subsection">3.19.28 MicroBlaze Options</h4>
+<h4 class="subsection">3.19.27 MicroBlaze Options</h4>
 <a name="index-MicroBlaze-Options"></a>
 
 <dl compact="compact">
+<dd>
+<a name="index-msoft_002dfloat-7"></a>
+</dd>
 <dt><code>-msoft-float</code></dt>
-<dd><a name="index-msoft_002dfloat-6"></a>
-<p>Use software emulation for floating point (default).
+<dd><p>Use software emulation for floating point (default).
 </p>
+<a name="index-mhard_002dfloat-3"></a>
 </dd>
 <dt><code>-mhard-float</code></dt>
-<dd><a name="index-mhard_002dfloat-3"></a>
-<p>Use hardware floating-point instructions.
+<dd><p>Use hardware floating-point instructions.
 </p>
+<a name="index-mmemcpy-1"></a>
 </dd>
 <dt><code>-mmemcpy</code></dt>
-<dd><a name="index-mmemcpy"></a>
-<p>Do not optimize block moves, use <code>memcpy</code>.
+<dd><p>Do not optimize block moves, use <code>memcpy</code>.
 </p>
+<a name="index-mno_002dclearbss"></a>
 </dd>
 <dt><code>-mno-clearbss</code></dt>
-<dd><a name="index-mno_002dclearbss"></a>
-<p>This option is deprecated.  Use <samp>-fno-zero-initialized-in-bss</samp> instead.
+<dd><p>This option is deprecated.  Use <samp>-fno-zero-initialized-in-bss</samp> instead.
 </p>
+<a name="index-mcpu_003d-3"></a>
 </dd>
 <dt><code>-mcpu=<var>cpu-type</var></code></dt>
-<dd><a name="index-mcpu_003d-3"></a>
-<p>Use features of, and schedule code for, the given CPU.
+<dd><p>Use features of, and schedule code for, the given CPU.
 Supported values are in the format &lsquo;<samp>v<var>X</var>.<var>YY</var>.<var>Z</var></samp>&rsquo;,
 where <var>X</var> is a major version, <var>YY</var> is the minor version, and
 <var>Z</var> is compatibility code.  Example values are &lsquo;<samp>v3.00.a</samp>&rsquo;,
 &lsquo;<samp>v4.00.b</samp>&rsquo;, &lsquo;<samp>v5.00.a</samp>&rsquo;, &lsquo;<samp>v5.00.b</samp>&rsquo;, &lsquo;<samp>v6.00.a</samp>&rsquo;.
 </p>
+<a name="index-mxl_002dsoft_002dmul"></a>
 </dd>
 <dt><code>-mxl-soft-mul</code></dt>
-<dd><a name="index-mxl_002dsoft_002dmul"></a>
-<p>Use software multiply emulation (default).
+<dd><p>Use software multiply emulation (default).
 </p>
+<a name="index-mxl_002dsoft_002ddiv"></a>
 </dd>
 <dt><code>-mxl-soft-div</code></dt>
-<dd><a name="index-mxl_002dsoft_002ddiv"></a>
-<p>Use software emulation for divides (default).
+<dd><p>Use software emulation for divides (default).
 </p>
+<a name="index-mxl_002dbarrel_002dshift"></a>
 </dd>
 <dt><code>-mxl-barrel-shift</code></dt>
-<dd><a name="index-mxl_002dbarrel_002dshift"></a>
-<p>Use the hardware barrel shifter.
+<dd><p>Use the hardware barrel shifter.
 </p>
+<a name="index-mxl_002dpattern_002dcompare"></a>
 </dd>
 <dt><code>-mxl-pattern-compare</code></dt>
-<dd><a name="index-mxl_002dpattern_002dcompare"></a>
-<p>Use pattern compare instructions.
+<dd><p>Use pattern compare instructions.
 </p>
+<a name="index-msmall_002ddivides"></a>
 </dd>
 <dt><code>-msmall-divides</code></dt>
-<dd><a name="index-msmall_002ddivides"></a>
-<p>Use table lookup optimization for small signed integer divisions.
+<dd><p>Use table lookup optimization for small signed integer divisions.
 </p>
+<a name="index-mxl_002dstack_002dcheck"></a>
 </dd>
 <dt><code>-mxl-stack-check</code></dt>
-<dd><a name="index-mxl_002dstack_002dcheck"></a>
-<p>This option is deprecated.  Use <samp>-fstack-check</samp> instead.
+<dd><p>This option is deprecated.  Use <samp>-fstack-check</samp> instead.
 </p>
+<a name="index-mxl_002dgp_002dopt"></a>
 </dd>
 <dt><code>-mxl-gp-opt</code></dt>
-<dd><a name="index-mxl_002dgp_002dopt"></a>
-<p>Use GP-relative <code>.sdata</code>/<code>.sbss</code> sections.
+<dd><p>Use GP-relative <code>.sdata</code>/<code>.sbss</code> sections.
 </p>
+<a name="index-mxl_002dmultiply_002dhigh"></a>
 </dd>
 <dt><code>-mxl-multiply-high</code></dt>
-<dd><a name="index-mxl_002dmultiply_002dhigh"></a>
-<p>Use multiply high instructions for high part of 32x32 multiply.
+<dd><p>Use multiply high instructions for high part of 32x32 multiply.
 </p>
+<a name="index-mxl_002dfloat_002dconvert"></a>
 </dd>
 <dt><code>-mxl-float-convert</code></dt>
-<dd><a name="index-mxl_002dfloat_002dconvert"></a>
-<p>Use hardware floating-point conversion instructions.
+<dd><p>Use hardware floating-point conversion instructions.
 </p>
+<a name="index-mxl_002dfloat_002dsqrt"></a>
 </dd>
 <dt><code>-mxl-float-sqrt</code></dt>
-<dd><a name="index-mxl_002dfloat_002dsqrt"></a>
-<p>Use hardware floating-point square root instruction.
+<dd><p>Use hardware floating-point square root instruction.
 </p>
+<a name="index-mbig_002dendian-8"></a>
 </dd>
 <dt><code>-mbig-endian</code></dt>
-<dd><a name="index-mbig_002dendian-8"></a>
-<p>Generate code for a big-endian target.
+<dd><p>Generate code for a big-endian target.
 </p>
+<a name="index-mlittle_002dendian-8"></a>
 </dd>
 <dt><code>-mlittle-endian</code></dt>
-<dd><a name="index-mlittle_002dendian-8"></a>
-<p>Generate code for a little-endian target.
+<dd><p>Generate code for a little-endian target.
 </p>
+<a name="index-mxl_002dreorder"></a>
 </dd>
 <dt><code>-mxl-reorder</code></dt>
-<dd><a name="index-mxl_002dreorder"></a>
-<p>Use reorder instructions (swap and byte reversed load/store).
+<dd><p>Use reorder instructions (swap and byte reversed load/store).
 </p>
 </dd>
 <dt><code>-mxl-mode-<var>app-model</var></code></dt>
@@ -177,13 +181,6 @@ where <var>X</var> is a major version, <var>YY</var> is the minor version, and
 </p><dl compact="compact">
 <dt>&lsquo;<samp>executable</samp>&rsquo;</dt>
 <dd><p>normal executable (default), uses startup code <samp>crt0.o</samp>.
-</p>
-</dd>
-<dt>&lsquo;<samp>-mpic-data-is-text-relative</samp>&rsquo;</dt>
-<dd><a name="index-mpic_002ddata_002dis_002dtext_002drelative-1"></a>
-<p>Assume that the displacement between the text and data segments is fixed
-at static link time.  This allows data to be referenced by offset from start of
-text address instead of GOT since PC-relative addressing is not supported.
 </p>
 </dd>
 <dt>&lsquo;<samp>xmdstub</samp>&rsquo;</dt>
@@ -209,13 +206,20 @@ within a monitoring application. This model uses <samp>crt3.o</samp> as a startu
 <p>Option <samp>-xl-mode-<var>app-model</var></samp> is a deprecated alias for
 <samp>-mxl-mode-<var>app-model</var></samp>.
 </p>
+<a name="index-mpic_002ddata_002dis_002dtext_002drelative-1"></a>
+</dd>
+<dt><code>-mpic-data-is-text-relative</code></dt>
+<dd><p>Assume that the displacement between the text and data segments is fixed
+at static link time.  This allows data to be referenced by offset from start of
+text address instead of GOT since PC-relative addressing is not supported.
+</p>
 </dd>
 </dl>
 
 <hr>
 <div class="header">
 <p>
-Next: <a href="MIPS-Options.html#MIPS-Options" accesskey="n" rel="next">MIPS Options</a>, Previous: <a href="MeP-Options.html#MeP-Options" accesskey="p" rel="prev">MeP Options</a>, Up: <a href="Submodel-Options.html#Submodel-Options" accesskey="u" rel="up">Submodel Options</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Option-Index.html#Option-Index" title="Index" rel="index">Index</a>]</p>
+Next: <a href="MIPS-Options.html#MIPS-Options" accesskey="n" rel="next">MIPS Options</a>, Previous: <a href="MCore-Options.html#MCore-Options" accesskey="p" rel="prev">MCore Options</a>, Up: <a href="Submodel-Options.html#Submodel-Options" accesskey="u" rel="up">Submodel Options</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Indices.html#Indices" title="Index" rel="index">Index</a>]</p>
 </div>
 
 

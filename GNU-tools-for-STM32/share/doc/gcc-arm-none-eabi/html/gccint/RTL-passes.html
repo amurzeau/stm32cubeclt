@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- Copyright (C) 1988-2021 Free Software Foundation, Inc.
+<!-- Copyright (C) 1988-2023 Free Software Foundation, Inc.
 
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
@@ -83,16 +83,16 @@ passes that are run after the Tree optimization passes.
 <li> RTL generation
 
 <p>The source files for RTL generation include
-<samp>stmt.c</samp>,
-<samp>calls.c</samp>,
-<samp>expr.c</samp>,
-<samp>explow.c</samp>,
-<samp>expmed.c</samp>,
-<samp>function.c</samp>,
-<samp>optabs.c</samp>
-and <samp>emit-rtl.c</samp>.
+<samp>stmt.cc</samp>,
+<samp>calls.cc</samp>,
+<samp>expr.cc</samp>,
+<samp>explow.cc</samp>,
+<samp>expmed.cc</samp>,
+<samp>function.cc</samp>,
+<samp>optabs.cc</samp>
+and <samp>emit-rtl.cc</samp>.
 Also, the file
-<samp>insn-emit.c</samp>, generated from the machine description by the
+<samp>insn-emit.cc</samp>, generated from the machine description by the
 program <code>genemit</code>, is used in this pass.  The header file
 <samp>expr.h</samp> is used for communication within this pass.
 </p>
@@ -109,7 +109,7 @@ for use and which patterns correspond to them.
 exception handling library routines and the exception handlers within
 the function.  Entry points in the function that are invoked by the
 exception handling library are called <em>landing pads</em>.  The code
-for this pass is located in <samp>except.c</samp>.
+for this pass is located in <samp>except.cc</samp>.
 </p>
 </li><li> Control flow graph cleanup
 
@@ -117,8 +117,8 @@ for this pass is located in <samp>except.c</samp>.
 jump, jumps across jumps, etc.  The pass is run multiple times.
 For historical reasons, it is occasionally referred to as the &ldquo;jump
 optimization pass&rdquo;.  The bulk of the code for this pass is in
-<samp>cfgcleanup.c</samp>, and there are support routines in <samp>cfgrtl.c</samp>
-and <samp>jump.c</samp>.
+<samp>cfgcleanup.cc</samp>, and there are support routines in <samp>cfgrtl.cc</samp>
+and <samp>jump.cc</samp>.
 </p>
 </li><li> Forward propagation of single-def values
 
@@ -127,13 +127,13 @@ variables that come from a single definition, and
 seeing if the result can be simplified.  It performs copy propagation
 and addressing mode selection.  The pass is run twice, with values
 being propagated into loops only on the second run.  The code is
-located in <samp>fwprop.c</samp>.
+located in <samp>fwprop.cc</samp>.
 </p>
 </li><li> Common subexpression elimination
 
 <p>This pass removes redundant computation within basic blocks, and
 optimizes addressing modes based on cost.  The pass is run twice.
-The code for this pass is located in <samp>cse.c</samp>.
+The code for this pass is located in <samp>cse.cc</samp>.
 </p>
 </li><li> Global common subexpression elimination
 
@@ -152,26 +152,26 @@ based GCSE also does loop invariant code motion.  We also perform load
 and store motion when optimizing for speed.
 Regardless of which type of GCSE is used, the GCSE pass also performs
 global constant and  copy propagation.
-The source file for this pass is <samp>gcse.c</samp>, and the LCM routines
-are in <samp>lcm.c</samp>.
+The source file for this pass is <samp>gcse.cc</samp>, and the LCM routines
+are in <samp>lcm.cc</samp>.
 </p>
 </li><li> Loop optimization
 
 <p>This pass performs several loop related optimizations.
-The source files <samp>cfgloopanal.c</samp> and <samp>cfgloopmanip.c</samp> contain
+The source files <samp>cfgloopanal.cc</samp> and <samp>cfgloopmanip.cc</samp> contain
 generic loop analysis and manipulation code.  Initialization and finalization
-of loop structures is handled by <samp>loop-init.c</samp>.
-A loop invariant motion pass is implemented in <samp>loop-invariant.c</samp>.
+of loop structures is handled by <samp>loop-init.cc</samp>.
+A loop invariant motion pass is implemented in <samp>loop-invariant.cc</samp>.
 Basic block level optimizations&mdash;unrolling, and peeling loops&mdash;
-are implemented in <samp>loop-unroll.c</samp>.
+are implemented in <samp>loop-unroll.cc</samp>.
 Replacing of the exit condition of loops by special machine-dependent
-instructions is handled by <samp>loop-doloop.c</samp>.
+instructions is handled by <samp>loop-doloop.cc</samp>.
 </p>
 </li><li> Jump bypassing
 
 <p>This pass is an aggressive form of GCSE that transforms the control
 flow graph of a function by propagating constants into conditional
-branch instructions.  The source file for this pass is <samp>gcse.c</samp>.
+branch instructions.  The source file for this pass is <samp>gcse.cc</samp>.
 </p>
 </li><li> If conversion
 
@@ -179,13 +179,13 @@ branch instructions.  The source file for this pass is <samp>gcse.c</samp>.
 assignments with arithmetic, boolean value producing comparison
 instructions, and conditional move instructions.  In the very last
 invocation after reload/LRA, it will generate predicated instructions
-when supported by the target.  The code is located in <samp>ifcvt.c</samp>.
+when supported by the target.  The code is located in <samp>ifcvt.cc</samp>.
 </p>
 </li><li> Web construction
 
 <p>This pass splits independent uses of each pseudo-register.  This can
 improve effect of the other transformation, such as CSE or register
-allocation.  The code for this pass is located in <samp>web.c</samp>.
+allocation.  The code for this pass is located in <samp>web.cc</samp>.
 </p>
 </li><li> Instruction combination
 
@@ -193,7 +193,7 @@ allocation.  The code for this pass is located in <samp>web.c</samp>.
 are related by data flow into single instructions.  It combines the
 RTL expressions for the instructions by substitution, simplifies the
 result using algebra, and then attempts to match the result against
-the machine description.  The code is located in <samp>combine.c</samp>.
+the machine description.  The code is located in <samp>combine.cc</samp>.
 </p>
 </li><li> Mode switching optimization
 
@@ -201,7 +201,7 @@ the machine description.  The code is located in <samp>combine.c</samp>.
 specific &ldquo;mode&rdquo; and minimizes the number of mode changes required to
 satisfy all users.  What these modes are, and what they apply to are
 completely target-specific.  The code for this pass is located in
-<samp>mode-switching.c</samp>.
+<samp>mode-switching.cc</samp>.
 </p>
 </li><li> <a name="index-modulo-scheduling"></a>
 <a name="index-sms_002c-swing_002c-software-pipelining"></a>
@@ -210,7 +210,7 @@ Modulo scheduling
 <p>This pass looks at innermost loops and reorders their instructions
 by overlapping different iterations.  Modulo scheduling is performed
 immediately before instruction scheduling.  The code for this pass is
-located in <samp>modulo-sched.c</samp>.
+located in <samp>modulo-sched.cc</samp>.
 </p>
 </li><li> Instruction scheduling
 
@@ -220,8 +220,8 @@ floating point instructions often have this behavior on RISC machines.
 It re-orders instructions within a basic block to try to separate the
 definition and use of items that otherwise would cause pipeline
 stalls.  This pass is performed twice, before and after register
-allocation.  The code for this pass is located in <samp>haifa-sched.c</samp>,
-<samp>sched-deps.c</samp>, <samp>sched-ebb.c</samp>, <samp>sched-rgn.c</samp> and
+allocation.  The code for this pass is located in <samp>haifa-sched.cc</samp>,
+<samp>sched-deps.cc</samp>, <samp>sched-ebb.cc</samp>, <samp>sched-rgn.cc</samp> and
 <samp>sched-vis.c</samp>.
 </p>
 </li><li> Register allocation
@@ -246,9 +246,9 @@ if there is one region.  By default, IRA chooses regions using
 register pressure but the user can force it to use one region or
 regions corresponding to all loops.
 
-<p>Source files of the allocator are <samp>ira.c</samp>, <samp>ira-build.c</samp>,
-<samp>ira-costs.c</samp>, <samp>ira-conflicts.c</samp>, <samp>ira-color.c</samp>,
-<samp>ira-emit.c</samp>, <samp>ira-lives</samp>, plus header files <samp>ira.h</samp>
+<p>Source files of the allocator are <samp>ira.cc</samp>, <samp>ira-build.cc</samp>,
+<samp>ira-costs.cc</samp>, <samp>ira-conflicts.cc</samp>, <samp>ira-color.cc</samp>,
+<samp>ira-emit.cc</samp>, <samp>ira-lives</samp>, plus header files <samp>ira.h</samp>
 and <samp>ira-int.h</samp> used for the communication between the allocator
 and the rest of the compiler and between the IRA files.
 </p>
@@ -265,14 +265,14 @@ do the copying.
 <p>The reload pass also optionally eliminates the frame pointer and inserts
 instructions to save and restore call-clobbered registers around calls.
 </p>
-<p>Source files are <samp>reload.c</samp> and <samp>reload1.c</samp>, plus the header
+<p>Source files are <samp>reload.cc</samp> and <samp>reload1.cc</samp>, plus the header
 <samp>reload.h</samp> used for communication between them.
 </p>
 </li><li> <a name="index-Local-Register-Allocator-_0028LRA_0029"></a>
 This pass is a modern replacement of the reload pass.  Source files
-are <samp>lra.c</samp>, <samp>lra-assign.c</samp>, <samp>lra-coalesce.c</samp>,
-<samp>lra-constraints.c</samp>, <samp>lra-eliminations.c</samp>,
-<samp>lra-lives.c</samp>, <samp>lra-remat.c</samp>, <samp>lra-spills.c</samp>, the
+are <samp>lra.cc</samp>, <samp>lra-assign.c</samp>, <samp>lra-coalesce.cc</samp>,
+<samp>lra-constraints.cc</samp>, <samp>lra-eliminations.cc</samp>,
+<samp>lra-lives.cc</samp>, <samp>lra-remat.cc</samp>, <samp>lra-spills.cc</samp>, the
 header <samp>lra-int.h</samp> used for communication between them, and the
 header <samp>lra.h</samp> used for communication between LRA and the rest of
 compiler.
@@ -291,8 +291,8 @@ source of control.
 information is not available, various types of static analysis are
 performed to make the predictions normally coming from the profile
 feedback (IE execution frequency, branch probability, etc).  It is
-implemented in the file <samp>bb-reorder.c</samp>, and the various
-prediction routines are in <samp>predict.c</samp>.
+implemented in the file <samp>bb-reorder.cc</samp>, and the various
+prediction routines are in <samp>predict.cc</samp>.
 </p>
 </li><li> Variable tracking
 
@@ -300,13 +300,13 @@ prediction routines are in <samp>predict.c</samp>.
 position in code and generates notes describing the variable locations
 to RTL code.  The location lists are then generated according to these
 notes to debug information if the debugging information format supports
-location lists.  The code is located in <samp>var-tracking.c</samp>.
+location lists.  The code is located in <samp>var-tracking.cc</samp>.
 </p>
 </li><li> Delayed branch scheduling
 
 <p>This optional pass attempts to find instructions that can go into the
 delay slots of other instructions, usually jumps and calls.  The code
-for this pass is located in <samp>reorg.c</samp>.
+for this pass is located in <samp>reorg.cc</samp>.
 </p>
 </li><li> Branch shortening
 
@@ -315,19 +315,19 @@ Thus, longer sequences of instructions must be used for long branches.
 In this pass, the compiler figures out what how far each instruction
 will be from each other instruction, and therefore whether the usual
 instructions, or the longer sequences, must be used for each branch.
-The code for this pass is located in <samp>final.c</samp>.
+The code for this pass is located in <samp>final.cc</samp>.
 </p>
 </li><li> Register-to-stack conversion
 
 <p>Conversion from usage of some hard registers to usage of a register
 stack may be done at this point.  Currently, this is supported only
 for the floating-point registers of the Intel 80387 coprocessor.  The
-code for this pass is located in <samp>reg-stack.c</samp>.
+code for this pass is located in <samp>reg-stack.cc</samp>.
 </p>
 </li><li> Final
 
 <p>This pass outputs the assembler code for the function.  The source files
-are <samp>final.c</samp> plus <samp>insn-output.c</samp>; the latter is generated
+are <samp>final.cc</samp> plus <samp>insn-output.cc</samp>; the latter is generated
 automatically from the machine description by the tool <samp>genoutput</samp>.
 The header file <samp>conditions.h</samp> is used for communication between
 these files.
@@ -336,9 +336,9 @@ these files.
 
 <p>This is run after final because it must output the stack slot offsets
 for pseudo registers that did not get hard registers.  Source files
-are <samp>dbxout.c</samp> for DBX symbol table format, <samp>dwarfout.c</samp> for
-DWARF symbol table format, files <samp>dwarf2out.c</samp> and <samp>dwarf2asm.c</samp>
-for DWARF2 symbol table format, and <samp>vmsdbgout.c</samp> for VMS debug
+are <samp>dwarfout.c</samp> for
+DWARF symbol table format, files <samp>dwarf2out.cc</samp> and <samp>dwarf2asm.cc</samp>
+for DWARF2 symbol table format, and <samp>vmsdbgout.cc</samp> for VMS debug
 symbol table format.
 </p>
 </li></ul>

@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- Copyright (C) 1988-2021 Free Software Foundation, Inc.
+<!-- Copyright (C) 1988-2023 Free Software Foundation, Inc.
 
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
@@ -80,8 +80,8 @@ Next: <a href="IPA.html#IPA" accesskey="n" rel="next">IPA</a>, Previous: <a href
 Data structures and enum codes for sections are defined in
 <samp>lto-streamer.h</samp>.
 </p>
-<p>These sections are emitted from <samp>lto-streamer-out.c</samp> and mapped
-in all at once from <samp>lto/lto.c</samp>:<code>lto_file_read</code>.  The
+<p>These sections are emitted from <samp>lto-streamer-out.cc</samp> and mapped
+in all at once from <samp>lto/lto.cc</samp>:<code>lto_file_read</code>.  The
 individual functions dealing with the reading/writing of each section
 are described below.
 </p>
@@ -93,13 +93,11 @@ object files.  This is used at link time to determine the optimization
 level and other settings when they are not explicitly specified at the
 linker command line.
 </p>
-<p>Currently, GCC does not support combining LTO object files compiled
-with different set of the command line options into a single binary.
-At link time, the options given on the command line and the options
-saved on all the files in a link-time set are applied globally.  No
-attempt is made at validating the combination of flags (other than the
-usual validation done by option processing).  This is implemented in
-<samp>lto/lto.c</samp>:<code>lto_read_all_file_options</code>.
+<p>Most options are recorded at a per function level and their setting
+restored when processing the functions at link time.  Global options
+are composed from options specified at compile time and link time.
+How exactly they are combined or mismatches diagnosed is implemented in
+<samp>lto-wrapper.cc</samp>:<code>find_and_merge_options</code>.
 </p>
 
 </li><li> Symbol table (<code>.gnu.lto_.symtab</code>)
@@ -119,7 +117,7 @@ optimization.  This would lead to an undefined symbol if only one
 symbol table was used.
 </p>
 <p>The symbol table is emitted in
-<samp>lto-streamer-out.c</samp>:<code>produce_symtab</code>.
+<samp>lto-streamer-out.cc</samp>:<code>produce_symtab</code>.
 </p>
 
 </li><li> Global declarations and types (<code>.gnu.lto_.decls</code>)
@@ -129,10 +127,10 @@ declarations and types required to represent the callgraph, static
 variables and top-level debug info.
 </p>
 <p>The contents of this section are emitted in
-<samp>lto-streamer-out.c</samp>:<code>produce_asm_for_decls</code>.  Types and
+<samp>lto-streamer-out.cc</samp>:<code>produce_asm_for_decls</code>.  Types and
 symbols are emitted in a topological order that preserves the sharing
 of pointers when the file is read back in
-(<samp>lto.c</samp>:<code>read_cgraph_and_symbols</code>).
+(<samp>lto.cc</samp>:<code>read_cgraph_and_symbols</code>).
 </p>
 
 </li><li> The callgraph (<code>.gnu.lto_.cgraph</code>)
@@ -143,15 +141,15 @@ annotated multi-graph which represents the functions and call sites as
 well as the variables, aliases and top-level <code>asm</code> statements.
 </p>
 <p>This section is emitted in
-<samp>lto-streamer-out.c</samp>:<code>output_cgraph</code> and read in
-<samp>lto-cgraph.c</samp>:<code>input_cgraph</code>.
+<samp>lto-streamer-out.cc</samp>:<code>output_cgraph</code> and read in
+<samp>lto-cgraph.cc</samp>:<code>input_cgraph</code>.
 </p>
 
 </li><li> IPA references (<code>.gnu.lto_.refs</code>)
 
 <p>This section contains references between function and static
-variables.  It is emitted by <samp>lto-cgraph.c</samp>:<code>output_refs</code>
-and read by <samp>lto-cgraph.c</samp>:<code>input_refs</code>.
+variables.  It is emitted by <samp>lto-cgraph.cc</samp>:<code>output_refs</code>
+and read by <samp>lto-cgraph.cc</samp>:<code>input_refs</code>.
 </p>
 
 </li><li> Function bodies (<code>.gnu.lto_.function_body.&lt;name&gt;</code>)
@@ -162,15 +160,15 @@ copying of the section independently to different object files or
 reading the function on demand.
 </p>
 <p>Functions are emitted in
-<samp>lto-streamer-out.c</samp>:<code>output_function</code> and read in
-<samp>lto-streamer-in.c</samp>:<code>input_function</code>.
+<samp>lto-streamer-out.cc</samp>:<code>output_function</code> and read in
+<samp>lto-streamer-in.cc</samp>:<code>input_function</code>.
 </p>
 
 </li><li> Static variable initializers (<code>.gnu.lto_.vars</code>)
 
 <p>This section contains all the symbols in the global variable pool.  It
-is emitted by <samp>lto-cgraph.c</samp>:<code>output_varpool</code> and read in
-<samp>lto-cgraph.c</samp>:<code>input_cgraph</code>.
+is emitted by <samp>lto-cgraph.cc</samp>:<code>output_varpool</code> and read in
+<samp>lto-cgraph.cc</samp>:<code>input_cgraph</code>.
 </p>
 </li><li> Summaries and optimization summaries used by IPA passes
 (<code>.gnu.lto_.&lt;xxx&gt;</code>, where <code>&lt;xxx&gt;</code> is one of <code>jmpfuncs</code>,

@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- Copyright (C) 1988-2021 Free Software Foundation, Inc.
+<!-- Copyright (C) 1988-2023 Free Software Foundation, Inc.
 
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
@@ -34,7 +34,7 @@ You have freedom to copy and modify this GNU Manual, like GNU
 <link href="index.html#SEC_Contents" rel="contents" title="Table of Contents">
 <link href="Condition-Code.html#Condition-Code" rel="up" title="Condition Code">
 <link href="Costs.html#Costs" rel="next" title="Costs">
-<link href="CC0-Condition-Codes.html#CC0-Condition-Codes" rel="prev" title="CC0 Condition Codes">
+<link href="Condition-Code.html#Condition-Code" rel="prev" title="Condition Code">
 <style type="text/css">
 <!--
 a.summary-letter {text-decoration: none}
@@ -70,11 +70,11 @@ ul.no-bullet {list-style: none}
 <a name="MODE_005fCC-Condition-Codes"></a>
 <div class="header">
 <p>
-Previous: <a href="CC0-Condition-Codes.html#CC0-Condition-Codes" accesskey="p" rel="prev">CC0 Condition Codes</a>, Up: <a href="Condition-Code.html#Condition-Code" accesskey="u" rel="up">Condition Code</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Option-Index.html#Option-Index" title="Index" rel="index">Index</a>]</p>
+Up: <a href="Condition-Code.html#Condition-Code" accesskey="u" rel="up">Condition Code</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Option-Index.html#Option-Index" title="Index" rel="index">Index</a>]</p>
 </div>
 <hr>
 <a name="Representation-of-condition-codes-using-registers"></a>
-<h4 class="subsection">18.15.2 Representation of condition codes using registers</h4>
+<h4 class="subsection">18.15.1 Representation of condition codes using registers</h4>
 <a name="index-CCmode-1"></a>
 <a name="index-MODE_005fCC-1"></a>
 
@@ -191,7 +191,7 @@ like:
 
 <dl>
 <dt><a name="index-TARGET_005fFIXED_005fCONDITION_005fCODE_005fREGS"></a>Target Hook: <em>bool</em> <strong>TARGET_FIXED_CONDITION_CODE_REGS</strong> <em>(unsigned int *<var>p1</var>, unsigned int *<var>p2</var>)</em></dt>
-<dd><p>On targets which do not use <code>(cc0)</code>, and which use a hard
+<dd><p>On targets which use a hard
 register rather than a pseudo-register to hold condition codes, the
 regular CSE passes are often not able to identify cases in which the
 hard register is set to a common value.  Use this hook to enable a
@@ -229,7 +229,7 @@ then this value should be set appropriately.
 <hr>
 <div class="header">
 <p>
-Previous: <a href="CC0-Condition-Codes.html#CC0-Condition-Codes" accesskey="p" rel="prev">CC0 Condition Codes</a>, Up: <a href="Condition-Code.html#Condition-Code" accesskey="u" rel="up">Condition Code</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Option-Index.html#Option-Index" title="Index" rel="index">Index</a>]</p>
+Up: <a href="Condition-Code.html#Condition-Code" accesskey="u" rel="up">Condition Code</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Option-Index.html#Option-Index" title="Index" rel="index">Index</a>]</p>
 </div>
 
 

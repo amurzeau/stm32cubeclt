@@ -1,6 +1,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- Copyright (C) 1988-2021 Free Software Foundation, Inc.
+<!-- This file documents the use of the GNU compilers.
+
+Copyright (C) 1988-2023 Free Software Foundation, Inc.
 
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
@@ -30,7 +32,7 @@ You have freedom to copy and modify this GNU Manual, like GNU
 <meta name="distribution" content="global">
 <meta name="Generator" content="makeinfo">
 <link href="index.html#Top" rel="start" title="Top">
-<link href="Option-Index.html#Option-Index" rel="index" title="Option Index">
+<link href="Indices.html#Indices" rel="index" title="Indices">
 <link href="index.html#SEC_Contents" rel="contents" title="Table of Contents">
 <link href="Invoking-GCC.html#Invoking-GCC" rel="up" title="Invoking GCC">
 <link href="C_002b_002b-Module-Mapper.html#C_002b_002b-Module-Mapper" rel="next" title="C++ Module Mapper">
@@ -66,11 +68,11 @@ ul.no-bullet {list-style: none}
 
 </head>
 
-<body lang="en">
+<body lang="en_US">
 <a name="C_002b_002b-Modules"></a>
 <div class="header">
 <p>
-Previous: <a href="Precompiled-Headers.html#Precompiled-Headers" accesskey="p" rel="prev">Precompiled Headers</a>, Up: <a href="Invoking-GCC.html#Invoking-GCC" accesskey="u" rel="up">Invoking GCC</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Option-Index.html#Option-Index" title="Index" rel="index">Index</a>]</p>
+Previous: <a href="Precompiled-Headers.html#Precompiled-Headers" accesskey="p" rel="prev">Precompiled Headers</a>, Up: <a href="Invoking-GCC.html#Invoking-GCC" accesskey="u" rel="up">Invoking GCC</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Indices.html#Indices" title="Index" rel="index">Index</a>]</p>
 </div>
 <hr>
 <a name="C_002b_002b-Modules-1"></a>
@@ -82,9 +84,7 @@ provides a modular compilation system, intending to provide both
 faster builds and better library isolation.  The &ldquo;Merging Modules&rdquo;
 paper <a href="https://wg21.link/p1103">https://wg21.link/p1103</a>, provides the easiest to read set
 of changes to the standard, although it does not capture later
-changes.  That specification is now part of C++20,
-<a href="git@github.com:cplusplus/draft.git">git@github.com:cplusplus/draft.git</a>, it is considered complete
-(there may be defect reports to come).
+changes.
 </p>
 <p><em>G++&rsquo;s modules support is not complete.</em>  Other than bugs, the
 known missing pieces are:
@@ -116,14 +116,6 @@ exported region may reference (for instance, the entities an exported
 template definition may reference).  These are not fully implemented.
 </p>
 </dd>
-<dt><em>Language-linkage module attachment</em></dt>
-<dd><p>Declarations with explicit language linkage (<code>extern &quot;C&quot;</code> or
-<code>extern &quot;C++&quot;</code>) are attached to the global module, even when in
-the purview of a named module.  This is not implemented.  Such
-declarations will be attached to the module, if any, in which they are
-declared.
-</p>
-</dd>
 <dt><em>Standard Library Header Units</em></dt>
 <dd><p>The Standard Library is not provided as importable header units.  If
 you want to import such units, you must explicitly build them first.
@@ -141,7 +133,7 @@ version selected, although in pre-C++20 versions, it is of course an
 extension.
 </p>
 <p>No new source file suffixes are required or supported.  If you wish to
-use a non-standard suffix (See <a href="Overall-Options.html#Overall-Options">Overall Options</a>), you also need
+use a non-standard suffix (see <a href="Overall-Options.html#Overall-Options">Overall Options</a>), you also need
 to provide a <samp>-x c++</samp> option too.<a name="DOCF2" href="#FOOT2"><sup>2</sup></a>
 </p>
 <p>Compiling a module interface unit produces an additional output (to
@@ -199,8 +191,8 @@ to be resolved at the end of compilation.  Without this, imported
 macros are only resolved when expanded or (re)defined.  This option
 detects conflicting import definitions for all macros.
 </p>
-<p>See <a href="C_002b_002b-Module-Mapper.html#C_002b_002b-Module-Mapper">C++ Module Mapper</a> for details of the <samp>-fmodule-mapper</samp>
-family of options.
+<p>For details of the <samp>-fmodule-mapper</samp> family of options,
+see <a href="C_002b_002b-Module-Mapper.html#C_002b_002b-Module-Mapper">C++ Module Mapper</a>.
 </p>
 <table class="menu" border="0" cellspacing="0">
 <tr><td align="left" valign="top">&bull; <a href="C_002b_002b-Module-Mapper.html#C_002b_002b-Module-Mapper" accesskey="1">C++ Module Mapper</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Module Mapper
@@ -225,7 +217,7 @@ naming <code>module-m.cpp</code> would be less invasive.</p>
 <hr>
 <div class="header">
 <p>
-Previous: <a href="Precompiled-Headers.html#Precompiled-Headers" accesskey="p" rel="prev">Precompiled Headers</a>, Up: <a href="Invoking-GCC.html#Invoking-GCC" accesskey="u" rel="up">Invoking GCC</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Option-Index.html#Option-Index" title="Index" rel="index">Index</a>]</p>
+Previous: <a href="Precompiled-Headers.html#Precompiled-Headers" accesskey="p" rel="prev">Precompiled Headers</a>, Up: <a href="Invoking-GCC.html#Invoking-GCC" accesskey="u" rel="up">Invoking GCC</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Indices.html#Indices" title="Index" rel="index">Index</a>]</p>
 </div>
 
 

@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- Copyright (C) 1988-2021 Free Software Foundation, Inc.
+<!-- Copyright (C) 1988-2023 Free Software Foundation, Inc.
 
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
@@ -102,17 +102,28 @@ normally defined in <samp>libgcc2.c</samp>.
 
 <dl>
 <dt><a name="index-TARGET_005fSTACK_005fPROTECT_005fRUNTIME_005fENABLED_005fP"></a>Target Hook: <em>bool</em> <strong>TARGET_STACK_PROTECT_RUNTIME_ENABLED_P</strong> <em>(void)</em></dt>
-<dd><p>Returns true if the target wants GCC&rsquo;s default stack protect runtime support, otherwise return false.  The default implementation always returns true.
+<dd><p>Returns true if the target wants GCC&rsquo;s default stack protect runtime support,
+otherwise return false.  The default implementation always returns true.
 </p></dd></dl>
 
 <dl>
 <dt><a name="index-TARGET_005fSUPPORTS_005fSPLIT_005fSTACK"></a>Common Target Hook: <em>bool</em> <strong>TARGET_SUPPORTS_SPLIT_STACK</strong> <em>(bool <var>report</var>, struct gcc_options *<var>opts</var>)</em></dt>
-<dd><p>Whether this target supports splitting the stack when the options described in <var>opts</var> have been passed.  This is called after options have been parsed, so the target may reject splitting the stack in some configurations.  The default version of this hook returns false.  If <var>report</var> is true, this function may issue a warning or error; if <var>report</var> is false, it must simply return a value
+<dd><p>Whether this target supports splitting the stack when the options
+described in <var>opts</var> have been passed.  This is called
+after options have been parsed, so the target may reject splitting
+the stack in some configurations.  The default version of this hook
+returns false.  If <var>report</var> is true, this function may issue a warning
+or error; if <var>report</var> is false, it must simply return a value
 </p></dd></dl>
 
 <dl>
 <dt><a name="index-TARGET_005fGET_005fVALID_005fOPTION_005fVALUES"></a>Common Target Hook: <em>vec&lt;const char *&gt;</em> <strong>TARGET_GET_VALID_OPTION_VALUES</strong> <em>(int <var>option_code</var>, const char *<var>prefix</var>)</em></dt>
-<dd><p>The hook is used for options that have a non-trivial list of possible option values.  OPTION_CODE is option code of opt_code enum type.  PREFIX is used for bash completion and allows an implementation to return more specific completion based on the prefix.  All string values should be allocated from heap memory and consumers should release them.  The result will be pruned to cases with PREFIX if not NULL.
+<dd><p>The hook is used for options that have a non-trivial list of
+possible option values.  OPTION_CODE is option code of opt_code
+enum type.  PREFIX is used for bash completion and allows an implementation
+to return more specific completion based on the prefix.  All string values
+should be allocated from heap memory and consumers should release them.
+The result will be pruned to cases with PREFIX if not NULL.
 </p></dd></dl>
 
 <hr>

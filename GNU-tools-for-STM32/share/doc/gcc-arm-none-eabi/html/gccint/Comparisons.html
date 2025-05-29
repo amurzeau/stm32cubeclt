@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- Copyright (C) 1988-2021 Free Software Foundation, Inc.
+<!-- Copyright (C) 1988-2023 Free Software Foundation, Inc.
 
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
@@ -93,26 +93,17 @@ of the data being compared.  If the comparison operation is being tested
 <code>VOIDmode</code>.
 </p>
 <a name="index-condition-codes"></a>
-<p>There are two ways that comparison operations may be used.  The
-comparison operators may be used to compare the condition codes
-<code>(cc0)</code> against zero, as in <code>(eq (cc0) (const_int 0))</code>.  Such
-a construct actually refers to the result of the preceding instruction
-in which the condition codes were set.  The instruction setting the
-condition code must be adjacent to the instruction using the condition
-code; only <code>note</code> insns may separate them.
-</p>
-<p>Alternatively, a comparison operation may directly compare two data
+<p>A comparison operation compares two data
 objects.  The mode of the comparison is determined by the operands; they
 must both be valid for a common machine mode.  A comparison with both
 operands constant would be invalid as the machine mode could not be
 deduced from it, but such a comparison should never exist in RTL due to
 constant folding.
 </p>
-<p>In the example above, if <code>(cc0)</code> were last set to
-<code>(compare <var>x</var> <var>y</var>)</code>, the comparison operation is
-identical to <code>(eq <var>x</var> <var>y</var>)</code>.  Usually only one style
+<p>Usually only one style
 of comparisons is supported on a particular machine, but the combine
-pass will try to merge the operations to produce the <code>eq</code> shown
+pass will try to merge operations to produce code like
+<code>(eq <var>x</var> <var>y</var>)</code>,
 in case it exists in the context of the particular insn involved.
 </p>
 <p>Inequality comparisons come in two flavors, signed and unsigned.  Thus,

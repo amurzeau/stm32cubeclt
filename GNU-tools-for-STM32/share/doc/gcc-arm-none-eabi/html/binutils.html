@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- Copyright (C) 1991-2022 Free Software Foundation, Inc.
+<!-- Copyright (C) 1991-2024 Free Software Foundation, Inc.
 
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3
@@ -118,8 +118,8 @@ Next: <a href="#ar" accesskey="n" rel="next">ar</a>, Up: <a href="dir.html#Top" 
 <a name="index-version"></a>
 <p>This brief manual contains documentation for the <small>GNU</small> binary
 utilities
-(GNU Tools for STM32 11.3.rel1.20230519-1941)
-version 2.38:
+(GNU Tools for STM32 13.3.rel1.20240926-1715)
+version 2.42.0:
 </p>
 
 <p>This document is distributed under the terms of the GNU Free
@@ -147,7 +147,7 @@ in the section entitled &ldquo;GNU Free Documentation License&rdquo;.
 </td></tr>
 <tr><td align="left" valign="top">&bull; <a href="#c_002b_002bfilt">cxxfilt</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">MS-DOS name for c++filt
 </td></tr>
-<tr><td align="left" valign="top">&bull; <a href="#addr2line">addr2line</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Convert addresses to file and line
+<tr><td align="left" valign="top">&bull; <a href="#addr2line">addr2line</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Convert addresses or symbol+offset to file and line
 </td></tr>
 <tr><td align="left" valign="top">&bull; <a href="#windmc">windmc</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Generator for Windows message resources
 </td></tr>
@@ -558,6 +558,10 @@ operation &lsquo;<samp>r</samp>&rsquo; (replace).  In particular, the combinatio
 not allowed, since checking the timestamps would lose any speed
 advantage from the operation &lsquo;<samp>q</samp>&rsquo;.
 </p>
+<p>Note - if an archive has been created in a deterministic manner, eg
+via the use of the <samp>D</samp> modifier, then replacement will always
+happen and the <samp>u</samp> modifier will be ineffective.
+</p>
 </dd>
 <dt>&lsquo;<samp>U</samp>&rsquo;</dt>
 <dd><a name="index-deterministic-archives-1"></a>
@@ -861,10 +865,10 @@ Next: <a href="#objcopy" accesskey="n" rel="next">objcopy</a>, Previous: <a href
    [<samp>-s</samp>|<samp>--print-armap</samp>]
    [<samp>-t</samp> <var>radix</var>|<samp>--radix=</samp><var>radix</var>]
    [<samp>-u</samp>|<samp>--undefined-only</samp>]
-   [<samp>-U</samp> <var>method</var>] [<samp>--unicode=</samp><var>method</var>]
+   [<samp>-U</samp>|<samp>--defined-only</samp>]
    [<samp>-V</samp>|<samp>--version</samp>]
+   [<samp>-W</samp>|<samp>--no-weak</samp>]
    [<samp>-X 32_64</samp>]
-   [<samp>--defined-only</samp>]
    [<samp>--no-demangle</samp>]
    [<samp>--no-recurse-limit</samp>|<samp>--recurse-limit</samp>]]
    [<samp>--plugin</samp> <var>name</var>]
@@ -872,6 +876,7 @@ Next: <a href="#objcopy" accesskey="n" rel="next">objcopy</a>, Previous: <a href
    [<samp>--special-syms</samp>]
    [<samp>--synthetic</samp>]
    [<samp>--target=</samp><var>bfdname</var>]
+   [<samp>--unicode=</samp><var>method</var>]
    [<samp>--with-symbol-versions</samp>]
    [<samp>--without-symbol-versions</samp>]
    [<var>objfile</var>&hellip;]
@@ -958,7 +963,7 @@ symbols.
 </p>
 </dd>
 <dt><code>n</code></dt>
-<dd><p>The symbol is in the read-only data section.
+<dd><p>The symbol is in a non-data, non-code, non-debug read-only section.
 </p>
 </dd>
 <dt><code>p</code></dt>
@@ -1210,22 +1215,15 @@ contain definitions for which names.
 <dd><a name="index-external-symbols-1"></a>
 <a name="index-undefined-symbols"></a>
 <p>Display only undefined symbols (those external to each object file).
+By default both defined and undefined symbols are displayed.
 </p>
 </dd>
-<dt><code>-U <var>[d|i|l|e|x|h]</var></code></dt>
-<dt><code>--unicode=<var>[default|invalid|locale|escape|hex|highlight]</var></code></dt>
-<dd><p>Controls the display of UTF-8 encoded multibyte characters in strings.
-The default (<samp>--unicode=default</samp>) is to give them no special
-treatment.  The <samp>--unicode=locale</samp> option displays the sequence
-in the current locale, which may or may not support them.  The options
-<samp>--unicode=hex</samp> and <samp>--unicode=invalid</samp> display them as
-hex byte sequences enclosed by either angle brackets or curly braces.
-</p>
-<p>The <samp>--unicode=escape</samp> option displays them as escape sequences
-(<var>\uxxxx</var>) and the <samp>--unicode=highlight</samp> option displays
-them as escape sequences highlighted in red (if supported by the
-output device).  The colouring is intended to draw attention to the
-presence of unicode sequences where they might not be expected.
+<dt><code>-U</code></dt>
+<dt><code>--defined-only</code></dt>
+<dd><a name="index-external-symbols-2"></a>
+<a name="index-undefined-symbols-1"></a>
+<p>Display only defined symbols for each object file.
+By default both defined and undefined symbols are displayed.
 </p>
 </dd>
 <dt><code>-V</code></dt>
@@ -1238,12 +1236,6 @@ presence of unicode sequences where they might not be expected.
 <code>nm</code>.  It takes one parameter which must be the string
 <samp>32_64</samp>.  The default mode of AIX <code>nm</code> corresponds
 to <samp>-X 32</samp>, which is not supported by <small>GNU</small> <code>nm</code>.
-</p>
-</dd>
-<dt><code>--defined-only</code></dt>
-<dd><a name="index-external-symbols-2"></a>
-<a name="index-undefined-symbols-1"></a>
-<p>Display only defined symbols for each object file.
 </p>
 </dd>
 <dt><code>--plugin <var>name</var></code></dt>
@@ -1275,6 +1267,9 @@ with the next higher value.  If the <code>bsd</code> output format is used
 the size of the symbol is printed, rather than the value, and
 &lsquo;<samp>-S</samp>&rsquo; must be used in order both size and value to be printed.
 </p>
+<p>Note - this option does not work if <samp>--undefined-only</samp> has been
+enabled as undefined symbols have no size.
+</p>
 </dd>
 <dt><code>--special-syms</code></dt>
 <dd><p>Display symbols which have a target-specific special meaning.  These
@@ -1288,6 +1283,26 @@ used to mark transitions between ARM code, THUMB code and data.
 <dd><p>Include synthetic symbols in the output.  These are special symbols
 created by the linker for various purposes.  They are not shown by
 default since they are not part of the binary&rsquo;s original source code.
+</p>
+</dd>
+<dt><code>--unicode=<var>[default|invalid|locale|escape|hex|highlight]</var></code></dt>
+<dd><p>Controls the display of UTF-8 encoded multibyte characters in strings.
+The default (<samp>--unicode=default</samp>) is to give them no special
+treatment.  The <samp>--unicode=locale</samp> option displays the sequence
+in the current locale, which may or may not support them.  The options
+<samp>--unicode=hex</samp> and <samp>--unicode=invalid</samp> display them as
+hex byte sequences enclosed by either angle brackets or curly braces.
+</p>
+<p>The <samp>--unicode=escape</samp> option displays them as escape sequences
+(<var>\uxxxx</var>) and the <samp>--unicode=highlight</samp> option displays
+them as escape sequences highlighted in red (if supported by the
+output device).  The colouring is intended to draw attention to the
+presence of unicode sequences where they might not be expected.
+</p>
+</dd>
+<dt><code>-W</code></dt>
+<dt><code>--no-weak</code></dt>
+<dd><p>Do not display weak symbols.
 </p>
 </dd>
 <dt><code>--with-symbol-versions</code></dt>
@@ -1350,6 +1365,7 @@ Next: <a href="#objdump" accesskey="n" rel="next">objdump</a>, Previous: <a href
         [<samp>-R</samp> <var>sectionpattern</var>|<samp>--remove-section=</samp><var>sectionpattern</var>]
         [<samp>--keep-section=</samp><var>sectionpattern</var>]
         [<samp>--remove-relocations=</samp><var>sectionpattern</var>]
+        [<samp>--strip-section-headers</samp>]
         [<samp>-p</samp>|<samp>--preserve-dates</samp>]
         [<samp>-D</samp>|<samp>--enable-deterministic-archives</samp>]
         [<samp>-U</samp>|<samp>--disable-deterministic-archives</samp>]
@@ -1397,10 +1413,10 @@ Next: <a href="#objdump" accesskey="n" rel="next">objdump</a>, Previous: <a href
         [<samp>--pure</samp>]
         [<samp>--impure</samp>]
         [<samp>--file-alignment=</samp><var>num</var>]
-        [<samp>--heap=</samp><var>size</var>]
+        [<samp>--heap=</samp><var>reserve</var>[,<var>commit</var>]]
         [<samp>--image-base=</samp><var>address</var>]
         [<samp>--section-alignment=</samp><var>num</var>]
-        [<samp>--stack=</samp><var>size</var>]
+        [<samp>--stack=</samp><var>reserve</var>[,<var>commit</var>]]
         [<samp>--subsystem=</samp><var>which</var>:<var>major</var>.<var>minor</var>]
         [<samp>--compress-debug-sections</samp>]
         [<samp>--decompress-debug-sections</samp>]
@@ -1571,6 +1587,11 @@ For example:
 &rsquo;.text.foo&rsquo;.
 </p>
 </dd>
+<dt><code>--strip-section-headers</code></dt>
+<dd><p>Strip section header   This option is specific to ELF files.
+Implies <samp>--strip-all</samp> and <samp>--merge-notes</samp>.
+</p>
+</dd>
 <dt><code>-S</code></dt>
 <dt><code>--strip-all</code></dt>
 <dd><p>Do not copy relocation and symbol information from the source file.
@@ -1714,6 +1735,11 @@ commands.  If the input was &rsquo;12345678&rsquo; then the outputs would be
 <dd><p>Set the access and modification dates of the output file to be the same
 as those of the input file.
 </p>
+<p>This option also copies the date stored in a PE format file&rsquo;s header,
+unless the SOURCE_DATE_EPOCH environment variable is defined.  If it
+is defined then this variable will be used as the date stored in the
+header, interpreted as the number of seconds since the Unix epoch.
+</p>
 </dd>
 <dt><code>-D</code></dt>
 <dt><code>--enable-deterministic-archives</code></dt>
@@ -1847,13 +1873,14 @@ if the section pattern does not match any sections.
 <var>flags</var> argument is a comma separated string of flag names.  The
 recognized names are &lsquo;<samp>alloc</samp>&rsquo;, &lsquo;<samp>contents</samp>&rsquo;, &lsquo;<samp>load</samp>&rsquo;,
 &lsquo;<samp>noload</samp>&rsquo;, &lsquo;<samp>readonly</samp>&rsquo;, &lsquo;<samp>code</samp>&rsquo;, &lsquo;<samp>data</samp>&rsquo;, &lsquo;<samp>rom</samp>&rsquo;,
-&lsquo;<samp>exclude</samp>&rsquo;, &lsquo;<samp>share</samp>&rsquo;, and &lsquo;<samp>debug</samp>&rsquo;.  You can set the
-&lsquo;<samp>contents</samp>&rsquo; flag for a section which does not have contents, but it
-is not meaningful to clear the &lsquo;<samp>contents</samp>&rsquo; flag of a section which
-does have contents&ndash;just remove the section instead.  Not all flags are
-meaningful for all object file formats.  In particular the
-&lsquo;<samp>share</samp>&rsquo; flag is only meaningful for COFF format files and not for
-ELF format files.
+&lsquo;<samp>exclude</samp>&rsquo;, &lsquo;<samp>share</samp>&rsquo;, &lsquo;<samp>debug</samp>&rsquo;, and &lsquo;<samp>large</samp>&rsquo;.
+You can set the &lsquo;<samp>contents</samp>&rsquo; flag for a section which does not have
+contents, but it is not meaningful to clear the &lsquo;<samp>contents</samp>&rsquo; flag of a
+section which does have contents&ndash;just remove the section instead.  Not all
+flags are meaningful for all object file formats.  In particular the
+&lsquo;<samp>share</samp>&rsquo; flag is only meaningful for COFF format files and not for ELF
+format files.  The ELF x86-64 specific flag &lsquo;<samp>large</samp>&rsquo; corresponds to
+SHF_X86_64_LARGE.
 </p>
 </dd>
 <dt><code>--set-section-alignment <var>sectionpattern</var>=<var>align</var></code></dt>
@@ -1916,7 +1943,7 @@ changing the section&rsquo;s flags to <var>flags</var> in the process.  This has
 the advantage over using a linker script to perform the rename in that
 the output stays as an object file and does not become a linked
 executable.  This option accepts the same set of flags as the
-<samp>--sect-section-flags</samp> option.
+<samp>--set-section-flags</samp> option.
 </p>
 <p>This option is particularly helpful when the input format is binary,
 since this will always create a section called .data.  If for example,
@@ -2310,22 +2337,24 @@ ELF ABI.  Note - if compression would actually make a section
 <dt><code>--compress-debug-sections=zlib</code></dt>
 <dt><code>--compress-debug-sections=zlib-gnu</code></dt>
 <dt><code>--compress-debug-sections=zlib-gabi</code></dt>
+<dt><code>--compress-debug-sections=zstd</code></dt>
 <dd><p>For ELF files, these options control how DWARF debug sections are
 compressed.  <samp>--compress-debug-sections=none</samp> is equivalent
 to <samp>--decompress-debug-sections</samp>.
 <samp>--compress-debug-sections=zlib</samp> and
 <samp>--compress-debug-sections=zlib-gabi</samp> are equivalent to
 <samp>--compress-debug-sections</samp>.
-<samp>--compress-debug-sections=zlib-gnu</samp> compresses DWARF debug
-sections using zlib.  The debug sections are renamed to begin with
-&lsquo;<samp>.zdebug</samp>&rsquo; instead of &lsquo;<samp>.debug</samp>&rsquo;.  Note - if compression would
-actually make a section <em>larger</em>, then it is not compressed nor
-renamed.
+<samp>--compress-debug-sections=zlib-gnu</samp> compresses DWARF debug sections
+using the obsoleted zlib-gnu format.  The debug sections are renamed to begin
+with &lsquo;<samp>.zdebug</samp>&rsquo;.
+<samp>--compress-debug-sections=zstd</samp> compresses DWARF debug
+sections using zstd.  Note - if compression would actually make a section
+<em>larger</em>, then it is not compressed nor renamed.
 </p>
 </dd>
 <dt><code>--decompress-debug-sections</code></dt>
-<dd><p>Decompress DWARF debug sections using zlib.  The original section
-names of the compressed sections are restored.
+<dd><p>Decompress DWARF debug sections.  For a &lsquo;<samp>.zdebug</samp>&rsquo; section, the original
+name is restored.
 </p>
 </dd>
 <dt><code>--elf-stt-common=yes</code></dt>
@@ -2410,12 +2439,16 @@ Next: <a href="#ranlib" accesskey="n" rel="next">ranlib</a>, Previous: <a href="
         [<samp>-r</samp>|<samp>--reloc</samp>]
         [<samp>-R</samp>|<samp>--dynamic-reloc</samp>]
         [<samp>-s</samp>|<samp>--full-contents</samp>]
+        [<samp>-Z</samp>|<samp>--decompress</samp>]
         [<samp>-W[lLiaprmfFsoORtUuTgAck]</samp>|
          <samp>--dwarf</samp>[=rawline,=decodedline,=info,=abbrev,=pubnames,=aranges,=macro,=frames,=frames-interp,=str,=str-offsets,=loc,=Ranges,=pubtypes,=trace_info,=trace_abbrev,=trace_aranges,=gdb_index,=addr,=cu_index,=links]]
         [<samp>-WK</samp>|<samp>--dwarf=follow-links</samp>]
         [<samp>-WN</samp>|<samp>--dwarf=no-follow-links</samp>]
+        [<samp>-wD</samp>|<samp>--dwarf=use-debuginfod</samp>]
+        [<samp>-wE</samp>|<samp>--dwarf=do-not-use-debuginfod</samp>]
         [<samp>-L</samp>|<samp>--process-links</samp>]
         [<samp>--ctf=</samp><var>section</var>]
+        [<samp>--sframe=</samp><var>section</var>]
         [<samp>-G</samp>|<samp>--stabs</samp>]
         [<samp>-t</samp>|<samp>--syms</samp>]
         [<samp>-T</samp>|<samp>--dynamic-syms</samp>]
@@ -2427,6 +2460,7 @@ Next: <a href="#ranlib" accesskey="n" rel="next">ranlib</a>, Previous: <a href="
         [<samp>--prefix-addresses</samp>]
         [<samp>--[no-]show-raw-insn</samp>]
         [<samp>--adjust-vma=</samp><var>offset</var>]
+        [<samp>--show-all-symbols</samp>]
         [<samp>--dwarf-depth=<var>n</var></samp>]
         [<samp>--dwarf-start=<var>n</var></samp>]
         [<samp>--ctf-parent=</samp><var>section</var>]
@@ -2436,6 +2470,7 @@ Next: <a href="#ranlib" accesskey="n" rel="next">ranlib</a>, Previous: <a href="
         [<samp>--prefix-strip=</samp><var>level</var>]
         [<samp>--insn-width=</samp><var>width</var>]
         [<samp>--visualize-jumps[=color|=extended-color|=off]</samp>
+        [<samp>--disassembler-color=[off|terminal|on|extended]</samp>
         [<samp>-U</samp> <var>method</var>] [<samp>--unicode=</samp><var>method</var>]
         [<samp>-V</samp>|<samp>--version</samp>]
         [<samp>-H</samp>|<samp>--help</samp>]
@@ -2561,8 +2596,9 @@ used when disassembling.
 </dd>
 <dt><code>-D</code></dt>
 <dt><code>--disassemble-all</code></dt>
-<dd><p>Like <samp>-d</samp>, but disassemble the contents of all sections, not just
-those expected to contain instructions.
+<dd><p>Like <samp>-d</samp>, but disassemble the contents of all non-empty
+non-bss sections, not just those expected to contain instructions.
+<samp>-j</samp> may be used to select specific sections.
 </p>
 <p>This option also has a subtle effect on the disassembly of
 instructions in code sections.  When option <samp>-d</samp> is in effect
@@ -2666,7 +2702,8 @@ for specification with <samp>-b</samp> or <samp>-m</samp>.
 <dt><code>-j <var>name</var></code></dt>
 <dt><code>--section=<var>name</var></code></dt>
 <dd><a name="index-section-information"></a>
-<p>Display information only for section <var>name</var>.
+<p>Display information for section <var>name</var>.  This option may be
+specified multiple times.
 </p>
 </dd>
 <dt><code>-L</code></dt>
@@ -2693,6 +2730,12 @@ Only useful with <samp>-d</samp>, <samp>-D</samp>, or <samp>-r</samp>.
 can be useful when disassembling object files which do not describe
 architecture information, such as S-records.  You can list the available
 architectures with the <samp>-i</samp> option.
+</p>
+<p>For most architectures it is possible to supply an architecture
+name and a machine name, separated by a colon.  For example
+&lsquo;<samp>foo:bar</samp>&rsquo; would refer to the &lsquo;<samp>bar</samp>&rsquo; machine type in the
+&lsquo;<samp>foo</samp>&rsquo; architecture.  This can be helpful if objdump has been
+configured to support multiple architectures.
 </p>
 <p>If the target is an ARM architecture then this switch has an
 additional effect.  It restricts the disassembly to only those
@@ -2808,20 +2851,22 @@ rather than <code>li</code>.  All of the <samp>-m</samp> arguments for
 <samp>601</samp>, <samp>603</samp>, <samp>604</samp>, <samp>620</samp>, <samp>7400</samp>,
 <samp>7410</samp>, <samp>7450</samp>, <samp>7455</samp>, <samp>750cl</samp>,
 <samp>821</samp>, <samp>850</samp>, <samp>860</samp>, <samp>a2</samp>, <samp>booke</samp>,
-<samp>booke32</samp>, <samp>cell</samp>, <samp>com</samp>, <samp>e200z4</samp>,
+<samp>booke32</samp>, <samp>cell</samp>, <samp>com</samp>, <samp>e200z2</samp>, <samp>e200z4</samp>,
 <samp>e300</samp>, <samp>e500</samp>, <samp>e500mc</samp>, <samp>e500mc64</samp>,
 <samp>e500x2</samp>, <samp>e5500</samp>, <samp>e6500</samp>, <samp>efs</samp>,
 <samp>power4</samp>, <samp>power5</samp>, <samp>power6</samp>, <samp>power7</samp>,
-<samp>power8</samp>, <samp>power9</samp>, <samp>power10</samp>, <samp>ppc</samp>,
-<samp>ppc32</samp>, <samp>ppc64</samp>, <samp>ppc64bridge</samp>, <samp>ppcps</samp>,
-<samp>pwr</samp>, <samp>pwr2</samp>, <samp>pwr4</samp>, <samp>pwr5</samp>, <samp>pwr5x</samp>,
-<samp>pwr6</samp>, <samp>pwr7</samp>, <samp>pwr8</samp>, <samp>pwr9</samp>, <samp>pwr10</samp>,
-<samp>pwrx</samp>, <samp>titan</samp>, and <samp>vle</samp>.
+<samp>power8</samp>, <samp>power9</samp>, <samp>power10</samp>, <samp>power11</samp>,
+<samp>ppc</samp>, <samp>ppc32</samp>, <samp>ppc64</samp>, <samp>ppc64bridge</samp>,
+<samp>ppcps</samp>, <samp>pwr</samp>, <samp>pwr2</samp>, <samp>pwr4</samp>, <samp>pwr5</samp>,
+<samp>pwr5x</samp>, <samp>pwr6</samp>, <samp>pwr7</samp>, <samp>pwr8</samp>, <samp>pwr9</samp>,
+<samp>pwr10</samp>, <samp>pwr11</samp>, <samp>pwrx</samp>, <samp>titan</samp>, <samp>vle</samp>,
+and <samp>future</samp>.
 <samp>32</samp> and <samp>64</samp> modify the default or a prior CPU
 selection, disabling and enabling 64-bit insns respectively.  In
-addition, <samp>altivec</samp>, <samp>any</samp>, <samp>htm</samp>, <samp>vsx</samp>,
-and <samp>spe</samp> add capabilities to a previous <em>or later</em> CPU
-selection.  <samp>any</samp> will disassemble any opcode known to
+addition, <samp>altivec</samp>, <samp>any</samp>, <samp>lsp</samp>, <samp>htm</samp>,
+<samp>vsx</samp>, <samp>spe</samp> and  <samp>spe2</samp> add capabilities to a
+previous <em>or later</em> CPU selection.
+<samp>any</samp> will disassemble any opcode known to
 binutils, but in cases where an opcode has two different meanings or
 different arguments, you may not see the disassembly you expect.
 If you disassemble without giving a CPU selection, a default will be
@@ -2931,6 +2976,12 @@ format (the lists of options is displayed with the help).
 <dt><code>ldinfo</code></dt>
 </dl>
 
+<p>For PE, the available options are:
+</p><dl compact="compact">
+<dt><code>header</code></dt>
+<dt><code>sections</code></dt>
+</dl>
+
 <p>Not all object formats support this option.  In particular the ELF
 format does not use it.
 </p>
@@ -2957,8 +3008,12 @@ disassembly.
 <dt><code>--full-contents</code></dt>
 <dd><a name="index-sections_002c-full-contents"></a>
 <a name="index-object-file-sections"></a>
-<p>Display the full contents of any sections requested.  By default all
-non-empty sections are displayed.
+<p>Display the full contents of sections, often used in combination with
+<samp>-j</samp> to request specific sections.  By default all non-empty
+non-bss sections are displayed.  By default any compressed section
+will be displayed in its compressed form.  In order to see the
+contents in a decompressed form add the <samp>-Z</samp> option to the
+command line.
 </p>
 </dd>
 <dt><code>-S</code></dt>
@@ -2967,6 +3022,11 @@ non-empty sections are displayed.
 <a name="index-disassembly_002c-with-source"></a>
 <p>Display source code intermixed with disassembly, if possible.  Implies
 <samp>-d</samp>.
+</p>
+</dd>
+<dt><code>--show-all-symbols</code></dt>
+<dd><p>When disassembling, show all the symbols that match a given address,
+not just the first one.
 </p>
 </dd>
 <dt><code>--source-comment[=<var>txt</var>]</code></dt>
@@ -3018,6 +3078,28 @@ colors, but these might not work on all terminals.
 <p>If it is necessary to disable the <samp>visualize-jumps</samp> option
 after it has previously been enabled then use
 <samp>visualize-jumps=off</samp>.
+</p>
+</dd>
+<dt><code>--disassembler-color=off</code></dt>
+<dt><code>--disassembler-color=terminal</code></dt>
+<dt><code>--disassembler-color=on|color|colour</code></dt>
+<dt><code>--disassembler-color=extened|extended-color|extened-colour</code></dt>
+<dd><p>Enables or disables the use of colored syntax highlighting in
+disassembly output.  The default behaviour is determined via a
+configure time option.  Note, not all architectures support colored
+syntax highlighting, and depending upon the terminal used, colored
+output may not actually be legible.
+</p>
+<p>The <samp>on</samp> argument adds colors using simple terminal colors.
+</p>
+<p>The <samp>terminal</samp> argument does the same, but only if the output
+device is a terminal.
+</p>
+<p>The <samp>extended-color</samp> argument is similar to the <samp>on</samp>
+argument, but it uses 8-bit colors.  These may not work on all
+terminals.
+</p>
+<p>The <samp>off</samp> argument disables colored disassembly.
 </p>
 </dd>
 <dt><code>-W[lLiaprmfFsoORtUuTgAckK]</code></dt>
@@ -3097,10 +3179,29 @@ chosen when configuring the binutils via the
 <samp>--enable-follow-debug-links=no</samp> options.  If these are not
 used then the default is to enable the following of debug links.
 </p>
+<p>Note - if support for the debuginfod protocol was enabled when the
+binutils were built then this option will also include an attempt to
+contact any debuginfod servers mentioned in the <var>DEBUGINFOD_URLS</var>
+environment variable.  This could take some time to resolve.  This
+behaviour can be disabled via the <samp>=do-not-use-debuginfod</samp> debug
+option.
+</p>
 </dd>
 <dt><code>N</code></dt>
 <dt><code>=no-follow-links</code></dt>
 <dd><p>Disables the following of links to separate debug info files.
+</p>
+</dd>
+<dt><code>D</code></dt>
+<dt><code>=use-debuginfod</code></dt>
+<dd><p>Enables contacting debuginfod servers if there is a need to follow
+debug links.  This is the default behaviour.
+</p>
+</dd>
+<dt><code>E</code></dt>
+<dt><code>=do-not-use-debuginfod</code></dt>
+<dd><p>Disables contacting debuginfod servers when there is a need to follow
+debug links.
 </p>
 </dd>
 <dt><code>l</code></dt>
@@ -3231,6 +3332,16 @@ function at link time.  When looking at CTF archives that have been
 created by a linker that uses the name changer to rename the parent
 archive member, <samp>--ctf-parent</samp> can be used to specify the name
 used for the parent.
+</p>
+
+</dd>
+<dt><code>--sframe[=<var>section</var>]</code></dt>
+<dd><a name="index-SFrame"></a>
+
+<p>Display the contents of the specified SFrame section.
+</p>
+<p>By default, display the name of the section named <var>.sframe</var>, which is the
+name emitted by <code>ld</code>.
 </p>
 </dd>
 <dt><code>-G</code></dt>
@@ -3417,6 +3528,16 @@ Also do not truncate symbol names when they are displayed.
 <dd><p>Normally the disassembly output will skip blocks of zeroes.  This
 option directs the disassembler to disassemble those blocks, just like
 any other data.
+</p>
+</dd>
+<dt><code>-Z</code></dt>
+<dt><code>--decompress</code></dt>
+<dd><a name="index-sections_002c-full-contents-1"></a>
+<a name="index-object-file-sections-1"></a>
+<a name="index-compressed-section-contents"></a>
+<p>The <samp>-Z</samp> option is meant to be used in conunction with the
+<samp>-s</samp> option.  It instructs <code>objdump</code> to decompress any
+compressed sections before displaying their contents.
 </p></dd>
 </dl>
 
@@ -3523,6 +3644,7 @@ Next: <a href="#strings" accesskey="n" rel="next">strings</a>, Previous: <a href
      [<samp>--common</samp>]
      [<samp>-t</samp>|<samp>--totals</samp>]
      [<samp>--target=</samp><var>bfdname</var>] [<samp>-V</samp>|<samp>--version</samp>]
+     [<samp>-f</samp>]
      [<var>objfile</var>&hellip;]
 </pre></div>
 
@@ -3602,6 +3724,9 @@ Total         388688
 
 </dd>
 <dt><code>--help</code></dt>
+<dt><code>-h</code></dt>
+<dt><code>-H</code></dt>
+<dt><code>-?</code></dt>
 <dd><p>Show a summary of acceptable arguments and options.
 </p>
 </dd>
@@ -3638,10 +3763,17 @@ automatically recognize many formats.
 See <a href="#Target-Selection">Target Selection</a>, for more information.
 </p>
 </dd>
+<dt><code>-v</code></dt>
 <dt><code>-V</code></dt>
 <dt><code>--version</code></dt>
 <dd><p>Display the version number of <code>size</code>.
-</p></dd>
+</p>
+</dd>
+<dt><code>-f</code></dt>
+<dd><p>Ignored.  This option is used by other versions of the <code>size</code>
+program, but it is not supported by the GNU Binutils version.
+</p>
+</dd>
 </dl>
 
 
@@ -3759,7 +3891,7 @@ octal, &lsquo;<samp>x</samp>&rsquo; for hexadecimal, or &lsquo;<samp>d</samp>&rs
 <dt><code>--encoding=<var>encoding</var></code></dt>
 <dd><p>Select the character encoding of the strings that are to be found.
 Possible values for <var>encoding</var> are: &lsquo;<samp>s</samp>&rsquo; = single-7-bit-byte
-characters (ASCII, ISO 8859, etc., default), &lsquo;<samp>S</samp>&rsquo; =
+characters (default), &lsquo;<samp>S</samp>&rsquo; =
 single-8-bit-byte characters, &lsquo;<samp>b</samp>&rsquo; = 16-bit bigendian, &lsquo;<samp>l</samp>&rsquo; =
 16-bit littleendian, &lsquo;<samp>B</samp>&rsquo; = 32-bit bigendian, &lsquo;<samp>L</samp>&rsquo; = 32-bit
 littleendian.  Useful for finding wide character strings. (&lsquo;<samp>l</samp>&rsquo;
@@ -3851,6 +3983,7 @@ Next: <a href="#c_002b_002bfilt" accesskey="n" rel="next">c++filt</a>, Previous:
       [<samp>-R</samp> <var>sectionname</var> |<samp>--remove-section=</samp><var>sectionname</var>]
       [<samp>--keep-section=</samp><var>sectionpattern</var>]
       [<samp>--remove-relocations=</samp><var>sectionpattern</var>]
+      [<samp>--strip-section-headers</samp>]
       [<samp>-o</samp> <var>file</var>] [<samp>-p</samp>|<samp>--preserve-dates</samp>]
       [<samp>-D</samp>|<samp>--enable-deterministic-archives</samp>]
       [<samp>-U</samp>|<samp>--disable-deterministic-archives</samp>]
@@ -3955,6 +4088,11 @@ For example:
 <p>will remove all relocations for sections matching the pattern
 &rsquo;.text.*&rsquo;, but will not remove relocations for the section
 &rsquo;.text.foo&rsquo;.
+</p>
+</dd>
+<dt><code>--strip-section-headers</code></dt>
+<dd><p>Strip section headers.  This option is specific to ELF files.  Implies
+<samp>--strip-all</samp> and <samp>--merge-notes</samp>.
 </p>
 </dd>
 <dt><code>-s</code></dt>
@@ -4389,8 +4527,8 @@ Next: <a href="#windmc" accesskey="n" rel="next">windmc</a>, Previous: <a href="
 </pre></div>
 
 
-<p><code>addr2line</code> translates addresses into file names and line numbers.
-Given an address in an executable or an offset in a section of a relocatable
+<p><code>addr2line</code> translates addresses or symbol+offset into file names and line numbers.
+Given an address or symbol+offset in an executable or an offset in a section of a relocatable
 object, it uses the debugging information to figure out which file name and
 line number are associated with it.
 </p>
@@ -4400,11 +4538,11 @@ object to use is specified with the <samp>-j</samp> option.
 </p>
 <p><code>addr2line</code> has two modes of operation.
 </p>
-<p>In the first, hexadecimal addresses are specified on the command line,
+<p>In the first, hexadecimal addresses or symbol+offset are specified on the command line,
 and <code>addr2line</code> displays the file name and line number for each
 address.
 </p>
-<p>In the second, <code>addr2line</code> reads hexadecimal addresses from
+<p>In the second, <code>addr2line</code> reads hexadecimal addresses or symbol+offset from
 standard input, and prints the file name and line number for each
 address on standard output.  In this mode, <code>addr2line</code> may be used
 in a pipe to convert dynamically chosen addresses.
@@ -4440,6 +4578,10 @@ by the text &lsquo;<samp>(inlined by)</samp>&rsquo;.
 <p>If the file name or function name can not be determined,
 <code>addr2line</code> will print two question marks in their place.  If the
 line number can not be determined, <code>addr2line</code> will print 0.
+</p>
+<p>When symbol+offset is used, +offset is optional, except when the symbol
+is ambigious with a hex number. The resolved symbols can be mangled
+or unmangled, except unmangled symbols with + are not allowed.
 </p>
 
 
@@ -4982,6 +5124,7 @@ support DLLs.
         [<samp>-v</samp>|<samp>--verbose</samp>]
         [<samp>-h</samp>|<samp>--help</samp>] [<samp>-V</samp>|<samp>--version</samp>]
         [<samp>--no-leading-underscore</samp>] [<samp>--leading-underscore</samp>]
+        [<samp>--deterministic-libraries</samp>] [<samp>--non-deterministic-libraries</samp>]
         [object-file &hellip;]
 </pre></div>
 
@@ -5100,6 +5243,15 @@ exports file generated by dlltool.
 <dt><code>-y <var>filename</var></code></dt>
 <dt><code>--output-delaylib <var>filename</var></code></dt>
 <dd><p>Specifies the name of the delay-import library file to be created by dlltool.
+</p>
+</dd>
+<dt><code>--deterministic-libraries</code></dt>
+<dt><code>--non-deterministic-libraries</code></dt>
+<dd><p>When creating output libraries in response to either the
+<samp>--output-lib</samp> or <samp>--output-delaylib</samp> options either use
+the value of zero for any timestamps, user ids and group ids created
+(<samp>--deterministic-libraries</samp>) or the actual timestamps, user
+ids and group ids (<samp>--non-deterministic-libraries</samp>).
 </p>
 </dd>
 <dt><code>--export-all-symbols</code></dt>
@@ -5402,6 +5554,7 @@ Next: <a href="#elfedit" accesskey="n" rel="next">elfedit</a>, Previous: <a href
         [<samp>--quiet</samp>]
         [<samp>--recurse-limit</samp>|<samp>--no-recurse-limit</samp>]
         [<samp>-U</samp> <var>method</var>|<samp>--unicode=</samp><var>method</var>]
+        [<samp>-X</samp>|<samp>--extra-sym-info</samp>|<samp>--no-extra-sym-info</samp>]
         [<samp>-n</samp>|<samp>--notes</samp>]
         [<samp>-r</samp>|<samp>--relocs</samp>]
         [<samp>-u</samp>|<samp>--unwind</samp>]
@@ -5419,6 +5572,8 @@ Next: <a href="#elfedit" accesskey="n" rel="next">elfedit</a>, Previous: <a href
          <samp>--debug-dump</samp>[=rawline,=decodedline,=info,=abbrev,=pubnames,=aranges,=macro,=frames,=frames-interp,=str,=str-offsets,=loc,=Ranges,=pubtypes,=trace_info,=trace_abbrev,=trace_aranges,=gdb_index,=addr,=cu_index,=links]]
         [<samp>-wK</samp>|<samp>--debug-dump=follow-links</samp>]
         [<samp>-wN</samp>|<samp>--debug-dump=no-follow-links</samp>]
+        [<samp>-wD</samp>|<samp>--debug-dump=use-debuginfod</samp>]
+        [<samp>-wE</samp>|<samp>--debug-dump=do-not-use-debuginfod</samp>]
         [<samp>-P</samp>|<samp>--process-links</samp>]
         [<samp>--dwarf-depth=<var>n</var></samp>]
         [<samp>--dwarf-start=<var>n</var></samp>]
@@ -5426,6 +5581,7 @@ Next: <a href="#elfedit" accesskey="n" rel="next">elfedit</a>, Previous: <a href
         [<samp>--ctf-parent=</samp><var>section</var>]
         [<samp>--ctf-symbols=</samp><var>section</var>]
         [<samp>--ctf-strings=</samp><var>section</var>]
+        [<samp>--sframe=</samp><var>section</var>]
         [<samp>-I</samp>|<samp>--histogram</samp>]
         [<samp>-v</samp>|<samp>--version</samp>]
         [<samp>-W</samp>|<samp>--wide</samp>]
@@ -5599,6 +5755,22 @@ unicode escape sequences but it will also highlighted them in red,
 assuming that colouring is supported by the output device.  The
 colouring is intended to draw attention to the presence of unicode
 sequences when they might not be expected.
+</p>
+</dd>
+<dt><code>-X</code></dt>
+<dt><code>--extra-sym-info</code></dt>
+<dd><p>When displaying details of symbols, include extra information not
+normally presented.  Currently this just adds the name of the section
+referenced by the symbol&rsquo;s index field, if there is one.  In the
+future more information may be displayed when this option is enabled.
+</p>
+<p>Enabling this option effectively enables the <samp>--wide</samp> option as
+well, at least when displaying symbol information.
+</p>
+</dd>
+<dt><code>--no-extra-sym-info</code></dt>
+<dd><p>Disables the effect of the <samp>--extra-sym-info</samp> option.  This
+is the default.
 </p>
 </dd>
 <dt><code>-e</code></dt>
@@ -5784,10 +5956,29 @@ chosen when configuring the binutils via the
 <samp>--enable-follow-debug-links=no</samp> options.  If these are not
 used then the default is to enable the following of debug links.
 </p>
+<p>Note - if support for the debuginfod protocol was enabled when the
+binutils were built then this option will also include an attempt to
+contact any debuginfod servers mentioned in the <var>DEBUGINFOD_URLS</var>
+environment variable.  This could take some time to resolve.  This
+behaviour can be disabled via the <samp>=do-not-use-debuginfod</samp> debug
+option.
+</p>
 </dd>
 <dt><code>N</code></dt>
 <dt><code>=no-follow-links</code></dt>
 <dd><p>Disables the following of links to separate debug info files.
+</p>
+</dd>
+<dt><code>D</code></dt>
+<dt><code>=use-debuginfod</code></dt>
+<dd><p>Enables contacting debuginfod servers if there is a need to follow
+debug links.  This is the default behaviour.
+</p>
+</dd>
+<dt><code>E</code></dt>
+<dt><code>=do-not-use-debuginfod</code></dt>
+<dd><p>Disables contacting debuginfod servers when there is a need to follow
+debug links.
 </p>
 </dd>
 <dt><code>l</code></dt>
@@ -6308,7 +6499,8 @@ Next: <a href="#Reporting-Bugs" accesskey="n" rel="next">Reporting Bugs</a>, Pre
 <a name="index-separate-debug-files"></a>
 
 <p>debuginfod is a web service that indexes ELF/DWARF debugging resources
-by build-id and serves them over HTTP.
+by build-id and serves them over HTTP.  For more information see:
+<em>https://sourceware.org/elfutils/Debuginfod.html</em>
 </p>
 <p>Binutils can be built with the debuginfod client library
 <code>libdebuginfod</code> using the <samp>--with-debuginfod</samp> configure option.
@@ -6319,6 +6511,10 @@ separate debug files when the files are otherwise not found.
 </p>
 <p>debuginfod is packaged with elfutils, starting with version 0.178.
 You can get the latest version from &lsquo;https://sourceware.org/elfutils/&rsquo;.
+</p>
+<p>The DWARF info dumping tools (<code>readelf</code> and <code>objdump</code>)
+have options to control when they should access the debuginfod
+servers.  By default this access is enabled.
 </p>
 <hr>
 <a name="Reporting-Bugs"></a>
@@ -7112,6 +7308,7 @@ Previous: <a href="#GNU-Free-Documentation-License" accesskey="p" rel="prev">GNU
 <tr><td></td><td valign="top"><a href="#index-Compact-Type-Format">Compact Type Format</a>:</td><td>&nbsp;</td><td valign="top"><a href="#objdump">objdump</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-Compact-Type-Format-1">Compact Type Format</a>:</td><td>&nbsp;</td><td valign="top"><a href="#readelf">readelf</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-compatibility_002c-ar">compatibility, <code>ar</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#ar">ar</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-compressed-section-contents">compressed section contents</a>:</td><td>&nbsp;</td><td valign="top"><a href="#objdump">objdump</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-contents-of-archive">contents of archive</a>:</td><td>&nbsp;</td><td valign="top"><a href="#ar-cmdline">ar cmdline</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-crash">crash</a>:</td><td>&nbsp;</td><td valign="top"><a href="#Bug-Criteria">Bug Criteria</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-creating-archives">creating archives</a>:</td><td>&nbsp;</td><td valign="top"><a href="#ar-cmdline">ar cmdline</a></td></tr>
@@ -7217,6 +7414,7 @@ Previous: <a href="#GNU-Free-Documentation-License" accesskey="p" rel="prev">GNU
 <tr><td></td><td valign="top"><a href="#index-object-file-information">object file information</a>:</td><td>&nbsp;</td><td valign="top"><a href="#objdump">objdump</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-object-file-offsets">object file offsets</a>:</td><td>&nbsp;</td><td valign="top"><a href="#objdump">objdump</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-object-file-sections">object file sections</a>:</td><td>&nbsp;</td><td valign="top"><a href="#objdump">objdump</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-object-file-sections-1">object file sections</a>:</td><td>&nbsp;</td><td valign="top"><a href="#objdump">objdump</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-object-formats-available">object formats available</a>:</td><td>&nbsp;</td><td valign="top"><a href="#objdump">objdump</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-offsets-of-files">offsets of files</a>:</td><td>&nbsp;</td><td valign="top"><a href="#ar-cmdline">ar cmdline</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-operations-on-archive">operations on archive</a>:</td><td>&nbsp;</td><td valign="top"><a href="#ar-cmdline">ar cmdline</a></td></tr>
@@ -7250,7 +7448,9 @@ Previous: <a href="#GNU-Free-Documentation-License" accesskey="p" rel="prev">GNU
 <tr><td></td><td valign="top"><a href="#index-section-information">section information</a>:</td><td>&nbsp;</td><td valign="top"><a href="#objdump">objdump</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-section-sizes">section sizes</a>:</td><td>&nbsp;</td><td valign="top"><a href="#size">size</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-sections_002c-full-contents">sections, full contents</a>:</td><td>&nbsp;</td><td valign="top"><a href="#objdump">objdump</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-sections_002c-full-contents-1">sections, full contents</a>:</td><td>&nbsp;</td><td valign="top"><a href="#objdump">objdump</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-separate-debug-files">separate debug files</a>:</td><td>&nbsp;</td><td valign="top"><a href="#debuginfod">debuginfod</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-SFrame">SFrame</a>:</td><td>&nbsp;</td><td valign="top"><a href="#objdump">objdump</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-size">size</a>:</td><td>&nbsp;</td><td valign="top"><a href="#size">size</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-size-display-format"><code>size</code> display format</a>:</td><td>&nbsp;</td><td valign="top"><a href="#size">size</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-size-number-format"><code>size</code> number format</a>:</td><td>&nbsp;</td><td valign="top"><a href="#size">size</a></td></tr>

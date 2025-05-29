@@ -1,6 +1,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- Copyright (C) 1988-2021 Free Software Foundation, Inc.
+<!-- This file documents the use of the GNU compilers.
+
+Copyright (C) 1988-2023 Free Software Foundation, Inc.
 
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
@@ -30,7 +32,7 @@ You have freedom to copy and modify this GNU Manual, like GNU
 <meta name="distribution" content="global">
 <meta name="Generator" content="makeinfo">
 <link href="index.html#Top" rel="start" title="Top">
-<link href="Option-Index.html#Option-Index" rel="index" title="Option Index">
+<link href="Indices.html#Indices" rel="index" title="Indices">
 <link href="index.html#SEC_Contents" rel="contents" title="Table of Contents">
 <link href="Constraints.html#Constraints" rel="up" title="Constraints">
 <link href="Asm-Labels.html#Asm-Labels" rel="next" title="Asm Labels">
@@ -66,11 +68,11 @@ ul.no-bullet {list-style: none}
 
 </head>
 
-<body lang="en">
+<body lang="en_US">
 <a name="Machine-Constraints"></a>
 <div class="header">
 <p>
-Previous: <a href="Modifiers.html#Modifiers" accesskey="p" rel="prev">Modifiers</a>, Up: <a href="Constraints.html#Constraints" accesskey="u" rel="up">Constraints</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Option-Index.html#Option-Index" title="Index" rel="index">Index</a>]</p>
+Previous: <a href="Modifiers.html#Modifiers" accesskey="p" rel="prev">Modifiers</a>, Up: <a href="Constraints.html#Constraints" accesskey="u" rel="up">Constraints</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Indices.html#Indices" title="Index" rel="index">Index</a>]</p>
 </div>
 <hr>
 <a name="Constraints-for-Particular-Machines"></a>
@@ -695,50 +697,6 @@ use only with accumulator A1.
 </dl>
 
 </dd>
-<dt><em>CR16 Architecture&mdash;<samp>config/cr16/cr16.h</samp></em></dt>
-<dd><dl compact="compact">
-<dt><code>b</code></dt>
-<dd><p>Registers from r0 to r14 (registers without stack pointer)
-</p>
-</dd>
-<dt><code>t</code></dt>
-<dd><p>Register from r0 to r11 (all 16-bit registers)
-</p>
-</dd>
-<dt><code>p</code></dt>
-<dd><p>Register from r12 to r15 (all 32-bit registers)
-</p>
-</dd>
-<dt><code>I</code></dt>
-<dd><p>Signed constant that fits in 4 bits
-</p>
-</dd>
-<dt><code>J</code></dt>
-<dd><p>Signed constant that fits in 5 bits
-</p>
-</dd>
-<dt><code>K</code></dt>
-<dd><p>Signed constant that fits in 6 bits
-</p>
-</dd>
-<dt><code>L</code></dt>
-<dd><p>Unsigned constant that fits in 4 bits
-</p>
-</dd>
-<dt><code>M</code></dt>
-<dd><p>Signed constant that fits in 32 bits
-</p>
-</dd>
-<dt><code>N</code></dt>
-<dd><p>Check for 64 bits wide constants for add/sub instructions
-</p>
-</dd>
-<dt><code>G</code></dt>
-<dd><p>Floating point constant that is legal for store immediate
-</p></dd>
-</dl>
-
-</dd>
 <dt><em>C-SKY&mdash;<samp>config/csky/constraints.md</samp></em></dt>
 <dd><dl compact="compact">
 <dt><code>a</code></dt>
@@ -771,6 +729,16 @@ use only with accumulator A1.
 </dd>
 <dt><code>z</code></dt>
 <dd><p>Stack pointer register (SP).
+</p>
+</dd>
+<dt><code>Q</code></dt>
+<dd><p>A memory address which uses a base register with a short offset
+or with a index register with its scale.
+</p>
+</dd>
+<dt><code>W</code></dt>
+<dd><p>A memory address which uses a base register with a index register
+with its scale.
 </p></dd>
 </dl>
 
@@ -825,7 +793,7 @@ in effect.
 </p>
 </dd>
 <dt><code>Rsc</code></dt>
-<dd><p>The the register class of registers that can be used to hold a
+<dd><p>The register class of registers that can be used to hold a
 sibcall call address.  I.e., a caller-saved register.
 </p>
 </dd>
@@ -1214,7 +1182,7 @@ or &lsquo;<samp>&gt;</samp>&rsquo;.
 </dl>
 
 </dd>
-<dt><em>M32C&mdash;<samp>config/m32c/m32c.c</samp></em></dt>
+<dt><em>M32C&mdash;<samp>config/m32c/m32c.cc</samp></em></dt>
 <dd><dl compact="compact">
 <dt><code>Rsp</code></dt>
 <dt><code>Rfb</code></dt>
@@ -1379,6 +1347,41 @@ Used to match function return values.
 </dd>
 <dt><code>S1</code></dt>
 <dd><p>$r1h
+</p></dd>
+</dl>
+
+</dd>
+<dt><em>LoongArch&mdash;<samp>config/loongarch/constraints.md</samp></em></dt>
+<dd><dl compact="compact">
+<dt><code>f</code></dt>
+<dd><p>A floating-point register (if available).
+</p></dd>
+<dt><code>k</code></dt>
+<dd><p>A memory operand whose address is formed by a base register and
+(optionally scaled) index register.
+</p></dd>
+<dt><code>l</code></dt>
+<dd><p>A signed 16-bit constant.
+</p></dd>
+<dt><code>m</code></dt>
+<dd><p>A memory operand whose address is formed by a base register and offset
+that is suitable for use in instructions with the same addressing mode
+as <code>st.w</code> and <code>ld.w</code>.
+</p></dd>
+<dt><code>I</code></dt>
+<dd><p>A signed 12-bit constant (for arithmetic instructions).
+</p></dd>
+<dt><code>K</code></dt>
+<dd><p>An unsigned 12-bit constant (for logic instructions).
+</p></dd>
+<dt><code>ZB</code></dt>
+<dd><p>An address that is held in a general-purpose register.
+The offset is zero.
+</p></dd>
+<dt><code>ZC</code></dt>
+<dd><p>A memory operand whose address is formed by a base register and offset
+that is suitable for use in instructions with the same addressing mode
+as <code>ll.w</code> and <code>sc.w</code>.
 </p></dd>
 </dl>
 
@@ -2046,6 +2049,16 @@ for <code>SImode</code> constants).
 <dt><code>eI</code></dt>
 <dd><p>A signed 34-bit integer constant if prefixed instructions are supported.
 </p>
+</dd>
+<dt><code>eP</code></dt>
+<dd><p>A scalar floating point constant or a vector constant that can be
+loaded to a VSX register with one prefixed instruction.
+</p>
+</dd>
+<dt><code>eQ</code></dt>
+<dd><p>An IEEE 128-bit constant that can be loaded into a VSX register with
+the <code>lxvkq</code> instruction.
+</p>
 
 </dd>
 <dt><code>m</code></dt>
@@ -2267,6 +2280,22 @@ corresponding load or store instruction.  For example:
 </dd>
 <dt><code>A</code></dt>
 <dd><p>An address that is held in a general-purpose register.
+</p>
+</dd>
+<dt><code>S</code></dt>
+<dd><p>A constraint that matches an absolute symbolic address.
+</p>
+</dd>
+<dt><code>vr</code></dt>
+<dd><p>A vector register (if available)..
+</p>
+</dd>
+<dt><code>vd</code></dt>
+<dd><p>A vector register, excluding v0 (if available).
+</p>
+</dd>
+<dt><code>vm</code></dt>
+<dd><p>A vector register, only v0 (if available).
 </p>
 </dd>
 </dl>
@@ -2614,189 +2643,6 @@ plus A0 if not C64X or higher).
 </dd>
 <dt><code>Z</code></dt>
 <dd><p>Register B14 (aka DP).
-</p>
-</dd>
-</dl>
-
-</dd>
-<dt><em>TILE-Gx&mdash;<samp>config/tilegx/constraints.md</samp></em></dt>
-<dd><dl compact="compact">
-<dt><code>R00</code></dt>
-<dt><code>R01</code></dt>
-<dt><code>R02</code></dt>
-<dt><code>R03</code></dt>
-<dt><code>R04</code></dt>
-<dt><code>R05</code></dt>
-<dt><code>R06</code></dt>
-<dt><code>R07</code></dt>
-<dt><code>R08</code></dt>
-<dt><code>R09</code></dt>
-<dt><code>R10</code></dt>
-<dd><p>Each of these represents a register constraint for an individual
-register, from r0 to r10.
-</p>
-</dd>
-<dt><code>I</code></dt>
-<dd><p>Signed 8-bit integer constant.
-</p>
-</dd>
-<dt><code>J</code></dt>
-<dd><p>Signed 16-bit integer constant.
-</p>
-</dd>
-<dt><code>K</code></dt>
-<dd><p>Unsigned 16-bit integer constant.
-</p>
-</dd>
-<dt><code>L</code></dt>
-<dd><p>Integer constant that fits in one signed byte when incremented by one
-(-129 &hellip; 126).
-</p>
-</dd>
-<dt><code>m</code></dt>
-<dd><p>Memory operand.  If used together with &lsquo;<samp>&lt;</samp>&rsquo; or &lsquo;<samp>&gt;</samp>&rsquo;, the
-operand can have postincrement which requires printing with &lsquo;<samp>%In</samp>&rsquo;
-and &lsquo;<samp>%in</samp>&rsquo; on TILE-Gx.  For example:
-</p>
-<div class="smallexample">
-<pre class="smallexample">asm (&quot;st_add %I0,%1,%i0&quot; : &quot;=m&lt;&gt;&quot; (*mem) : &quot;r&quot; (val));
-</pre></div>
-
-</dd>
-<dt><code>M</code></dt>
-<dd><p>A bit mask suitable for the BFINS instruction.
-</p>
-</dd>
-<dt><code>N</code></dt>
-<dd><p>Integer constant that is a byte tiled out eight times.
-</p>
-</dd>
-<dt><code>O</code></dt>
-<dd><p>The integer zero constant.
-</p>
-</dd>
-<dt><code>P</code></dt>
-<dd><p>Integer constant that is a sign-extended byte tiled out as four shorts.
-</p>
-</dd>
-<dt><code>Q</code></dt>
-<dd><p>Integer constant that fits in one signed byte when incremented
-(-129 &hellip; 126), but excluding -1.
-</p>
-</dd>
-<dt><code>S</code></dt>
-<dd><p>Integer constant that has all 1 bits consecutive and starting at bit 0.
-</p>
-</dd>
-<dt><code>T</code></dt>
-<dd><p>A 16-bit fragment of a got, tls, or pc-relative reference.
-</p>
-</dd>
-<dt><code>U</code></dt>
-<dd><p>Memory operand except postincrement.  This is roughly the same as
-&lsquo;<samp>m</samp>&rsquo; when not used together with &lsquo;<samp>&lt;</samp>&rsquo; or &lsquo;<samp>&gt;</samp>&rsquo;.
-</p>
-</dd>
-<dt><code>W</code></dt>
-<dd><p>An 8-element vector constant with identical elements.
-</p>
-</dd>
-<dt><code>Y</code></dt>
-<dd><p>A 4-element vector constant with identical elements.
-</p>
-</dd>
-<dt><code>Z0</code></dt>
-<dd><p>The integer constant 0xffffffff.
-</p>
-</dd>
-<dt><code>Z1</code></dt>
-<dd><p>The integer constant 0xffffffff00000000.
-</p>
-</dd>
-</dl>
-
-</dd>
-<dt><em>TILEPro&mdash;<samp>config/tilepro/constraints.md</samp></em></dt>
-<dd><dl compact="compact">
-<dt><code>R00</code></dt>
-<dt><code>R01</code></dt>
-<dt><code>R02</code></dt>
-<dt><code>R03</code></dt>
-<dt><code>R04</code></dt>
-<dt><code>R05</code></dt>
-<dt><code>R06</code></dt>
-<dt><code>R07</code></dt>
-<dt><code>R08</code></dt>
-<dt><code>R09</code></dt>
-<dt><code>R10</code></dt>
-<dd><p>Each of these represents a register constraint for an individual
-register, from r0 to r10.
-</p>
-</dd>
-<dt><code>I</code></dt>
-<dd><p>Signed 8-bit integer constant.
-</p>
-</dd>
-<dt><code>J</code></dt>
-<dd><p>Signed 16-bit integer constant.
-</p>
-</dd>
-<dt><code>K</code></dt>
-<dd><p>Nonzero integer constant with low 16 bits zero.
-</p>
-</dd>
-<dt><code>L</code></dt>
-<dd><p>Integer constant that fits in one signed byte when incremented by one
-(-129 &hellip; 126).
-</p>
-</dd>
-<dt><code>m</code></dt>
-<dd><p>Memory operand.  If used together with &lsquo;<samp>&lt;</samp>&rsquo; or &lsquo;<samp>&gt;</samp>&rsquo;, the
-operand can have postincrement which requires printing with &lsquo;<samp>%In</samp>&rsquo;
-and &lsquo;<samp>%in</samp>&rsquo; on TILEPro.  For example:
-</p>
-<div class="smallexample">
-<pre class="smallexample">asm (&quot;swadd %I0,%1,%i0&quot; : &quot;=m&lt;&gt;&quot; (mem) : &quot;r&quot; (val));
-</pre></div>
-
-</dd>
-<dt><code>M</code></dt>
-<dd><p>A bit mask suitable for the MM instruction.
-</p>
-</dd>
-<dt><code>N</code></dt>
-<dd><p>Integer constant that is a byte tiled out four times.
-</p>
-</dd>
-<dt><code>O</code></dt>
-<dd><p>The integer zero constant.
-</p>
-</dd>
-<dt><code>P</code></dt>
-<dd><p>Integer constant that is a sign-extended byte tiled out as two shorts.
-</p>
-</dd>
-<dt><code>Q</code></dt>
-<dd><p>Integer constant that fits in one signed byte when incremented
-(-129 &hellip; 126), but excluding -1.
-</p>
-</dd>
-<dt><code>T</code></dt>
-<dd><p>A symbolic operand, or a 16-bit fragment of a got, tls, or pc-relative
-reference.
-</p>
-</dd>
-<dt><code>U</code></dt>
-<dd><p>Memory operand except postincrement.  This is roughly the same as
-&lsquo;<samp>m</samp>&rsquo; when not used together with &lsquo;<samp>&lt;</samp>&rsquo; or &lsquo;<samp>&gt;</samp>&rsquo;.
-</p>
-</dd>
-<dt><code>W</code></dt>
-<dd><p>A 4-element vector constant with identical elements.
-</p>
-</dd>
-<dt><code>Y</code></dt>
-<dd><p>A 2-element vector constant with identical elements.
 </p>
 </dd>
 </dl>
@@ -3177,7 +3023,7 @@ instructions).
 <hr>
 <div class="header">
 <p>
-Previous: <a href="Modifiers.html#Modifiers" accesskey="p" rel="prev">Modifiers</a>, Up: <a href="Constraints.html#Constraints" accesskey="u" rel="up">Constraints</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Option-Index.html#Option-Index" title="Index" rel="index">Index</a>]</p>
+Previous: <a href="Modifiers.html#Modifiers" accesskey="p" rel="prev">Modifiers</a>, Up: <a href="Constraints.html#Constraints" accesskey="u" rel="up">Constraints</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Indices.html#Indices" title="Index" rel="index">Index</a>]</p>
 </div>
 
 

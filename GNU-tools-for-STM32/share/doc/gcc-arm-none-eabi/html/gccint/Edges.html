@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- Copyright (C) 1988-2021 Free Software Foundation, Inc.
+<!-- Copyright (C) 1988-2023 Free Software Foundation, Inc.
 
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
@@ -144,8 +144,8 @@ point to the previous edge in the sequence.
 <code>edge_iterator</code>.
 </p>
 </dd>
-<dt><code>ei_safe_safe</code>
-<a name="index-ei_005fsafe_005fsafe"></a>
+<dt><code>ei_safe_edge</code>
+<a name="index-ei_005fsafe_005fedge"></a>
 </dt>
 <dd><p>This function returns the <code>edge</code> currently pointed to by an
 <code>edge_iterator</code>, but returns <code>NULL</code> if the iterator is
@@ -191,10 +191,10 @@ These edges are used for unconditional or conditional jumps and in
 RTL also for table jumps.  They are the easiest to manipulate as they
 may be freely redirected when the flow graph is not in SSA form.
 </p>
+<a name="index-EDGE_005fFALLTHRU_002c-force_005fnonfallthru"></a>
 </dd>
 <dt><em>fall-thru</em></dt>
-<dd><a name="index-EDGE_005fFALLTHRU_002c-force_005fnonfallthru"></a>
-<p>Fall-thru edges are present in case where the basic block may continue
+<dd><p>Fall-thru edges are present in case where the basic block may continue
 execution to the following one without branching.  These edges have
 the <code>EDGE_FALLTHRU</code> flag set.  Unlike other types of edges, these
 edges must come into the basic block immediately following in the
@@ -202,11 +202,11 @@ instruction stream.  The function <code>force_nonfallthru</code> is
 available to insert an unconditional jump in the case that redirection
 is needed.  Note that this may require creation of a new basic block.
 </p>
+<a name="index-exception-handling"></a>
+<a name="index-EDGE_005fABNORMAL_002c-EDGE_005fEH"></a>
 </dd>
 <dt><em>exception handling</em></dt>
-<dd><a name="index-exception-handling"></a>
-<a name="index-EDGE_005fABNORMAL_002c-EDGE_005fEH"></a>
-<p>Exception handling edges represent possible control transfers from a
+<dd><p>Exception handling edges represent possible control transfers from a
 trapping instruction to an exception handler.  The definition of
 &ldquo;trapping&rdquo; varies.  In C++, only function calls can throw, but for
 Ada exceptions like division by zero or segmentation fault are
@@ -234,20 +234,20 @@ but this predicate only checks for possible memory traps, as in
 dereferencing an invalid pointer location.
 </p>
 
+<a name="index-sibling-call"></a>
+<a name="index-EDGE_005fABNORMAL_002c-EDGE_005fSIBCALL"></a>
 </dd>
 <dt><em>sibling calls</em></dt>
-<dd><a name="index-sibling-call"></a>
-<a name="index-EDGE_005fABNORMAL_002c-EDGE_005fSIBCALL"></a>
-<p>Sibling calls or tail calls terminate the function in a non-standard
+<dd><p>Sibling calls or tail calls terminate the function in a non-standard
 way and thus an edge to the exit must be present.
 <code>EDGE_SIBCALL</code> and <code>EDGE_ABNORMAL</code> are set in such case.
 These edges only exist in the RTL representation.
 </p>
+<a name="index-computed-jump"></a>
+<a name="index-EDGE_005fABNORMAL"></a>
 </dd>
 <dt><em>computed jumps</em></dt>
-<dd><a name="index-computed-jump"></a>
-<a name="index-EDGE_005fABNORMAL"></a>
-<p>Computed jumps contain edges to all labels in the function referenced
+<dd><p>Computed jumps contain edges to all labels in the function referenced
 from the code.  All those edges have <code>EDGE_ABNORMAL</code> flag set.
 The edges used to represent computed jumps often cause compile time
 performance problems, since functions consisting of many taken labels
@@ -294,11 +294,11 @@ Be aware of that when you work on passes in that area.  There have
 been numerous examples already where the compile time for code with
 unfactored computed jumps caused some serious headaches.
 </p>
+<a name="index-nonlocal-goto-handler"></a>
+<a name="index-EDGE_005fABNORMAL_002c-EDGE_005fABNORMAL_005fCALL"></a>
 </dd>
 <dt><em>nonlocal goto handlers</em></dt>
-<dd><a name="index-nonlocal-goto-handler"></a>
-<a name="index-EDGE_005fABNORMAL_002c-EDGE_005fABNORMAL_005fCALL"></a>
-<p>GCC allows nested functions to return into caller using a <code>goto</code>
+<dd><p>GCC allows nested functions to return into caller using a <code>goto</code>
 to a label passed to as an argument to the callee.  The labels passed
 to nested functions contain special code to cleanup after function
 call.  Such sections of code are referred to as &ldquo;nonlocal goto
@@ -306,11 +306,11 @@ receivers&rdquo;.  If a function contains such nonlocal goto receivers, an
 edge from the call to the label is created with the
 <code>EDGE_ABNORMAL</code> and <code>EDGE_ABNORMAL_CALL</code> flags set.
 </p>
+<a name="index-function-entry-point_002c-alternate-function-entry-point"></a>
+<a name="index-LABEL_005fALTERNATE_005fNAME"></a>
 </dd>
 <dt><em>function entry points</em></dt>
-<dd><a name="index-function-entry-point_002c-alternate-function-entry-point"></a>
-<a name="index-LABEL_005fALTERNATE_005fNAME"></a>
-<p>By definition, execution of function starts at basic block 0, so there
+<dd><p>By definition, execution of function starts at basic block 0, so there
 is always an edge from the <code>ENTRY_BLOCK_PTR</code> to basic block 0.
 There is no <code>GIMPLE</code> representation for alternate entry points at
 this moment.  In RTL, alternate entry points are specified by

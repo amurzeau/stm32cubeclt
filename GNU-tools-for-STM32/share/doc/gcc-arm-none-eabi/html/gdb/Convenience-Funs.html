@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- Copyright (C) 1988-2022 Free Software Foundation, Inc.
+<!-- Copyright (C) 1988-2023 Free Software Foundation, Inc.
 
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
@@ -80,9 +80,11 @@ however, a convenience function is implemented internally to
 <code>Python</code> support, which means that they are always available.
 </p>
 <dl compact="compact">
+<dd>
+<a name="index-_0024_005fisvoid_002c-convenience-function"></a>
+</dd>
 <dt><code>$_isvoid (<var>expr</var>)</code></dt>
-<dd><a name="index-_0024_005fisvoid_002c-convenience-function"></a>
-<p>Return one if the expression <var>expr</var> is <code>void</code>.  Otherwise it
+<dd><p>Return one if the expression <var>expr</var> is <code>void</code>.  Otherwise it
 returns zero.
 </p>
 <p>A <code>void</code> expression is an expression where the type of the result
@@ -136,10 +138,10 @@ $3 = void
 $4 = 1
 </pre></div>
 
+<a name="index-_0024_005fgdb_005fsetting_005fstr_002c-convenience-function"></a>
 </dd>
 <dt><code>$_gdb_setting_str (<var>setting</var>)</code></dt>
-<dd><a name="index-_0024_005fgdb_005fsetting_005fstr_002c-convenience-function"></a>
-<p>Return the value of the <small>GDB</small> <var>setting</var> as a string.
+<dd><p>Return the value of the <small>GDB</small> <var>setting</var> as a string.
 <var>setting</var> is any setting that can be used in a <code>set</code> or
 <code>show</code> command (see <a href="Controlling-GDB.html#Controlling-GDB">Controlling GDB</a>).
 </p>
@@ -153,10 +155,10 @@ $2 = &quot;30&quot;
 (gdb)
 </pre></div>
 
+<a name="index-_0024_005fgdb_005fsetting_002c-convenience-function"></a>
 </dd>
 <dt><code>$_gdb_setting (<var>setting</var>)</code></dt>
-<dd><a name="index-_0024_005fgdb_005fsetting_002c-convenience-function"></a>
-<p>Return the value of the <small>GDB</small> <var>setting</var>.
+<dd><p>Return the value of the <small>GDB</small> <var>setting</var>.
 The type of the returned value depends on the setting.
 </p>
 <p>The value type for boolean and auto boolean settings is <code>int</code>.
@@ -213,17 +215,71 @@ $8 = -1
 are returned as string values.
 </p>
 
+<a name="index-_0024_005fgdb_005fmaint_005fsetting_005fstr_002c-convenience-function"></a>
 </dd>
 <dt><code>$_gdb_maint_setting_str (<var>setting</var>)</code></dt>
-<dd><a name="index-_0024_005fgdb_005fmaint_005fsetting_005fstr_002c-convenience-function"></a>
-<p>Like the <code>$_gdb_setting_str</code> function, but works with
+<dd><p>Like the <code>$_gdb_setting_str</code> function, but works with
 <code>maintenance set</code> variables.
 </p>
+<a name="index-_0024_005fgdb_005fmaint_005fsetting_002c-convenience-function"></a>
 </dd>
 <dt><code>$_gdb_maint_setting (<var>setting</var>)</code></dt>
-<dd><a name="index-_0024_005fgdb_005fmaint_005fsetting_002c-convenience-function"></a>
-<p>Like the <code>$_gdb_setting</code> function, but works with
+<dd><p>Like the <code>$_gdb_setting</code> function, but works with
 <code>maintenance set</code> variables.
+</p>
+<a name="g_t_0024_005fshell-convenience-function"></a><a name="index-_0024_005fshell_002c-convenience-function"></a>
+</dd>
+<dt><code>$_shell (<var>command-string</var>)</code></dt>
+<dd>
+<p>Invoke a shell to execute <var>command-string</var>.  <var>command-string</var>
+must be a string.  The shell runs on the host machine, the machine
+<small>GDB</small> is running on.  Returns the command&rsquo;s exit status.  On
+Unix systems, a command which exits with a zero exit status has
+succeeded, and non-zero exit status indicates failure.  When a command
+terminates on a fatal signal whose number is <var>N</var>, <small>GDB</small>
+uses the value 128+<var>N</var> as the exit status, as is standard in Unix
+shells.  Note that <var>N</var> is a host signal number, not a target
+signal number.  If you&rsquo;re native debugging, they will be the same, but
+if cross debugging, the host vs target signal numbers may be
+completely unrelated.  Please consult your host operating system&rsquo;s
+documentation for the mapping between host signal numbers and signal
+names.  The shell to run is determined in the same way as for the
+<code>shell</code> command.  See <a href="Shell-Commands.html#Shell-Commands">Shell Commands</a>.
+</p>
+<div class="smallexample">
+<pre class="smallexample">(gdb) print $_shell(&quot;true&quot;)
+$1 = 0
+(gdb) print $_shell(&quot;false&quot;)
+$2 = 1
+(gdb) p $_shell(&quot;echo hello&quot;)
+hello
+$3 = 0
+(gdb) p $_shell(&quot;foobar&quot;)
+bash: line 1: foobar: command not found
+$4 = 127
+</pre></div>
+
+<p>This may also be useful in breakpoint conditions.  For example:
+</p>
+<div class="smallexample">
+<pre class="smallexample">(gdb) break function if $_shell(&quot;some command&quot;) == 0
+</pre></div>
+
+<p>In this scenario, you&rsquo;ll want to make sure that the shell command you
+run in the breakpoint condition takes the least amount of time
+possible.  For example, avoid running a command that may block
+indefinitely, or that sleeps for a while before exiting.  Prefer a
+command or script which analyzes some state and exits immediately.
+This is important because the debugged program stops for the
+breakpoint every time, and then <small>GDB</small> evaluates the breakpoint
+condition.  If the condition is false, the program is re-resumed
+transparently, without informing you of the stop.  A quick shell
+command thus avoids significantly slowing down the debugged program
+unnecessarily.
+</p>
+<p>Note: unlike the <code>shell</code> command, the <code>$_shell</code> convenience
+function does not affect the <code>$_shell_exitcode</code> and
+<code>$_shell_exitsignal</code> convenience variables.
 </p>
 </dd>
 </dl>
@@ -232,35 +288,37 @@ are returned as string values.
 <code>Python</code> support.
 </p>
 <dl compact="compact">
+<dd>
+<a name="index-_0024_005fmemeq_002c-convenience-function"></a>
+</dd>
 <dt><code>$_memeq(<var>buf1</var>, <var>buf2</var>, <var>length</var>)</code></dt>
-<dd><a name="index-_0024_005fmemeq_002c-convenience-function"></a>
-<p>Returns one if the <var>length</var> bytes at the addresses given by
+<dd><p>Returns one if the <var>length</var> bytes at the addresses given by
 <var>buf1</var> and <var>buf2</var> are equal.
 Otherwise it returns zero.
 </p>
+<a name="index-_0024_005fregex_002c-convenience-function"></a>
 </dd>
 <dt><code>$_regex(<var>str</var>, <var>regex</var>)</code></dt>
-<dd><a name="index-_0024_005fregex_002c-convenience-function"></a>
-<p>Returns one if the string <var>str</var> matches the regular expression
+<dd><p>Returns one if the string <var>str</var> matches the regular expression
 <var>regex</var>.  Otherwise it returns zero.
 The syntax of the regular expression is that specified by <code>Python</code>&rsquo;s
 regular expression support.
 </p>
+<a name="index-_0024_005fstreq_002c-convenience-function"></a>
 </dd>
 <dt><code>$_streq(<var>str1</var>, <var>str2</var>)</code></dt>
-<dd><a name="index-_0024_005fstreq_002c-convenience-function"></a>
-<p>Returns one if the strings <var>str1</var> and <var>str2</var> are equal.
+<dd><p>Returns one if the strings <var>str1</var> and <var>str2</var> are equal.
 Otherwise it returns zero.
 </p>
+<a name="index-_0024_005fstrlen_002c-convenience-function"></a>
 </dd>
 <dt><code>$_strlen(<var>str</var>)</code></dt>
-<dd><a name="index-_0024_005fstrlen_002c-convenience-function"></a>
-<p>Returns the length of string <var>str</var>.
+<dd><p>Returns the length of string <var>str</var>.
 </p>
+<a name="index-_0024_005fcaller_005fis_002c-convenience-function"></a>
 </dd>
 <dt><code>$_caller_is(<var>name</var><span class="roman">[</span>, <var>number_of_frames</var><span class="roman">]</span>)</code></dt>
-<dd><a name="index-_0024_005fcaller_005fis_002c-convenience-function"></a>
-<p>Returns one if the calling function&rsquo;s name is equal to <var>name</var>.
+<dd><p>Returns one if the calling function&rsquo;s name is equal to <var>name</var>.
 Otherwise it returns zero.
 </p>
 <p>If the optional argument <var>number_of_frames</var> is provided,
@@ -285,20 +343,20 @@ $1 = 1
 $1 = 1
 </pre></div>
 
+<a name="index-_0024_005fcaller_005fmatches_002c-convenience-function"></a>
 </dd>
 <dt><code>$_caller_matches(<var>regexp</var><span class="roman">[</span>, <var>number_of_frames</var><span class="roman">]</span>)</code></dt>
-<dd><a name="index-_0024_005fcaller_005fmatches_002c-convenience-function"></a>
-<p>Returns one if the calling function&rsquo;s name matches the regular expression
+<dd><p>Returns one if the calling function&rsquo;s name matches the regular expression
 <var>regexp</var>.  Otherwise it returns zero.
 </p>
 <p>If the optional argument <var>number_of_frames</var> is provided,
 it is the number of frames up in the stack to look.
 The default is 1.
 </p>
+<a name="index-_0024_005fany_005fcaller_005fis_002c-convenience-function"></a>
 </dd>
 <dt><code>$_any_caller_is(<var>name</var><span class="roman">[</span>, <var>number_of_frames</var><span class="roman">]</span>)</code></dt>
-<dd><a name="index-_0024_005fany_005fcaller_005fis_002c-convenience-function"></a>
-<p>Returns one if any calling function&rsquo;s name is equal to <var>name</var>.
+<dd><p>Returns one if any calling function&rsquo;s name is equal to <var>name</var>.
 Otherwise it returns zero.
 </p>
 <p>If the optional argument <var>number_of_frames</var> is provided,
@@ -310,10 +368,10 @@ checks all stack frames from the immediate caller to the frame specified
 by <var>number_of_frames</var>, whereas <code>$_caller_is</code> only checks the
 frame specified by <var>number_of_frames</var>.
 </p>
+<a name="index-_0024_005fany_005fcaller_005fmatches_002c-convenience-function"></a>
 </dd>
 <dt><code>$_any_caller_matches(<var>regexp</var><span class="roman">[</span>, <var>number_of_frames</var><span class="roman">]</span>)</code></dt>
-<dd><a name="index-_0024_005fany_005fcaller_005fmatches_002c-convenience-function"></a>
-<p>Returns one if any calling function&rsquo;s name matches the regular expression
+<dd><p>Returns one if any calling function&rsquo;s name matches the regular expression
 <var>regexp</var>.  Otherwise it returns zero.
 </p>
 <p>If the optional argument <var>number_of_frames</var> is provided,
@@ -325,9 +383,13 @@ checks all stack frames from the immediate caller to the frame specified
 by <var>number_of_frames</var>, whereas <code>$_caller_matches</code> only checks the
 frame specified by <var>number_of_frames</var>.
 </p>
+<a name="index-_0024_005fas_005fstring_002c-convenience-function"></a>
 </dd>
 <dt><code>$_as_string(<var>value</var>)</code></dt>
-<dd><a name="index-_0024_005fas_005fstring_002c-convenience-function"></a>
+<dd><p>This convenience function is considered deprecated, and could be
+removed from future versions of <small>GDB</small>.  Use the &lsquo;<samp>%V</samp>&rsquo; format
+specifier instead (see <a href="Output.html#g_t_0025V-Format-Specifier">%V Format Specifier</a>).
+</p>
 <p>Return the string representation of <var>value</var>.
 </p>
 <p>This function is useful to obtain the textual label (enumerator) of an
@@ -339,12 +401,12 @@ an enumerated type:
 Visiting node of type NODE_INTEGER
 </pre></div>
 
+<a name="index-_0024_005fcimag_002c-convenience-function"></a>
+<a name="index-_0024_005fcreal_002c-convenience-function"></a>
 </dd>
 <dt><code>$_cimag(<var>value</var>)</code></dt>
 <dt><code>$_creal(<var>value</var>)</code></dt>
-<dd><a name="index-_0024_005fcimag_002c-convenience-function"></a>
-<a name="index-_0024_005fcreal_002c-convenience-function"></a>
-<p>Return the imaginary (<code>$_cimag</code>) or real (<code>$_creal</code>) part of
+<dd><p>Return the imaginary (<code>$_cimag</code>) or real (<code>$_creal</code>) part of
 the complex number <var>value</var>.
 </p>
 <p>The type of the imaginary or real part depends on the type of the

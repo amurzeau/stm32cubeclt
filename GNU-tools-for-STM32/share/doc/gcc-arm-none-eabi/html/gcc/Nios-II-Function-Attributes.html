@@ -1,6 +1,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- Copyright (C) 1988-2021 Free Software Foundation, Inc.
+<!-- This file documents the use of the GNU compilers.
+
+Copyright (C) 1988-2023 Free Software Foundation, Inc.
 
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
@@ -30,7 +32,7 @@ You have freedom to copy and modify this GNU Manual, like GNU
 <meta name="distribution" content="global">
 <meta name="Generator" content="makeinfo">
 <link href="index.html#Top" rel="start" title="Top">
-<link href="Option-Index.html#Option-Index" rel="index" title="Option Index">
+<link href="Indices.html#Indices" rel="index" title="Indices">
 <link href="index.html#SEC_Contents" rel="contents" title="Table of Contents">
 <link href="Function-Attributes.html#Function-Attributes" rel="up" title="Function Attributes">
 <link href="Nvidia-PTX-Function-Attributes.html#Nvidia-PTX-Function-Attributes" rel="next" title="Nvidia PTX Function Attributes">
@@ -66,32 +68,34 @@ ul.no-bullet {list-style: none}
 
 </head>
 
-<body lang="en">
+<body lang="en_US">
 <a name="Nios-II-Function-Attributes"></a>
 <div class="header">
 <p>
-Next: <a href="Nvidia-PTX-Function-Attributes.html#Nvidia-PTX-Function-Attributes" accesskey="n" rel="next">Nvidia PTX Function Attributes</a>, Previous: <a href="NDS32-Function-Attributes.html#NDS32-Function-Attributes" accesskey="p" rel="prev">NDS32 Function Attributes</a>, Up: <a href="Function-Attributes.html#Function-Attributes" accesskey="u" rel="up">Function Attributes</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Option-Index.html#Option-Index" title="Index" rel="index">Index</a>]</p>
+Next: <a href="Nvidia-PTX-Function-Attributes.html#Nvidia-PTX-Function-Attributes" accesskey="n" rel="next">Nvidia PTX Function Attributes</a>, Previous: <a href="NDS32-Function-Attributes.html#NDS32-Function-Attributes" accesskey="p" rel="prev">NDS32 Function Attributes</a>, Up: <a href="Function-Attributes.html#Function-Attributes" accesskey="u" rel="up">Function Attributes</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Indices.html#Indices" title="Index" rel="index">Index</a>]</p>
 </div>
 <hr>
 <a name="Nios-II-Function-Attributes-1"></a>
-<h4 class="subsection">6.33.24 Nios II Function Attributes</h4>
+<h4 class="subsection">6.33.22 Nios II Function Attributes</h4>
 
 <p>These function attributes are supported by the Nios II back end:
 </p>
 <dl compact="compact">
-<dt><code>target (<var>options</var>)</code></dt>
 <dd><a name="index-target-function-attribute-2"></a>
-<p>As discussed in <a href="Common-Function-Attributes.html#Common-Function-Attributes">Common Function Attributes</a>, this attribute 
+</dd>
+<dt><code>target (<var>options</var>)</code></dt>
+<dd><p>As discussed in <a href="Common-Function-Attributes.html#Common-Function-Attributes">Common Function Attributes</a>, this attribute 
 allows specification of target-specific compilation options.
 </p>
 <p>When compiling for Nios II, the following options are allowed:
 </p>
 <dl compact="compact">
-<dt>&lsquo;<samp>custom-<var>insn</var>=<var>N</var></samp>&rsquo;</dt>
-<dt>&lsquo;<samp>no-custom-<var>insn</var></samp>&rsquo;</dt>
 <dd><a name="index-target_0028_0022custom_002dinsn_003dN_0022_0029-function-attribute_002c-Nios-II"></a>
 <a name="index-target_0028_0022no_002dcustom_002dinsn_0022_0029-function-attribute_002c-Nios-II"></a>
-<p>Each &lsquo;<samp>custom-<var>insn</var>=<var>N</var></samp>&rsquo; attribute locally enables use of a
+</dd>
+<dt>&lsquo;<samp>custom-<var>insn</var>=<var>N</var></samp>&rsquo;</dt>
+<dt>&lsquo;<samp>no-custom-<var>insn</var></samp>&rsquo;</dt>
+<dd><p>Each &lsquo;<samp>custom-<var>insn</var>=<var>N</var></samp>&rsquo; attribute locally enables use of a
 custom instruction with encoding <var>N</var> when generating code that uses 
 <var>insn</var>.  Similarly, &lsquo;<samp>no-custom-<var>insn</var></samp>&rsquo; locally inhibits use of
 the custom instruction <var>insn</var>.
@@ -100,10 +104,10 @@ These target attributes correspond to the
 command-line options, and support the same set of <var>insn</var> keywords.
 See <a href="Nios-II-Options.html#Nios-II-Options">Nios II Options</a>, for more information.
 </p>
+<a name="index-target_0028_0022custom_002dfpu_002dcfg_003dname_0022_0029-function-attribute_002c-Nios-II"></a>
 </dd>
 <dt>&lsquo;<samp>custom-fpu-cfg=<var>name</var></samp>&rsquo;</dt>
-<dd><a name="index-target_0028_0022custom_002dfpu_002dcfg_003dname_0022_0029-function-attribute_002c-Nios-II"></a>
-<p>This attribute corresponds to the <samp>-mcustom-fpu-cfg=<var>name</var></samp>
+<dd><p>This attribute corresponds to the <samp>-mcustom-fpu-cfg=<var>name</var></samp>
 command-line option, to select a predefined set of custom instructions
 named <var>name</var>.
 See <a href="Nios-II-Options.html#Nios-II-Options">Nios II Options</a>, for more information.

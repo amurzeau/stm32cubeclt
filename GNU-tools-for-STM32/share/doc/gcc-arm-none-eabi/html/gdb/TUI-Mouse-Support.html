@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- Copyright (C) 1988-2022 Free Software Foundation, Inc.
+<!-- Copyright (C) 1988-2023 Free Software Foundation, Inc.
 
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
@@ -81,7 +81,13 @@ the <tt class="key">SHIFT</tt> key on your keyboard to temporarily bypass
 <small>GDB</small>&rsquo;s TUI and access the terminal&rsquo;s native mouse copy/paste
 functionality (commonly, click-drag-release or double-click to select
 text, middle-click to paste).  This copy/paste works with the
-terminal&rsquo;s selection buffer, as opposed to the TUI&rsquo;s buffer.
+terminal&rsquo;s selection buffer, as opposed to the TUI&rsquo;s buffer.  Alternatively, to
+disable mouse support in the TUI entirely and give the terminal control over
+mouse clicks, turn off the <code>tui mouse-events</code> setting
+(see <a href="TUI-Configuration.html#tui_002dmouse_002devents">set tui mouse-events</a>).
+</p>
+<p>Python extensions can react to mouse clicks
+(see <a href="TUI-Windows-In-Python.html#python_002dwindow_002dclick">Window.click</a>).
 </p>
 
 

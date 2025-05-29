@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- Copyright (C) 1988-2021 Free Software Foundation, Inc.
+<!-- Copyright (C) 1988-2023 Free Software Foundation, Inc.
 
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
@@ -109,9 +109,6 @@ are shared.
 </li><li> <a name="index-pc_002c-RTL-sharing"></a>
 There is only one <code>pc</code> expression.
 
-</li><li> <a name="index-cc0_002c-RTL-sharing"></a>
-There is only one <code>cc0</code> expression.
-
 </li><li> <a name="index-const_005fdouble_002c-RTL-sharing"></a>
 There is only one <code>const_double</code> expression with value 0 for
 each floating point mode.  Likewise for values 1 and 2.
@@ -150,7 +147,7 @@ side-effects on other insns.
 </li><li> <a name="index-unshare_005fall_005frtl"></a>
 During initial RTL generation, shared structure is freely introduced.
 After all the RTL for a function has been generated, all shared
-structure is copied by <code>unshare_all_rtl</code> in <samp>emit-rtl.c</samp>,
+structure is copied by <code>unshare_all_rtl</code> in <samp>emit-rtl.cc</samp>,
 after which the above rules are guaranteed to be followed.
 
 </li><li> <a name="index-copy_005frtx_005fif_005fshared"></a>

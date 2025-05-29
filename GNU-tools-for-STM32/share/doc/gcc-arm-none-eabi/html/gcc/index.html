@@ -1,6 +1,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- Copyright (C) 1988-2021 Free Software Foundation, Inc.
+<!-- This file documents the use of the GNU compilers.
+
+Copyright (C) 1988-2023 Free Software Foundation, Inc.
 
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
@@ -30,7 +32,7 @@ You have freedom to copy and modify this GNU Manual, like GNU
 <meta name="distribution" content="global">
 <meta name="Generator" content="makeinfo">
 <link href="#Top" rel="start" title="Top">
-<link href="Option-Index.html#Option-Index" rel="index" title="Option Index">
+<link href="Indices.html#Indices" rel="index" title="Indices">
 <link href="#SEC_Contents" rel="contents" title="Table of Contents">
 <link href="G_002b_002b-and-GCC.html#G_002b_002b-and-GCC" rel="next" title="G++ and GCC">
 <style type="text/css">
@@ -64,7 +66,7 @@ ul.no-bullet {list-style: none}
 
 </head>
 
-<body lang="en">
+<body lang="en_US">
 <h1 class="settitle" align="center">Using the GNU Compiler Collection (GCC)</h1>
 
 
@@ -80,9 +82,13 @@ ul.no-bullet {list-style: none}
 
 
 
+
+
+
+<br>
 <p>This file documents the use of the GNU compilers.
-</p><br>
-<p>Copyright &copy; 1988-2021 Free Software Foundation, Inc.
+</p>
+<p>Copyright &copy; 1988-2023 Free Software Foundation, Inc.
 </p>
 <p>Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
@@ -94,14 +100,18 @@ Texts being (a) (see below), and with the Back-Cover Texts being (b)
 </p>
 <p>(a) The FSF&rsquo;s Front-Cover Text is:
 </p>
+<blockquote>
 <p>A GNU Manual
-</p>
+</p></blockquote>
+
 <p>(b) The FSF&rsquo;s Back-Cover Text is:
 </p>
+<blockquote>
 <p>You have freedom to copy and modify this GNU Manual, like GNU
      software.  Copies published by the Free Software Foundation raise
      funds for GNU development.
-</p>
+</p></blockquote>
+
 <br>
 
 <a name="SEC_Overview"></a>
@@ -131,8 +141,7 @@ Texts being (a) (see below), and with the Back-Cover Texts being (b)
 <li><a name="stoc-GNU-General-Public-License" href="#toc-GNU-General-Public-License">GNU General Public License</a></li>
 <li><a name="stoc-GNU-Free-Documentation-License-1" href="#toc-GNU-Free-Documentation-License-1">GNU Free Documentation License</a></li>
 <li><a name="stoc-Contributors-to-GCC" href="#toc-Contributors-to-GCC">Contributors to GCC</a></li>
-<li><a name="stoc-Option-Index-1" href="#toc-Option-Index-1">Option Index</a></li>
-<li><a name="stoc-Keyword-Index-1" href="#toc-Keyword-Index-1">Keyword Index</a></li>
+<li><a name="stoc-Indices-1" href="#toc-Indices-1">Appendix A Indices</a></li>
 </ul>
 </div>
 
@@ -149,9 +158,8 @@ Texts being (a) (see below), and with the Back-Cover Texts being (b)
     <li><a name="toc-C_002b_002b-Language" href="Standards.html#C_002b_002b-Language">2.2 C++ Language</a></li>
     <li><a name="toc-Objective_002dC-and-Objective_002dC_002b_002b-Languages" href="Standards.html#Objective_002dC-and-Objective_002dC_002b_002b-Languages">2.3 Objective-C and Objective-C++ Languages</a></li>
     <li><a name="toc-Go-Language" href="Standards.html#Go-Language">2.4 Go Language</a></li>
-    <li><a name="toc-HSA-Intermediate-Language-_0028HSAIL_0029" href="Standards.html#HSA-Intermediate-Language-_0028HSAIL_0029">2.5 HSA Intermediate Language (HSAIL)</a></li>
-    <li><a name="toc-D-language" href="Standards.html#D-language">2.6 D language</a></li>
-    <li><a name="toc-References-for-Other-Languages" href="Standards.html#References-for-Other-Languages">2.7 References for Other Languages</a></li>
+    <li><a name="toc-D-language" href="Standards.html#D-language">2.5 D language</a></li>
+    <li><a name="toc-References-for-Other-Languages" href="Standards.html#References-for-Other-Languages">2.6 References for Other Languages</a></li>
   </ul></li>
   <li><a name="toc-GCC-Command-Options" href="Invoking-GCC.html#Invoking-GCC">3 GCC Command Options</a>
   <ul class="no-bullet">
@@ -188,64 +196,60 @@ Texts being (a) (see below), and with the Back-Cover Texts being (b)
         <li><a name="toc-EIND-and-Devices-with-More-Than-128-Ki-Bytes-of-Flash" href="AVR-Options.html#EIND-and-Devices-with-More-Than-128-Ki-Bytes-of-Flash">3.19.6.1 <code>EIND</code> and Devices with More Than 128 Ki Bytes of Flash</a></li>
         <li><a name="toc-Handling-of-the-RAMPD_002c-RAMPX_002c-RAMPY-and-RAMPZ-Special-Function-Registers" href="AVR-Options.html#Handling-of-the-RAMPD_002c-RAMPX_002c-RAMPY-and-RAMPZ-Special-Function-Registers">3.19.6.2 Handling of the <code>RAMPD</code>, <code>RAMPX</code>, <code>RAMPY</code> and <code>RAMPZ</code> Special Function Registers</a></li>
         <li><a name="toc-AVR-Built_002din-Macros" href="AVR-Options.html#AVR-Built_002din-Macros">3.19.6.3 AVR Built-in Macros</a></li>
+        <li><a name="toc-AVR-Internal-Options" href="AVR-Options.html#AVR-Internal-Options">3.19.6.4 AVR Internal Options</a></li>
       </ul></li>
       <li><a name="toc-Blackfin-Options-1" href="Blackfin-Options.html#Blackfin-Options">3.19.7 Blackfin Options</a></li>
       <li><a name="toc-C6X-Options-1" href="C6X-Options.html#C6X-Options">3.19.8 C6X Options</a></li>
       <li><a name="toc-CRIS-Options-1" href="CRIS-Options.html#CRIS-Options">3.19.9 CRIS Options</a></li>
-      <li><a name="toc-CR16-Options-1" href="CR16-Options.html#CR16-Options">3.19.10 CR16 Options</a></li>
-      <li><a name="toc-C_002dSKY-Options-1" href="C_002dSKY-Options.html#C_002dSKY-Options">3.19.11 C-SKY Options</a></li>
-      <li><a name="toc-Darwin-Options-1" href="Darwin-Options.html#Darwin-Options">3.19.12 Darwin Options</a></li>
-      <li><a name="toc-DEC-Alpha-Options-1" href="DEC-Alpha-Options.html#DEC-Alpha-Options">3.19.13 DEC Alpha Options</a></li>
-      <li><a name="toc-eBPF-Options-1" href="eBPF-Options.html#eBPF-Options">3.19.14 eBPF Options</a></li>
-      <li><a name="toc-FR30-Options-1" href="FR30-Options.html#FR30-Options">3.19.15 FR30 Options</a></li>
-      <li><a name="toc-FT32-Options-1" href="FT32-Options.html#FT32-Options">3.19.16 FT32 Options</a></li>
-      <li><a name="toc-FRV-Options-1" href="FRV-Options.html#FRV-Options">3.19.17 FRV Options</a></li>
-      <li><a name="toc-GNU_002fLinux-Options-1" href="GNU_002fLinux-Options.html#GNU_002fLinux-Options">3.19.18 GNU/Linux Options</a></li>
-      <li><a name="toc-H8_002f300-Options-1" href="H8_002f300-Options.html#H8_002f300-Options">3.19.19 H8/300 Options</a></li>
-      <li><a name="toc-HPPA-Options-1" href="HPPA-Options.html#HPPA-Options">3.19.20 HPPA Options</a></li>
-      <li><a name="toc-IA_002d64-Options-1" href="IA_002d64-Options.html#IA_002d64-Options">3.19.21 IA-64 Options</a></li>
-      <li><a name="toc-LM32-Options-1" href="LM32-Options.html#LM32-Options">3.19.22 LM32 Options</a></li>
+      <li><a name="toc-C_002dSKY-Options-1" href="C_002dSKY-Options.html#C_002dSKY-Options">3.19.10 C-SKY Options</a></li>
+      <li><a name="toc-Darwin-Options-1" href="Darwin-Options.html#Darwin-Options">3.19.11 Darwin Options</a></li>
+      <li><a name="toc-DEC-Alpha-Options-1" href="DEC-Alpha-Options.html#DEC-Alpha-Options">3.19.12 DEC Alpha Options</a></li>
+      <li><a name="toc-eBPF-Options-1" href="eBPF-Options.html#eBPF-Options">3.19.13 eBPF Options</a></li>
+      <li><a name="toc-FR30-Options-1" href="FR30-Options.html#FR30-Options">3.19.14 FR30 Options</a></li>
+      <li><a name="toc-FT32-Options-1" href="FT32-Options.html#FT32-Options">3.19.15 FT32 Options</a></li>
+      <li><a name="toc-FRV-Options-1" href="FRV-Options.html#FRV-Options">3.19.16 FRV Options</a></li>
+      <li><a name="toc-GNU_002fLinux-Options-1" href="GNU_002fLinux-Options.html#GNU_002fLinux-Options">3.19.17 GNU/Linux Options</a></li>
+      <li><a name="toc-H8_002f300-Options-1" href="H8_002f300-Options.html#H8_002f300-Options">3.19.18 H8/300 Options</a></li>
+      <li><a name="toc-HPPA-Options-1" href="HPPA-Options.html#HPPA-Options">3.19.19 HPPA Options</a></li>
+      <li><a name="toc-IA_002d64-Options-1" href="IA_002d64-Options.html#IA_002d64-Options">3.19.20 IA-64 Options</a></li>
+      <li><a name="toc-LM32-Options-1" href="LM32-Options.html#LM32-Options">3.19.21 LM32 Options</a></li>
+      <li><a name="toc-LoongArch-Options-1" href="LoongArch-Options.html#LoongArch-Options">3.19.22 LoongArch Options</a></li>
       <li><a name="toc-M32C-Options-1" href="M32C-Options.html#M32C-Options">3.19.23 M32C Options</a></li>
       <li><a name="toc-M32R_002fD-Options-1" href="M32R_002fD-Options.html#M32R_002fD-Options">3.19.24 M32R/D Options</a></li>
       <li><a name="toc-M680x0-Options-1" href="M680x0-Options.html#M680x0-Options">3.19.25 M680x0 Options</a></li>
       <li><a name="toc-MCore-Options-1" href="MCore-Options.html#MCore-Options">3.19.26 MCore Options</a></li>
-      <li><a name="toc-MeP-Options-1" href="MeP-Options.html#MeP-Options">3.19.27 MeP Options</a></li>
-      <li><a name="toc-MicroBlaze-Options-1" href="MicroBlaze-Options.html#MicroBlaze-Options">3.19.28 MicroBlaze Options</a></li>
-      <li><a name="toc-MIPS-Options-1" href="MIPS-Options.html#MIPS-Options">3.19.29 MIPS Options</a></li>
-      <li><a name="toc-MMIX-Options-1" href="MMIX-Options.html#MMIX-Options">3.19.30 MMIX Options</a></li>
-      <li><a name="toc-MN10300-Options-1" href="MN10300-Options.html#MN10300-Options">3.19.31 MN10300 Options</a></li>
-      <li><a name="toc-Moxie-Options-1" href="Moxie-Options.html#Moxie-Options">3.19.32 Moxie Options</a></li>
-      <li><a name="toc-MSP430-Options-1" href="MSP430-Options.html#MSP430-Options">3.19.33 MSP430 Options</a></li>
-      <li><a name="toc-NDS32-Options-1" href="NDS32-Options.html#NDS32-Options">3.19.34 NDS32 Options</a></li>
-      <li><a name="toc-Nios-II-Options-1" href="Nios-II-Options.html#Nios-II-Options">3.19.35 Nios II Options</a></li>
-      <li><a name="toc-Nvidia-PTX-Options-1" href="Nvidia-PTX-Options.html#Nvidia-PTX-Options">3.19.36 Nvidia PTX Options</a></li>
-      <li><a name="toc-OpenRISC-Options-1" href="OpenRISC-Options.html#OpenRISC-Options">3.19.37 OpenRISC Options</a></li>
-      <li><a name="toc-PDP_002d11-Options-1" href="PDP_002d11-Options.html#PDP_002d11-Options">3.19.38 PDP-11 Options</a></li>
-      <li><a name="toc-picoChip-Options-1" href="picoChip-Options.html#picoChip-Options">3.19.39 picoChip Options</a></li>
-      <li><a name="toc-PowerPC-Options-1" href="PowerPC-Options.html#PowerPC-Options">3.19.40 PowerPC Options</a></li>
-      <li><a name="toc-PRU-Options-1" href="PRU-Options.html#PRU-Options">3.19.41 PRU Options</a></li>
-      <li><a name="toc-RISC_002dV-Options-1" href="RISC_002dV-Options.html#RISC_002dV-Options">3.19.42 RISC-V Options</a></li>
-      <li><a name="toc-RL78-Options-1" href="RL78-Options.html#RL78-Options">3.19.43 RL78 Options</a></li>
-      <li><a name="toc-IBM-RS_002f6000-and-PowerPC-Options" href="RS_002f6000-and-PowerPC-Options.html#RS_002f6000-and-PowerPC-Options">3.19.44 IBM RS/6000 and PowerPC Options</a></li>
-      <li><a name="toc-RX-Options-1" href="RX-Options.html#RX-Options">3.19.45 RX Options</a></li>
-      <li><a name="toc-S_002f390-and-zSeries-Options-1" href="S_002f390-and-zSeries-Options.html#S_002f390-and-zSeries-Options">3.19.46 S/390 and zSeries Options</a></li>
-      <li><a name="toc-Score-Options-1" href="Score-Options.html#Score-Options">3.19.47 Score Options</a></li>
-      <li><a name="toc-SH-Options-1" href="SH-Options.html#SH-Options">3.19.48 SH Options</a></li>
-      <li><a name="toc-Solaris-2-Options-1" href="Solaris-2-Options.html#Solaris-2-Options">3.19.49 Solaris 2 Options</a></li>
-      <li><a name="toc-SPARC-Options-1" href="SPARC-Options.html#SPARC-Options">3.19.50 SPARC Options</a></li>
-      <li><a name="toc-Options-for-System-V" href="System-V-Options.html#System-V-Options">3.19.51 Options for System V</a></li>
-      <li><a name="toc-TILE_002dGx-Options-1" href="TILE_002dGx-Options.html#TILE_002dGx-Options">3.19.52 TILE-Gx Options</a></li>
-      <li><a name="toc-TILEPro-Options-1" href="TILEPro-Options.html#TILEPro-Options">3.19.53 TILEPro Options</a></li>
-      <li><a name="toc-V850-Options-1" href="V850-Options.html#V850-Options">3.19.54 V850 Options</a></li>
-      <li><a name="toc-VAX-Options-1" href="VAX-Options.html#VAX-Options">3.19.55 VAX Options</a></li>
-      <li><a name="toc-Visium-Options-1" href="Visium-Options.html#Visium-Options">3.19.56 Visium Options</a></li>
-      <li><a name="toc-VMS-Options-1" href="VMS-Options.html#VMS-Options">3.19.57 VMS Options</a></li>
-      <li><a name="toc-VxWorks-Options-1" href="VxWorks-Options.html#VxWorks-Options">3.19.58 VxWorks Options</a></li>
-      <li><a name="toc-x86-Options-1" href="x86-Options.html#x86-Options">3.19.59 x86 Options</a></li>
-      <li><a name="toc-x86-Windows-Options-1" href="x86-Windows-Options.html#x86-Windows-Options">3.19.60 x86 Windows Options</a></li>
-      <li><a name="toc-Xstormy16-Options-1" href="Xstormy16-Options.html#Xstormy16-Options">3.19.61 Xstormy16 Options</a></li>
-      <li><a name="toc-Xtensa-Options-1" href="Xtensa-Options.html#Xtensa-Options">3.19.62 Xtensa Options</a></li>
-      <li><a name="toc-zSeries-Options-1" href="zSeries-Options.html#zSeries-Options">3.19.63 zSeries Options</a></li>
+      <li><a name="toc-MicroBlaze-Options-1" href="MicroBlaze-Options.html#MicroBlaze-Options">3.19.27 MicroBlaze Options</a></li>
+      <li><a name="toc-MIPS-Options-1" href="MIPS-Options.html#MIPS-Options">3.19.28 MIPS Options</a></li>
+      <li><a name="toc-MMIX-Options-1" href="MMIX-Options.html#MMIX-Options">3.19.29 MMIX Options</a></li>
+      <li><a name="toc-MN10300-Options-1" href="MN10300-Options.html#MN10300-Options">3.19.30 MN10300 Options</a></li>
+      <li><a name="toc-Moxie-Options-1" href="Moxie-Options.html#Moxie-Options">3.19.31 Moxie Options</a></li>
+      <li><a name="toc-MSP430-Options-1" href="MSP430-Options.html#MSP430-Options">3.19.32 MSP430 Options</a></li>
+      <li><a name="toc-NDS32-Options-1" href="NDS32-Options.html#NDS32-Options">3.19.33 NDS32 Options</a></li>
+      <li><a name="toc-Nios-II-Options-1" href="Nios-II-Options.html#Nios-II-Options">3.19.34 Nios II Options</a></li>
+      <li><a name="toc-Nvidia-PTX-Options-1" href="Nvidia-PTX-Options.html#Nvidia-PTX-Options">3.19.35 Nvidia PTX Options</a></li>
+      <li><a name="toc-OpenRISC-Options-1" href="OpenRISC-Options.html#OpenRISC-Options">3.19.36 OpenRISC Options</a></li>
+      <li><a name="toc-PDP_002d11-Options-1" href="PDP_002d11-Options.html#PDP_002d11-Options">3.19.37 PDP-11 Options</a></li>
+      <li><a name="toc-PowerPC-Options-1" href="PowerPC-Options.html#PowerPC-Options">3.19.38 PowerPC Options</a></li>
+      <li><a name="toc-PRU-Options-1" href="PRU-Options.html#PRU-Options">3.19.39 PRU Options</a></li>
+      <li><a name="toc-RISC_002dV-Options-1" href="RISC_002dV-Options.html#RISC_002dV-Options">3.19.40 RISC-V Options</a></li>
+      <li><a name="toc-RL78-Options-1" href="RL78-Options.html#RL78-Options">3.19.41 RL78 Options</a></li>
+      <li><a name="toc-IBM-RS_002f6000-and-PowerPC-Options" href="RS_002f6000-and-PowerPC-Options.html#RS_002f6000-and-PowerPC-Options">3.19.42 IBM RS/6000 and PowerPC Options</a></li>
+      <li><a name="toc-RX-Options-1" href="RX-Options.html#RX-Options">3.19.43 RX Options</a></li>
+      <li><a name="toc-S_002f390-and-zSeries-Options-1" href="S_002f390-and-zSeries-Options.html#S_002f390-and-zSeries-Options">3.19.44 S/390 and zSeries Options</a></li>
+      <li><a name="toc-SH-Options-1" href="SH-Options.html#SH-Options">3.19.45 SH Options</a></li>
+      <li><a name="toc-Solaris-2-Options-1" href="Solaris-2-Options.html#Solaris-2-Options">3.19.46 Solaris 2 Options</a></li>
+      <li><a name="toc-SPARC-Options-1" href="SPARC-Options.html#SPARC-Options">3.19.47 SPARC Options</a></li>
+      <li><a name="toc-Options-for-System-V" href="System-V-Options.html#System-V-Options">3.19.48 Options for System V</a></li>
+      <li><a name="toc-V850-Options-1" href="V850-Options.html#V850-Options">3.19.49 V850 Options</a></li>
+      <li><a name="toc-VAX-Options-1" href="VAX-Options.html#VAX-Options">3.19.50 VAX Options</a></li>
+      <li><a name="toc-Visium-Options-1" href="Visium-Options.html#Visium-Options">3.19.51 Visium Options</a></li>
+      <li><a name="toc-VMS-Options-1" href="VMS-Options.html#VMS-Options">3.19.52 VMS Options</a></li>
+      <li><a name="toc-VxWorks-Options-1" href="VxWorks-Options.html#VxWorks-Options">3.19.53 VxWorks Options</a></li>
+      <li><a name="toc-x86-Options-1" href="x86-Options.html#x86-Options">3.19.54 x86 Options</a></li>
+      <li><a name="toc-x86-Windows-Options-1" href="x86-Windows-Options.html#x86-Windows-Options">3.19.55 x86 Windows Options</a></li>
+      <li><a name="toc-Xstormy16-Options-1" href="Xstormy16-Options.html#Xstormy16-Options">3.19.56 Xstormy16 Options</a></li>
+      <li><a name="toc-Xtensa-Options-1" href="Xtensa-Options.html#Xtensa-Options">3.19.57 Xtensa Options</a></li>
+      <li><a name="toc-zSeries-Options-1" href="zSeries-Options.html#zSeries-Options">3.19.58 zSeries Options</a></li>
     </ul></li>
     <li><a name="toc-Specifying-Subprocesses-and-the-Switches-to-Pass-to-Them" href="Spec-Files.html#Spec-Files">3.20 Specifying Subprocesses and the Switches to Pass to Them</a></li>
     <li><a name="toc-Environment-Variables-Affecting-GCC" href="Environment-Variables.html#Environment-Variables">3.21 Environment Variables Affecting GCC</a></li>
@@ -303,8 +307,9 @@ Texts being (a) (see below), and with the Back-Cover Texts being (b)
     <ul class="no-bullet">
       <li><a name="toc-AVR-Named-Address-Spaces-1" href="Named-Address-Spaces.html#AVR-Named-Address-Spaces-1">6.17.1 AVR Named Address Spaces</a></li>
       <li><a name="toc-M32C-Named-Address-Spaces" href="Named-Address-Spaces.html#M32C-Named-Address-Spaces">6.17.2 M32C Named Address Spaces</a></li>
-      <li><a name="toc-RL78-Named-Address-Spaces" href="Named-Address-Spaces.html#RL78-Named-Address-Spaces">6.17.3 RL78 Named Address Spaces</a></li>
-      <li><a name="toc-x86-Named-Address-Spaces" href="Named-Address-Spaces.html#x86-Named-Address-Spaces">6.17.4 x86 Named Address Spaces</a></li>
+      <li><a name="toc-PRU-Named-Address-Spaces" href="Named-Address-Spaces.html#PRU-Named-Address-Spaces">6.17.3 PRU Named Address Spaces</a></li>
+      <li><a name="toc-RL78-Named-Address-Spaces" href="Named-Address-Spaces.html#RL78-Named-Address-Spaces">6.17.4 RL78 Named Address Spaces</a></li>
+      <li><a name="toc-x86-Named-Address-Spaces" href="Named-Address-Spaces.html#x86-Named-Address-Spaces">6.17.5 x86 Named Address Spaces</a></li>
     </ul></li>
     <li><a name="toc-Arrays-of-Length-Zero" href="Zero-Length.html#Zero-Length">6.18 Arrays of Length Zero</a></li>
     <li><a name="toc-Structures-with-No-Members" href="Empty-Structures.html#Empty-Structures">6.19 Structures with No Members</a></li>
@@ -334,34 +339,32 @@ Texts being (a) (see below), and with the Back-Cover Texts being (b)
       <li><a name="toc-AVR-Function-Attributes-1" href="AVR-Function-Attributes.html#AVR-Function-Attributes">6.33.6 AVR Function Attributes</a></li>
       <li><a name="toc-Blackfin-Function-Attributes-1" href="Blackfin-Function-Attributes.html#Blackfin-Function-Attributes">6.33.7 Blackfin Function Attributes</a></li>
       <li><a name="toc-BPF-Function-Attributes-1" href="BPF-Function-Attributes.html#BPF-Function-Attributes">6.33.8 BPF Function Attributes</a></li>
-      <li><a name="toc-CR16-Function-Attributes-1" href="CR16-Function-Attributes.html#CR16-Function-Attributes">6.33.9 CR16 Function Attributes</a></li>
-      <li><a name="toc-C_002dSKY-Function-Attributes-1" href="C_002dSKY-Function-Attributes.html#C_002dSKY-Function-Attributes">6.33.10 C-SKY Function Attributes</a></li>
-      <li><a name="toc-Epiphany-Function-Attributes-1" href="Epiphany-Function-Attributes.html#Epiphany-Function-Attributes">6.33.11 Epiphany Function Attributes</a></li>
-      <li><a name="toc-H8_002f300-Function-Attributes-1" href="H8_002f300-Function-Attributes.html#H8_002f300-Function-Attributes">6.33.12 H8/300 Function Attributes</a></li>
-      <li><a name="toc-IA_002d64-Function-Attributes-1" href="IA_002d64-Function-Attributes.html#IA_002d64-Function-Attributes">6.33.13 IA-64 Function Attributes</a></li>
-      <li><a name="toc-M32C-Function-Attributes-1" href="M32C-Function-Attributes.html#M32C-Function-Attributes">6.33.14 M32C Function Attributes</a></li>
-      <li><a name="toc-M32R_002fD-Function-Attributes-1" href="M32R_002fD-Function-Attributes.html#M32R_002fD-Function-Attributes">6.33.15 M32R/D Function Attributes</a></li>
-      <li><a name="toc-m68k-Function-Attributes-1" href="m68k-Function-Attributes.html#m68k-Function-Attributes">6.33.16 m68k Function Attributes</a></li>
-      <li><a name="toc-MCORE-Function-Attributes-1" href="MCORE-Function-Attributes.html#MCORE-Function-Attributes">6.33.17 MCORE Function Attributes</a></li>
-      <li><a name="toc-MeP-Function-Attributes-1" href="MeP-Function-Attributes.html#MeP-Function-Attributes">6.33.18 MeP Function Attributes</a></li>
-      <li><a name="toc-MicroBlaze-Function-Attributes-1" href="MicroBlaze-Function-Attributes.html#MicroBlaze-Function-Attributes">6.33.19 MicroBlaze Function Attributes</a></li>
-      <li><a name="toc-Microsoft-Windows-Function-Attributes-1" href="Microsoft-Windows-Function-Attributes.html#Microsoft-Windows-Function-Attributes">6.33.20 Microsoft Windows Function Attributes</a></li>
-      <li><a name="toc-MIPS-Function-Attributes-1" href="MIPS-Function-Attributes.html#MIPS-Function-Attributes">6.33.21 MIPS Function Attributes</a></li>
-      <li><a name="toc-MSP430-Function-Attributes-1" href="MSP430-Function-Attributes.html#MSP430-Function-Attributes">6.33.22 MSP430 Function Attributes</a></li>
-      <li><a name="toc-NDS32-Function-Attributes-1" href="NDS32-Function-Attributes.html#NDS32-Function-Attributes">6.33.23 NDS32 Function Attributes</a></li>
-      <li><a name="toc-Nios-II-Function-Attributes-1" href="Nios-II-Function-Attributes.html#Nios-II-Function-Attributes">6.33.24 Nios II Function Attributes</a></li>
-      <li><a name="toc-Nvidia-PTX-Function-Attributes-1" href="Nvidia-PTX-Function-Attributes.html#Nvidia-PTX-Function-Attributes">6.33.25 Nvidia PTX Function Attributes</a></li>
-      <li><a name="toc-PowerPC-Function-Attributes-1" href="PowerPC-Function-Attributes.html#PowerPC-Function-Attributes">6.33.26 PowerPC Function Attributes</a></li>
-      <li><a name="toc-RISC_002dV-Function-Attributes-1" href="RISC_002dV-Function-Attributes.html#RISC_002dV-Function-Attributes">6.33.27 RISC-V Function Attributes</a></li>
-      <li><a name="toc-RL78-Function-Attributes-1" href="RL78-Function-Attributes.html#RL78-Function-Attributes">6.33.28 RL78 Function Attributes</a></li>
-      <li><a name="toc-RX-Function-Attributes-1" href="RX-Function-Attributes.html#RX-Function-Attributes">6.33.29 RX Function Attributes</a></li>
-      <li><a name="toc-S_002f390-Function-Attributes-1" href="S_002f390-Function-Attributes.html#S_002f390-Function-Attributes">6.33.30 S/390 Function Attributes</a></li>
-      <li><a name="toc-SH-Function-Attributes-1" href="SH-Function-Attributes.html#SH-Function-Attributes">6.33.31 SH Function Attributes</a></li>
-      <li><a name="toc-Symbian-OS-Function-Attributes-1" href="Symbian-OS-Function-Attributes.html#Symbian-OS-Function-Attributes">6.33.32 Symbian OS Function Attributes</a></li>
-      <li><a name="toc-V850-Function-Attributes-1" href="V850-Function-Attributes.html#V850-Function-Attributes">6.33.33 V850 Function Attributes</a></li>
-      <li><a name="toc-Visium-Function-Attributes-1" href="Visium-Function-Attributes.html#Visium-Function-Attributes">6.33.34 Visium Function Attributes</a></li>
-      <li><a name="toc-x86-Function-Attributes-1" href="x86-Function-Attributes.html#x86-Function-Attributes">6.33.35 x86 Function Attributes</a></li>
-      <li><a name="toc-Xstormy16-Function-Attributes-1" href="Xstormy16-Function-Attributes.html#Xstormy16-Function-Attributes">6.33.36 Xstormy16 Function Attributes</a></li>
+      <li><a name="toc-C_002dSKY-Function-Attributes-1" href="C_002dSKY-Function-Attributes.html#C_002dSKY-Function-Attributes">6.33.9 C-SKY Function Attributes</a></li>
+      <li><a name="toc-Epiphany-Function-Attributes-1" href="Epiphany-Function-Attributes.html#Epiphany-Function-Attributes">6.33.10 Epiphany Function Attributes</a></li>
+      <li><a name="toc-H8_002f300-Function-Attributes-1" href="H8_002f300-Function-Attributes.html#H8_002f300-Function-Attributes">6.33.11 H8/300 Function Attributes</a></li>
+      <li><a name="toc-IA_002d64-Function-Attributes-1" href="IA_002d64-Function-Attributes.html#IA_002d64-Function-Attributes">6.33.12 IA-64 Function Attributes</a></li>
+      <li><a name="toc-M32C-Function-Attributes-1" href="M32C-Function-Attributes.html#M32C-Function-Attributes">6.33.13 M32C Function Attributes</a></li>
+      <li><a name="toc-M32R_002fD-Function-Attributes-1" href="M32R_002fD-Function-Attributes.html#M32R_002fD-Function-Attributes">6.33.14 M32R/D Function Attributes</a></li>
+      <li><a name="toc-m68k-Function-Attributes-1" href="m68k-Function-Attributes.html#m68k-Function-Attributes">6.33.15 m68k Function Attributes</a></li>
+      <li><a name="toc-MCORE-Function-Attributes-1" href="MCORE-Function-Attributes.html#MCORE-Function-Attributes">6.33.16 MCORE Function Attributes</a></li>
+      <li><a name="toc-MicroBlaze-Function-Attributes-1" href="MicroBlaze-Function-Attributes.html#MicroBlaze-Function-Attributes">6.33.17 MicroBlaze Function Attributes</a></li>
+      <li><a name="toc-Microsoft-Windows-Function-Attributes-1" href="Microsoft-Windows-Function-Attributes.html#Microsoft-Windows-Function-Attributes">6.33.18 Microsoft Windows Function Attributes</a></li>
+      <li><a name="toc-MIPS-Function-Attributes-1" href="MIPS-Function-Attributes.html#MIPS-Function-Attributes">6.33.19 MIPS Function Attributes</a></li>
+      <li><a name="toc-MSP430-Function-Attributes-1" href="MSP430-Function-Attributes.html#MSP430-Function-Attributes">6.33.20 MSP430 Function Attributes</a></li>
+      <li><a name="toc-NDS32-Function-Attributes-1" href="NDS32-Function-Attributes.html#NDS32-Function-Attributes">6.33.21 NDS32 Function Attributes</a></li>
+      <li><a name="toc-Nios-II-Function-Attributes-1" href="Nios-II-Function-Attributes.html#Nios-II-Function-Attributes">6.33.22 Nios II Function Attributes</a></li>
+      <li><a name="toc-Nvidia-PTX-Function-Attributes-1" href="Nvidia-PTX-Function-Attributes.html#Nvidia-PTX-Function-Attributes">6.33.23 Nvidia PTX Function Attributes</a></li>
+      <li><a name="toc-PowerPC-Function-Attributes-1" href="PowerPC-Function-Attributes.html#PowerPC-Function-Attributes">6.33.24 PowerPC Function Attributes</a></li>
+      <li><a name="toc-RISC_002dV-Function-Attributes-1" href="RISC_002dV-Function-Attributes.html#RISC_002dV-Function-Attributes">6.33.25 RISC-V Function Attributes</a></li>
+      <li><a name="toc-RL78-Function-Attributes-1" href="RL78-Function-Attributes.html#RL78-Function-Attributes">6.33.26 RL78 Function Attributes</a></li>
+      <li><a name="toc-RX-Function-Attributes-1" href="RX-Function-Attributes.html#RX-Function-Attributes">6.33.27 RX Function Attributes</a></li>
+      <li><a name="toc-S_002f390-Function-Attributes-1" href="S_002f390-Function-Attributes.html#S_002f390-Function-Attributes">6.33.28 S/390 Function Attributes</a></li>
+      <li><a name="toc-SH-Function-Attributes-1" href="SH-Function-Attributes.html#SH-Function-Attributes">6.33.29 SH Function Attributes</a></li>
+      <li><a name="toc-Symbian-OS-Function-Attributes-1" href="Symbian-OS-Function-Attributes.html#Symbian-OS-Function-Attributes">6.33.30 Symbian OS Function Attributes</a></li>
+      <li><a name="toc-V850-Function-Attributes-1" href="V850-Function-Attributes.html#V850-Function-Attributes">6.33.31 V850 Function Attributes</a></li>
+      <li><a name="toc-Visium-Function-Attributes-1" href="Visium-Function-Attributes.html#Visium-Function-Attributes">6.33.32 Visium Function Attributes</a></li>
+      <li><a name="toc-x86-Function-Attributes-1" href="x86-Function-Attributes.html#x86-Function-Attributes">6.33.33 x86 Function Attributes</a></li>
+      <li><a name="toc-Xstormy16-Function-Attributes-1" href="Xstormy16-Function-Attributes.html#Xstormy16-Function-Attributes">6.33.34 Xstormy16 Function Attributes</a></li>
     </ul></li>
     <li><a name="toc-Specifying-Attributes-of-Variables" href="Variable-Attributes.html#Variable-Attributes">6.34 Specifying Attributes of Variables</a>
     <ul class="no-bullet">
@@ -371,8 +374,8 @@ Texts being (a) (see below), and with the Back-Cover Texts being (b)
       <li><a name="toc-Blackfin-Variable-Attributes-1" href="Blackfin-Variable-Attributes.html#Blackfin-Variable-Attributes">6.34.4 Blackfin Variable Attributes</a></li>
       <li><a name="toc-H8_002f300-Variable-Attributes-1" href="H8_002f300-Variable-Attributes.html#H8_002f300-Variable-Attributes">6.34.5 H8/300 Variable Attributes</a></li>
       <li><a name="toc-IA_002d64-Variable-Attributes-1" href="IA_002d64-Variable-Attributes.html#IA_002d64-Variable-Attributes">6.34.6 IA-64 Variable Attributes</a></li>
-      <li><a name="toc-M32R_002fD-Variable-Attributes-1" href="M32R_002fD-Variable-Attributes.html#M32R_002fD-Variable-Attributes">6.34.7 M32R/D Variable Attributes</a></li>
-      <li><a name="toc-MeP-Variable-Attributes-1" href="MeP-Variable-Attributes.html#MeP-Variable-Attributes">6.34.8 MeP Variable Attributes</a></li>
+      <li><a name="toc-LoongArch-Variable-Attributes-1" href="LoongArch-Variable-Attributes.html#LoongArch-Variable-Attributes">6.34.7 LoongArch Variable Attributes</a></li>
+      <li><a name="toc-M32R_002fD-Variable-Attributes-1" href="M32R_002fD-Variable-Attributes.html#M32R_002fD-Variable-Attributes">6.34.8 M32R/D Variable Attributes</a></li>
       <li><a name="toc-Microsoft-Windows-Variable-Attributes-1" href="Microsoft-Windows-Variable-Attributes.html#Microsoft-Windows-Variable-Attributes">6.34.9 Microsoft Windows Variable Attributes</a></li>
       <li><a name="toc-MSP430-Variable-Attributes-1" href="MSP430-Variable-Attributes.html#MSP430-Variable-Attributes">6.34.10 MSP430 Variable Attributes</a></li>
       <li><a name="toc-Nvidia-PTX-Variable-Attributes-1" href="Nvidia-PTX-Variable-Attributes.html#Nvidia-PTX-Variable-Attributes">6.34.11 Nvidia PTX Variable Attributes</a></li>
@@ -387,7 +390,7 @@ Texts being (a) (see below), and with the Back-Cover Texts being (b)
       <li><a name="toc-Common-Type-Attributes-1" href="Common-Type-Attributes.html#Common-Type-Attributes">6.35.1 Common Type Attributes</a></li>
       <li><a name="toc-ARC-Type-Attributes-1" href="ARC-Type-Attributes.html#ARC-Type-Attributes">6.35.2 ARC Type Attributes</a></li>
       <li><a name="toc-ARM-Type-Attributes-1" href="ARM-Type-Attributes.html#ARM-Type-Attributes">6.35.3 ARM Type Attributes</a></li>
-      <li><a name="toc-MeP-Type-Attributes-1" href="MeP-Type-Attributes.html#MeP-Type-Attributes">6.35.4 MeP Type Attributes</a></li>
+      <li><a name="toc-BPF-Type-Attributes-1" href="BPF-Type-Attributes.html#BPF-Type-Attributes">6.35.4 BPF Type Attributes</a></li>
       <li><a name="toc-PowerPC-Type-Attributes-1" href="PowerPC-Type-Attributes.html#PowerPC-Type-Attributes">6.35.5 PowerPC Type Attributes</a></li>
       <li><a name="toc-x86-Type-Attributes-1" href="x86-Type-Attributes.html#x86-Type-Attributes">6.35.6 x86 Type Attributes</a></li>
     </ul></li>
@@ -414,9 +417,11 @@ Texts being (a) (see below), and with the Back-Cover Texts being (b)
         <li><a name="toc-Input-Operands" href="Extended-Asm.html#Input-Operands">6.47.2.5 Input Operands</a></li>
         <li><a name="toc-Clobbers-and-Scratch-Registers-1" href="Extended-Asm.html#Clobbers-and-Scratch-Registers-1">6.47.2.6 Clobbers and Scratch Registers</a></li>
         <li><a name="toc-Goto-Labels" href="Extended-Asm.html#Goto-Labels">6.47.2.7 Goto Labels</a></li>
-        <li><a name="toc-x86-Operand-Modifiers" href="Extended-Asm.html#x86-Operand-Modifiers">6.47.2.8 x86 Operand Modifiers</a></li>
-        <li><a name="toc-x86-Floating_002dPoint-asm-Operands" href="Extended-Asm.html#x86-Floating_002dPoint-asm-Operands">6.47.2.9 x86 Floating-Point <code>asm</code> Operands</a></li>
-        <li><a name="toc-MSP430-Operand-Modifiers" href="Extended-Asm.html#MSP430-Operand-Modifiers">6.47.2.10 MSP430 Operand Modifiers</a></li>
+        <li><a name="toc-Generic-Operand-Modifiers" href="Extended-Asm.html#Generic-Operand-Modifiers">6.47.2.8 Generic Operand Modifiers</a></li>
+        <li><a name="toc-x86-Operand-Modifiers" href="Extended-Asm.html#x86-Operand-Modifiers">6.47.2.9 x86 Operand Modifiers</a></li>
+        <li><a name="toc-x86-Floating_002dPoint-asm-Operands" href="Extended-Asm.html#x86-Floating_002dPoint-asm-Operands">6.47.2.10 x86 Floating-Point <code>asm</code> Operands</a></li>
+        <li><a name="toc-MSP430-Operand-Modifiers" href="Extended-Asm.html#MSP430-Operand-Modifiers">6.47.2.11 MSP430 Operand Modifiers</a></li>
+        <li><a name="toc-LoongArch-Operand-Modifiers" href="Extended-Asm.html#LoongArch-Operand-Modifiers">6.47.2.12 LoongArch Operand Modifiers</a></li>
       </ul></li>
       <li><a name="toc-Constraints-for-asm-Operands" href="Constraints.html#Constraints">6.47.3 Constraints for <code>asm</code> Operands</a>
       <ul class="no-bullet">
@@ -443,7 +448,14 @@ Texts being (a) (see below), and with the Back-Cover Texts being (b)
     <li><a name="toc-Built_002din-Functions-for-Memory-Model-Aware-Atomic-Operations" href="_005f_005fatomic-Builtins.html#g_t_005f_005fatomic-Builtins">6.55 Built-in Functions for Memory Model Aware Atomic Operations</a></li>
     <li><a name="toc-Built_002din-Functions-to-Perform-Arithmetic-with-Overflow-Checking" href="Integer-Overflow-Builtins.html#Integer-Overflow-Builtins">6.56 Built-in Functions to Perform Arithmetic with Overflow Checking</a></li>
     <li><a name="toc-x86_002dSpecific-Memory-Model-Extensions-for-Transactional-Memory" href="x86-specific-memory-model-extensions-for-transactional-memory.html#x86-specific-memory-model-extensions-for-transactional-memory">6.57 x86-Specific Memory Model Extensions for Transactional Memory</a></li>
-    <li><a name="toc-Object-Size-Checking-Built_002din-Functions" href="Object-Size-Checking.html#Object-Size-Checking">6.58 Object Size Checking Built-in Functions</a></li>
+    <li><a name="toc-Object-Size-Checking-1" href="Object-Size-Checking.html#Object-Size-Checking">6.58 Object Size Checking</a>
+    <ul class="no-bullet">
+      <li><a name="toc-Object-Size-Checking-Built_002din-Functions" href="Object-Size-Checking.html#Object-Size-Checking-Built_002din-Functions">6.58.1 Object Size Checking Built-in Functions</a></li>
+      <li><a name="toc-Object-Size-Checking-and-Source-Fortification" href="Object-Size-Checking.html#Object-Size-Checking-and-Source-Fortification">6.58.2 Object Size Checking and Source Fortification</a>
+      <ul class="no-bullet">
+        <li><a name="toc-Formatted-Output-Function-Checking" href="Object-Size-Checking.html#Formatted-Output-Function-Checking">6.58.2.1 Formatted Output Function Checking</a></li>
+      </ul></li>
+    </ul></li>
     <li><a name="toc-Other-Built_002din-Functions-Provided-by-GCC" href="Other-Builtins.html#Other-Builtins">6.59 Other Built-in Functions Provided by GCC</a></li>
     <li><a name="toc-Built_002din-Functions-Specific-to-Particular-Target-Machines" href="Target-Builtins.html#Target-Builtins">6.60 Built-in Functions Specific to Particular Target Machines</a>
     <ul class="no-bullet">
@@ -467,22 +479,22 @@ Texts being (a) (see below), and with the Back-Cover Texts being (b)
         <li><a name="toc-Raw-Read_002fWrite-Functions" href="Raw-read_002fwrite-Functions.html#Raw-read_002fwrite-Functions">6.60.13.4 Raw Read/Write Functions</a></li>
         <li><a name="toc-Other-Built_002din-Functions-1" href="Other-Built_002din-Functions.html#Other-Built_002din-Functions">6.60.13.5 Other Built-in Functions</a></li>
       </ul></li>
-      <li><a name="toc-MIPS-DSP-Built_002din-Functions-1" href="MIPS-DSP-Built_002din-Functions.html#MIPS-DSP-Built_002din-Functions">6.60.14 MIPS DSP Built-in Functions</a></li>
-      <li><a name="toc-MIPS-Paired_002dSingle-Support-1" href="MIPS-Paired_002dSingle-Support.html#MIPS-Paired_002dSingle-Support">6.60.15 MIPS Paired-Single Support</a></li>
-      <li><a name="toc-MIPS-Loongson-Built_002din-Functions-1" href="MIPS-Loongson-Built_002din-Functions.html#MIPS-Loongson-Built_002din-Functions">6.60.16 MIPS Loongson Built-in Functions</a>
+      <li><a name="toc-LoongArch-Base-Built_002din-Functions-1" href="LoongArch-Base-Built_002din-Functions.html#LoongArch-Base-Built_002din-Functions">6.60.14 LoongArch Base Built-in Functions</a></li>
+      <li><a name="toc-MIPS-DSP-Built_002din-Functions-1" href="MIPS-DSP-Built_002din-Functions.html#MIPS-DSP-Built_002din-Functions">6.60.15 MIPS DSP Built-in Functions</a></li>
+      <li><a name="toc-MIPS-Paired_002dSingle-Support-1" href="MIPS-Paired_002dSingle-Support.html#MIPS-Paired_002dSingle-Support">6.60.16 MIPS Paired-Single Support</a></li>
+      <li><a name="toc-MIPS-Loongson-Built_002din-Functions-1" href="MIPS-Loongson-Built_002din-Functions.html#MIPS-Loongson-Built_002din-Functions">6.60.17 MIPS Loongson Built-in Functions</a>
       <ul class="no-bullet">
-        <li><a name="toc-Paired_002dSingle-Arithmetic-1" href="Paired_002dSingle-Arithmetic.html#Paired_002dSingle-Arithmetic">6.60.16.1 Paired-Single Arithmetic</a></li>
-        <li><a name="toc-Paired_002dSingle-Built_002din-Functions-1" href="Paired_002dSingle-Built_002din-Functions.html#Paired_002dSingle-Built_002din-Functions">6.60.16.2 Paired-Single Built-in Functions</a></li>
-        <li><a name="toc-MIPS_002d3D-Built_002din-Functions-1" href="MIPS_002d3D-Built_002din-Functions.html#MIPS_002d3D-Built_002din-Functions">6.60.16.3 MIPS-3D Built-in Functions</a></li>
+        <li><a name="toc-Paired_002dSingle-Arithmetic-1" href="Paired_002dSingle-Arithmetic.html#Paired_002dSingle-Arithmetic">6.60.17.1 Paired-Single Arithmetic</a></li>
+        <li><a name="toc-Paired_002dSingle-Built_002din-Functions-1" href="Paired_002dSingle-Built_002din-Functions.html#Paired_002dSingle-Built_002din-Functions">6.60.17.2 Paired-Single Built-in Functions</a></li>
+        <li><a name="toc-MIPS_002d3D-Built_002din-Functions-1" href="MIPS_002d3D-Built_002din-Functions.html#MIPS_002d3D-Built_002din-Functions">6.60.17.3 MIPS-3D Built-in Functions</a></li>
       </ul></li>
-      <li><a name="toc-MIPS-SIMD-Architecture-_0028MSA_0029-Support-1" href="MIPS-SIMD-Architecture-_0028MSA_0029-Support.html#MIPS-SIMD-Architecture-_0028MSA_0029-Support">6.60.17 MIPS SIMD Architecture (MSA) Support</a>
+      <li><a name="toc-MIPS-SIMD-Architecture-_0028MSA_0029-Support-1" href="MIPS-SIMD-Architecture-_0028MSA_0029-Support.html#MIPS-SIMD-Architecture-_0028MSA_0029-Support">6.60.18 MIPS SIMD Architecture (MSA) Support</a>
       <ul class="no-bullet">
-        <li><a name="toc-MIPS-SIMD-Architecture-Built_002din-Functions-1" href="MIPS-SIMD-Architecture-Built_002din-Functions.html#MIPS-SIMD-Architecture-Built_002din-Functions">6.60.17.1 MIPS SIMD Architecture Built-in Functions</a></li>
+        <li><a name="toc-MIPS-SIMD-Architecture-Built_002din-Functions-1" href="MIPS-SIMD-Architecture-Built_002din-Functions.html#MIPS-SIMD-Architecture-Built_002din-Functions">6.60.18.1 MIPS SIMD Architecture Built-in Functions</a></li>
       </ul></li>
-      <li><a name="toc-Other-MIPS-Built_002din-Functions-1" href="Other-MIPS-Built_002din-Functions.html#Other-MIPS-Built_002din-Functions">6.60.18 Other MIPS Built-in Functions</a></li>
-      <li><a name="toc-MSP430-Built_002din-Functions-1" href="MSP430-Built_002din-Functions.html#MSP430-Built_002din-Functions">6.60.19 MSP430 Built-in Functions</a></li>
-      <li><a name="toc-NDS32-Built_002din-Functions-1" href="NDS32-Built_002din-Functions.html#NDS32-Built_002din-Functions">6.60.20 NDS32 Built-in Functions</a></li>
-      <li><a name="toc-picoChip-Built_002din-Functions-1" href="picoChip-Built_002din-Functions.html#picoChip-Built_002din-Functions">6.60.21 picoChip Built-in Functions</a></li>
+      <li><a name="toc-Other-MIPS-Built_002din-Functions-1" href="Other-MIPS-Built_002din-Functions.html#Other-MIPS-Built_002din-Functions">6.60.19 Other MIPS Built-in Functions</a></li>
+      <li><a name="toc-MSP430-Built_002din-Functions-1" href="MSP430-Built_002din-Functions.html#MSP430-Built_002din-Functions">6.60.20 MSP430 Built-in Functions</a></li>
+      <li><a name="toc-NDS32-Built_002din-Functions-1" href="NDS32-Built_002din-Functions.html#NDS32-Built_002din-Functions">6.60.21 NDS32 Built-in Functions</a></li>
       <li><a name="toc-Basic-PowerPC-Built_002din-Functions-1" href="Basic-PowerPC-Built_002din-Functions.html#Basic-PowerPC-Built_002din-Functions">6.60.22 Basic PowerPC Built-in Functions</a>
       <ul class="no-bullet">
         <li><a name="toc-Basic-PowerPC-Built_002din-Functions-Available-on-all-Configurations-1" href="Basic-PowerPC-Built_002din-Functions-Available-on-all-Configurations.html#Basic-PowerPC-Built_002din-Functions-Available-on-all-Configurations">6.60.22.1 Basic PowerPC Built-in Functions Available on all Configurations</a></li>
@@ -509,16 +521,15 @@ Texts being (a) (see below), and with the Back-Cover Texts being (b)
       <li><a name="toc-PowerPC-Matrix_002dMultiply-Assist-Built_002din-Functions-1" href="PowerPC-Matrix_002dMultiply-Assist-Built_002din-Functions.html#PowerPC-Matrix_002dMultiply-Assist-Built_002din-Functions">6.60.26 PowerPC Matrix-Multiply Assist Built-in Functions</a></li>
       <li><a name="toc-PRU-Built_002din-Functions-1" href="PRU-Built_002din-Functions.html#PRU-Built_002din-Functions">6.60.27 PRU Built-in Functions</a></li>
       <li><a name="toc-RISC_002dV-Built_002din-Functions-1" href="RISC_002dV-Built_002din-Functions.html#RISC_002dV-Built_002din-Functions">6.60.28 RISC-V Built-in Functions</a></li>
-      <li><a name="toc-RX-Built_002din-Functions-1" href="RX-Built_002din-Functions.html#RX-Built_002din-Functions">6.60.29 RX Built-in Functions</a></li>
-      <li><a name="toc-S_002f390-System-z-Built_002din-Functions-1" href="S_002f390-System-z-Built_002din-Functions.html#S_002f390-System-z-Built_002din-Functions">6.60.30 S/390 System z Built-in Functions</a></li>
-      <li><a name="toc-SH-Built_002din-Functions-1" href="SH-Built_002din-Functions.html#SH-Built_002din-Functions">6.60.31 SH Built-in Functions</a></li>
-      <li><a name="toc-SPARC-VIS-Built_002din-Functions-1" href="SPARC-VIS-Built_002din-Functions.html#SPARC-VIS-Built_002din-Functions">6.60.32 SPARC VIS Built-in Functions</a></li>
-      <li><a name="toc-TI-C6X-Built_002din-Functions-1" href="TI-C6X-Built_002din-Functions.html#TI-C6X-Built_002din-Functions">6.60.33 TI C6X Built-in Functions</a></li>
-      <li><a name="toc-TILE_002dGx-Built_002din-Functions-1" href="TILE_002dGx-Built_002din-Functions.html#TILE_002dGx-Built_002din-Functions">6.60.34 TILE-Gx Built-in Functions</a></li>
-      <li><a name="toc-TILEPro-Built_002din-Functions-1" href="TILEPro-Built_002din-Functions.html#TILEPro-Built_002din-Functions">6.60.35 TILEPro Built-in Functions</a></li>
-      <li><a name="toc-x86-Built_002din-Functions-1" href="x86-Built_002din-Functions.html#x86-Built_002din-Functions">6.60.36 x86 Built-in Functions</a></li>
-      <li><a name="toc-x86-Transactional-Memory-Intrinsics" href="x86-transactional-memory-intrinsics.html#x86-transactional-memory-intrinsics">6.60.37 x86 Transactional Memory Intrinsics</a></li>
-      <li><a name="toc-x86-Control_002dFlow-Protection-Intrinsics" href="x86-control_002dflow-protection-intrinsics.html#x86-control_002dflow-protection-intrinsics">6.60.38 x86 Control-Flow Protection Intrinsics</a></li>
+      <li><a name="toc-RISC_002dV-Vector-Intrinsics-1" href="RISC_002dV-Vector-Intrinsics.html#RISC_002dV-Vector-Intrinsics">6.60.29 RISC-V Vector Intrinsics</a></li>
+      <li><a name="toc-RX-Built_002din-Functions-1" href="RX-Built_002din-Functions.html#RX-Built_002din-Functions">6.60.30 RX Built-in Functions</a></li>
+      <li><a name="toc-S_002f390-System-z-Built_002din-Functions-1" href="S_002f390-System-z-Built_002din-Functions.html#S_002f390-System-z-Built_002din-Functions">6.60.31 S/390 System z Built-in Functions</a></li>
+      <li><a name="toc-SH-Built_002din-Functions-1" href="SH-Built_002din-Functions.html#SH-Built_002din-Functions">6.60.32 SH Built-in Functions</a></li>
+      <li><a name="toc-SPARC-VIS-Built_002din-Functions-1" href="SPARC-VIS-Built_002din-Functions.html#SPARC-VIS-Built_002din-Functions">6.60.33 SPARC VIS Built-in Functions</a></li>
+      <li><a name="toc-TI-C6X-Built_002din-Functions-1" href="TI-C6X-Built_002din-Functions.html#TI-C6X-Built_002din-Functions">6.60.34 TI C6X Built-in Functions</a></li>
+      <li><a name="toc-x86-Built_002din-Functions-1" href="x86-Built_002din-Functions.html#x86-Built_002din-Functions">6.60.35 x86 Built-in Functions</a></li>
+      <li><a name="toc-x86-Transactional-Memory-Intrinsics" href="x86-transactional-memory-intrinsics.html#x86-transactional-memory-intrinsics">6.60.36 x86 Transactional Memory Intrinsics</a></li>
+      <li><a name="toc-x86-Control_002dFlow-Protection-Intrinsics" href="x86-control_002dflow-protection-intrinsics.html#x86-control_002dflow-protection-intrinsics">6.60.37 x86 Control-Flow Protection Intrinsics</a></li>
     </ul></li>
     <li><a name="toc-Format-Checks-Specific-to-Particular-Target-Machines" href="Target-Format-Checks.html#Target-Format-Checks">6.61 Format Checks Specific to Particular Target Machines</a>
     <ul class="no-bullet">
@@ -530,20 +541,19 @@ Texts being (a) (see below), and with the Back-Cover Texts being (b)
       <li><a name="toc-AArch64-Pragmas-1" href="AArch64-Pragmas.html#AArch64-Pragmas">6.62.1 AArch64 Pragmas</a></li>
       <li><a name="toc-ARM-Pragmas-1" href="ARM-Pragmas.html#ARM-Pragmas">6.62.2 ARM Pragmas</a></li>
       <li><a name="toc-M32C-Pragmas-1" href="M32C-Pragmas.html#M32C-Pragmas">6.62.3 M32C Pragmas</a></li>
-      <li><a name="toc-MeP-Pragmas-1" href="MeP-Pragmas.html#MeP-Pragmas">6.62.4 MeP Pragmas</a></li>
-      <li><a name="toc-PRU-Pragmas-1" href="PRU-Pragmas.html#PRU-Pragmas">6.62.5 PRU Pragmas</a></li>
-      <li><a name="toc-RS_002f6000-and-PowerPC-Pragmas-1" href="RS_002f6000-and-PowerPC-Pragmas.html#RS_002f6000-and-PowerPC-Pragmas">6.62.6 RS/6000 and PowerPC Pragmas</a></li>
-      <li><a name="toc-S_002f390-Pragmas-1" href="S_002f390-Pragmas.html#S_002f390-Pragmas">6.62.7 S/390 Pragmas</a></li>
-      <li><a name="toc-Darwin-Pragmas-1" href="Darwin-Pragmas.html#Darwin-Pragmas">6.62.8 Darwin Pragmas</a></li>
-      <li><a name="toc-Solaris-Pragmas-1" href="Solaris-Pragmas.html#Solaris-Pragmas">6.62.9 Solaris Pragmas</a></li>
-      <li><a name="toc-Symbol_002dRenaming-Pragmas-1" href="Symbol_002dRenaming-Pragmas.html#Symbol_002dRenaming-Pragmas">6.62.10 Symbol-Renaming Pragmas</a></li>
-      <li><a name="toc-Structure_002dLayout-Pragmas-1" href="Structure_002dLayout-Pragmas.html#Structure_002dLayout-Pragmas">6.62.11 Structure-Layout Pragmas</a></li>
-      <li><a name="toc-Weak-Pragmas-1" href="Weak-Pragmas.html#Weak-Pragmas">6.62.12 Weak Pragmas</a></li>
-      <li><a name="toc-Diagnostic-Pragmas-1" href="Diagnostic-Pragmas.html#Diagnostic-Pragmas">6.62.13 Diagnostic Pragmas</a></li>
-      <li><a name="toc-Visibility-Pragmas-1" href="Visibility-Pragmas.html#Visibility-Pragmas">6.62.14 Visibility Pragmas</a></li>
-      <li><a name="toc-Push_002fPop-Macro-Pragmas-1" href="Push_002fPop-Macro-Pragmas.html#Push_002fPop-Macro-Pragmas">6.62.15 Push/Pop Macro Pragmas</a></li>
-      <li><a name="toc-Function-Specific-Option-Pragmas-1" href="Function-Specific-Option-Pragmas.html#Function-Specific-Option-Pragmas">6.62.16 Function Specific Option Pragmas</a></li>
-      <li><a name="toc-Loop_002dSpecific-Pragmas-1" href="Loop_002dSpecific-Pragmas.html#Loop_002dSpecific-Pragmas">6.62.17 Loop-Specific Pragmas</a></li>
+      <li><a name="toc-PRU-Pragmas-1" href="PRU-Pragmas.html#PRU-Pragmas">6.62.4 PRU Pragmas</a></li>
+      <li><a name="toc-RS_002f6000-and-PowerPC-Pragmas-1" href="RS_002f6000-and-PowerPC-Pragmas.html#RS_002f6000-and-PowerPC-Pragmas">6.62.5 RS/6000 and PowerPC Pragmas</a></li>
+      <li><a name="toc-S_002f390-Pragmas-1" href="S_002f390-Pragmas.html#S_002f390-Pragmas">6.62.6 S/390 Pragmas</a></li>
+      <li><a name="toc-Darwin-Pragmas-1" href="Darwin-Pragmas.html#Darwin-Pragmas">6.62.7 Darwin Pragmas</a></li>
+      <li><a name="toc-Solaris-Pragmas-1" href="Solaris-Pragmas.html#Solaris-Pragmas">6.62.8 Solaris Pragmas</a></li>
+      <li><a name="toc-Symbol_002dRenaming-Pragmas-1" href="Symbol_002dRenaming-Pragmas.html#Symbol_002dRenaming-Pragmas">6.62.9 Symbol-Renaming Pragmas</a></li>
+      <li><a name="toc-Structure_002dLayout-Pragmas-1" href="Structure_002dLayout-Pragmas.html#Structure_002dLayout-Pragmas">6.62.10 Structure-Layout Pragmas</a></li>
+      <li><a name="toc-Weak-Pragmas-1" href="Weak-Pragmas.html#Weak-Pragmas">6.62.11 Weak Pragmas</a></li>
+      <li><a name="toc-Diagnostic-Pragmas-1" href="Diagnostic-Pragmas.html#Diagnostic-Pragmas">6.62.12 Diagnostic Pragmas</a></li>
+      <li><a name="toc-Visibility-Pragmas-1" href="Visibility-Pragmas.html#Visibility-Pragmas">6.62.13 Visibility Pragmas</a></li>
+      <li><a name="toc-Push_002fPop-Macro-Pragmas-1" href="Push_002fPop-Macro-Pragmas.html#Push_002fPop-Macro-Pragmas">6.62.14 Push/Pop Macro Pragmas</a></li>
+      <li><a name="toc-Function-Specific-Option-Pragmas-1" href="Function-Specific-Option-Pragmas.html#Function-Specific-Option-Pragmas">6.62.15 Function Specific Option Pragmas</a></li>
+      <li><a name="toc-Loop_002dSpecific-Pragmas-1" href="Loop_002dSpecific-Pragmas.html#Loop_002dSpecific-Pragmas">6.62.16 Loop-Specific Pragmas</a></li>
     </ul></li>
     <li><a name="toc-Unnamed-Structure-and-Union-Fields" href="Unnamed-Fields.html#Unnamed-Fields">6.63 Unnamed Structure and Union Fields</a></li>
     <li><a name="toc-Thread_002dLocal-Storage" href="Thread_002dLocal.html#Thread_002dLocal">6.64 Thread-Local Storage</a>
@@ -611,6 +621,12 @@ Texts being (a) (see below), and with the Back-Cover Texts being (b)
     <li><a name="toc-Using-gcov-with-GCC-Optimization" href="Gcov-and-Optimization.html#Gcov-and-Optimization">10.3 Using <code>gcov</code> with GCC Optimization</a></li>
     <li><a name="toc-Brief-Description-of-gcov-Data-Files" href="Gcov-Data-Files.html#Gcov-Data-Files">10.4 Brief Description of <code>gcov</code> Data Files</a></li>
     <li><a name="toc-Data-File-Relocation-to-Support-Cross_002dProfiling" href="Cross_002dprofiling.html#Cross_002dprofiling">10.5 Data File Relocation to Support Cross-Profiling</a></li>
+    <li><a name="toc-Profiling-and-Test-Coverage-in-Freestanding-Environments" href="Freestanding-Environments.html#Freestanding-Environments">10.6 Profiling and Test Coverage in Freestanding Environments</a>
+    <ul class="no-bullet">
+      <li><a name="toc-Overview" href="Freestanding-Environments.html#Overview">10.6.1 Overview</a></li>
+      <li><a name="toc-Tutorial" href="Freestanding-Environments.html#Tutorial">10.6.2 Tutorial</a></li>
+      <li><a name="toc-System-Initialization-Caveats" href="Freestanding-Environments.html#System-Initialization-Caveats">10.6.3 System Initialization Caveats</a></li>
+    </ul></li>
   </ul></li>
   <li><a name="toc-gcov_002dtool_002d_002d_002dan-Offline-Gcda-Profile-Processing-Tool" href="Gcov_002dtool.html#Gcov_002dtool">11 <code>gcov-tool</code>&mdash;an Offline Gcda Profile Processing Tool</a>
   <ul class="no-bullet">
@@ -660,8 +676,11 @@ Texts being (a) (see below), and with the Back-Cover Texts being (b)
     <li><a name="toc-ADDENDUM_003a-How-to-use-this-License-for-your-documents" href="GNU-Free-Documentation-License.html#ADDENDUM_003a-How-to-use-this-License-for-your-documents">ADDENDUM: How to use this License for your documents</a></li>
   </ul></li>
   <li><a name="toc-Contributors-to-GCC" href="Contributors.html#Contributors">Contributors to GCC</a></li>
-  <li><a name="toc-Option-Index-1" href="Option-Index.html#Option-Index">Option Index</a></li>
-  <li><a name="toc-Keyword-Index-1" href="Keyword-Index.html#Keyword-Index">Keyword Index</a></li>
+  <li><a name="toc-Indices-1" href="Indices.html#Indices">Appendix A Indices</a>
+  <ul class="no-bullet">
+    <li><a name="toc-Option-Index-1" href="Option-Index.html#Option-Index">A.1 Option Index</a></li>
+    <li><a name="toc-Concept-and-Symbol-Index-1" href="Concept-and-Symbol-Index.html#Concept-and-Symbol-Index">A.2 Concept and Symbol Index</a></li>
+  </ul></li>
 </ul>
 </div>
 
@@ -669,7 +688,7 @@ Texts being (a) (see below), and with the Back-Cover Texts being (b)
 <a name="Top"></a>
 <div class="header">
 <p>
-Next: <a href="G_002b_002b-and-GCC.html#G_002b_002b-and-GCC" accesskey="n" rel="next">G++ and GCC</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Option-Index.html#Option-Index" title="Index" rel="index">Index</a>]</p>
+Next: <a href="G_002b_002b-and-GCC.html#G_002b_002b-and-GCC" accesskey="n" rel="next">G++ and GCC</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Indices.html#Indices" title="Index" rel="index">Index</a>]</p>
 </div>
 <hr>
 <a name="Introduction"></a>
@@ -679,8 +698,8 @@ Next: <a href="G_002b_002b-and-GCC.html#G_002b_002b-and-GCC" accesskey="n" rel="
 <p>This manual documents how to use the GNU compilers,
 as well as their features and incompatibilities, and how to report
 bugs.  It corresponds to the compilers
-(GNU Tools for STM32 11.3.rel1.20230519-1941)
-version 11.3.1.
+(GNU Tools for STM32 13.3.rel1.20240926-1715)
+version 13.3.1.
 The internals of the GNU compilers, including how to port them to new
 targets and some information about how to write front ends for new
 languages, are documented in a separate manual.  See <a href="http://gcc.gnu.org/onlinedocs/gccint/index.html#Top">Introduction</a> in <cite>GNU Compiler Collection (GCC) Internals</cite>.
@@ -738,9 +757,7 @@ object files.
 </td></tr>
 <tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
 
-</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="Option-Index.html#Option-Index">Option Index</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Index to command line options.
-</td></tr>
-<tr><td align="left" valign="top">&bull; <a href="Keyword-Index.html#Keyword-Index">Keyword Index</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Index of concepts and symbol names.
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="Indices.html#Indices">Indices</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">List of indices in this manual.
 </td></tr>
 </table>
 
@@ -748,7 +765,7 @@ object files.
 <hr>
 <div class="header">
 <p>
-Next: <a href="G_002b_002b-and-GCC.html#G_002b_002b-and-GCC" accesskey="n" rel="next">G++ and GCC</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Option-Index.html#Option-Index" title="Index" rel="index">Index</a>]</p>
+Next: <a href="G_002b_002b-and-GCC.html#G_002b_002b-and-GCC" accesskey="n" rel="next">G++ and GCC</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Indices.html#Indices" title="Index" rel="index">Index</a>]</p>
 </div>
 
 

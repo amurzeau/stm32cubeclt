@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- Copyright (C) 1988-2021 Free Software Foundation, Inc.
+<!-- Copyright (C) 1988-2023 Free Software Foundation, Inc.
 
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
@@ -445,13 +445,22 @@ rounding behavior for <var>i</var> &gt; 1.
 </dd>
 <dt><code>while_ult<var>m</var><var>n</var></code></dt>
 <dd><p>Set operand 0 to a mask that is true while incrementing operand 1
-gives a value that is less than operand 2.  Operand 0 has mode <var>n</var>
-and operands 1 and 2 are scalar integers of mode <var>m</var>.
-The operation is equivalent to:
+gives a value that is less than operand 2, for a vector length up to operand 3.
+Operand 0 has mode <var>n</var> and operands 1 and 2 are scalar integers of mode
+<var>m</var>.  Operand 3 should be omitted when <var>n</var> is a vector mode, and
+a <code>CONST_INT</code> otherwise.  The operation for vector modes is equivalent to:
 </p>
 <div class="smallexample">
 <pre class="smallexample">operand0[0] = operand1 &lt; operand2;
 for (i = 1; i &lt; GET_MODE_NUNITS (<var>n</var>); i++)
+  operand0[i] = operand0[i - 1] &amp;&amp; (operand1 + i &lt; operand2);
+</pre></div>
+
+<p>And for non-vector modes the operation is equivalent to:
+</p>
+<div class="smallexample">
+<pre class="smallexample">operand0[0] = operand1 &lt; operand2;
+for (i = 1; i &lt; operand3; i++)
   operand0[i] = operand0[i - 1] &amp;&amp; (operand1 + i &lt; operand2);
 </pre></div>
 
@@ -565,26 +574,44 @@ mode <var>n</var>.
 <a name="index-len_005fload_005fm-instruction-pattern"></a>
 </dd>
 <dt>&lsquo;<samp>len_load_<var>m</var></samp>&rsquo;</dt>
-<dd><p>Load the number of vector elements specified by operand 2 from memory
-operand 1 into vector register operand 0, setting the other elements of
+<dd><p>Load (operand 2 - operand 3) elements from vector memory operand 1
+into vector register operand 0, setting the other elements of
 operand 0 to undefined values.  Operands 0 and 1 have mode <var>m</var>,
 which must be a vector mode.  Operand 2 has whichever integer mode the
-target prefers.  If operand 2 exceeds the number of elements in mode
-<var>m</var>, the behavior is undefined.  If the target prefers the length
-to be measured in bytes rather than elements, it should only implement
-this pattern for vectors of <code>QI</code> elements.
+target prefers.  Operand 3 conceptually has mode <code>QI</code>.
+</p>
+<p>Operand 2 can be a variable or a constant amount.  Operand 3 specifies a
+constant bias: it is either a constant 0 or a constant -1.  The predicate on
+operand 3 must only accept the bias values that the target actually supports.
+GCC handles a bias of 0 more efficiently than a bias of -1.
+</p>
+<p>If (operand 2 - operand 3) exceeds the number of elements in mode
+<var>m</var>, the behavior is undefined.
+</p>
+<p>If the target prefers the length to be measured in bytes rather than
+elements, it should only implement this pattern for vectors of <code>QI</code>
+elements.
 </p>
 <p>This pattern is not allowed to <code>FAIL</code>.
 </p>
 <a name="index-len_005fstore_005fm-instruction-pattern"></a>
 </dd>
 <dt>&lsquo;<samp>len_store_<var>m</var></samp>&rsquo;</dt>
-<dd><p>Store the number of vector elements specified by operand 2 from vector
-register operand 1 into memory operand 0, leaving the other elements of
+<dd><p>Store (operand 2 - operand 3) vector elements from vector register operand 1
+into memory operand 0, leaving the other elements of
 operand 0 unchanged.  Operands 0 and 1 have mode <var>m</var>, which must be
 a vector mode.  Operand 2 has whichever integer mode the target prefers.
-If operand 2 exceeds the number of elements in mode <var>m</var>, the behavior
-is undefined.  If the target prefers the length to be measured in bytes
+Operand 3 conceptually has mode <code>QI</code>.
+</p>
+<p>Operand 2 can be a variable or a constant amount.  Operand 3 specifies a
+constant bias: it is either a constant 0 or a constant -1.  The predicate on
+operand 3 must only accept the bias values that the target actually supports.
+GCC handles a bias of 0 more efficiently than a bias of -1.
+</p>
+<p>If (operand 2 - operand 3) exceeds the number of elements in mode
+<var>m</var>, the behavior is undefined.
+</p>
+<p>If the target prefers the length to be measured in bytes
 rather than elements, it should only implement this pattern for vectors
 of <code>QI</code> elements.
 </p>
@@ -777,6 +804,15 @@ the elements of the input vector.
 operand 1, and operand 0 is the scalar result, with mode equal to the mode of
 the elements of the input vector.
 </p>
+<a name="index-reduc_005ffmin_005fscal_005fm-instruction-pattern"></a>
+<a name="index-reduc_005ffmax_005fscal_005fm-instruction-pattern"></a>
+</dd>
+<dt>&lsquo;<samp>reduc_fmin_scal_<var>m</var></samp>&rsquo;, &lsquo;<samp>reduc_fmax_scal_<var>m</var></samp>&rsquo;</dt>
+<dd><p>Find the floating-point minimum/maximum of the elements of a vector,
+using the same rules as <code>fmin<var>m</var>3</code> and <code>fmax<var>m</var>3</code>.
+Operand 1 is a vector of mode <var>m</var> and operand 0 is the scalar
+result, which has mode <code>GET_MODE_INNER (<var>m</var>)</code>.
+</p>
 <a name="index-reduc_005fplus_005fscal_005fm-instruction-pattern"></a>
 </dd>
 <dt>&lsquo;<samp>reduc_plus_scal_<var>m</var></samp>&rsquo;</dt>
@@ -785,13 +821,11 @@ operand 0 is the scalar result, with mode equal to the mode of the elements of
 the input vector.
 </p>
 <a name="index-reduc_005fand_005fscal_005fm-instruction-pattern"></a>
+<a name="index-reduc_005fior_005fscal_005fm-instruction-pattern"></a>
+<a name="index-reduc_005fxor_005fscal_005fm-instruction-pattern"></a>
 </dd>
 <dt>&lsquo;<samp>reduc_and_scal_<var>m</var></samp>&rsquo;</dt>
-<dd><a name="index-reduc_005fior_005fscal_005fm-instruction-pattern"></a>
-</dd>
 <dt>&lsquo;<samp>reduc_ior_scal_<var>m</var></samp>&rsquo;</dt>
-<dd><a name="index-reduc_005fxor_005fscal_005fm-instruction-pattern"></a>
-</dd>
 <dt>&lsquo;<samp>reduc_xor_scal_<var>m</var></samp>&rsquo;</dt>
 <dd><p>Compute the bitwise <code>AND</code>/<code>IOR</code>/<code>XOR</code> reduction of the elements
 of a vector of mode <var>m</var>.  Operand 1 is the vector input and operand 0
@@ -835,20 +869,60 @@ no reassociation.
 <a name="index-sdot_005fprodm-instruction-pattern"></a>
 </dd>
 <dt>&lsquo;<samp>sdot_prod<var>m</var></samp>&rsquo;</dt>
-<dd><a name="index-udot_005fprodm-instruction-pattern"></a>
+<dd>
+<p>Compute the sum of the products of two signed elements.
+Operand 1 and operand 2 are of the same mode. Their
+product, which is of a wider mode, is computed and added to operand 3.
+Operand 3 is of a mode equal or wider than the mode of the product. The
+result is placed in operand 0, which is of the same mode as operand 3.
+</p>
+<p>Semantically the expressions perform the multiplication in the following signs
+</p>
+<div class="smallexample">
+<pre class="smallexample">sdot&lt;signed op0, signed op1, signed op2, signed op3&gt; ==
+   op0 = sign-ext (op1) * sign-ext (op2) + op3
+&hellip;
+</pre></div>
+
+<a name="index-udot_005fprodm-instruction-pattern"></a>
 </dd>
 <dt>&lsquo;<samp>udot_prod<var>m</var></samp>&rsquo;</dt>
-<dd><p>Compute the sum of the products of two signed/unsigned elements.
-Operand 1 and operand 2 are of the same mode. Their product, which is of a
-wider mode, is computed and added to operand 3. Operand 3 is of a mode equal or
-wider than the mode of the product. The result is placed in operand 0, which
-is of the same mode as operand 3.
+<dd>
+<p>Compute the sum of the products of two unsigned elements.
+Operand 1 and operand 2 are of the same mode. Their
+product, which is of a wider mode, is computed and added to operand 3.
+Operand 3 is of a mode equal or wider than the mode of the product. The
+result is placed in operand 0, which is of the same mode as operand 3.
 </p>
+<p>Semantically the expressions perform the multiplication in the following signs
+</p>
+<div class="smallexample">
+<pre class="smallexample">udot&lt;unsigned op0, unsigned op1, unsigned op2, unsigned op3&gt; ==
+   op0 = zero-ext (op1) * zero-ext (op2) + op3
+&hellip;
+</pre></div>
+
+<a name="index-usdot_005fprodm-instruction-pattern"></a>
+</dd>
+<dt>&lsquo;<samp>usdot_prod<var>m</var></samp>&rsquo;</dt>
+<dd><p>Compute the sum of the products of elements of different signs.
+Operand 1 must be unsigned and operand 2 signed. Their
+product, which is of a wider mode, is computed and added to operand 3.
+Operand 3 is of a mode equal or wider than the mode of the product. The
+result is placed in operand 0, which is of the same mode as operand 3.
+</p>
+<p>Semantically the expressions perform the multiplication in the following signs
+</p>
+<div class="smallexample">
+<pre class="smallexample">usdot&lt;signed op0, unsigned op1, signed op2, signed op3&gt; ==
+   op0 = ((signed-conv) zero-ext (op1)) * sign-ext (op2) + op3
+&hellip;
+</pre></div>
+
 <a name="index-ssadm-instruction-pattern"></a>
+<a name="index-usadm-instruction-pattern"></a>
 </dd>
 <dt>&lsquo;<samp>ssad<var>m</var></samp>&rsquo;</dt>
-<dd><a name="index-usadm-instruction-pattern"></a>
-</dd>
 <dt>&lsquo;<samp>usad<var>m</var></samp>&rsquo;</dt>
 <dd><p>Compute the sum of absolute differences of two signed/unsigned elements.
 Operand 1 and operand 2 are of the same mode. Their absolute difference, which
@@ -857,10 +931,9 @@ equal or wider than the mode of the absolute difference. The result is placed
 in operand 0, which is of the same mode as operand 3.
 </p>
 <a name="index-widen_005fssumm3-instruction-pattern"></a>
+<a name="index-widen_005fusumm3-instruction-pattern"></a>
 </dd>
 <dt>&lsquo;<samp>widen_ssum<var>m3</var></samp>&rsquo;</dt>
-<dd><a name="index-widen_005fusumm3-instruction-pattern"></a>
-</dd>
 <dt>&lsquo;<samp>widen_usum<var>m3</var></samp>&rsquo;</dt>
 <dd><p>Operands 0 and 2 are of the same mode, which is wider than the mode of
 operand 1. Add operand 1 to operand 2 and place the widened result in
@@ -868,10 +941,9 @@ operand 0. (This is used express accumulation of elements into an accumulator
 of a wider mode.)
 </p>
 <a name="index-smulhsm3-instruction-pattern"></a>
+<a name="index-umulhsm3-instruction-pattern"></a>
 </dd>
 <dt>&lsquo;<samp>smulhs<var>m3</var></samp>&rsquo;</dt>
-<dd><a name="index-umulhsm3-instruction-pattern"></a>
-</dd>
 <dt>&lsquo;<samp>umulhs<var>m3</var></samp>&rsquo;</dt>
 <dd><p>Signed/unsigned multiply high with scale. This is equivalent to the C code:
 </p><div class="smallexample">
@@ -883,10 +955,9 @@ op0 = (narrow) (((wide) op1 * (wide) op2) &gt;&gt; (N / 2 - 1));
 or unsigned operation, and <var>N</var> is the size of &lsquo;<samp>wide</samp>&rsquo; in bits.
 </p>
 <a name="index-smulhrsm3-instruction-pattern"></a>
+<a name="index-umulhrsm3-instruction-pattern"></a>
 </dd>
 <dt>&lsquo;<samp>smulhrs<var>m3</var></samp>&rsquo;</dt>
-<dd><a name="index-umulhrsm3-instruction-pattern"></a>
-</dd>
 <dt>&lsquo;<samp>umulhrs<var>m3</var></samp>&rsquo;</dt>
 <dd><p>Signed/unsigned multiply high with round and scale. This is
 equivalent to the C code:
@@ -899,10 +970,9 @@ op0 = (narrow) (((((wide) op1 * (wide) op2) &gt;&gt; (N / 2 - 2)) + 1) &gt;&gt; 
 or unsigned operation, and <var>N</var> is the size of &lsquo;<samp>wide</samp>&rsquo; in bits.
 </p>
 <a name="index-sdiv_005fpow2m3-instruction-pattern"></a>
+<a name="index-sdiv_005fpow2m3-instruction-pattern-1"></a>
 </dd>
 <dt>&lsquo;<samp>sdiv_pow2<var>m3</var></samp>&rsquo;</dt>
-<dd><a name="index-sdiv_005fpow2m3-instruction-pattern-1"></a>
-</dd>
 <dt>&lsquo;<samp>sdiv_pow2<var>m3</var></samp>&rsquo;</dt>
 <dd><p>Signed division by power-of-2 immediate. Equivalent to:
 </p><div class="smallexample">
@@ -1099,6 +1169,31 @@ signed/unsigned elements of size S.  Subtract the high/low elements of 2 from
 1 and widen the resulting elements. Put the N/2 results of size 2*S in the
 output vector (operand 0).
 </p>
+<a name="index-vec_005faddsubm3-instruction-pattern"></a>
+</dd>
+<dt>&lsquo;<samp>vec_addsub<var>m</var>3</samp>&rsquo;</dt>
+<dd><p>Alternating subtract, add with even lanes doing subtract and odd
+lanes doing addition.  Operands 1 and 2 and the outout operand are vectors
+with mode <var>m</var>.
+</p>
+<a name="index-vec_005ffmaddsubm4-instruction-pattern"></a>
+</dd>
+<dt>&lsquo;<samp>vec_fmaddsub<var>m</var>4</samp>&rsquo;</dt>
+<dd><p>Alternating multiply subtract, add with even lanes doing subtract and odd
+lanes doing addition of the third operand to the multiplication result
+of the first two operands.  Operands 1, 2 and 3 and the outout operand are vectors
+with mode <var>m</var>.
+</p>
+<a name="index-vec_005ffmsubaddm4-instruction-pattern"></a>
+</dd>
+<dt>&lsquo;<samp>vec_fmsubadd<var>m</var>4</samp>&rsquo;</dt>
+<dd><p>Alternating multiply add, subtract with even lanes doing addition and odd
+lanes doing subtraction of the third operand to the multiplication result
+of the first two operands.  Operands 1, 2 and 3 and the outout operand are vectors
+with mode <var>m</var>.
+</p>
+<p>These instructions are not allowed to <code>FAIL</code>.
+</p>
 <a name="index-mulhisi3-instruction-pattern"></a>
 </dd>
 <dt>&lsquo;<samp>mulhisi3</samp>&rsquo;</dt>
@@ -1133,12 +1228,14 @@ multiplication.
 <dt>&lsquo;<samp>smul<var>m</var>3_highpart</samp>&rsquo;</dt>
 <dd><p>Perform a signed multiplication of operands 1 and 2, which have mode
 <var>m</var>, and store the most significant half of the product in operand 0.
-The least significant half of the product is discarded.
+The least significant half of the product is discarded.  This may be
+represented in RTL using a <code>smul_highpart</code> RTX expression.
 </p>
 <a name="index-umulm3_005fhighpart-instruction-pattern"></a>
 </dd>
 <dt>&lsquo;<samp>umul<var>m</var>3_highpart</samp>&rsquo;</dt>
-<dd><p>Similar, but the multiplication is unsigned.
+<dd><p>Similar, but the multiplication is unsigned.  This may be represented
+in RTL using an <code>umul_highpart</code> RTX expression.
 </p>
 <a name="index-maddmn4-instruction-pattern"></a>
 </dd>
@@ -1440,6 +1537,25 @@ mode <var>m</var>, which is a scalar or vector floating-point mode.
 </p>
 <p>This pattern is not allowed to <code>FAIL</code>.
 </p>
+<a name="index-fegetroundm-instruction-pattern"></a>
+</dd>
+<dt>&lsquo;<samp>fegetround<var>m</var></samp>&rsquo;</dt>
+<dd><p>Store the current machine floating-point rounding mode into operand 0.
+Operand 0 has mode <var>m</var>, which is scalar.  This pattern is used to
+implement the <code>fegetround</code> function from the ISO C99 standard.
+</p>
+<a name="index-feclearexceptm-instruction-pattern"></a>
+<a name="index-feraiseexceptm-instruction-pattern"></a>
+</dd>
+<dt>&lsquo;<samp>feclearexcept<var>m</var></samp>&rsquo;</dt>
+<dt>&lsquo;<samp>feraiseexcept<var>m</var></samp>&rsquo;</dt>
+<dd><p>Clears or raises the supported machine floating-point exceptions
+represented by the bits in operand 1.  Error status is stored as
+nonzero value in operand 0.  Both operands have mode <var>m</var>, which is
+a scalar.  These patterns are used to implement the
+<code>feclearexcept</code> and <code>feraiseexcept</code> functions from the ISO
+C99 standard.
+</p>
 <a name="index-expm2-instruction-pattern"></a>
 </dd>
 <dt>&lsquo;<samp>exp<var>m</var>2</samp>&rsquo;</dt>
@@ -1523,6 +1639,18 @@ have mode <var>m</var>, which is a scalar or vector floating-point mode.
 <dd><p>Store the base-<code>FLT_RADIX</code> logarithm of operand 1 into operand 0.
 Both operands have mode <var>m</var>, which is a scalar or vector
 floating-point mode.
+</p>
+<p>This pattern is not allowed to <code>FAIL</code>.
+</p>
+<a name="index-signbitm2-instruction-pattern"></a>
+</dd>
+<dt>&lsquo;<samp>signbit<var>m</var>2</samp>&rsquo;</dt>
+<dd><p>Store the sign bit of floating-point operand 1 in operand 0.
+<var>m</var> is either a scalar or vector mode.  When it is a scalar,
+operand 1 has mode <var>m</var> but operand 0 must have mode <code>SImode</code>.
+When <var>m</var> is a vector, operand 1 has the mode <var>m</var>.
+operand 0&rsquo;s mode should be an vector integer mode which has
+the same number of elements and the same size as mode <var>m</var>.
 </p>
 <p>This pattern is not allowed to <code>FAIL</code>.
 </p>
@@ -1665,6 +1793,11 @@ All operands have mode <var>m</var>, which is a scalar or vector
 floating-point mode.
 </p>
 <p>This pattern is not allowed to <code>FAIL</code>.
+</p>
+<a name="index-issignalingm2-instruction-pattern"></a>
+</dd>
+<dt>&lsquo;<samp>issignaling<var>m</var>2</samp>&rsquo;</dt>
+<dd><p>Set operand 0 to 1 if operand 1 is a signaling NaN and to 0 otherwise.
 </p>
 <a name="index-cadd90m3-instruction-pattern"></a>
 </dd>
@@ -2135,6 +2268,14 @@ operand 2 is the character to search for (normally zero),
 and operand 3 is a constant describing the known alignment
 of the beginning of the string.
 </p>
+<a name="index-rawmemchrm-instruction-pattern"></a>
+</dd>
+<dt>&lsquo;<samp>rawmemchr<var>m</var></samp>&rsquo;</dt>
+<dd><p>Scan memory referred to by operand 1 for the first occurrence of operand 2.
+Operand 1 is a <code>mem</code> and operand 2 a <code>const_int</code> of mode <var>m</var>.
+Operand 0 is the result, i.e., a pointer to the first occurrence of operand 2
+in the memory block given by operand 1.
+</p>
 <a name="index-floatmn2-instruction-pattern"></a>
 </dd>
 <dt>&lsquo;<samp>float<var>m</var><var>n</var>2</samp>&rsquo;</dt>
@@ -2386,6 +2527,11 @@ operand 0, otherwise (operand 2 + operand 3) is moved.
 <a name="index-cond_005fsmaxmode-instruction-pattern"></a>
 <a name="index-cond_005fuminmode-instruction-pattern"></a>
 <a name="index-cond_005fumaxmode-instruction-pattern"></a>
+<a name="index-cond_005ffminmode-instruction-pattern"></a>
+<a name="index-cond_005ffmaxmode-instruction-pattern"></a>
+<a name="index-cond_005fashlmode-instruction-pattern"></a>
+<a name="index-cond_005fashrmode-instruction-pattern"></a>
+<a name="index-cond_005flshrmode-instruction-pattern"></a>
 </dd>
 <dt>&lsquo;<samp>cond_add<var>mode</var></samp>&rsquo;</dt>
 <dt>&lsquo;<samp>cond_sub<var>mode</var></samp>&rsquo;</dt>
@@ -2401,6 +2547,11 @@ operand 0, otherwise (operand 2 + operand 3) is moved.
 <dt>&lsquo;<samp>cond_smax<var>mode</var></samp>&rsquo;</dt>
 <dt>&lsquo;<samp>cond_umin<var>mode</var></samp>&rsquo;</dt>
 <dt>&lsquo;<samp>cond_umax<var>mode</var></samp>&rsquo;</dt>
+<dt>&lsquo;<samp>cond_fmin<var>mode</var></samp>&rsquo;</dt>
+<dt>&lsquo;<samp>cond_fmax<var>mode</var></samp>&rsquo;</dt>
+<dt>&lsquo;<samp>cond_ashl<var>mode</var></samp>&rsquo;</dt>
+<dt>&lsquo;<samp>cond_ashr<var>mode</var></samp>&rsquo;</dt>
+<dt>&lsquo;<samp>cond_lshr<var>mode</var></samp>&rsquo;</dt>
 <dd><p>When operand 1 is true, perform an operation on operands 2 and 3 and
 store the result in operand 0, otherwise store operand 4 in operand 0.
 The operation works elementwise if the operands are vectors.
@@ -2427,6 +2578,11 @@ be in a normal C &lsquo;<samp>?:</samp>&rsquo; condition.
 <p>Operands 0, 2, 3 and 4 all have mode <var>m</var>.  Operand 1 is a scalar
 integer if <var>m</var> is scalar, otherwise it has the mode returned by
 <code>TARGET_VECTORIZE_GET_MASK_MODE</code>.
+</p>
+<p>&lsquo;<samp>cond_<var>op</var><var>mode</var></samp>&rsquo; generally corresponds to a conditional
+form of &lsquo;<samp><var>op</var><var>mode</var>3</samp>&rsquo;.  As an exception, the vector forms
+of shifts correspond to patterns like <code>vashl<var>mode</var>3</code> rather
+than patterns like <code>ashl<var>mode</var>3</code>.
 </p>
 <a name="index-cond_005ffmamode-instruction-pattern"></a>
 <a name="index-cond_005ffmsmode-instruction-pattern"></a>
@@ -2501,6 +2657,14 @@ case, you can and should make operand 1&rsquo;s predicate reject some operators
 in the &lsquo;<samp>cstore<var>mode</var>4</samp>&rsquo; pattern, or remove the pattern altogether
 from the machine description.
 </p>
+<a name="index-tbranch_005fopmode3-instruction-pattern"></a>
+</dd>
+<dt>&lsquo;<samp>tbranch_<var>op</var><var>mode</var>3</samp>&rsquo;</dt>
+<dd><p>Conditional branch instruction combined with a bit test-and-compare
+instruction. Operand 0 is the operand of the comparison.  Operand 1 is the bit
+position of Operand 1 to test.  Operand 3 is the <code>code_label</code> to jump to.
+<var>op</var> is one of <var>eq</var> or <var>ne</var>.
+</p>
 <a name="index-cbranchmode4-instruction-pattern"></a>
 </dd>
 <dt>&lsquo;<samp>cbranch<var>mode</var>4</samp>&rsquo;</dt>
@@ -2521,8 +2685,12 @@ machines.
 <dt>&lsquo;<samp>call</samp>&rsquo;</dt>
 <dd><p>Subroutine call instruction returning no value.  Operand 0 is the
 function to call; operand 1 is the number of bytes of arguments pushed
-as a <code>const_int</code>; operand 2 is the number of registers used as
-operands.
+as a <code>const_int</code>.  Operand 2 is the result of calling the target
+hook <code>TARGET_FUNCTION_ARG</code> with the second argument <code>arg</code>
+yielding true for <code>arg.end_marker_p ()</code>, in a call after all
+parameters have been passed to that hook.  By default this is the first
+register beyond those used for arguments in the call, or <code>NULL</code> if
+all the argument-registers are used in the call.
 </p>
 <p>On most machines, operand 2 is not actually stored into the RTL
 pattern.  It is supplied for the sake of some RISC machines which need
@@ -2622,7 +2790,7 @@ such as
   [(set (pc)
         (if_then_else (match_operator
                          0 &quot;comparison_operator&quot;
-                         [(cc0) (const_int 0)])
+                         [(reg:CC CC_REG) (const_int 0)])
                       (return)
                       (pc)))]
   &quot;<var>condition</var>&quot;
@@ -3386,6 +3554,31 @@ the specified bit.
 counterparts.  If none of these are available a compare-and-swap
 loop will be used.
 </p>
+<a name="index-atomic_005fadd_005ffetch_005fcmp_005f0mode-instruction-pattern"></a>
+<a name="index-atomic_005fsub_005ffetch_005fcmp_005f0mode-instruction-pattern"></a>
+<a name="index-atomic_005fand_005ffetch_005fcmp_005f0mode-instruction-pattern"></a>
+<a name="index-atomic_005for_005ffetch_005fcmp_005f0mode-instruction-pattern"></a>
+<a name="index-atomic_005fxor_005ffetch_005fcmp_005f0mode-instruction-pattern"></a>
+</dd>
+<dt>&lsquo;<samp>atomic_add_fetch_cmp_0<var>mode</var></samp>&rsquo;</dt>
+<dt>&lsquo;<samp>atomic_sub_fetch_cmp_0<var>mode</var></samp>&rsquo;</dt>
+<dt>&lsquo;<samp>atomic_and_fetch_cmp_0<var>mode</var></samp>&rsquo;</dt>
+<dt>&lsquo;<samp>atomic_or_fetch_cmp_0<var>mode</var></samp>&rsquo;</dt>
+<dt>&lsquo;<samp>atomic_xor_fetch_cmp_0<var>mode</var></samp>&rsquo;</dt>
+<dd><p>These patterns emit code for an atomic operation on memory with memory
+model semantics if the fetch result is used only in a comparison against
+zero.
+Operand 0 is an output operand which contains a boolean result of comparison
+of the value after the operation against zero.  Operand 1 is the memory on
+which the atomic operation is performed.  Operand 2 is the second operand
+to the binary operator.  Operand 3 is the memory model to be used by the
+operation.  Operand 4 is an integer holding the comparison code, one of
+<code>EQ</code>, <code>NE</code>, <code>LT</code>, <code>GT</code>, <code>LE</code> or <code>GE</code>.
+</p>
+<p>If these patterns are not defined, attempts will be made to use separate
+atomic operation and fetch pattern followed by comparison of the result
+against zero.
+</p>
 <a name="index-mem_005fthread_005ffence-instruction-pattern"></a>
 </dd>
 <dt>&lsquo;<samp>mem_thread_fence</samp>&rsquo;</dt>
@@ -3487,6 +3680,16 @@ inclusive and operand 1 exclusive.
 </p>
 <p>If this pattern is not defined, a call to the library function
 <code>__clear_cache</code> is used.
+</p>
+<a name="index-spaceshipm3-instruction-pattern"></a>
+</dd>
+<dt>&lsquo;<samp>spaceship<var>m</var>3</samp>&rsquo;</dt>
+<dd><p>Initialize output operand 0 with mode of integer type to -1, 0, 1 or 2
+if operand 1 with mode <var>m</var> compares less than operand 2, equal to
+operand 2, greater than operand 2 or is unordered with operand 2.
+<var>m</var> should be a scalar floating point mode.
+</p>
+<p>This pattern is not allowed to <code>FAIL</code>.
 </p>
 </dd>
 </dl>

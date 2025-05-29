@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- Copyright (C) 1988-2021 Free Software Foundation, Inc.
+<!-- Copyright (C) 1988-2023 Free Software Foundation, Inc.
 
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
@@ -130,6 +130,14 @@ static GTY(()) int <var>counter</var>;        /* <span class="roman">save counte
 <code>typedef struct <var>tag</var> *<var>name</var>;</code> and
 <code>typedef int <var>name</var>;</code>.
 These don&rsquo;t need to be marked.
+</p>
+<p>However, in combination with GTY, avoid using typedefs such as
+<code>typedef int_hash&lt;&hellip;&gt; <var>name</var>;</code>
+for these generate infinite-recursion code.
+See <a href="https://gcc.gnu.org/PR103157">PR103157</a>.
+Instead, you may use
+<code>struct <var>name</var> : int_hash&lt;&hellip;&gt; {};</code>,
+for example.
 </p>
 <p>Since <code>gengtype</code>&rsquo;s understanding of C++ is limited, there are
 several constructs and declarations that are not supported inside

@@ -12,6 +12,7 @@ extern "C" {
 
 #include <_ansi.h>
 #include <stddef.h>
+#include <sys/cdefs.h>
 #include <sys/_types.h>
 
 #define _NULL 0
@@ -144,6 +145,11 @@ struct __sbuf {
 
 #define _REENT_SMALL_CHECK_INIT(ptr) /* nothing */
 
+/* Cygwin must use __sFILE64 for backward compatibility, even though
+   it's not defining __LARGE64_FILES anymore.  To make sure that __sFILE
+   is never defined, disable it here explicitely. */
+#ifndef __CYGWIN__
+
 struct __sFILE {
   unsigned char *_p;	/* current position in (some) buffer */
   int	_r;		/* read space left for getc() */
@@ -195,13 +201,24 @@ struct __sFILE {
   int   _flags2;        /* for future use */
 };
 
+#endif /* !__CYGWIN__ */
+
 #ifdef __CUSTOM_FILE_IO__
 
 /* Get custom _FILE definition.  */
 #include <sys/custom_file.h>
 
 #else /* !__CUSTOM_FILE_IO__ */
-#ifdef __LARGE64_FILES
+/* Cygwin must use __sFILE64 for backward compatibility, even though
+   it's not defining __LARGE64_FILES anymore.  It also has to make
+   sure the name is the same to satisfy C++ name mangling.  Overloading
+   _fpos64_t just fixes a build problem.  The _seek64 function is
+   actually never used without __LARGE64_FILES being defined. */
+#if defined (__LARGE64_FILES) || defined (__CYGWIN__)
+#ifdef __CYGWIN__
+#define _fpos64_t _fpos_t
+#endif
+
 struct __sFILE64 {
   unsigned char *_p;	/* current position in (some) buffer */
   int	_r;		/* read space left for getc() */
@@ -352,6 +369,9 @@ struct _misc_reent
   _mbstate_t _mbsrtowcs_state;
   _mbstate_t _wcrtomb_state;
   _mbstate_t _wcsrtombs_state;
+#ifdef _MB_CAPABLE
+  char _getlocalename_l_buf[32 /*ENCODING + 1*/];
+#endif
 };
 
 /* This version of _reent is laid out with "int"s in pairs, to help
@@ -494,6 +514,11 @@ struct _reent
 #define _REENT_CHECK_EMERGENCY(var) \
   _REENT_CHECK(var, _emergency, char *, _REENT_EMERGENCY_SIZE, /* nothing */)
 
+#ifdef _MB_CAPABLE
+#define __REENT_INIT_MISC_GETLOCALENAME_L _r->_misc->_getlocalename_l_buf[0] = '\0'
+#else
+#define __REENT_INIT_MISC_GETLOCALENAME_L
+#endif
 #define _REENT_INIT_MISC(var) do { \
   struct _reent *_r = (var); \
   _r->_misc->_strtok_last = _NULL; \
@@ -513,6 +538,7 @@ struct _reent
   _r->_misc->_wcrtomb_state.__value.__wch = 0; \
   _r->_misc->_wcsrtombs_state.__count = 0; \
   _r->_misc->_wcsrtombs_state.__value.__wch = 0; \
+  __REENT_INIT_MISC_GETLOCALENAME_L; \
   _r->_misc->_l64a_buf[0] = '\0'; \
   _r->_misc->_getdate_err = 0; \
 } while (0)
@@ -544,6 +570,7 @@ struct _reent
 #define _REENT_WCSRTOMBS_STATE(ptr) ((ptr)->_misc->_wcsrtombs_state)
 #define _REENT_L64A_BUF(ptr)    ((ptr)->_misc->_l64a_buf)
 #define _REENT_GETDATE_ERR_P(ptr) (&((ptr)->_misc->_getdate_err))
+#define _REENT_GETLOCALENAME_L_BUF(ptr) ((ptr)->_misc->_getlocalename_l_buf)
 #define _REENT_SIGNAL_BUF(ptr)  ((ptr)->_signal_buf)
 
 #else /* !_REENT_SMALL */
@@ -606,6 +633,18 @@ struct _reent
           _mbstate_t _wcrtomb_state;
           _mbstate_t _wcsrtombs_state;
 	  int _h_errno;
+#ifdef __CYGWIN__
+          _mbstate_t _c8rtomb_state;
+          _mbstate_t _c16rtomb_state;
+          _mbstate_t _c32rtomb_state;
+          _mbstate_t _mbrtoc8_state;
+          _mbstate_t _mbrtoc16_state;
+          _mbstate_t _mbrtoc32_state;
+#endif
+	  /* No errors are defined for getlocalename_l.  So we can't use
+	     buffer allocation which might lead to an ENOMEM error.  We
+	     have to use a "static" buffer here instead. */
+	  char _getlocalename_l_buf[32 /* ENCODING_LEN + 1 */];
         } _reent;
 #ifdef _REENT_BACKWARD_BINARY_COMPAT
       struct
@@ -714,9 +753,18 @@ struct _reent
 #define _REENT_MBSRTOWCS_STATE(ptr)((ptr)->_new._reent._mbsrtowcs_state)
 #define _REENT_WCRTOMB_STATE(ptr)((ptr)->_new._reent._wcrtomb_state)
 #define _REENT_WCSRTOMBS_STATE(ptr)((ptr)->_new._reent._wcsrtombs_state)
+#ifdef __CYGWIN__
+#  define _REENT_C8RTOMB_STATE(ptr)((ptr)->_new._reent._c8rtomb_state)
+#  define _REENT_C16RTOMB_STATE(ptr)((ptr)->_new._reent._c16rtomb_state)
+#  define _REENT_C32RTOMB_STATE(ptr)((ptr)->_new._reent._c32rtomb_state)
+#  define _REENT_MBRTOC8_STATE(ptr)((ptr)->_new._reent._mbrtoc8_state)
+#  define _REENT_MBRTOC16_STATE(ptr)((ptr)->_new._reent._mbrtoc16_state)
+#  define _REENT_MBRTOC32_STATE(ptr)((ptr)->_new._reent._mbrtoc32_state)
+#endif
 #define _REENT_L64A_BUF(ptr)    ((ptr)->_new._reent._l64a_buf)
 #define _REENT_SIGNAL_BUF(ptr)  ((ptr)->_new._reent._signal_buf)
 #define _REENT_GETDATE_ERR_P(ptr) (&((ptr)->_new._reent._getdate_err))
+#define _REENT_GETLOCALENAME_L_BUF(ptr)((ptr)->_new._reent._getlocalename_l_buf)
 
 #endif /* !_REENT_SMALL */
 
@@ -796,7 +844,7 @@ extern _Thread_local int _tls_cvtlen;
 #define _REENT_CVTLEN(_ptr) (_tls_cvtlen)
 extern _Thread_local void (*_tls_cleanup)(struct _reent *);
 #define _REENT_CLEANUP(_ptr) (_tls_cleanup)
-extern _Thread_local char _tls_emergency;
+extern _Thread_local char _tls_emergency[_REENT_EMERGENCY_SIZE];
 #define _REENT_EMERGENCY(_ptr) (_tls_emergency)
 extern _Thread_local int _tls_errno;
 #define _REENT_ERRNO(_ptr) (_tls_errno)
@@ -809,6 +857,8 @@ extern _Thread_local char _tls_l64a_buf[8];
 extern _Thread_local struct __locale_t *_tls_locale;
 #define _REENT_LOCALE(_ptr) (_tls_locale)
 extern _Thread_local _mbstate_t _tls_mblen_state;
+#define _REENT_GETLOCALENAME_L_BUF(ptr) (_tls_getlocalename_l_buf)
+extern _Thread_local char _tls_getlocalename_l_buf[32 /*ENCODING + 1*/];
 #define _REENT_MBLEN_STATE(_ptr) (_tls_mblen_state)
 extern _Thread_local _mbstate_t _tls_mbrlen_state;
 #define _REENT_MBRLEN_STATE(_ptr) (_tls_mbrlen_state)

@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- Copyright (C) 1987-2021 Free Software Foundation, Inc.
+<!-- Copyright (C) 1987-2023 Free Software Foundation, Inc.
 
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
@@ -122,9 +122,13 @@ options may <em>not</em> be grouped: <samp>-dM</samp> is very different from
 <a name="index-options"></a>
 
 <dl compact="compact">
+<dd>
+
+
+<a name="index-D"></a>
+</dd>
 <dt><code>-D <var>name</var></code></dt>
-<dd><a name="index-D"></a>
-<p>Predefine <var>name</var> as a macro, with definition <code>1</code>.
+<dd><p>Predefine <var>name</var> as a macro, with definition <code>1</code>.
 </p>
 </dd>
 <dt><code>-D <var>name</var>=<var>definition</var></code></dt>
@@ -148,16 +152,16 @@ are given on the command line.  All <samp>-imacros <var>file</var></samp> and
 <samp>-include <var>file</var></samp> options are processed after all
 <samp>-D</samp> and <samp>-U</samp> options.
 </p>
+<a name="index-U"></a>
 </dd>
 <dt><code>-U <var>name</var></code></dt>
-<dd><a name="index-U"></a>
-<p>Cancel any previous definition of <var>name</var>, either built in or
+<dd><p>Cancel any previous definition of <var>name</var>, either built in or
 provided with a <samp>-D</samp> option.
 </p>
+<a name="index-include"></a>
 </dd>
 <dt><code>-include <var>file</var></code></dt>
-<dd><a name="index-include"></a>
-<p>Process <var>file</var> as if <code>#include &quot;file&quot;</code> appeared as the first
+<dd><p>Process <var>file</var> as if <code>#include &quot;file&quot;</code> appeared as the first
 line of the primary source file.  However, the first directory searched
 for <var>file</var> is the preprocessor&rsquo;s working directory <em>instead of</em>
 the directory containing the main source file.  If not found there, it
@@ -167,10 +171,10 @@ chain as normal.
 <p>If multiple <samp>-include</samp> options are given, the files are included
 in the order they appear on the command line.
 </p>
+<a name="index-imacros"></a>
 </dd>
 <dt><code>-imacros <var>file</var></code></dt>
-<dd><a name="index-imacros"></a>
-<p>Exactly like <samp>-include</samp>, except that any output produced by
+<dd><p>Exactly like <samp>-include</samp>, except that any output produced by
 scanning <var>file</var> is thrown away.  Macros it defines remain defined.
 This allows you to acquire all the macros from a header without also
 processing its declarations.
@@ -178,27 +182,27 @@ processing its declarations.
 <p>All files specified by <samp>-imacros</samp> are processed before all files
 specified by <samp>-include</samp>.
 </p>
+<a name="index-undef"></a>
 </dd>
 <dt><code>-undef</code></dt>
-<dd><a name="index-undef"></a>
-<p>Do not predefine any system-specific or GCC-specific macros.  The
+<dd><p>Do not predefine any system-specific or GCC-specific macros.  The
 standard predefined macros remain defined.
 See <a href="Standard-Predefined-Macros.html#Standard-Predefined-Macros">Standard Predefined Macros</a>.
 </p>
+<a name="index-pthread"></a>
 </dd>
 <dt><code>-pthread</code></dt>
-<dd><a name="index-pthread"></a>
-<p>Define additional macros required for using the POSIX threads library.
+<dd><p>Define additional macros required for using the POSIX threads library.
 You should use this option consistently for both compilation and linking.
 This option is supported on GNU/Linux targets, most other Unix derivatives,
 and also on x86 Cygwin and MinGW targets.
 </p>
-</dd>
-<dt><code>-M</code></dt>
-<dd><a name="index-M"></a>
+<a name="index-M"></a>
 <a name="index-make"></a>
 <a name="index-dependencies_002c-make"></a>
-<p>Instead of outputting the result of preprocessing, output a rule
+</dd>
+<dt><code>-M</code></dt>
+<dd><p>Instead of outputting the result of preprocessing, output a rule
 suitable for <code>make</code> describing the dependencies of the main
 source file.  The preprocessor outputs one <code>make</code> rule containing
 the object file name for that source file, a colon, and the names of all
@@ -222,10 +226,10 @@ is still sent to the regular output stream as normal.
 <p>Passing <samp>-M</samp> to the driver implies <samp>-E</samp>, and suppresses
 warnings with an implicit <samp>-w</samp>.
 </p>
+<a name="index-MM"></a>
 </dd>
 <dt><code>-MM</code></dt>
-<dd><a name="index-MM"></a>
-<p>Like <samp>-M</samp> but do not mention header files that are found in
+<dd><p>Like <samp>-M</samp> but do not mention header files that are found in
 system header directories, nor header files that are included,
 directly or indirectly, from such a header.
 </p>
@@ -233,10 +237,10 @@ directly or indirectly, from such a header.
 &lsquo;<samp>#include</samp>&rsquo; directive does not in itself determine whether that
 header appears in <samp>-MM</samp> dependency output.
 </p>
-<a name="dashMF"></a></dd>
+<a name="dashMF"></a><a name="index-MF"></a>
+</dd>
 <dt><code>-MF <var>file</var></code></dt>
-<dd><a name="index-MF"></a>
-<p>When used with <samp>-M</samp> or <samp>-MM</samp>, specifies a
+<dd><p>When used with <samp>-M</samp> or <samp>-MM</samp>, specifies a
 file to write the dependencies to.  If no <samp>-MF</samp> switch is given
 the preprocessor sends the rules to the same place it would send
 preprocessed output.
@@ -246,10 +250,10 @@ preprocessed output.
 </p>
 <p>If <var>file</var> is <samp>-</samp>, then the dependencies are written to <samp>stdout</samp>.
 </p>
+<a name="index-MG"></a>
 </dd>
 <dt><code>-MG</code></dt>
-<dd><a name="index-MG"></a>
-<p>In conjunction with an option such as <samp>-M</samp> requesting
+<dd><p>In conjunction with an option such as <samp>-M</samp> requesting
 dependency generation, <samp>-MG</samp> assumes missing header files are
 generated files and adds them to the dependency list without raising
 an error.  The dependency filename is taken directly from the
@@ -259,15 +263,15 @@ this useless.
 </p>
 <p>This feature is used in automatic updating of makefiles.
 </p>
+<a name="index-Mno_002dmodules"></a>
 </dd>
 <dt><code>-Mno-modules</code></dt>
-<dd><a name="index-Mno_002dmodules"></a>
-<p>Disable dependency generation for compiled module interfaces.
+<dd><p>Disable dependency generation for compiled module interfaces.
 </p>
+<a name="index-MP"></a>
 </dd>
 <dt><code>-MP</code></dt>
-<dd><a name="index-MP"></a>
-<p>This option instructs CPP to add a phony target for each dependency
+<dd><p>This option instructs CPP to add a phony target for each dependency
 other than the main file, causing each to depend on nothing.  These
 dummy rules work around errors <code>make</code> gives if you remove header
 files without updating the <samp>Makefile</samp> to match.
@@ -280,10 +284,10 @@ files without updating the <samp>Makefile</samp> to match.
 test.h:
 </pre></div>
 
+<a name="index-MT"></a>
 </dd>
 <dt><code>-MT <var>target</var></code></dt>
-<dd><a name="index-MT"></a>
-
+<dd>
 <p>Change the target of the rule emitted by dependency generation.  By
 default CPP takes the name of the main input file, deletes any
 directory components and any file suffix such as &lsquo;<samp>.c</samp>&rsquo;, and
@@ -299,10 +303,10 @@ argument to <samp>-MT</samp>, or use multiple <samp>-MT</samp> options.
 <pre class="smallexample">$(objpfx)foo.o: foo.c
 </pre></div>
 
+<a name="index-MQ"></a>
 </dd>
 <dt><code>-MQ <var>target</var></code></dt>
-<dd><a name="index-MQ"></a>
-
+<dd>
 <p>Same as <samp>-MT</samp>, but it quotes any characters which are special to
 Make.  <samp><span class="nolinebreak">-MQ</span>&nbsp;'$(objpfx)foo.o'<!-- /@w --></samp> gives
 </p>
@@ -313,10 +317,10 @@ Make.  <samp><span class="nolinebreak">-MQ</span>&nbsp;'$(objpfx)foo.o'<!-- /@w 
 <p>The default target is automatically quoted, as if it were given with
 <samp>-MQ</samp>.
 </p>
+<a name="index-MD"></a>
 </dd>
 <dt><code>-MD</code></dt>
-<dd><a name="index-MD"></a>
-<p><samp>-MD</samp> is equivalent to <samp>-M -MF <var>file</var></samp>, except that
+<dd><p><samp>-MD</samp> is equivalent to <samp>-M -MF <var>file</var></samp>, except that
 <samp>-E</samp> is not implied.  The driver determines <var>file</var> based on
 whether an <samp>-o</samp> option is given.  If it is, the driver uses its
 argument but with a suffix of <samp>.d</samp>, otherwise it takes the name
@@ -331,16 +335,16 @@ is understood to specify a target object file.
 <p>Since <samp>-E</samp> is not implied, <samp>-MD</samp> can be used to generate
 a dependency output file as a side effect of the compilation process.
 </p>
+<a name="index-MMD"></a>
 </dd>
 <dt><code>-MMD</code></dt>
-<dd><a name="index-MMD"></a>
-<p>Like <samp>-MD</samp> except mention only user header files, not system
+<dd><p>Like <samp>-MD</samp> except mention only user header files, not system
 header files.
 </p>
+<a name="index-fpreprocessed"></a>
 </dd>
 <dt><code>-fpreprocessed</code></dt>
-<dd><a name="index-fpreprocessed"></a>
-<p>Indicate to the preprocessor that the input file has already been
+<dd><p>Indicate to the preprocessor that the input file has already been
 preprocessed.  This suppresses things like macro expansion, trigraph
 conversion, escaped newline splicing, and processing of most directives.
 The preprocessor still recognizes and removes comments, so that you can
@@ -353,10 +357,10 @@ extensions &lsquo;<samp>.i</samp>&rsquo;, &lsquo;<samp>.ii</samp>&rsquo; or &lsq
 extensions that GCC uses for preprocessed files created by
 <samp>-save-temps</samp>.
 </p>
+<a name="index-fdirectives_002donly"></a>
 </dd>
 <dt><code>-fdirectives-only</code></dt>
-<dd><a name="index-fdirectives_002donly"></a>
-<p>When preprocessing, handle directives, but do not expand macros.
+<dd><p>When preprocessing, handle directives, but do not expand macros.
 </p>
 <p>The option&rsquo;s behavior depends on the <samp>-E</samp> and <samp>-fpreprocessed</samp>
 options.
@@ -376,41 +380,41 @@ files previously preprocessed with <code>-E -fdirectives-only</code>.
 <samp>-fpreprocessed</samp> take precedence.  This enables full preprocessing of
 files previously preprocessed with <code>-E -fdirectives-only</code>.
 </p>
+<a name="index-fdollars_002din_002didentifiers"></a>
 </dd>
 <dt><code>-fdollars-in-identifiers</code></dt>
-<dd><a name="index-fdollars_002din_002didentifiers"></a>
-<a name="fdollars_002din_002didentifiers"></a><p>Accept &lsquo;<samp>$</samp>&rsquo; in identifiers.
+<dd><a name="fdollars_002din_002didentifiers"></a><p>Accept &lsquo;<samp>$</samp>&rsquo; in identifiers.
 See <a href="Implementation_002ddefined-behavior.html#Identifier-characters">Identifier characters</a>.
 </p>
+<a name="index-fextended_002didentifiers"></a>
 </dd>
 <dt><code>-fextended-identifiers</code></dt>
-<dd><a name="index-fextended_002didentifiers"></a>
-<p>Accept universal character names and extended characters in
+<dd><p>Accept universal character names and extended characters in
 identifiers.  This option is enabled by default for C99 (and later C
 standard versions) and C++.
 </p>
+<a name="index-fno_002dcanonical_002dsystem_002dheaders"></a>
 </dd>
 <dt><code>-fno-canonical-system-headers</code></dt>
-<dd><a name="index-fno_002dcanonical_002dsystem_002dheaders"></a>
-<p>When preprocessing, do not shorten system header paths with canonicalization.
+<dd><p>When preprocessing, do not shorten system header paths with canonicalization.
 </p>
+<a name="index-fmax_002dinclude_002ddepth"></a>
 </dd>
 <dt><code>-fmax-include-depth=<var>depth</var></code></dt>
-<dd><a name="index-fmax_002dinclude_002ddepth"></a>
-<p>Set the maximum depth of the nested #include. The default is 200. 
+<dd><p>Set the maximum depth of the nested #include. The default is 200. 
 </p>
+<a name="index-ftabstop"></a>
 </dd>
 <dt><code>-ftabstop=<var>width</var></code></dt>
-<dd><a name="index-ftabstop"></a>
-<p>Set the distance between tab stops.  This helps the preprocessor report
+<dd><p>Set the distance between tab stops.  This helps the preprocessor report
 correct column numbers in warnings or errors, even if tabs appear on the
 line.  If the value is less than 1 or greater than 100, the option is
 ignored.  The default is 8.
 </p>
+<a name="index-ftrack_002dmacro_002dexpansion"></a>
 </dd>
 <dt><code>-ftrack-macro-expansion<span class="roman">[</span>=<var>level</var><span class="roman">]</span></code></dt>
-<dd><a name="index-ftrack_002dmacro_002dexpansion"></a>
-<p>Track locations of tokens across macro expansions. This allows the
+<dd><p>Track locations of tokens across macro expansions. This allows the
 compiler to emit diagnostic about the current macro expansion stack
 when a compilation error occurs in a macro expansion. Using this
 option makes the preprocessor and the compiler consume more
@@ -427,42 +431,43 @@ When this option is given no argument, the default parameter value is
 </p>
 <p>Note that <code>-ftrack-macro-expansion=2</code> is activated by default.
 </p>
+<a name="index-fmacro_002dprefix_002dmap"></a>
 </dd>
 <dt><code>-fmacro-prefix-map=<var>old</var>=<var>new</var></code></dt>
-<dd><a name="index-fmacro_002dprefix_002dmap"></a>
-<p>When preprocessing files residing in directory <samp><var>old</var></samp>,
+<dd><p>When preprocessing files residing in directory <samp><var>old</var></samp>,
 expand the <code>__FILE__</code> and <code>__BASE_FILE__</code> macros as if the
 files resided in directory <samp><var>new</var></samp> instead.  This can be used
 to change an absolute path to a relative path by using <samp>.</samp> for
 <var>new</var> which can result in more reproducible builds that are
 location independent.  This option also affects
 <code>__builtin_FILE()</code> during compilation.  See also
-<samp>-ffile-prefix-map</samp>.
+<samp>-ffile-prefix-map</samp> and <samp>-fcanon-prefix-map</samp>.
 </p>
+<a name="index-fexec_002dcharset"></a>
+<a name="index-character-set_002c-execution"></a>
 </dd>
 <dt><code>-fexec-charset=<var>charset</var></code></dt>
-<dd><a name="index-fexec_002dcharset"></a>
-<a name="index-character-set_002c-execution"></a>
-<p>Set the execution character set, used for string and character
+<dd><p>Set the execution character set, used for string and character
 constants.  The default is UTF-8.  <var>charset</var> can be any encoding
 supported by the system&rsquo;s <code>iconv</code> library routine.
 </p>
+<a name="index-fwide_002dexec_002dcharset"></a>
+<a name="index-character-set_002c-wide-execution"></a>
 </dd>
 <dt><code>-fwide-exec-charset=<var>charset</var></code></dt>
-<dd><a name="index-fwide_002dexec_002dcharset"></a>
-<a name="index-character-set_002c-wide-execution"></a>
-<p>Set the wide execution character set, used for wide string and
-character constants.  The default is UTF-32 or UTF-16, whichever
-corresponds to the width of <code>wchar_t</code>.  As with
-<samp>-fexec-charset</samp>, <var>charset</var> can be any encoding supported
+<dd><p>Set the wide execution character set, used for wide string and
+character constants.  The default is one of UTF-32BE, UTF-32LE, UTF-16BE,
+or UTF-16LE, whichever corresponds to the width of <code>wchar_t</code> and the
+big-endian or little-endian byte order being used for code generation.  As
+with <samp>-fexec-charset</samp>, <var>charset</var> can be any encoding supported
 by the system&rsquo;s <code>iconv</code> library routine; however, you will have
 problems with encodings that do not fit exactly in <code>wchar_t</code>.
 </p>
+<a name="index-finput_002dcharset"></a>
+<a name="index-character-set_002c-input"></a>
 </dd>
 <dt><code>-finput-charset=<var>charset</var></code></dt>
-<dd><a name="index-finput_002dcharset"></a>
-<a name="index-character-set_002c-input"></a>
-<p>Set the input character set, used for translation from the character
+<dd><p>Set the input character set, used for translation from the character
 set of the input file to the source character set used by GCC.  If the
 locale does not specify, or GCC cannot get this information from the
 locale, the default is UTF-8.  This can be overridden by either the locale
@@ -471,11 +476,11 @@ precedence if there&rsquo;s a conflict.  <var>charset</var> can be any encoding
 supported by the system&rsquo;s <code>iconv</code> library routine.
 </p>
 
+<a name="index-fworking_002ddirectory"></a>
+<a name="index-fno_002dworking_002ddirectory"></a>
 </dd>
 <dt><code>-fworking-directory</code></dt>
-<dd><a name="index-fworking_002ddirectory"></a>
-<a name="index-fno_002dworking_002ddirectory"></a>
-<p>Enable generation of linemarkers in the preprocessor output that
+<dd><p>Enable generation of linemarkers in the preprocessor output that
 let the compiler know the current working directory at the time of
 preprocessing.  When this option is enabled, the preprocessor
 emits, after the initial linemarker, a second linemarker with the
@@ -488,10 +493,10 @@ form <samp>-fno-working-directory</samp>.  If the <samp>-P</samp> flag is
 present in the command line, this option has no effect, since no
 <code>#line</code> directives are emitted whatsoever.
 </p>
+<a name="index-A"></a>
 </dd>
 <dt><code>-A <var>predicate</var>=<var>answer</var></code></dt>
-<dd><a name="index-A"></a>
-<p>Make an assertion with the predicate <var>predicate</var> and answer
+<dd><p>Make an assertion with the predicate <var>predicate</var> and answer
 <var>answer</var>.  This form is preferred to the older form <samp>-A
 <var>predicate</var>(<var>answer</var>)</samp>, which is still supported, because
 it does not use shell special characters.
@@ -502,10 +507,10 @@ See <a href="Obsolete-Features.html#Obsolete-Features">Obsolete Features</a>.
 <dd><p>Cancel an assertion with the predicate <var>predicate</var> and answer
 <var>answer</var>.
 </p>
+<a name="index-C"></a>
 </dd>
 <dt><code>-C</code></dt>
-<dd><a name="index-C"></a>
-<p>Do not discard comments.  All comments are passed through to the output
+<dd><p>Do not discard comments.  All comments are passed through to the output
 file, except for comments in processed directives, which are deleted
 along with the directive.
 </p>
@@ -515,10 +520,10 @@ For example, comments appearing at the start of what would be a
 directive line have the effect of turning that line into an ordinary
 source line, since the first token on the line is no longer a &lsquo;<samp>#</samp>&rsquo;.
 </p>
+<a name="index-CC"></a>
 </dd>
 <dt><code>-CC</code></dt>
-<dd><a name="index-CC"></a>
-<p>Do not discard comments, including during macro expansion.  This is
+<dd><p>Do not discard comments, including during macro expansion.  This is
 like <samp>-C</samp>, except that comments contained within macros are
 also passed through to the output file where the macro is expanded.
 </p>
@@ -530,10 +535,10 @@ the source line.
 </p>
 <p>The <samp>-CC</samp> option is generally used to support lint comments.
 </p>
+<a name="index-P"></a>
 </dd>
 <dt><code>-P</code></dt>
-<dd><a name="index-P"></a>
-<p>Inhibit generation of linemarkers in the output from the preprocessor.
+<dd><p>Inhibit generation of linemarkers in the output from the preprocessor.
 This might be useful when running the preprocessor on something that is
 not C code, and will be sent to a program which might be confused by the
 linemarkers.
@@ -541,12 +546,12 @@ See <a href="Preprocessor-Output.html#Preprocessor-Output">Preprocessor Output</
 </p>
 <a name="index-traditional-C-language"></a>
 <a name="index-C-language_002c-traditional"></a>
+<a name="index-traditional_002dcpp"></a>
+<a name="index-traditional"></a>
 </dd>
 <dt><code>-traditional</code></dt>
 <dt><code>-traditional-cpp</code></dt>
-<dd><a name="index-traditional_002dcpp"></a>
-<a name="index-traditional"></a>
-
+<dd>
 <p>Try to imitate the behavior of pre-standard C preprocessors, as
 opposed to ISO C preprocessors.
 See <a href="Traditional-Mode.html#Traditional-Mode">Traditional Mode</a>.
@@ -555,10 +560,10 @@ See <a href="Traditional-Mode.html#Traditional-Mode">Traditional Mode</a>.
 C compiler, and these options are only supported with the <samp>-E</samp> 
 switch, or when invoking CPP explicitly.
 </p>
+<a name="index-trigraphs-1"></a>
 </dd>
 <dt><code>-trigraphs</code></dt>
-<dd><a name="index-trigraphs-1"></a>
-<p>Support ISO C trigraphs.
+<dd><p>Support ISO C trigraphs.
 These are three-character sequences, all starting with &lsquo;<samp>??</samp>&rsquo;, that
 are defined by ISO C to stand for single characters.  For example,
 &lsquo;<samp>??/</samp>&rsquo; stands for &lsquo;<samp>\</samp>&rsquo;, so &lsquo;<samp>'??/n'</samp>&rsquo; is a character
@@ -570,25 +575,25 @@ See <a href="Initial-processing.html#Initial-processing">Initial processing</a>.
 standard-conforming modes it converts them.  See the <samp>-std</samp> and
 <samp>-ansi</samp> options.
 </p>
+<a name="index-remap"></a>
 </dd>
 <dt><code>-remap</code></dt>
-<dd><a name="index-remap"></a>
-<p>Enable special code to work around file systems which only permit very
+<dd><p>Enable special code to work around file systems which only permit very
 short file names, such as MS-DOS.
 </p>
+<a name="index-H"></a>
 </dd>
 <dt><code>-H</code></dt>
-<dd><a name="index-H"></a>
-<p>Print the name of each header file used, in addition to other normal
+<dd><p>Print the name of each header file used, in addition to other normal
 activities.  Each name is indented to show how deep in the
 &lsquo;<samp>#include</samp>&rsquo; stack it is.  Precompiled header files are also
 printed, even if they are found to be invalid; an invalid precompiled
 header file is printed with &lsquo;<samp>...x</samp>&rsquo; and a valid one with &lsquo;<samp>...!</samp>&rsquo; .
 </p>
+<a name="index-d"></a>
 </dd>
 <dt><code>-d<var>letters</var></code></dt>
-<dd><a name="index-d"></a>
-<p>Says to make debugging dumps during compilation as specified by
+<dd><p>Says to make debugging dumps during compilation as specified by
 <var>letters</var>.  The flags documented here are those relevant to the
 preprocessor.  Other <var>letters</var> are interpreted
 by the compiler proper, or reserved for future versions of GCC, and so
@@ -596,9 +601,10 @@ are silently ignored.  If you specify <var>letters</var> whose behavior
 conflicts, the result is undefined.
 </p>
 <dl compact="compact">
-<dt><code>-dM</code></dt>
 <dd><a name="index-dM"></a>
-<p>Instead of the normal output, generate a list of &lsquo;<samp>#define</samp>&rsquo;
+</dd>
+<dt><code>-dM</code></dt>
+<dd><p>Instead of the normal output, generate a list of &lsquo;<samp>#define</samp>&rsquo;
 directives for all the macros defined during the execution of the
 preprocessor, including predefined macros.  This gives you a way of
 finding out what is predefined in your version of the preprocessor.
@@ -611,29 +617,29 @@ Assuming you have no file <samp>foo.h</samp>, the command
 <p>shows all the predefined macros.
 </p>
 
+<a name="index-dD"></a>
 </dd>
 <dt><code>-dD</code></dt>
-<dd><a name="index-dD"></a>
-<p>Like <samp>-dM</samp> except in two respects: it does <em>not</em> include the
+<dd><p>Like <samp>-dM</samp> except in two respects: it does <em>not</em> include the
 predefined macros, and it outputs <em>both</em> the &lsquo;<samp>#define</samp>&rsquo;
 directives and the result of preprocessing.  Both kinds of output go to
 the standard output file.
 </p>
+<a name="index-dN"></a>
 </dd>
 <dt><code>-dN</code></dt>
-<dd><a name="index-dN"></a>
-<p>Like <samp>-dD</samp>, but emit only the macro names, not their expansions.
+<dd><p>Like <samp>-dD</samp>, but emit only the macro names, not their expansions.
 </p>
+<a name="index-dI"></a>
 </dd>
 <dt><code>-dI</code></dt>
-<dd><a name="index-dI"></a>
-<p>Output &lsquo;<samp>#include</samp>&rsquo; directives in addition to the result of
+<dd><p>Output &lsquo;<samp>#include</samp>&rsquo; directives in addition to the result of
 preprocessing.
 </p>
+<a name="index-dU"></a>
 </dd>
 <dt><code>-dU</code></dt>
-<dd><a name="index-dU"></a>
-<p>Like <samp>-dD</samp> except that only macros that are expanded, or whose
+<dd><p>Like <samp>-dD</samp> except that only macros that are expanded, or whose
 definedness is tested in preprocessor directives, are output; the
 output is delayed until the use or test of the macro; and
 &lsquo;<samp>#undef</samp>&rsquo; directives are also output for macros tested but
@@ -641,10 +647,10 @@ undefined at the time.
 </p></dd>
 </dl>
 
+<a name="index-fdebug_002dcpp"></a>
 </dd>
 <dt><code>-fdebug-cpp</code></dt>
-<dd><a name="index-fdebug_002dcpp"></a>
-<p>This option is only useful for debugging GCC.  When used from CPP or with
+<dd><p>This option is only useful for debugging GCC.  When used from CPP or with
 <samp>-E</samp>, it dumps debugging information about location maps.  Every
 token in the output is preceded by the dump of the map its location
 belongs to.
@@ -653,16 +659,16 @@ belongs to.
 </p>
 
 
+<a name="index-I"></a>
+<a name="index-iquote"></a>
+<a name="index-isystem"></a>
+<a name="index-idirafter"></a>
 </dd>
 <dt><code>-I <var>dir</var></code></dt>
 <dt><code>-iquote <var>dir</var></code></dt>
 <dt><code>-isystem <var>dir</var></code></dt>
 <dt><code>-idirafter <var>dir</var></code></dt>
-<dd><a name="index-I"></a>
-<a name="index-iquote"></a>
-<a name="index-isystem"></a>
-<a name="index-idirafter"></a>
-<p>Add the directory <var>dir</var> to the list of directories to be searched
+<dd><p>Add the directory <var>dir</var> to the list of directories to be searched
 for header files during preprocessing.
 See <a href="Search-Path.html#Search-Path">Search Path</a>.
 If <var>dir</var> begins with &lsquo;<samp>=</samp>&rsquo; or <code>$SYSROOT</code>, then the &lsquo;<samp>=</samp>&rsquo;
@@ -723,10 +729,10 @@ If you really need to change the search order for system directories,
 use the <samp>-nostdinc</samp> and/or <samp>-isystem</samp> options.
 See <a href="System-Headers.html#System-Headers">System Headers</a>.
 </p>
+<a name="index-I_002d"></a>
 </dd>
 <dt><code>-I-</code></dt>
-<dd><a name="index-I_002d"></a>
-<p>Split the include path.
+<dd><p>Split the include path.
 This option has been deprecated.  Please use <samp>-iquote</samp> instead for
 <samp>-I</samp> directories before the <samp>-I-</samp> and remove the <samp>-I-</samp>
 option.
@@ -742,69 +748,69 @@ directories are searched for all &lsquo;<samp>#include</samp>&rsquo; directives.
 file directory as the first search directory for <code>#include&nbsp;&quot;<var>file</var>&quot;<!-- /@w --></code>.  There is no way to override this effect of <samp>-I-</samp>.
 See <a href="Search-Path.html#Search-Path">Search Path</a>.
 </p>
+<a name="index-iprefix"></a>
 </dd>
 <dt><code>-iprefix <var>prefix</var></code></dt>
-<dd><a name="index-iprefix"></a>
-<p>Specify <var>prefix</var> as the prefix for subsequent <samp>-iwithprefix</samp>
+<dd><p>Specify <var>prefix</var> as the prefix for subsequent <samp>-iwithprefix</samp>
 options.  If the prefix represents a directory, you should include the
 final &lsquo;<samp>/</samp>&rsquo;.
 </p>
+<a name="index-iwithprefix"></a>
+<a name="index-iwithprefixbefore"></a>
 </dd>
 <dt><code>-iwithprefix <var>dir</var></code></dt>
 <dt><code>-iwithprefixbefore <var>dir</var></code></dt>
-<dd><a name="index-iwithprefix"></a>
-<a name="index-iwithprefixbefore"></a>
-<p>Append <var>dir</var> to the prefix specified previously with
+<dd><p>Append <var>dir</var> to the prefix specified previously with
 <samp>-iprefix</samp>, and add the resulting directory to the include search
 path.  <samp>-iwithprefixbefore</samp> puts it in the same place <samp>-I</samp>
 would; <samp>-iwithprefix</samp> puts it where <samp>-idirafter</samp> would.
 </p>
+<a name="index-isysroot"></a>
 </dd>
 <dt><code>-isysroot <var>dir</var></code></dt>
-<dd><a name="index-isysroot"></a>
-<p>This option is like the <samp>--sysroot</samp> option, but applies only to
+<dd><p>This option is like the <samp>--sysroot</samp> option, but applies only to
 header files (except for Darwin targets, where it applies to both header
 files and libraries).  See the <samp>--sysroot</samp> option for more
 information.
 </p>
+<a name="index-imultilib"></a>
 </dd>
 <dt><code>-imultilib <var>dir</var></code></dt>
-<dd><a name="index-imultilib"></a>
-<p>Use <var>dir</var> as a subdirectory of the directory containing
+<dd><p>Use <var>dir</var> as a subdirectory of the directory containing
 target-specific C++ headers.
 </p>
+<a name="index-nostdinc"></a>
 </dd>
 <dt><code>-nostdinc</code></dt>
-<dd><a name="index-nostdinc"></a>
-<p>Do not search the standard system directories for header files.
+<dd><p>Do not search the standard system directories for header files.
 Only the directories explicitly specified with <samp>-I</samp>,
 <samp>-iquote</samp>, <samp>-isystem</samp>, and/or <samp>-idirafter</samp>
 options (and the directory of the current file, if appropriate) 
 are searched.
 </p>
+<a name="index-nostdinc_002b_002b"></a>
 </dd>
 <dt><code>-nostdinc++</code></dt>
-<dd><a name="index-nostdinc_002b_002b"></a>
-<p>Do not search for header files in the C++-specific standard directories,
+<dd><p>Do not search for header files in the C++-specific standard directories,
 but do still search the other standard directories.  (This option is
 used when building the C++ library.)
 </p>
 
 
 
+<a name="index-Wcomment"></a>
+<a name="index-Wcomments"></a>
 </dd>
 <dt><code>-Wcomment</code></dt>
 <dt><code>-Wcomments</code></dt>
-<dd><a name="index-Wcomment"></a>
-<a name="index-Wcomments"></a>
-<p>Warn whenever a comment-start sequence &lsquo;<samp>/*</samp>&rsquo; appears in a &lsquo;<samp>/*</samp>&rsquo;
+<dd><p>Warn whenever a comment-start sequence &lsquo;<samp>/*</samp>&rsquo; appears in a &lsquo;<samp>/*</samp>&rsquo;
 comment, or whenever a backslash-newline appears in a &lsquo;<samp>//</samp>&rsquo; comment.
 This warning is enabled by <samp>-Wall</samp>.
 </p>
+<a name="index-Wtrigraphs"></a>
 </dd>
 <dt><code>-Wtrigraphs</code></dt>
-<dd><a name="index-Wtrigraphs"></a>
-<a name="Wtrigraphs"></a><p>Warn if any trigraphs are encountered that might change the meaning of
+<dd><a name="Wtrigraphs"></a><p>Warn if any trigraphs are encountered that might change the meaning of
 the program.  Trigraphs within comments are not warned about,
 except those that would form escaped newlines.
 </p>
@@ -813,25 +819,25 @@ given, this option is still enabled unless trigraphs are enabled.  To
 get trigraph conversion without warnings, but get the other
 <samp>-Wall</samp> warnings, use &lsquo;<samp>-trigraphs -Wall -Wno-trigraphs</samp>&rsquo;.
 </p>
+<a name="index-Wundef"></a>
+<a name="index-Wno_002dundef"></a>
 </dd>
 <dt><code>-Wundef</code></dt>
-<dd><a name="index-Wundef"></a>
-<a name="index-Wno_002dundef"></a>
-<p>Warn if an undefined identifier is evaluated in an <code>#if</code> directive.
+<dd><p>Warn if an undefined identifier is evaluated in an <code>#if</code> directive.
 Such identifiers are replaced with zero.
 </p>
+<a name="index-Wexpansion_002dto_002ddefined"></a>
 </dd>
 <dt><code>-Wexpansion-to-defined</code></dt>
-<dd><a name="index-Wexpansion_002dto_002ddefined"></a>
-<p>Warn whenever &lsquo;<samp>defined</samp>&rsquo; is encountered in the expansion of a macro
+<dd><p>Warn whenever &lsquo;<samp>defined</samp>&rsquo; is encountered in the expansion of a macro
 (including the case where the macro is expanded by an &lsquo;<samp>#if</samp>&rsquo; directive).
 Such usage is not portable.
 This warning is also enabled by <samp>-Wpedantic</samp> and <samp>-Wextra</samp>.
 </p>
+<a name="index-Wunused_002dmacros"></a>
 </dd>
 <dt><code>-Wunused-macros</code></dt>
-<dd><a name="index-Wunused_002dmacros"></a>
-<p>Warn about macros defined in the main file that are unused.  A macro
+<dd><p>Warn about macros defined in the main file that are unused.  A macro
 is <em>used</em> if it is expanded or tested for existence at least once.
 The preprocessor also warns if the macro has not been used at the
 time it is redefined or undefined.
@@ -850,11 +856,11 @@ Alternatively, you could provide a dummy use with something like:
 #endif
 </pre></div>
 
+<a name="index-Wno_002dendif_002dlabels"></a>
+<a name="index-Wendif_002dlabels"></a>
 </dd>
 <dt><code>-Wno-endif-labels</code></dt>
-<dd><a name="index-Wno_002dendif_002dlabels"></a>
-<a name="index-Wendif_002dlabels"></a>
-<p>Do not warn whenever an <code>#else</code> or an <code>#endif</code> are followed by text.
+<dd><p>Do not warn whenever an <code>#else</code> or an <code>#endif</code> are followed by text.
 This sometimes happens in older programs with code of the form
 </p>
 <div class="smallexample">

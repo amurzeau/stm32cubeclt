@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- Copyright (C) 1988-2022 Free Software Foundation, Inc.
+<!-- Copyright (C) 1988-2023 Free Software Foundation, Inc.
 
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
@@ -95,24 +95,40 @@ the innermost frame is selected, this is a good way to delete a
 breakpoint where your program just stopped.
 </p>
 </dd>
-<dt><code>clear <var>location</var></code></dt>
-<dd><p>Delete any breakpoints set at the specified <var>location</var>.
-See <a href="Specify-Location.html#Specify-Location">Specify Location</a>, for the various forms of <var>location</var>; the
-most useful ones are listed below:
+<dt><code>clear <var>locspec</var></code></dt>
+<dd><p>Delete any breakpoint with a code location that corresponds to
+<var>locspec</var>.  See <a href="Location-Specifications.html#Location-Specifications">Location Specifications</a>, for the various forms
+of <var>locspec</var>.  Which code locations correspond to <var>locspec</var>
+depends on the form used in the location specification <var>locspec</var>:
 </p>
 <dl compact="compact">
-<dt><code>clear <var>function</var></code></dt>
-<dt><code>clear <var>filename</var>:<var>function</var></code></dt>
-<dd><p>Delete any breakpoints set at entry to the named <var>function</var>.
+<dt><code><var>linenum</var></code></dt>
+<dt><code><var>filename</var>:<var>linenum</var></code></dt>
+<dt><code>-line <var>linenum</var></code></dt>
+<dt><code>-source <var>filename</var> -line <var>linenum</var></code></dt>
+<dd><p>If <var>locspec</var> specifies a line number, with or without a file name,
+the command deletes any breakpoint with a code location that is at or
+within the specified line <var>linenum</var> in files that match the
+specified <var>filename</var>.  If <var>filename</var> is omitted, it defaults
+to the current source file.
 </p>
 </dd>
-<dt><code>clear <var>linenum</var></code></dt>
-<dt><code>clear <var>filename</var>:<var>linenum</var></code></dt>
-<dd><p>Delete any breakpoints set at or within the code of the specified
-<var>linenum</var> of the specified <var>filename</var>.
+<dt><code>*<var>address</var></code></dt>
+<dd><p>If <var>locspec</var> specifies an address, the command deletes any
+breakpoint with a code location that is at the given <var>address</var>.
+</p>
+</dd>
+<dt><code><var>function</var></code></dt>
+<dt><code>-function <var>function</var></code></dt>
+<dd><p>If <var>locspec</var> specifies a function, the command deletes any
+breakpoint with a code location that is at the entry to any function
+whose name matches <var>function</var>.
 </p></dd>
 </dl>
 
+<p>Ambiguity in names of files and functions can be resolved as described
+in <a href="Location-Specifications.html#Location-Specifications">Location Specifications</a>.
+</p>
 <a name="index-delete-breakpoints"></a>
 <a name="index-delete"></a>
 <a name="index-d-_0028delete_0029"></a>

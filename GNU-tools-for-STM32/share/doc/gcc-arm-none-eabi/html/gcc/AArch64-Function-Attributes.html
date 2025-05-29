@@ -1,6 +1,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- Copyright (C) 1988-2021 Free Software Foundation, Inc.
+<!-- This file documents the use of the GNU compilers.
+
+Copyright (C) 1988-2023 Free Software Foundation, Inc.
 
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
@@ -30,7 +32,7 @@ You have freedom to copy and modify this GNU Manual, like GNU
 <meta name="distribution" content="global">
 <meta name="Generator" content="makeinfo">
 <link href="index.html#Top" rel="start" title="Top">
-<link href="Option-Index.html#Option-Index" rel="index" title="Option Index">
+<link href="Indices.html#Indices" rel="index" title="Indices">
 <link href="index.html#SEC_Contents" rel="contents" title="Table of Contents">
 <link href="Function-Attributes.html#Function-Attributes" rel="up" title="Function Attributes">
 <link href="AMD-GCN-Function-Attributes.html#AMD-GCN-Function-Attributes" rel="next" title="AMD GCN Function Attributes">
@@ -66,11 +68,11 @@ ul.no-bullet {list-style: none}
 
 </head>
 
-<body lang="en">
+<body lang="en_US">
 <a name="AArch64-Function-Attributes"></a>
 <div class="header">
 <p>
-Next: <a href="AMD-GCN-Function-Attributes.html#AMD-GCN-Function-Attributes" accesskey="n" rel="next">AMD GCN Function Attributes</a>, Previous: <a href="Common-Function-Attributes.html#Common-Function-Attributes" accesskey="p" rel="prev">Common Function Attributes</a>, Up: <a href="Function-Attributes.html#Function-Attributes" accesskey="u" rel="up">Function Attributes</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Option-Index.html#Option-Index" title="Index" rel="index">Index</a>]</p>
+Next: <a href="AMD-GCN-Function-Attributes.html#AMD-GCN-Function-Attributes" accesskey="n" rel="next">AMD GCN Function Attributes</a>, Previous: <a href="Common-Function-Attributes.html#Common-Function-Attributes" accesskey="p" rel="prev">Common Function Attributes</a>, Up: <a href="Function-Attributes.html#Function-Attributes" accesskey="u" rel="up">Function Attributes</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Indices.html#Indices" title="Index" rel="index">Index</a>]</p>
 </div>
 <hr>
 <a name="AArch64-Function-Attributes-1"></a>
@@ -82,97 +84,98 @@ similar command-line options (see <a href="AArch64-Options.html#AArch64-Options"
 per-function basis.
 </p>
 <dl compact="compact">
-<dt><code>general-regs-only</code></dt>
 <dd><a name="index-general_002dregs_002donly-function-attribute_002c-AArch64"></a>
-<p>Indicates that no floating-point or Advanced SIMD registers should be
+</dd>
+<dt><code>general-regs-only</code></dt>
+<dd><p>Indicates that no floating-point or Advanced SIMD registers should be
 used when generating code for this function.  If the function explicitly
 uses floating-point code, then the compiler gives an error.  This is
 the same behavior as that of the command-line option
 <samp>-mgeneral-regs-only</samp>.
 </p>
+<a name="index-fix_002dcortex_002da53_002d835769-function-attribute_002c-AArch64"></a>
 </dd>
 <dt><code>fix-cortex-a53-835769</code></dt>
-<dd><a name="index-fix_002dcortex_002da53_002d835769-function-attribute_002c-AArch64"></a>
-<p>Indicates that the workaround for the Cortex-A53 erratum 835769 should be
+<dd><p>Indicates that the workaround for the Cortex-A53 erratum 835769 should be
 applied to this function.  To explicitly disable the workaround for this
 function specify the negated form: <code>no-fix-cortex-a53-835769</code>.
 This corresponds to the behavior of the command line options
 <samp>-mfix-cortex-a53-835769</samp> and <samp>-mno-fix-cortex-a53-835769</samp>.
 </p>
+<a name="index-cmodel_003d-function-attribute_002c-AArch64"></a>
 </dd>
 <dt><code>cmodel=</code></dt>
-<dd><a name="index-cmodel_003d-function-attribute_002c-AArch64"></a>
-<p>Indicates that code should be generated for a particular code model for
+<dd><p>Indicates that code should be generated for a particular code model for
 this function.  The behavior and permissible arguments are the same as
 for the command line option <samp>-mcmodel=</samp>.
 </p>
+<a name="index-strict_002dalign-function-attribute_002c-AArch64"></a>
 </dd>
 <dt><code>strict-align</code></dt>
 <dt><code>no-strict-align</code></dt>
-<dd><a name="index-strict_002dalign-function-attribute_002c-AArch64"></a>
-<p><code>strict-align</code> indicates that the compiler should not assume that unaligned
+<dd><p><code>strict-align</code> indicates that the compiler should not assume that unaligned
 memory references are handled by the system.  To allow the compiler to assume
 that aligned memory references are handled by the system, the inverse attribute
 <code>no-strict-align</code> can be specified.  The behavior is same as for the
 command-line option <samp>-mstrict-align</samp> and <samp>-mno-strict-align</samp>.
 </p>
+<a name="index-omit_002dleaf_002dframe_002dpointer-function-attribute_002c-AArch64"></a>
 </dd>
 <dt><code>omit-leaf-frame-pointer</code></dt>
-<dd><a name="index-omit_002dleaf_002dframe_002dpointer-function-attribute_002c-AArch64"></a>
-<p>Indicates that the frame pointer should be omitted for a leaf function call.
+<dd><p>Indicates that the frame pointer should be omitted for a leaf function call.
 To keep the frame pointer, the inverse attribute
 <code>no-omit-leaf-frame-pointer</code> can be specified.  These attributes have
 the same behavior as the command-line options <samp>-momit-leaf-frame-pointer</samp>
 and <samp>-mno-omit-leaf-frame-pointer</samp>.
 </p>
+<a name="index-tls_002ddialect_003d-function-attribute_002c-AArch64"></a>
 </dd>
 <dt><code>tls-dialect=</code></dt>
-<dd><a name="index-tls_002ddialect_003d-function-attribute_002c-AArch64"></a>
-<p>Specifies the TLS dialect to use for this function.  The behavior and
+<dd><p>Specifies the TLS dialect to use for this function.  The behavior and
 permissible arguments are the same as for the command-line option
 <samp>-mtls-dialect=</samp>.
 </p>
+<a name="index-arch_003d-function-attribute_002c-AArch64"></a>
 </dd>
 <dt><code>arch=</code></dt>
-<dd><a name="index-arch_003d-function-attribute_002c-AArch64"></a>
-<p>Specifies the architecture version and architectural extensions to use
+<dd><p>Specifies the architecture version and architectural extensions to use
 for this function.  The behavior and permissible arguments are the same as
 for the <samp>-march=</samp> command-line option.
 </p>
+<a name="index-tune_003d-function-attribute_002c-AArch64"></a>
 </dd>
 <dt><code>tune=</code></dt>
-<dd><a name="index-tune_003d-function-attribute_002c-AArch64"></a>
-<p>Specifies the core for which to tune the performance of this function.
+<dd><p>Specifies the core for which to tune the performance of this function.
 The behavior and permissible arguments are the same as for the <samp>-mtune=</samp>
 command-line option.
 </p>
+<a name="index-cpu_003d-function-attribute_002c-AArch64"></a>
 </dd>
 <dt><code>cpu=</code></dt>
-<dd><a name="index-cpu_003d-function-attribute_002c-AArch64"></a>
-<p>Specifies the core for which to tune the performance of this function and also
+<dd><p>Specifies the core for which to tune the performance of this function and also
 whose architectural features to use.  The behavior and valid arguments are the
 same as for the <samp>-mcpu=</samp> command-line option.
 </p>
+<a name="index-sign_002dreturn_002daddress-function-attribute_002c-AArch64"></a>
 </dd>
 <dt><code>sign-return-address</code></dt>
-<dd><a name="index-sign_002dreturn_002daddress-function-attribute_002c-AArch64"></a>
-<p>Select the function scope on which return address signing will be applied.  The
+<dd><p>Select the function scope on which return address signing will be applied.  The
 behavior and permissible arguments are the same as for the command-line option
 <samp>-msign-return-address=</samp>.  The default value is <code>none</code>.  This
 attribute is deprecated.  The <code>branch-protection</code> attribute should
 be used instead.
 </p>
+<a name="index-branch_002dprotection-function-attribute_002c-AArch64"></a>
 </dd>
 <dt><code>branch-protection</code></dt>
-<dd><a name="index-branch_002dprotection-function-attribute_002c-AArch64"></a>
-<p>Select the function scope on which branch protection will be applied.  The
+<dd><p>Select the function scope on which branch protection will be applied.  The
 behavior and permissible arguments are the same as for the command-line option
 <samp>-mbranch-protection=</samp>.  The default value is <code>none</code>.
 </p>
+<a name="index-outline_002datomics-function-attribute_002c-AArch64"></a>
 </dd>
 <dt><code>outline-atomics</code></dt>
-<dd><a name="index-outline_002datomics-function-attribute_002c-AArch64"></a>
-<p>Enable or disable calls to out-of-line helpers to implement atomic operations.
+<dd><p>Enable or disable calls to out-of-line helpers to implement atomic operations.
 This corresponds to the behavior of the command line options
 <samp>-moutline-atomics</samp> and <samp>-mno-outline-atomics</samp>.
 </p>
@@ -252,7 +255,7 @@ architectural feature rules specified above.
 <hr>
 <div class="header">
 <p>
-Next: <a href="AMD-GCN-Function-Attributes.html#AMD-GCN-Function-Attributes" accesskey="n" rel="next">AMD GCN Function Attributes</a>, Previous: <a href="Common-Function-Attributes.html#Common-Function-Attributes" accesskey="p" rel="prev">Common Function Attributes</a>, Up: <a href="Function-Attributes.html#Function-Attributes" accesskey="u" rel="up">Function Attributes</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Option-Index.html#Option-Index" title="Index" rel="index">Index</a>]</p>
+Next: <a href="AMD-GCN-Function-Attributes.html#AMD-GCN-Function-Attributes" accesskey="n" rel="next">AMD GCN Function Attributes</a>, Previous: <a href="Common-Function-Attributes.html#Common-Function-Attributes" accesskey="p" rel="prev">Common Function Attributes</a>, Up: <a href="Function-Attributes.html#Function-Attributes" accesskey="u" rel="up">Function Attributes</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Indices.html#Indices" title="Index" rel="index">Index</a>]</p>
 </div>
 
 

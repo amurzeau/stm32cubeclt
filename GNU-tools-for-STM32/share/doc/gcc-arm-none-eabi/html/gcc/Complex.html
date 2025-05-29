@@ -1,6 +1,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- Copyright (C) 1988-2021 Free Software Foundation, Inc.
+<!-- This file documents the use of the GNU compilers.
+
+Copyright (C) 1988-2023 Free Software Foundation, Inc.
 
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
@@ -30,7 +32,7 @@ You have freedom to copy and modify this GNU Manual, like GNU
 <meta name="distribution" content="global">
 <meta name="Generator" content="makeinfo">
 <link href="index.html#Top" rel="start" title="Top">
-<link href="Option-Index.html#Option-Index" rel="index" title="Option Index">
+<link href="Indices.html#Indices" rel="index" title="Indices">
 <link href="index.html#SEC_Contents" rel="contents" title="Table of Contents">
 <link href="C-Extensions.html#C-Extensions" rel="up" title="C Extensions">
 <link href="Floating-Types.html#Floating-Types" rel="next" title="Floating Types">
@@ -66,11 +68,11 @@ ul.no-bullet {list-style: none}
 
 </head>
 
-<body lang="en">
+<body lang="en_US">
 <a name="Complex"></a>
 <div class="header">
 <p>
-Next: <a href="Floating-Types.html#Floating-Types" accesskey="n" rel="next">Floating Types</a>, Previous: <a href="Long-Long.html#Long-Long" accesskey="p" rel="prev">Long Long</a>, Up: <a href="C-Extensions.html#C-Extensions" accesskey="u" rel="up">C Extensions</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Option-Index.html#Option-Index" title="Index" rel="index">Index</a>]</p>
+Next: <a href="Floating-Types.html#Floating-Types" accesskey="n" rel="next">Floating Types</a>, Previous: <a href="Long-Long.html#Long-Long" accesskey="p" rel="prev">Long Long</a>, Up: <a href="C-Extensions.html#C-Extensions" accesskey="u" rel="up">C Extensions</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Indices.html#Indices" title="Index" rel="index">Index</a>]</p>
 </div>
 <hr>
 <a name="Complex-Numbers"></a>
@@ -106,22 +108,53 @@ use the macros <code>I</code> or <code>_Complex_I</code> instead.
 that includes the &lsquo;<samp>&lt;complex&gt;</samp>&rsquo; header cannot use &lsquo;<samp>i</samp>&rsquo; for the
 GNU extension.  The &lsquo;<samp>j</samp>&rsquo; suffix still has the GNU meaning.
 </p>
+<p>GCC can handle both implicit and explicit casts between the <code>_Complex</code>
+types and other <code>_Complex</code> types as casting both the real and imaginary
+parts to the scalar type.
+GCC can handle implicit and explicit casts from a scalar type to a <code>_Complex</code>
+type and where the imaginary part will be considered zero.
+The C front-end can handle implicit and explicit casts from a <code>_Complex</code> type
+to a scalar type where the imaginary part will be ignored. In C++ code, this cast
+is considered illformed and G++ will error out.
+</p>
+<p>GCC provides a built-in function <code>__builtin_complex</code> will can be used to
+construct a complex value.
+</p>
 <a name="index-_005f_005freal_005f_005f-keyword"></a>
 <a name="index-_005f_005fimag_005f_005f-keyword"></a>
-<p>To extract the real part of a complex-valued expression <var>exp</var>, write
-<code>__real__ <var>exp</var></code>.  Likewise, use <code>__imag__</code> to
-extract the imaginary part.  This is a GNU extension; for values of
-floating type, you should use the ISO C99 functions <code>crealf</code>,
-<code>creal</code>, <code>creall</code>, <code>cimagf</code>, <code>cimag</code> and
-<code>cimagl</code>, declared in <code>&lt;complex.h&gt;</code> and also provided as
+
+<p>GCC has a few extensions which can be used to extract the real
+and the imaginary part of the complex-valued expression. Note
+these expressions are lvalues if the <var>exp</var> is an lvalue.
+These expressions operands have the type of a complex type
+which might get prompoted to a complex type from a scalar type.
+E.g. <code>__real__ (int)<var>x</var></code> is the same as casting to
+<code>_Complex int</code> before <code>__real__</code> is done.
+</p>
+<table>
+<thead><tr><th width="40%">Expression</th><th width="60%">Description</th></tr></thead>
+<tr><td width="40%"><code>__real__ <var>exp</var></code></td><td width="60%">Extract the real part of <var>exp</var>.</td></tr>
+<tr><td width="40%"><code>__imag__ <var>exp</var></code></td><td width="60%">Extract the imaginary part of <var>exp</var>.</td></tr>
+</table>
+
+<p>For values of floating point, you should use the ISO C99
+functions, declared in <code>&lt;complex.h&gt;</code> and also provided as
 built-in functions by GCC.
 </p>
+<table>
+<thead><tr><th width="40%">Expression</th><th width="20%">float</th><th width="20%">double</th><th width="20%">long double</th></tr></thead>
+<tr><td width="40%"><code>__real__ <var>exp</var></code></td><td width="20%"><code>crealf</code></td><td width="20%"><code>creal</code></td><td width="20%"><code>creall</code></td></tr>
+<tr><td width="40%"><code>__imag__ <var>exp</var></code></td><td width="20%"><code>cimagf</code></td><td width="20%"><code>cimag</code></td><td width="20%"><code>cimagl</code></td></tr>
+</table>
+
 <a name="index-complex-conjugation"></a>
 <p>The operator &lsquo;<samp>~</samp>&rsquo; performs complex conjugation when used on a value
 with a complex type.  This is a GNU extension; for values of
 floating type, you should use the ISO C99 functions <code>conjf</code>,
 <code>conj</code> and <code>conjl</code>, declared in <code>&lt;complex.h&gt;</code> and also
-provided as built-in functions by GCC.
+provided as built-in functions by GCC. Note unlike the <code>__real__</code>
+and <code>__imag__</code> operators, this operator will not do an implicit cast
+to the complex type because the &lsquo;<samp>~</samp>&rsquo; is already a normal operator.
 </p>
 <p>GCC can allocate complex automatic variables in a noncontiguous
 fashion; it&rsquo;s even possible for the real part to be in a register while
@@ -133,10 +166,23 @@ If the variable&rsquo;s actual name is <code>foo</code>, the two fictitious
 variables are named <code>foo$real</code> and <code>foo$imag</code>.  You can
 examine and set these two fictitious variables with your debugger.
 </p>
+<dl>
+<dt><a name="index-_005f_005fbuiltin_005fcomplex"></a>Built-in Function: <em><var>type</var></em> <strong>__builtin_complex</strong> <em>(<var>real</var>, <var>imag</var>)</em></dt>
+<dd>
+<p>The built-in function <code>__builtin_complex</code> is provided for use in
+implementing the ISO C11 macros <code>CMPLXF</code>, <code>CMPLX</code> and
+<code>CMPLXL</code>.  <var>real</var> and <var>imag</var> must have the same type, a
+real binary floating-point type, and the result has the corresponding
+complex type with real and imaginary parts <var>real</var> and <var>imag</var>.
+Unlike &lsquo;<samp><var>real</var> + I * <var>imag</var></samp>&rsquo;, this works even when
+infinities, NaNs and negative zeros are involved.
+</p>
+</dd></dl>
+
 <hr>
 <div class="header">
 <p>
-Next: <a href="Floating-Types.html#Floating-Types" accesskey="n" rel="next">Floating Types</a>, Previous: <a href="Long-Long.html#Long-Long" accesskey="p" rel="prev">Long Long</a>, Up: <a href="C-Extensions.html#C-Extensions" accesskey="u" rel="up">C Extensions</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Option-Index.html#Option-Index" title="Index" rel="index">Index</a>]</p>
+Next: <a href="Floating-Types.html#Floating-Types" accesskey="n" rel="next">Floating Types</a>, Previous: <a href="Long-Long.html#Long-Long" accesskey="p" rel="prev">Long Long</a>, Up: <a href="C-Extensions.html#C-Extensions" accesskey="u" rel="up">C Extensions</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Indices.html#Indices" title="Index" rel="index">Index</a>]</p>
 </div>
 
 

@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- Copyright (C) 1988-2021 Free Software Foundation, Inc.
+<!-- Copyright (C) 1988-2023 Free Software Foundation, Inc.
 
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
@@ -79,9 +79,12 @@ ul.no-bullet {list-style: none}
 
 
 
+
+
+
 <p>This file documents the internals of the GNU compilers.
 </p><br>
-<p>Copyright &copy; 1988-2021 Free Software Foundation, Inc.
+<p>Copyright &copy; 1988-2023 Free Software Foundation, Inc.
 </p>
 <p>Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
@@ -257,11 +260,12 @@ Texts being (a) (see below), and with the Back-Cover Texts being (b)
         <li><a name="toc-MIPS_002dspecific-attributes" href="Effective_002dTarget-Keywords.html#MIPS_002dspecific-attributes">7.2.3.9 MIPS-specific attributes</a></li>
         <li><a name="toc-MSP430_002dspecific-attributes" href="Effective_002dTarget-Keywords.html#MSP430_002dspecific-attributes">7.2.3.10 MSP430-specific attributes</a></li>
         <li><a name="toc-PowerPC_002dspecific-attributes" href="Effective_002dTarget-Keywords.html#PowerPC_002dspecific-attributes">7.2.3.11 PowerPC-specific attributes</a></li>
-        <li><a name="toc-Other-hardware-attributes" href="Effective_002dTarget-Keywords.html#Other-hardware-attributes">7.2.3.12 Other hardware attributes</a></li>
-        <li><a name="toc-Environment-attributes" href="Effective_002dTarget-Keywords.html#Environment-attributes">7.2.3.13 Environment attributes</a></li>
-        <li><a name="toc-Other-attributes" href="Effective_002dTarget-Keywords.html#Other-attributes">7.2.3.14 Other attributes</a></li>
-        <li><a name="toc-Local-to-tests-in-gcc_002etarget_002fi386" href="Effective_002dTarget-Keywords.html#Local-to-tests-in-gcc_002etarget_002fi386">7.2.3.15 Local to tests in <code>gcc.target/i386</code></a></li>
-        <li><a name="toc-Local-to-tests-in-gcc_002etest_002dframework" href="Effective_002dTarget-Keywords.html#Local-to-tests-in-gcc_002etest_002dframework">7.2.3.16 Local to tests in <code>gcc.test-framework</code></a></li>
+        <li><a name="toc-RISC_002dV-specific-attributes" href="Effective_002dTarget-Keywords.html#RISC_002dV-specific-attributes">7.2.3.12 RISC-V specific attributes</a></li>
+        <li><a name="toc-Other-hardware-attributes" href="Effective_002dTarget-Keywords.html#Other-hardware-attributes">7.2.3.13 Other hardware attributes</a></li>
+        <li><a name="toc-Environment-attributes" href="Effective_002dTarget-Keywords.html#Environment-attributes">7.2.3.14 Environment attributes</a></li>
+        <li><a name="toc-Other-attributes" href="Effective_002dTarget-Keywords.html#Other-attributes">7.2.3.15 Other attributes</a></li>
+        <li><a name="toc-Local-to-tests-in-gcc_002etarget_002fi386" href="Effective_002dTarget-Keywords.html#Local-to-tests-in-gcc_002etarget_002fi386">7.2.3.16 Local to tests in <code>gcc.target/i386</code></a></li>
+        <li><a name="toc-Local-to-tests-in-gcc_002etest_002dframework" href="Effective_002dTarget-Keywords.html#Local-to-tests-in-gcc_002etest_002dframework">7.2.3.17 Local to tests in <code>gcc.test-framework</code></a></li>
       </ul></li>
       <li><a name="toc-Features-for-dg_002dadd_002doptions" href="Add-Options.html#Add-Options">7.2.4 Features for <code>dg-add-options</code></a></li>
       <li><a name="toc-Variants-of-dg_002drequire_002dsupport" href="Require-Support.html#Require-Support">7.2.5 Variants of <code>dg-require-<var>support</var></code></a></li>
@@ -652,8 +656,7 @@ Texts being (a) (see below), and with the Back-Cover Texts being (b)
     <li><a name="toc-Anchored-Addresses-1" href="Anchored-Addresses.html#Anchored-Addresses">18.14 Anchored Addresses</a></li>
     <li><a name="toc-Condition-Code-Status" href="Condition-Code.html#Condition-Code">18.15 Condition Code Status</a>
     <ul class="no-bullet">
-      <li><a name="toc-Representation-of-condition-codes-using-_0028cc0_0029" href="CC0-Condition-Codes.html#CC0-Condition-Codes">18.15.1 Representation of condition codes using <code>(cc0)</code></a></li>
-      <li><a name="toc-Representation-of-condition-codes-using-registers" href="MODE_005fCC-Condition-Codes.html#MODE_005fCC-Condition-Codes">18.15.2 Representation of condition codes using registers</a></li>
+      <li><a name="toc-Representation-of-condition-codes-using-registers" href="MODE_005fCC-Condition-Codes.html#MODE_005fCC-Condition-Codes">18.15.1 Representation of condition codes using registers</a></li>
     </ul></li>
     <li><a name="toc-Describing-Relative-Costs-of-Operations" href="Costs.html#Costs">18.16 Describing Relative Costs of Operations</a></li>
     <li><a name="toc-Adjusting-the-Instruction-Scheduler" href="Scheduling.html#Scheduling">18.17 Adjusting the Instruction Scheduler</a></li>
@@ -675,11 +678,10 @@ Texts being (a) (see below), and with the Back-Cover Texts being (b)
     <li><a name="toc-Controlling-Debugging-Information-Format" href="Debugging-Info.html#Debugging-Info">18.21 Controlling Debugging Information Format</a>
     <ul class="no-bullet">
       <li><a name="toc-Macros-Affecting-All-Debugging-Formats" href="All-Debuggers.html#All-Debuggers">18.21.1 Macros Affecting All Debugging Formats</a></li>
-      <li><a name="toc-Specific-Options-for-DBX-Output" href="DBX-Options.html#DBX-Options">18.21.2 Specific Options for DBX Output</a></li>
-      <li><a name="toc-Open_002dEnded-Hooks-for-DBX-Format" href="DBX-Hooks.html#DBX-Hooks">18.21.3 Open-Ended Hooks for DBX Format</a></li>
-      <li><a name="toc-File-Names-in-DBX-Format" href="File-Names-and-DBX.html#File-Names-and-DBX">18.21.4 File Names in DBX Format</a></li>
-      <li><a name="toc-Macros-for-DWARF-Output" href="DWARF.html#DWARF">18.21.5 Macros for DWARF Output</a></li>
-      <li><a name="toc-Macros-for-VMS-Debug-Format" href="VMS-Debug.html#VMS-Debug">18.21.6 Macros for VMS Debug Format</a></li>
+      <li><a name="toc-Macros-for-DWARF-Output" href="DWARF.html#DWARF">18.21.2 Macros for DWARF Output</a></li>
+      <li><a name="toc-Macros-for-VMS-Debug-Format" href="VMS-Debug.html#VMS-Debug">18.21.3 Macros for VMS Debug Format</a></li>
+      <li><a name="toc-Macros-for-CTF-Debug-Format" href="CTF-Debug.html#CTF-Debug">18.21.4 Macros for CTF Debug Format</a></li>
+      <li><a name="toc-Macros-for-BTF-Debug-Format" href="BTF-Debug.html#BTF-Debug">18.21.5 Macros for BTF Debug Format</a></li>
     </ul></li>
     <li><a name="toc-Cross-Compilation-and-Floating-Point" href="Floating-Point.html#Floating-Point">18.22 Cross Compilation and Floating Point</a></li>
     <li><a name="toc-Mode-Switching-Instructions" href="Mode-Switching.html#Mode-Switching">18.23 Mode Switching Instructions</a></li>
@@ -826,8 +828,8 @@ Next: <a href="Contributing.html#Contributing" accesskey="n" rel="next">Contribu
 <p>This manual documents the internals of the GNU compilers, including
 how to port them to new targets and some information about how to
 write front ends for new languages.  It corresponds to the compilers
-(GNU Tools for STM32 11.3.rel1.20230519-1941)
-version 11.3.1.  The use of the GNU compilers is documented in a
+(GNU Tools for STM32 13.3.rel1.20240926-1715)
+version 13.3.1.  The use of the GNU compilers is documented in a
 separate manual.  See <a href="http://gcc.gnu.org/onlinedocs/gcc/index.html#Top">Introduction</a> in <cite>Using the GNU
 Compiler Collection (GCC)</cite>.
 </p>
@@ -842,7 +844,7 @@ interfaces to GCC front ends, and how support for a target system is
 implemented in GCC.
 </p>
 <p>Additional tutorial information is linked to from
-<a href="http://gcc.gnu.org/readings.html">http://gcc.gnu.org/readings.html</a>.
+<a href="https://gcc.gnu.org/readings.html">https://gcc.gnu.org/readings.html</a>.
 </p>
 <table class="menu" border="0" cellspacing="0">
 <tr><td align="left" valign="top">&bull; <a href="Contributing.html#Contributing" accesskey="1">Contributing</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">How to contribute to testing and developing GCC.

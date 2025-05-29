@@ -1,6 +1,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- Copyright (C) 1988-2021 Free Software Foundation, Inc.
+<!-- This file documents the use of the GNU compilers.
+
+Copyright (C) 1988-2023 Free Software Foundation, Inc.
 
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
@@ -30,10 +32,10 @@ You have freedom to copy and modify this GNU Manual, like GNU
 <meta name="distribution" content="global">
 <meta name="Generator" content="makeinfo">
 <link href="index.html#Top" rel="start" title="Top">
-<link href="Option-Index.html#Option-Index" rel="index" title="Option Index">
+<link href="Indices.html#Indices" rel="index" title="Indices">
 <link href="index.html#SEC_Contents" rel="contents" title="Table of Contents">
 <link href="Submodel-Options.html#Submodel-Options" rel="up" title="Submodel Options">
-<link href="Score-Options.html#Score-Options" rel="next" title="Score Options">
+<link href="SH-Options.html#SH-Options" rel="next" title="SH Options">
 <link href="RX-Options.html#RX-Options" rel="prev" title="RX Options">
 <style type="text/css">
 <!--
@@ -66,57 +68,58 @@ ul.no-bullet {list-style: none}
 
 </head>
 
-<body lang="en">
+<body lang="en_US">
 <a name="S_002f390-and-zSeries-Options"></a>
 <div class="header">
 <p>
-Next: <a href="Score-Options.html#Score-Options" accesskey="n" rel="next">Score Options</a>, Previous: <a href="RX-Options.html#RX-Options" accesskey="p" rel="prev">RX Options</a>, Up: <a href="Submodel-Options.html#Submodel-Options" accesskey="u" rel="up">Submodel Options</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Option-Index.html#Option-Index" title="Index" rel="index">Index</a>]</p>
+Next: <a href="SH-Options.html#SH-Options" accesskey="n" rel="next">SH Options</a>, Previous: <a href="RX-Options.html#RX-Options" accesskey="p" rel="prev">RX Options</a>, Up: <a href="Submodel-Options.html#Submodel-Options" accesskey="u" rel="up">Submodel Options</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Indices.html#Indices" title="Index" rel="index">Index</a>]</p>
 </div>
 <hr>
 <a name="S_002f390-and-zSeries-Options-1"></a>
-<h4 class="subsection">3.19.46 S/390 and zSeries Options</h4>
+<h4 class="subsection">3.19.44 S/390 and zSeries Options</h4>
 <a name="index-S_002f390-and-zSeries-Options"></a>
 
 <p>These are the &lsquo;<samp>-m</samp>&rsquo; options defined for the S/390 and zSeries architecture.
 </p>
 <dl compact="compact">
+<dd><a name="index-mhard_002dfloat-7"></a>
+<a name="index-msoft_002dfloat-12"></a>
+</dd>
 <dt><code>-mhard-float</code></dt>
 <dt><code>-msoft-float</code></dt>
-<dd><a name="index-mhard_002dfloat-7"></a>
-<a name="index-msoft_002dfloat-11"></a>
-<p>Use (do not use) the hardware floating-point instructions and registers
+<dd><p>Use (do not use) the hardware floating-point instructions and registers
 for floating-point operations.  When <samp>-msoft-float</samp> is specified,
 functions in <samp>libgcc.a</samp> are used to perform floating-point
 operations.  When <samp>-mhard-float</samp> is specified, the compiler
 generates IEEE floating-point instructions.  This is the default.
 </p>
+<a name="index-mhard_002ddfp-1"></a>
+<a name="index-mno_002dhard_002ddfp-1"></a>
 </dd>
 <dt><code>-mhard-dfp</code></dt>
 <dt><code>-mno-hard-dfp</code></dt>
-<dd><a name="index-mhard_002ddfp-1"></a>
-<a name="index-mno_002dhard_002ddfp-1"></a>
-<p>Use (do not use) the hardware decimal-floating-point instructions for
+<dd><p>Use (do not use) the hardware decimal-floating-point instructions for
 decimal-floating-point operations.  When <samp>-mno-hard-dfp</samp> is
 specified, functions in <samp>libgcc.a</samp> are used to perform
 decimal-floating-point operations.  When <samp>-mhard-dfp</samp> is
 specified, the compiler generates decimal-floating-point hardware
 instructions.  This is the default for <samp>-march=z9-ec</samp> or higher.
 </p>
+<a name="index-mlong_002ddouble_002d64"></a>
+<a name="index-mlong_002ddouble_002d128"></a>
 </dd>
 <dt><code>-mlong-double-64</code></dt>
 <dt><code>-mlong-double-128</code></dt>
-<dd><a name="index-mlong_002ddouble_002d64"></a>
-<a name="index-mlong_002ddouble_002d128"></a>
-<p>These switches control the size of <code>long double</code> type. A size
+<dd><p>These switches control the size of <code>long double</code> type. A size
 of 64 bits makes the <code>long double</code> type equivalent to the <code>double</code>
 type. This is the default.
 </p>
+<a name="index-mbackchain"></a>
+<a name="index-mno_002dbackchain"></a>
 </dd>
 <dt><code>-mbackchain</code></dt>
 <dt><code>-mno-backchain</code></dt>
-<dd><a name="index-mbackchain"></a>
-<a name="index-mno_002dbackchain"></a>
-<p>Store (do not store) the address of the caller&rsquo;s frame as backchain pointer
+<dd><p>Store (do not store) the address of the caller&rsquo;s frame as backchain pointer
 into the callee&rsquo;s stack frame.
 A backchain may be needed to allow debugging using tools that do not understand
 DWARF call frame information.
@@ -134,12 +137,12 @@ to build a linux kernel use <samp>-msoft-float</samp>.
 </p>
 <p>The default is to not maintain the backchain.
 </p>
+<a name="index-mpacked_002dstack"></a>
+<a name="index-mno_002dpacked_002dstack"></a>
 </dd>
 <dt><code>-mpacked-stack</code></dt>
 <dt><code>-mno-packed-stack</code></dt>
-<dd><a name="index-mpacked_002dstack"></a>
-<a name="index-mno_002dpacked_002dstack"></a>
-<p>Use (do not use) the packed stack layout.  When <samp>-mno-packed-stack</samp> is
+<dd><p>Use (do not use) the packed stack layout.  When <samp>-mno-packed-stack</samp> is
 specified, the compiler uses the all fields of the 96/160 byte register save
 area only for their default purpose; unused fields still take up stack space.
 When <samp>-mpacked-stack</samp> is specified, register save slots are densely
@@ -161,35 +164,35 @@ to build a linux kernel use <samp>-msoft-float</samp>.
 </p>
 <p>The default is to not use the packed stack layout.
 </p>
+<a name="index-msmall_002dexec"></a>
+<a name="index-mno_002dsmall_002dexec"></a>
 </dd>
 <dt><code>-msmall-exec</code></dt>
 <dt><code>-mno-small-exec</code></dt>
-<dd><a name="index-msmall_002dexec"></a>
-<a name="index-mno_002dsmall_002dexec"></a>
-<p>Generate (or do not generate) code using the <code>bras</code> instruction
+<dd><p>Generate (or do not generate) code using the <code>bras</code> instruction
 to do subroutine calls.
 This only works reliably if the total executable size does not
 exceed 64k.  The default is to use the <code>basr</code> instruction instead,
 which does not have this limitation.
 </p>
+<a name="index-m64-2"></a>
+<a name="index-m31"></a>
 </dd>
 <dt><code>-m64</code></dt>
 <dt><code>-m31</code></dt>
-<dd><a name="index-m64-2"></a>
-<a name="index-m31"></a>
-<p>When <samp>-m31</samp> is specified, generate code compliant to the
+<dd><p>When <samp>-m31</samp> is specified, generate code compliant to the
 GNU/Linux for S/390 ABI.  When <samp>-m64</samp> is specified, generate
 code compliant to the GNU/Linux for zSeries ABI.  This allows GCC in
 particular to generate 64-bit instructions.  For the &lsquo;<samp>s390</samp>&rsquo;
 targets, the default is <samp>-m31</samp>, while the &lsquo;<samp>s390x</samp>&rsquo;
 targets default to <samp>-m64</samp>.
 </p>
+<a name="index-mzarch"></a>
+<a name="index-mesa"></a>
 </dd>
 <dt><code>-mzarch</code></dt>
 <dt><code>-mesa</code></dt>
-<dd><a name="index-mzarch"></a>
-<a name="index-mesa"></a>
-<p>When <samp>-mzarch</samp> is specified, generate code using the
+<dd><p>When <samp>-mzarch</samp> is specified, generate code using the
 instructions available on z/Architecture.
 When <samp>-mesa</samp> is specified, generate code using the
 instructions available on ESA/390.  Note that <samp>-mesa</samp> is
@@ -198,23 +201,23 @@ When generating code compliant to the GNU/Linux for S/390 ABI,
 the default is <samp>-mesa</samp>.  When generating code compliant
 to the GNU/Linux for zSeries ABI, the default is <samp>-mzarch</samp>.
 </p>
+<a name="index-mhtm-1"></a>
+<a name="index-mno_002dhtm-1"></a>
 </dd>
 <dt><code>-mhtm</code></dt>
 <dt><code>-mno-htm</code></dt>
-<dd><a name="index-mhtm-1"></a>
-<a name="index-mno_002dhtm-1"></a>
-<p>The <samp>-mhtm</samp> option enables a set of builtins making use of
+<dd><p>The <samp>-mhtm</samp> option enables a set of builtins making use of
 instructions available with the transactional execution facility
 introduced with the IBM zEnterprise EC12 machine generation
 <a href="S_002f390-System-z-Built_002din-Functions.html#S_002f390-System-z-Built_002din-Functions">S/390 System z Built-in Functions</a>.
 <samp>-mhtm</samp> is enabled by default when using <samp>-march=zEC12</samp>.
 </p>
+<a name="index-mvx"></a>
+<a name="index-mno_002dvx"></a>
 </dd>
 <dt><code>-mvx</code></dt>
 <dt><code>-mno-vx</code></dt>
-<dd><a name="index-mvx"></a>
-<a name="index-mno_002dvx"></a>
-<p>When <samp>-mvx</samp> is specified, generate code using the instructions
+<dd><p>When <samp>-mvx</samp> is specified, generate code using the instructions
 available with the vector extension facility introduced with the IBM
 z13 machine generation.
 This option changes the ABI for some vector type values with regard to
@@ -223,12 +226,12 @@ being used in an ABI-relevant context a GAS &lsquo;<samp>.gnu_attribute</samp>&r
 command will be added to mark the resulting binary with the ABI used.
 <samp>-mvx</samp> is enabled by default when using <samp>-march=z13</samp>.
 </p>
+<a name="index-mzvector"></a>
+<a name="index-mno_002dzvector"></a>
 </dd>
 <dt><code>-mzvector</code></dt>
 <dt><code>-mno-zvector</code></dt>
-<dd><a name="index-mzvector"></a>
-<a name="index-mno_002dzvector"></a>
-<p>The <samp>-mzvector</samp> option enables vector language extensions and
+<dd><p>The <samp>-mzvector</samp> option enables vector language extensions and
 builtins using instructions available with the vector extension
 facility introduced with the IBM z13 machine generation.
 This option adds support for &lsquo;<samp>vector</samp>&rsquo; to be used as a keyword to
@@ -241,28 +244,28 @@ implementations like Power and Cell.  In order to make use of these
 builtins the header file <samp>vecintrin.h</samp> needs to be included.
 <samp>-mzvector</samp> is disabled by default.
 </p>
+<a name="index-mmvcle"></a>
+<a name="index-mno_002dmvcle"></a>
 </dd>
 <dt><code>-mmvcle</code></dt>
 <dt><code>-mno-mvcle</code></dt>
-<dd><a name="index-mmvcle"></a>
-<a name="index-mno_002dmvcle"></a>
-<p>Generate (or do not generate) code using the <code>mvcle</code> instruction
+<dd><p>Generate (or do not generate) code using the <code>mvcle</code> instruction
 to perform block moves.  When <samp>-mno-mvcle</samp> is specified,
 use a <code>mvc</code> loop instead.  This is the default unless optimizing for
 size.
 </p>
+<a name="index-mdebug-1"></a>
+<a name="index-mno_002ddebug"></a>
 </dd>
 <dt><code>-mdebug</code></dt>
 <dt><code>-mno-debug</code></dt>
-<dd><a name="index-mdebug-1"></a>
-<a name="index-mno_002ddebug"></a>
-<p>Print (or do not print) additional debug information when compiling.
+<dd><p>Print (or do not print) additional debug information when compiling.
 The default is to not print debug information.
 </p>
+<a name="index-march-15"></a>
 </dd>
 <dt><code>-march=<var>cpu-type</var></code></dt>
-<dd><a name="index-march-13"></a>
-<p>Generate code that runs on <var>cpu-type</var>, which is the name of a
+<dd><p>Generate code that runs on <var>cpu-type</var>, which is the name of a
 system representing a certain processor type.  Possible values for
 <var>cpu-type</var> are &lsquo;<samp>z900</samp>&rsquo;/&lsquo;<samp>arch5</samp>&rsquo;, &lsquo;<samp>z990</samp>&rsquo;/&lsquo;<samp>arch6</samp>&rsquo;,
 &lsquo;<samp>z9-109</samp>&rsquo;, &lsquo;<samp>z9-ec</samp>&rsquo;/&lsquo;<samp>arch7</samp>&rsquo;, &lsquo;<samp>z10</samp>&rsquo;/&lsquo;<samp>arch8</samp>&rsquo;,
@@ -277,64 +280,64 @@ architecture option for the host processor.
 <samp>-march=native</samp> has no effect if GCC does not recognize the
 processor.
 </p>
+<a name="index-mtune-14"></a>
 </dd>
 <dt><code>-mtune=<var>cpu-type</var></code></dt>
-<dd><a name="index-mtune-13"></a>
-<p>Tune to <var>cpu-type</var> everything applicable about the generated code,
+<dd><p>Tune to <var>cpu-type</var> everything applicable about the generated code,
 except for the ABI and the set of available instructions.
 The list of <var>cpu-type</var> values is the same as for <samp>-march</samp>.
 The default is the value used for <samp>-march</samp>.
 </p>
+<a name="index-mtpf_002dtrace"></a>
+<a name="index-mno_002dtpf_002dtrace"></a>
 </dd>
 <dt><code>-mtpf-trace</code></dt>
 <dt><code>-mno-tpf-trace</code></dt>
-<dd><a name="index-mtpf_002dtrace"></a>
-<a name="index-mno_002dtpf_002dtrace"></a>
-<p>Generate code that adds (does not add) in TPF OS specific branches to trace
+<dd><p>Generate code that adds (does not add) in TPF OS specific branches to trace
 routines in the operating system.  This option is off by default, even
 when compiling for the TPF OS.
 </p>
+<a name="index-mtpf_002dtrace_002dskip"></a>
+<a name="index-mno_002dtpf_002dtrace_002dskip"></a>
 </dd>
 <dt><code>-mtpf-trace-skip</code></dt>
 <dt><code>-mno-tpf-trace-skip</code></dt>
-<dd><a name="index-mtpf_002dtrace_002dskip"></a>
-<a name="index-mno_002dtpf_002dtrace_002dskip"></a>
-<p>Generate code that changes (does not change) the default branch
+<dd><p>Generate code that changes (does not change) the default branch
 targets enabled by <samp>-mtpf-trace</samp> to point to specialized trace
 routines providing the ability of selectively skipping function trace
 entries for the TPF OS.  This option is off by default, even when
 compiling for the TPF OS and specifying <samp>-mtpf-trace</samp>.
 </p>
+<a name="index-mfused_002dmadd-3"></a>
+<a name="index-mno_002dfused_002dmadd-3"></a>
 </dd>
 <dt><code>-mfused-madd</code></dt>
 <dt><code>-mno-fused-madd</code></dt>
-<dd><a name="index-mfused_002dmadd-3"></a>
-<a name="index-mno_002dfused_002dmadd-3"></a>
-<p>Generate code that uses (does not use) the floating-point multiply and
+<dd><p>Generate code that uses (does not use) the floating-point multiply and
 accumulate instructions.  These instructions are generated by default if
 hardware floating point is used.
 </p>
+<a name="index-mwarn_002dframesize"></a>
 </dd>
 <dt><code>-mwarn-framesize=<var>framesize</var></code></dt>
-<dd><a name="index-mwarn_002dframesize"></a>
-<p>Emit a warning if the current function exceeds the given frame size.  Because
+<dd><p>Emit a warning if the current function exceeds the given frame size.  Because
 this is a compile-time check it doesn&rsquo;t need to be a real problem when the program
 runs.  It is intended to identify functions that most probably cause
 a stack overflow.  It is useful to be used in an environment with limited stack
 size e.g. the linux kernel.
 </p>
+<a name="index-mwarn_002ddynamicstack"></a>
 </dd>
 <dt><code>-mwarn-dynamicstack</code></dt>
-<dd><a name="index-mwarn_002ddynamicstack"></a>
-<p>Emit a warning if the function calls <code>alloca</code> or uses dynamically-sized
+<dd><p>Emit a warning if the function calls <code>alloca</code> or uses dynamically-sized
 arrays.  This is generally a bad idea with a limited stack size.
 </p>
+<a name="index-mstack_002dguard"></a>
+<a name="index-mstack_002dsize-2"></a>
 </dd>
 <dt><code>-mstack-guard=<var>stack-guard</var></code></dt>
 <dt><code>-mstack-size=<var>stack-size</var></code></dt>
-<dd><a name="index-mstack_002dguard"></a>
-<a name="index-mstack_002dsize-2"></a>
-<p>If these options are provided the S/390 back end emits additional instructions in
+<dd><p>If these options are provided the S/390 back end emits additional instructions in
 the function prologue that trigger a trap if the stack size is <var>stack-guard</var>
 bytes above the <var>stack-size</var> (remember that the stack on S/390 grows downward).
 If the <var>stack-guard</var> option is omitted the smallest power of 2 larger than
@@ -348,10 +351,10 @@ In order to be efficient the extra code makes the assumption that the stack star
 at an address aligned to the value given by <var>stack-size</var>.
 The <var>stack-guard</var> option can only be used in conjunction with <var>stack-size</var>.
 </p>
+<a name="index-mhotpatch"></a>
 </dd>
 <dt><code>-mhotpatch=<var>pre-halfwords</var>,<var>post-halfwords</var></code></dt>
-<dd><a name="index-mhotpatch"></a>
-<p>If the hotpatch option is enabled, a &ldquo;hot-patching&rdquo; function
+<dd><p>If the hotpatch option is enabled, a &ldquo;hot-patching&rdquo; function
 prologue is generated for all functions in the compilation unit.
 The funtion label is prepended with the given number of two-byte
 NOP instructions (<var>pre-halfwords</var>, maximum 1000000).  After
@@ -369,7 +372,7 @@ largest NOP like instructions the architecture allows (maximum
 <hr>
 <div class="header">
 <p>
-Next: <a href="Score-Options.html#Score-Options" accesskey="n" rel="next">Score Options</a>, Previous: <a href="RX-Options.html#RX-Options" accesskey="p" rel="prev">RX Options</a>, Up: <a href="Submodel-Options.html#Submodel-Options" accesskey="u" rel="up">Submodel Options</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Option-Index.html#Option-Index" title="Index" rel="index">Index</a>]</p>
+Next: <a href="SH-Options.html#SH-Options" accesskey="n" rel="next">SH Options</a>, Previous: <a href="RX-Options.html#RX-Options" accesskey="p" rel="prev">RX Options</a>, Up: <a href="Submodel-Options.html#Submodel-Options" accesskey="u" rel="up">Submodel Options</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Indices.html#Indices" title="Index" rel="index">Index</a>]</p>
 </div>
 
 
