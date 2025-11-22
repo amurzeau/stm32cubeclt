@@ -61,6 +61,7 @@
 				"BitOffset":"0x13",
 				"BitWidth":"0x3",
 				"BitValue":"0x0",
+				"Nonce": "",
 				"PossibleValues":{
 					"0x0":"AES-ECB",
 					"0x1":"AES-CBC",

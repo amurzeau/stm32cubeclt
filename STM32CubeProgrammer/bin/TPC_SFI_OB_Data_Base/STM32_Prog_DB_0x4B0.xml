@@ -445,21 +445,17 @@
 								<Parameters address="0x5002204C" name="SECBOOTADD0R" size="0x4"/>
 								<AssignedBits>
 								<Bit>
-										<Name>SECBOOTADD0R</Name>
-										<Description>Secure boot base address 0</Description>
-										<BitOffset>0x7</BitOffset>
-										<BitWidth>0x19</BitWidth>
-										<Access>RW</Access>
-										<Equation multiplier="0x80" offset="0x0000000"/>
-										<DefaultVal>0x180000</DefaultVal>
+									<Name>BOOT_LOCK</Name>
+									<Description> The boot is always forced to base address value programmed in SECBOOTADD0</Description>
+									<BitOffset>0x0</BitOffset>
+									<BitWidth>0x1</BitWidth>
+									<Access>RW</Access>
+									<Values>
+										<Val value="0x0">Boot based on the pad/option bit configuration</Val>
+										<Val value="0x1">Boot forced from base address memory</Val>
+									</Values>
+									<DefaultVal>0x0</DefaultVal>
 								</Bit>
-								<Bit>
-										<Name>Res.</Name>
-										<BitOffset>0x0</BitOffset>
-										<BitWidth>0x1</BitWidth>
-										<Access>R</Access>
-										<DefaultVal>0x0</DefaultVal>
-									</Bit>
 									<Bit>
 										<Name>Res.</Name>
 										<BitOffset>0x1</BitOffset>
@@ -502,67 +498,17 @@
 										<Access>R</Access>
 										<DefaultVal>0x1</DefaultVal>
 									</Bit>
+									<Bit>
+										<Name>SECBOOTADD0R</Name>
+										<Description>Secure boot base address 0</Description>
+										<BitOffset>0x7</BitOffset>
+										<BitWidth>0x19</BitWidth>
+										<Access>RW</Access>
+										<Equation multiplier="0x80" offset="0x0000000"/>
+										<DefaultVal>0x180000</DefaultVal>
+								</Bit>
 								</AssignedBits>
 							</Field>
-						<Field>
-							<Parameters address="0x5002204C" name="BOOT_LOCK" size="0x4"/>
-							<AssignedBits>
-								<Bit>
-									<Name>BOOT_LOCK</Name>
-									<Description> The boot is always forced to base address value programmed in SECBOOTADD0</Description>
-									<BitOffset>0x0</BitOffset>
-									<BitWidth>0x1</BitWidth>
-									<Access>RW</Access>
-									<Values>
-										<Val value="0x0">Boot based on the pad/option bit configuration</Val>
-										<Val value="0x1">Boot forced from base address memory</Val>
-									</Values>
-									<DefaultVal>0x0</DefaultVal>
-								</Bit>
-								<Bit>
-									<Name>Res.</Name>
-									<BitOffset>0x1</BitOffset>
-									<BitWidth>0x1</BitWidth>
-									<Access>R</Access>
-									<DefaultVal>0x0</DefaultVal>
-									</Bit>
-									<Bit>
-										<Name>Res.</Name>
-										<BitOffset>0x2</BitOffset>
-										<BitWidth>0x1</BitWidth>
-										<Access>R</Access>
-										<DefaultVal>0x1</DefaultVal>
-									</Bit>
-									<Bit>
-										<Name>Res.</Name>
-										<BitOffset>0x3</BitOffset>
-										<BitWidth>0x1</BitWidth>
-										<Access>R</Access>
-										<DefaultVal>0x1</DefaultVal>
-									</Bit>
-									<Bit>
-										<Name>Res.</Name>
-										<BitOffset>0x4</BitOffset>
-										<BitWidth>0x1</BitWidth>
-										<Access>R</Access>
-										<DefaultVal>0x1</DefaultVal>
-									</Bit>
-									<Bit>
-										<Name>Res.</Name>
-										<BitOffset>0x5</BitOffset>
-										<BitWidth>0x1</BitWidth>
-										<Access>R</Access>
-										<DefaultVal>0x1</DefaultVal>
-									</Bit>
-									<Bit>
-										<Name>Res.</Name>
-										<BitOffset>0x6</BitOffset>
-										<BitWidth>0x1</BitWidth>
-										<Access>R</Access>
-										<DefaultVal>0x1</DefaultVal>
-									</Bit>
-							</AssignedBits>
-						</Field>
 				</Category>
 					<Category>
 						<Name>Secure Area 1</Name>
